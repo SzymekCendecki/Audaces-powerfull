@@ -1,0 +1,16 @@
+16 pażdziernika 2018 - wersja 0.0.0
+Przygotowanie plików do pracy.
+
+17 października 2018 - wersja 0.0.1
+Dodaniepierwsze style dla responsywności strony (do 800px i powyżej 800px);
+
+18 października 2018 - wersja 0.0.2
+Utworzono dwa dodatowe pliki: below800px i above800px - dla styli zapewniających responsywność strony (gry).
+  Dodano szare tło oraz nazwę studia z sentencją oraz wstępnie ostylowano je po kątem resposnywności.
+
+7 listopada 2018 - wersja 0.0.3
+Dodano nowe fonty (z google fonts).
+
+11 listopada 2018 - wersja 0.0.4
+Usunięto dwa pliki scss, odpowiadające za responsywność strony (gry) oraz rozpoczęto od nowa tworzenie css'a.
+  Dodano animacje dla nazwy studia (z sentencją) oraz nazwy gry (z podtytułem).
