@@ -1,0 +1,57 @@
+
+//style oraz animacja dla znikających napisów - nazwy studia, z sentencją oraz nazwy gry, z podtytułem
+#nameOfStudio, #maxim{
+  text-align: center;
+  font-style: italic;
+  animation: introFirst 5s linear;
+  animation-fill-mode: forwards;
+}
+
+#nameOfStudio{
+  font-size: 550%;
+  color: navy;
+  text-shadow: 1px 1px #0000cc, 2px 2px #0000ff, 3px 3px #4040ff;
+}
+
+#maxim{
+  font-size: 300%;
+  text-shadow: 1px 1px #666, 2px 2px #808080, 3px 3px #a0a0a0;
+}
+
+@keyframes introFirst {
+  0%{}
+  80%{ opacity: 1; }
+  100%{ opacity: 0; }
+}
+
+#nameOfGame, #subnameOfGame{
+  visibility: hidden;
+  text-align: center;
+  font-style: italic;
+  animation: introFirst2a 10s linear;
+  animation-fill-mode: forwards;
+  animation-delay: 5.5s;
+}
+
+#nameOfGame{
+    font-size: 550%;
+    margin-top: -10%;
+    -webkit-text-fill-color: #800000;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+#subnameOfGame{
+  font-size: 300%;
+  margin-top: -1%;
+  -webkit-text-fill-color: #808000;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+@keyframes introFirst2a {
+  0%{ opacity: 0; visibility: hidden; }
+  20%{ opacity: 1; visibility: visible; }
+  80%{ opacity: 1; visibility: visible;}
+  100%{ opacity: 0; visibility: hidden; }
+}

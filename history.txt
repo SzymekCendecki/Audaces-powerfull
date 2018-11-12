@@ -14,3 +14,7 @@ Dodano nowe fonty (z google fonts).
 11 listopada 2018 - wersja 0.0.4
 Usunięto dwa pliki scss, odpowiadające za responsywność strony (gry) oraz rozpoczęto od nowa tworzenie css'a.
   Dodano animacje dla nazwy studia (z sentencją) oraz nazwy gry (z podtytułem).
+
+12 listopada 2018 - wersja 0.0.5
+Dodano nowy plik: firstIntro.scss oraz przeniesiono do niego odpowiednie linie kodu.
+  Rozpoczęto pracę nad pierwszym menu.
