@@ -18,3 +18,6 @@ Usunięto dwa pliki scss, odpowiadające za responsywność strony (gry) oraz ro
 12 listopada 2018 - wersja 0.0.5
 Dodano nowy plik: firstIntro.scss oraz przeniesiono do niego odpowiednie linie kodu.
   Rozpoczęto pracę nad pierwszym menu.
+
+13 listopada 2018 - wersja 0.0.6
+Dodano style dla przycisków pierwszego menu.
