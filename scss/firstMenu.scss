@@ -1,90 +1,119 @@
-//style dla przycisków pierwszego menu
+//style dla przycisków pierwszego menu - początek
+@mixin basicSurface{
+  display: flex;
+  justify-content: center;
+  width: 24%;
+  height: 50%;
+  font-weight: bold;
+  color: white;
+  padding: 1% 0 1% 0;
+  transform: skewX(15deg);
+  background-color: #DDD;
+  box-shadow: -1px 1px 0  #BBB, -2px 2px 0 #999, -3px 3px 0 #777, -4px 4px 0 #555, -5px 5px 0 #333;
+}
+
+@mixin basicBtn{
+  width: 35%;
+  height: 100%;
+  font-weight: bold;
+  color: white;
+  margin: -1% 0 0 0;
+}
+
 #heroBtns{
   width: 100%;
   height: 50%;
 
+//style dla przycisku info - początek
 #info{
-  display: flex;
-  justify-content: center;
-  width: 20%;
-  height: 60%;
-  font-weight: bold;
-  color: white;
-  padding: 1% 0 1% 0;
-  transform: skewX(20deg);
-  background-color: #a6a6a6;
-  box-shadow: -1px 1px 0 #a6a6a6, -2px 2px 0 #838383,
-              -3px 3px 0 #606060, -4px 4px 0 #606060;
-
-
+  @include basicSurface;
   button{
-    width: 20%;
-    height: 70%;
-    font-weight: bold;
-    color: white;
+    @include basicBtn;
     background-color: #0000cc;
-    box-shadow: -1px 1px 0 #0000cc, -2px 2px 0 #0000cc,
-                -3px 3px 0 #0000cc, -4px 4px 0 #0000cc,
-                -5px 5px 0 #0000cc;
-}
-
-button:active{
-  animation: animButton 0.25s linear;
-  animation-fill-mode: forwards;
-}
-
-@keyframes animButton {
-  0% { box-shadow: -1px 1px 0 #0000cc, -2px 2px 0 #0000cc,
-              -3px 3px 0 #0000cc, -4px 4px 0 #0000cc,
-              -5px 5px 0 #0000cc; }
-
-  100% { box-shadow: inset 0 0 10px 0 black; background-color: #4040ff; margin-top: 6px; margin-left: -10px; }
-}
-
-
-  button:focus{
-    outline: none;
+    box-shadow: -1px 1px 0 #0000cc, -2px 2px 0 #0000cc, -3px 3px 0 #0000cc, -4px 4px 0 #0000cc, -5px 5px 0 #0000cc;
   }
 
+  button:active{
+    animation: animInfo 0.25s linear;
+    animation-fill-mode: forwards;
+  }
 
+  @keyframes animInfo {
+    0% {box-shadow: -1px 1px 0 #0000cc, -2px 2px 0 #0000cc, -3px 3px 0 #0000cc, -4px 4px 0 #0000cc, -5px 5px 0 #0000cc;}
+    100% {box-shadow: inset 0 0 10px 0 black; background-color: #4040ff; margin-top: 6px; margin-left: -10px;}
+  }
+
+  button:focus{ outline: none; }
 }
+//koniec styli dla przycisku info
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//style dla przycisku licencja - początek
 #licence{
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  padding: 1% 0 1% 0;
+  @include basicSurface;
+  button{
+      @include basicBtn;
+      background-color: #800080;
+      box-shadow: -1px 1px 0 #800080, -2px 2px 0 #800080, -3px 3px 0 #800080, -4px 4px 0 #800080, -5px 5px 0 #800080;
+  }
 
+  button:active{
+    animation: animLicence 0.25s linear;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes animLicence {
+    0% {box-shadow: -1px 1px 0 #800080, -2px 2px 0 #800080, -3px 3px 0 #800080, -4px 4px 0 #800080, -5px 5px 0 #800080;}
+    100% {box-shadow: inset 0 0 10px 0 black; background-color: #9932CC; margin-top: 6px; margin-left: -10px;}
+  }
+
+  button:focus{ outline: none; }
 }
+//koniec styli dla przycisku licencja
 
+//style dla przycisku tutorial - początek
 #tutorial{
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  padding: 1% 0 1% 0;
+  @include basicSurface;
+  button{
+      @include basicBtn;
+      background-color: #8B4513;
+      box-shadow: -1px 1px 0 #8B4513, -2px 2px 0 #8B4513, -3px 3px 0 #8B4513, -4px 4px 0 #8B4513, -5px 5px 0 #8B4513;
+  }
 
+  button:active{
+    animation: animTutorial 0.25s linear;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes animTutorial {
+    0% {box-shadow: -1px 1px 0 #8B4513, -2px 2px 0 #8B4513, -3px 3px 0 #8B4513, -4px 4px 0 #8B4513, -5px 5px 0 #8B4513;}
+    100% {box-shadow: inset 0 0 10px 0 black; background-color: #D2691E; margin-top: 6px; margin-left: -10px;}
+  }
+
+  button:focus{ outline: none; }
 }
+//koniec styli dla przycisku licencja
 
+//style dla przycisku gra - początek
 #game{
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  padding: 1% 0 1% 0;
+  @include basicSurface;
+  button{
+      @include basicBtn;
+      background-color: #006400;
+      box-shadow: -1px 1px 0 #006400, -2px 2px 0 #006400, -3px 3px 0 #006400, -4px 4px 0 #006400, -5px 5px 0 #006400;
+  }
 
-}
+  button:active{
+    animation: animGame 0.25s linear;
+    animation-fill-mode: forwards;
+  }
 
+  @keyframes animGame {
+    0% {box-shadow: -1px 1px 0 #006400, -2px 2px 0 #006400, -3px 3px 0 #006400, -4px 4px 0 #006400, -5px 5px 0 #006400;}
+    100% {box-shadow: inset 0 0 10px 0 black; background-color: #228B22; margin-top: 6px; margin-left: -10px;}
+  }
+
+  button:focus{ outline: none; }
 }
+//koniec styli dla przycisku licencja
+}
+//style dla przycisków pierwszego menu - koniec

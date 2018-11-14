@@ -21,3 +21,6 @@ Dodano nowy plik: firstIntro.scss oraz przeniesiono do niego odpowiednie linie k
 
 13 listopada 2018 - wersja 0.0.6
 Dodano style dla przycisków pierwszego menu.
+
+14 listopada 2018 - wersja 0.0.7
+Dodano tekst dla dwóch przyecisków pierwszego menu.
