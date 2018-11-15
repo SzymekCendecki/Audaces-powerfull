@@ -24,3 +24,9 @@ Dodano style dla przycisków pierwszego menu.
 
 14 listopada 2018 - wersja 0.0.7
 Dodano tekst dla dwóch przyecisków pierwszego menu.
+
+15 listopada 2018 - wersja 0.0.8
+Poprawka szerokości #mainPart (width - 90% zamiast 100%).
+  Dodano tekst powitalny.
+Drobne poprawki w tekście dla tekstu powitalnego i info.
+  Dodano oraz zmodyfikowano tekst dla przycisku tutorial.
