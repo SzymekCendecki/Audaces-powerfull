@@ -39,6 +39,16 @@ header{
   }
 }
 
+//style dla stopki
+#version{
+  font-size: 125%;
+  font-weight: bold;
+  -webkit-text-fill-color: #fff;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+
+}
+
 //style dla przycisków w cześci o id heroBtns
 #heroBtns{
   display: flex;
@@ -51,5 +61,4 @@ header{
   font-weight: bold;
   font-size: 150%;
   text-shadow: 1px 1px white;
-
 }

@@ -30,3 +30,7 @@ Poprawka szerokości #mainPart (width - 90% zamiast 100%).
   Dodano tekst powitalny.
 Drobne poprawki w tekście dla tekstu powitalnego i info.
   Dodano oraz zmodyfikowano tekst dla przycisku tutorial.
+
+16 listopada 2018 - wersja 0.0.9
+Drobna poprawa tekstu dla tutoriala w pierwszym menu.
+  Dodanie animacji znikania dla przycisków i tekstów dla pierwszego menu.

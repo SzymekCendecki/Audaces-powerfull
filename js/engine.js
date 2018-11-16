@@ -102,6 +102,10 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#tutorial").on("click", function () {
     firstMenu.tutorialBtn();
   });
+  $("#game").on("click", function () {
+    $("#info, #licence, #tutorial, #game").addClass("animRotate");
+    $("#mainPart").addClass("opacity0").delay(3000).remove("p");
+  });
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -126,7 +130,7 @@ module.exports.licenceBtn = function () {
 
 //przycisk tutorial
 module.exports.tutorialBtn = function () {
-  $("#mainPart").empty().html("<p class='standardText newRocker'>Początek gry. Ekran składa się z powitania oraz czterech przycisków. Po wciśnięciu przycisku Info, Licencja lub Tutorial obok pojawi się odpowiednia informacja. Po wciśnięciu przycisku Nowa gra, użytkownik rozpocznie grę. Wtedy będzie można stworzyć lub wylosować swoją postać. Po tym, gracz przejdze do gry. Ekran będzie podzielony na część z przyciskami - głównymi oraz interakcji. W głównej części będzie pojawiał się opis danej lokacji. W części komunikatów będą pojawiać się informacje o dokonanych wyborach oraz dodatkowe inforamcje związane z grą. Część z przyciskami będzie posiadała przyciski umożliwiające dostęp do cech postaci, ekwipunku, umiejętności itd. oraz do opcji, które będzie mógł wybrać w trakcie gry. Na podstawie opisów z głównej części gry, gracz będzie mógł dokonywać wyborów z listy przycisków.</p>");
+  $("#mainPart").empty().html("<p class='standardText newRocker'>Początek gry. Ekran składa się z powitania oraz czterech przycisków. Po wciśnięciu przycisku Info, Licencja lub Tutorial obok pojawi się odpowiednia informacja. Po wciśnięciu przycisku 'gra', użytkownik rozpocznie grę. Wtedy będzie można stworzyć lub wylosować swoją postać. Po tym, gracz przejdze do gry. Ekran będzie podzielony na część z przyciskami - głównymi oraz interakcji. W głównej części będzie pojawiał się opis danej lokacji. W części komunikatów będą pojawiać się informacje o dokonanych wyborach oraz dodatkowe inforamcje związane z grą. Część z przyciskami będzie posiadała przyciski umożliwiające dostęp do cech postaci, ekwipunku, umiejętności itd. oraz do opcji, które będzie mógł wybrać w trakcie gry. Na podstawie opisów z głównej części gry, gracz będzie mógł dokonywać wyborów z listy przycisków.</p>");
 };
 
 /***/ })

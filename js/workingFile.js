@@ -17,5 +17,10 @@ setTimeout(function(){
 $("#info").on("click", () => { firstMenu.infoBtn(); });
 $("#licence").on("click", () => { firstMenu.licenceBtn(); });
 $("#tutorial").on("click", () => { firstMenu.tutorialBtn(); });
+$("#game").on("click", () => {
+  $("#info, #licence, #tutorial, #game").addClass("animRotate");
+  $("#mainPart").addClass("opacity0").delay(3000).remove("p");
+});
+
 
 });//koniec DOMContentLoaded
