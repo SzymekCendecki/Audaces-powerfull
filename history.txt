@@ -34,3 +34,10 @@ Drobne poprawki w tekście dla tekstu powitalnego i info.
 16 listopada 2018 - wersja 0.0.9
 Drobna poprawa tekstu dla tutoriala w pierwszym menu.
   Dodanie animacji znikania dla przycisków i tekstów dla pierwszego menu.
+
+17 listopada 2018 - wersja 0.1.0
+Dodano znacznik meta description do pliku index.html.
+  Usunięto zbędne fonty.
+Poprawiono "animacje" po wciśnięciu przycisku "gra".
+  Przeniesiono z index.html do fonts.scss ścieżki dostępu do font'ów z google fonts.
+Do stopki dodano "oznakę" poprawności css zgodną z W3C.

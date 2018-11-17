@@ -104,7 +104,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   $("#game").on("click", function () {
     $("#info, #licence, #tutorial, #game").addClass("animRotate");
-    $("#mainPart").addClass("opacity0").delay(3000).remove("p");
+    $("#mainPart p").fadeOut(3000);
+    setTimeout(function () {
+      $("#mainPart p").remove();
+    }, 3000);
   });
 }); //koniec DOMContentLoaded
 

@@ -19,7 +19,8 @@ $("#licence").on("click", () => { firstMenu.licenceBtn(); });
 $("#tutorial").on("click", () => { firstMenu.tutorialBtn(); });
 $("#game").on("click", () => {
   $("#info, #licence, #tutorial, #game").addClass("animRotate");
-  $("#mainPart").addClass("opacity0").delay(3000).remove("p");
+  $("#mainPart p").fadeOut(3000);
+  setTimeout(function(){ $("#mainPart p").remove(); }, 3000);
 });
 
 
