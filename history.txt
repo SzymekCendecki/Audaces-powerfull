@@ -41,3 +41,6 @@ Dodano znacznik meta description do pliku index.html.
 Poprawiono "animacje" po wciśnięciu przycisku "gra".
   Przeniesiono z index.html do fonts.scss ścieżki dostępu do font'ów z google fonts.
 Do stopki dodano "oznakę" poprawności css zgodną z W3C.
+
+17 listopada 2018 - wersja 0.1.1
+Przeorganizowano kod firstMenu.js - utworzono obiekt (?) z JSON'em oraz workingFile.js aby można było wszystko "grało".
