@@ -44,3 +44,12 @@ Do stopki dodano "oznakę" poprawności css zgodną z W3C.
 
 17 listopada 2018 - wersja 0.1.1
 Przeorganizowano kod firstMenu.js - utworzono obiekt (?) z JSON'em oraz workingFile.js aby można było wszystko "grało".
+
+18 listopada 2018 - wersja 0.1.11
+Zmodyfikowano znacznik meta description.
+  Doadano znacznik meta author.
+Dodano znacznik meta robots.
+  Dodano znacznik meta keywords.
+Dodano licencje dla font'ów.
+  Dodano przyciski dla wyboru stworzenie postaci oraz wstępnie je ostylowano.
+Przeorganizowano delikatnie kod, celem łatwiejszego manipulowania elementami DOM.
