@@ -16,7 +16,10 @@ module.exports.firstMenuBtns = function(){
   $("#game").on("click", () => {
    $("#info, #licence, #tutorial, #game").addClass("animRotate");
    $("#description").fadeOut(3000);
-   setTimeout(()=>{ $("#description").remove(); }, 3000);
+   setTimeout(()=>{
+      $("#description").remove();
+      $("#info, #licence, #tutorial, #game").remove();
+  }, 3000);
    $("#randomHero, #chooseHero").delay(3050).fadeIn(750);
   });
 }

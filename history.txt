@@ -53,3 +53,10 @@ Dodano znacznik meta robots.
 Dodano licencje dla font'ów.
   Dodano przyciski dla wyboru stworzenie postaci oraz wstępnie je ostylowano.
 Przeorganizowano delikatnie kod, celem łatwiejszego manipulowania elementami DOM.
+
+19 listopada 2018 - wersja 0.1.12
+Przeniesiono przyciski "wylosuj" i "stwórz" z mainPart do heroBtns, oraz dodano do nich animacje.
+  Przekopiowane zostały wszystkie tablice potrzebne do tworzenia postaci z poprzedniej werji gry.
+Dodano tablicę z tatuażami.
+  Przekopiowano z Audaces - remastered wszystkie rasy.
+Sprawdzono, dodano brakujące oraz uzupełniono tablice z modyfikatorami ras.

@@ -60,25 +60,40 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(1);
+"use strict";
 
+
+//funkcja, która tworzy nowy element DOM
+module.exports.newElement = function (nameElement, idName, text, whereAppend) {
+  var newElement = document.createElement(nameElement);
+  newElement.id = idName;
+  newElement.innerText = text;
+  whereAppend.append(newElement);
+};
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(2);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
-var functions = __webpack_require__(3);
-var firstMenu = __webpack_require__(2);
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
@@ -100,13 +115,13 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var functions = __webpack_require__(3);
+var functions = __webpack_require__(0);
 var heroCreator = "./heroCreator.js";
 
 //tekst powitalny
@@ -132,24 +147,10 @@ module.exports.firstMenuBtns = function () {
     $("#description").fadeOut(3000);
     setTimeout(function () {
       $("#description").remove();
+      $("#info, #licence, #tutorial, #game").remove();
     }, 3000);
     $("#randomHero, #chooseHero").delay(3050).fadeIn(750);
   });
-};
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-//funkcja, która tworzy nowy element DOM
-module.exports.newElement = function (nameElement, idName, text, whereAppend) {
-  var newElement = document.createElement(nameElement);
-  newElement.id = idName;
-  newElement.innerText = text;
-  whereAppend.append(newElement);
 };
 
 /***/ })

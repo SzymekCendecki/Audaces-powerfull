@@ -1,17 +1,18 @@
-#randomHero, #chooseHero{
-  width: 25%;
-  height: 15%;
-  color: white;
-  font-size: 200%;
+//style dla przycisków tworzenia postaci: losowo oraz "ręcznie"
+#randomHero, #chooseHero{ width: 25%; height: 90%; color: white; font-size: 200%; text-shadow: 1px 1px black; }
+
+#randomHero{ background-color: #0000ff; margin-left: 20%; }
+#randomHero:active{ animation: animRandomHero 0.25s linear; animation-fill-mode: forwards; }
+@keyframes animRandomHero{
+  0%{ box-shadow: inset 0 0 0 black; background-color: #0000ff; }
+  100%{ box-shadow: inset 0 0 20px black; background-color: #a8a8ff; color: black; text-shadow: 1px 1px white; }
 }
 
-#randomHero{
-  background-color: blue;
-  margin-left: 20%;
+#chooseHero{ background-color: #cc0000; float: right; margin-right: 20%; }
+#chooseHero:active{ animation: animChooseHero 0.25s linear; animation-fill-mode: forwards;  }
+@keyframes animChooseHero{
+  0%{ box-shadow: inset 0 0 0 black; background-color: #cc0000; }
+  100%{ box-shadow: inset 0 0 20px black; background-color: #ff6b6b; color: black; text-shadow: 1px 1px white; }
 }
 
-#chooseHero{
-  background-color: crimson;
-  float: right;
-  margin-right: 20%;
-}
+#randomHero:focus, #chooseHero:focus{ outline: none; }
