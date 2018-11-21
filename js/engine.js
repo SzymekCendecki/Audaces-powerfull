@@ -94,6 +94,7 @@ module.exports = __webpack_require__(2);
 
 var functions = __webpack_require__(0);
 var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(4);
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
@@ -112,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //funkcje dla przycisków pierwszego menu
   firstMenu.firstMenuBtns();
+  heroCreator.random();
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -151,6 +153,128 @@ module.exports.firstMenuBtns = function () {
     }, 3000);
     $("#randomHero, #chooseHero").delay(3050).fadeIn(750);
   });
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+
+//tablica zbiorcza z wyniami losowania lub wyborami postaci
+//0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
+var hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano"];
+
+//tablica ekwipunku
+var equip = [];
+
+//tablica umiejętności
+var skills = [];
+
+//tablica ze złotem
+var gold = [0];
+
+//tablica z imionami męskimi
+var namesMan = ["Wortigern", "Gintor", "Hegel", "Derig", "Diggramon", "Zengowetoryk", "Deggetm", "Zigamon", "Birduk", "Ardenor", "Winterks", "Joluntik", "Menigor", "Oltis", "Kurdir"];
+
+//tablica z imionami żeńskimi
+var namesWomen = ["Wortigerna", "Hejacynta", "Dejawina", "Ludiniam", "Keoburna", "Leokamina", "Erminia", "Xynenda", "Fejmira", "Apsurginis", "Wicynia", "Jermodernia", "Sertyksa"];
+
+//tablica z rasami
+var races = ["człowiek", "półork", "ork", "półelf", "elf", "krasnolud", "gnom", "niziołek", "goblin", "trol", "półolbrzym"];
+
+//tablica z profesjami
+var occupations = ["wojownik", "złoczyńca", "czarodziej"];
+
+//tabica z płcią
+var sex = ["kobieta", "mężczyzna", "nie wiadomo"];
+
+//tablica z kolorami włosów
+var hairColor = ["blond", "rude", "czarne", "farbowane"];
+
+//tablica z kolorem oczu
+var eyesColor = ["piwne", "szare", "brązowe", "niebieskie"];
+
+//tablica z kolorem skóry
+var skinColor = ["biała", "brązowa", "czarna", "czerwona", "zółta", "zielona", "brunatna", "błękitna"];
+
+//tablica z tatuażami
+var tattoo = ["brak", "więzienne", "plemienne", ""];
+
+//tablica z wagą
+var weight = ["niedowaga", "normalna", "nadwaga"];
+
+//tablica ze wzrostem
+var height = ["niski", "normalny", "wysoki"];
+
+//tablice z ekwipunkiem
+//broń
+var equipWeapon = ["sztylet", "drewniana pałka", "krótki miecz", "szabla", "włócznia", "proca", "łuk"];
+
+//zbroja
+var equipArmor = ["przeszywanica", "zbroja skórzana", "zbroja ćwiekowana"];
+
+//tarcze
+var equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+
+//tablice ze modyfikatorami rasy i profesji - dla określenia ostatecznej ilości punktów postaci
+//indeksy: 0-siła, 1-wytrzymałość, 2-zręczność, 3-inteligencja, 4-charyzma
+var warrior = [5, 5, 0, 0, 0];
+var criminal = [0, 0, 10, 0, 0];
+var wizard = [0, 0, 0, 5, 5];
+
+var human = [0, 0, 0, 0, 0];
+var halfOrc = [3, 3, 0, -3, -3];
+var orc = [5, 5, 0, -5, -5];
+var halfElv = [-3, -3, 0, 3, 3];
+var elv = [-5, -5, 0, 5, 5];
+var dwarf = [4, 4, 0, -2, -3];
+var gnome = [-2, -2, 3, 3, 0];
+var halfling = [-3, 0, 6, 0, 0];
+var goblin = [2, -2, 4, 0, -4];
+var troll = [2, 0, 0, -2, -2];
+var semiGiant = [7, 7, -5, -3, 0];
+
+//dodatkowa tablica dla losowania cech
+var randomFeatures = [0, 0, 0, 0, 0];
+
+//inny ekwipunek
+var equipOther = ["kostur", "mieszek", "torba podróżna", "sakwa", "plecak", "manierka", "sagan", "koc", "tuba na perg.", "pęk piór do pis.", "pergaminy 5szt.", "zwykłe ubranie", "fikuśna czapka", "płaszcz", "skórzany pas", "igły i nici", "derka", "namiot", "drewniana miska", "drewniana łyżka", "pochodnia", "lampa oliwna", "kaganek", "lina 5m", "hubka i krzesiwo"];
+
+//tablice z umiejętnościami
+//wojownika
+var skillsWarrior = ["szt.przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+
+//złoczyńcy
+var skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drewniana pałka"];
+
+//czarodzieja
+var skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo", "leczenie ran", "rzuczanie czarów", "tworz. eliksirów", "tworz.mag. przedm.", "tworzenie maści", "tworzenie runów", "astrologia", "zielarstwo"];
+
+module.exports.random = function () {
+	$("#randomHero").on("click", function () {
+		console.log("działa");
+
+		//losowanie płci
+		var randomSexNumber = Math.round(Math.random() * (sex.length - 1));
+		var sexHero = sex[randomSexNumber];
+		hero.splice(1, 1, sexHero);
+
+		//losowanie rasy
+		var randomRaceNumber = Math.round(Math.random() * (races.length - 1));
+		var raceHero = races[randomRaceNumber];
+		hero.splice(2, 1, raceHero);
+
+		//losowanie profesji
+		var randomOccupationNumber = Math.round(Math.random() * (occupations.length - 1));
+		var occupationsHero = occupations[randomOccupationNumber];
+		hero.splice(3, 1, occupationsHero);
+
+		console.log(hero);
+	});
 };
 
 /***/ })

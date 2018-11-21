@@ -60,3 +60,6 @@ Przeniesiono przyciski "wylosuj" i "stwórz" z mainPart do heroBtns, oraz dodano
 Dodano tablicę z tatuażami.
   Przekopiowano z Audaces - remastered wszystkie rasy.
 Sprawdzono, dodano brakujące oraz uzupełniono tablice z modyfikatorami ras.
+
+21 listopada 2018 - wersja 0.1.13
+Rozpoczęto tworzenie losownia postaci - losowana jest płeć, rasa i profesja - wynik w console.log.

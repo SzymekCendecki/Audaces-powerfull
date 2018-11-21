@@ -1,5 +1,18 @@
 let functions=require("./functions.js");
 
+//tablica zbiorcza z wyniami losowania lub wyborami postaci
+//0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
+let hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano"];
+
+//tablica ekwipunku
+let equip = [];
+
+//tablica umiejętności
+let skills = [];
+
+//tablica ze złotem
+let gold = [0];
+
 //tablica z imionami męskimi
 let namesMan = ["Wortigern", "Gintor", "Hegel", "Derig", "Diggramon", "Zengowetoryk", "Deggetm", "Zigamon", "Birduk", "Ardenor", "Winterks", "Joluntik", "Menigor", "Oltis", "Kurdir"];
 
@@ -61,8 +74,6 @@ let equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"]
   let troll = [2, 0, 0, -2, -2];
   let semiGiant = [7, 7, -5, -3, 0];
 
-  //"człowiek", "półork", "ork", "półelf", "elf", "krasnolud", "gnom", "niziołek", "goblin", "trol", "półolbrzym"
-
 //dodatkowa tablica dla losowania cech
 let randomFeatures = [0, 0, 0, 0, 0];
 
@@ -78,3 +89,27 @@ let skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "puł
 
 //czarodzieja
 let skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo", "leczenie ran", "rzuczanie czarów", "tworz. eliksirów", "tworz.mag. przedm.", "tworzenie maści", "tworzenie runów", "astrologia", "zielarstwo"];
+
+module.exports.random = function(){
+	$("#randomHero").on("click", ()=>{
+		console.log("działa");
+
+		//losowanie płci
+		let randomSexNumber = Math.round(Math.random()*(sex.length-1));
+		let sexHero = sex[randomSexNumber];
+		hero.splice(1, 1, sexHero);
+
+		//losowanie rasy
+		let randomRaceNumber = Math.round(Math.random()*(races.length-1));
+		let raceHero = races[randomRaceNumber];
+		hero.splice(2, 1, raceHero);
+
+		//losowanie profesji
+  	let randomOccupationNumber = Math.round(Math.random()*(occupations.length-1));
+  	let occupationsHero = occupations[randomOccupationNumber];
+		hero.splice(3, 1, occupationsHero);
+
+
+		console.log(hero);
+	});
+}

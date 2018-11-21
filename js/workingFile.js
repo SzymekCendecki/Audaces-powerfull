@@ -1,5 +1,6 @@
 let functions=require("./functions.js");
 let firstMenu=require("./firstMenu.js");
+let heroCreator=require("./heroCreator.js");
 
 document.addEventListener("DOMContentLoaded", () => {
  console.log("NIEWIERNE PSY RULEZ!!!!");
@@ -18,4 +19,5 @@ setTimeout(function(){
 
 //funkcje dla przycisków pierwszego menu
  firstMenu.firstMenuBtns();
+ heroCreator.random();
 });//koniec DOMContentLoaded
