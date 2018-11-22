@@ -63,3 +63,6 @@ Sprawdzono, dodano brakujące oraz uzupełniono tablice z modyfikatorami ras.
 
 21 listopada 2018 - wersja 0.1.13
 Rozpoczęto tworzenie losownia postaci - losowana jest płeć, rasa i profesja - wynik w console.log.
+
+22 listopada 2018 - wersja 0.1.14
+Wyniki losowania wyciągnięte z console.log na ekran. Bez formatowania i dalszego losowania.

@@ -92,8 +92,6 @@ let skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo"
 
 module.exports.random = function(){
 	$("#randomHero").on("click", ()=>{
-		console.log("działa");
-
 		//losowanie płci
 		let randomSexNumber = Math.round(Math.random()*(sex.length-1));
 		let sexHero = sex[randomSexNumber];
@@ -109,7 +107,6 @@ module.exports.random = function(){
   	let occupationsHero = occupations[randomOccupationNumber];
 		hero.splice(3, 1, occupationsHero);
 
-
-		console.log(hero);
+		$("#mainPart").html(`<h2>WYLOSOWANY BOHATER</h2><div><p>imię</p><p>${hero[0]}</p></div><div><p>płeć</p><p>${hero[1]}</p></div><div><p>rasa</p><p>${hero[2]}</p></div><div><p>profesja</p><p>${hero[3]}</p></div><div><p>współczynniki</p><p>siła: ${hero[4]}</p><p>wytrzymałość: ${hero[5]}</p><p>zręczność: ${hero[6]}</p><p>inteligencja: ${hero[7]}</p><p>inteligencja: ${hero[8]}</p></div><div><p>kolor oczu</p><p>${hero[9]}</p></div><div><p>kolor włosów</p><p>${hero[10]}</p></div><div><p>kolor skóry</p><p>${hero[11]}</p></div><div><p>tatuaże</p><p>${hero[12]}</p></div><div><p>waga</p><p>${hero[13]}</p></div><div><p>wzrost</p><p>${hero[14]}</p></div>`);
 	});
 }
