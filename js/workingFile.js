@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
  console.log("NIEWIERNE PSY RULEZ!!!!");
 
 //ukrywanie odpowiednich części
-$("header p, #heroBtns div, #randomHero, #chooseHero").hide();
+$("header p, #heroBtns div, #randomHero, #chooseHero, #randomHeroResults").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){

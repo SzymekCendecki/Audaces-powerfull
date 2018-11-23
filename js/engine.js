@@ -70,12 +70,34 @@
 "use strict";
 
 
+var heroCreator = __webpack_require__(4);
+
 //funkcja, która tworzy nowy element DOM
 module.exports.newElement = function (nameElement, idName, text, whereAppend) {
   var newElement = document.createElement(nameElement);
   newElement.id = idName;
   newElement.innerText = text;
   whereAppend.append(newElement);
+};
+
+//funkcja pokazująca wybór kreowania postaci
+module.exports.heroCreatorResult = function (hero) {
+  $("#randomHeroResults").show();
+  $("#spanName").text(hero[0]);
+  $("#spanSex").text(hero[1]);
+  $("#spanRace").text(hero[2]);
+  $("#spanOccupation").text(hero[3]);
+  $("#spanForce").text(hero[4]);
+  $("#spanStrength").text(hero[5]);
+  $("#spanDexterity").text(hero[6]);
+  $("#spanIntelligence").text(hero[7]);
+  $("#spanCharisma").text(hero[8]);
+  $("#spanEyes").text(hero[9]);
+  $("#spanHair").text(hero[10]);
+  $("#spanSkin").text(hero[11]);
+  $("#spanTattoo").text(hero[12]);
+  $("#spanWeight").text(hero[13]);
+  $("#spanHeight").text(hero[14]);
 };
 
 /***/ }),
@@ -100,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
 
   //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero").hide();
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #randomHeroResults").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -256,6 +278,7 @@ var skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo"
 
 module.exports.random = function () {
 	$("#randomHero").on("click", function () {
+
 		//losowanie płci
 		var randomSexNumber = Math.round(Math.random() * (sex.length - 1));
 		var sexHero = sex[randomSexNumber];
@@ -271,7 +294,7 @@ module.exports.random = function () {
 		var occupationsHero = occupations[randomOccupationNumber];
 		hero.splice(3, 1, occupationsHero);
 
-		$("#mainPart").html("<h2>WYLOSOWANY BOHATER</h2><div><p>imi\u0119</p><p>" + hero[0] + "</p></div><div><p>p\u0142e\u0107</p><p>" + hero[1] + "</p></div><div><p>rasa</p><p>" + hero[2] + "</p></div><div><p>profesja</p><p>" + hero[3] + "</p></div><div><p>wsp\xF3\u0142czynniki</p><p>si\u0142a: " + hero[4] + "</p><p>wytrzyma\u0142o\u015B\u0107: " + hero[5] + "</p><p>zr\u0119czno\u015B\u0107: " + hero[6] + "</p><p>inteligencja: " + hero[7] + "</p><p>inteligencja: " + hero[8] + "</p></div><div><p>kolor oczu</p><p>" + hero[9] + "</p></div><div><p>kolor w\u0142os\xF3w</p><p>" + hero[10] + "</p></div><div><p>kolor sk\xF3ry</p><p>" + hero[11] + "</p></div><div><p>tatua\u017Ce</p><p>" + hero[12] + "</p></div><div><p>waga</p><p>" + hero[13] + "</p></div><div><p>wzrost</p><p>" + hero[14] + "</p></div>");
+		functions.heroCreatorResult(hero);
 	});
 };
 

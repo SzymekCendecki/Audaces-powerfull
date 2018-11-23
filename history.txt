@@ -66,3 +66,7 @@ Rozpoczęto tworzenie losownia postaci - losowana jest płeć, rasa i profesja -
 
 22 listopada 2018 - wersja 0.1.14
 Wyniki losowania wyciągnięte z console.log na ekran. Bez formatowania i dalszego losowania.
+
+23 listopada 2018 - wersja 0.1.15
+Przeorganizowano kod - przeniesiono odpowiedni kod z heroCreator.js do index.html oraz do functions.js.
+  Dodano wyświetlanie pozostałych cech stworzonej postaci - nie dodano żadnego nowego losowania.
