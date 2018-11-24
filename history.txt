@@ -70,3 +70,7 @@ Wyniki losowania wyciągnięte z console.log na ekran. Bez formatowania i dalsze
 23 listopada 2018 - wersja 0.1.15
 Przeorganizowano kod - przeniesiono odpowiedni kod z heroCreator.js do index.html oraz do functions.js.
   Dodano wyświetlanie pozostałych cech stworzonej postaci - nie dodano żadnego nowego losowania.
+
+24 listopada 2018 - wersja 0.1.16
+Poprawiono wygląd wyników wyboru postaci.
+  Rozpoczęto pracę nad losowaniem punktów postaci (losowanie dla człowieka - wszystie profesje).

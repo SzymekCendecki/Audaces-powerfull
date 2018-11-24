@@ -3,6 +3,7 @@ let functions=require("./functions.js");
 //tablica zbiorcza z wyniami losowania lub wyborami postaci
 //0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
 let hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano"];
+module.exports.hero = hero;
 
 //tablica ekwipunku
 let equip = [];
@@ -58,21 +59,21 @@ let equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"]
 
 //tablice ze modyfikatorami rasy i profesji - dla określenia ostatecznej ilości punktów postaci
 //indeksy: 0-siła, 1-wytrzymałość, 2-zręczność, 3-inteligencja, 4-charyzma
-	let warrior = [5, 5, 0, 0, 0];
-	let criminal = [0, 0, 10, 0, 0];
-	let wizard = [0, 0, 0, 5, 5];
+	let warrior = [5, 5, 0, 0, 0]; 	module.exports.warrior = warrior;
+	let criminal = [0, 0, 10, 0, 0]; module.exports.criminal = criminal;
+	let wizard = [0, 0, 0, 5, 5]; module.exports.wizard = wizard;
 
-	let human = [0, 0, 0, 0, 0];
-  let halfOrc = [3, 3, 0, -3, -3];
-  let orc = [5, 5, 0, -5, -5];
-  let halfElv = [-3, -3, 0, 3, 3];
-	let elv = [-5, -5, 0, 5, 5];
-	let dwarf = [4, 4, 0, -2, -3];
-  let gnome = [-2, -2, 3, 3, 0];
-  let halfling = [-3, 0, 6, 0, 0];
-  let goblin = [2, -2, 4, 0, -4];
-  let troll = [2, 0, 0, -2, -2];
-  let semiGiant = [7, 7, -5, -3, 0];
+	let human = [0, 0, 0, 0, 0]; module.exports.human = human;
+  let halfOrc = [3, 3, 0, -3, -3]; module.exports.halfOrc = halfOrc;
+  let orc = [5, 5, 0, -5, -5]; module.exports.orc = orc;
+  let halfElv = [-3, -3, 0, 3, 3]; module.exports.halfElv = halfElv;
+	let elv = [-5, -5, 0, 5, 5]; module.exports.elc = elv;
+	let dwarf = [4, 4, 0, -2, -3]; module.exports.dwarf = dwarf;
+  let gnome = [-2, -2, 3, 3, 0]; module.exports.gnome = gnome;
+  let halfling = [-3, 0, 6, 0, 0]; module.exports.halfling = halfling;
+  let goblin = [2, -2, 4, 0, -4]; module.exports.goblin = goblin;
+  let troll = [2, 0, 0, -2, -2]; module.exports.troll = troll;
+  let semiGiant = [7, 7, -5, -3, 0]; module.exports.semiGiant = semiGiant;
 
 //dodatkowa tablica dla losowania cech
 let randomFeatures = [0, 0, 0, 0, 0];
@@ -98,6 +99,22 @@ module.exports.random = function(){
 		let sexHero = sex[randomSexNumber];
 		hero.splice(1, 1, sexHero);
 
+		//losowanie imienia
+		if(hero[1] == "kobieta"){
+			let randomNameNumber = Math.round(Math.random()*(namesWomen.length-1));
+			let nameHero = namesWomen[randomNameNumber];
+			hero.splice(0, 1, nameHero);
+		}else if(hero[1] == "mężczyzna"){
+			let randomNameNumber = Math.round(Math.random()*(namesMan.length-1));
+			let nameHero = namesMan[randomNameNumber];
+			hero.splice(0, 1, nameHero);
+		}else{
+			let allNames = namesMan.concat(namesWomen);
+			let randomNameNumber = Math.round(Math.random()*(allNames.length-1));
+			let nameHero = allNames[randomNameNumber];
+			hero.splice(0, 1, nameHero);
+		}
+
 		//losowanie rasy
 		let randomRaceNumber = Math.round(Math.random()*(races.length-1));
 		let raceHero = races[randomRaceNumber];
@@ -108,6 +125,9 @@ module.exports.random = function(){
   	let occupationsHero = occupations[randomOccupationNumber];
 		hero.splice(3, 1, occupationsHero);
 
+		functions.randomPoints2(hero[2], hero[3]);
+
 		functions.heroCreatorResult(hero);
+		$("#heroResults span").addClass("greenText");
 	});
 }
