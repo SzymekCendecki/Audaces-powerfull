@@ -74,3 +74,9 @@ Przeorganizowano kod - przeniesiono odpowiedni kod z heroCreator.js do index.htm
 24 listopada 2018 - wersja 0.1.16
 Poprawiono wygląd wyników wyboru postaci.
   Rozpoczęto pracę nad losowaniem punktów postaci (losowanie dla człowieka - wszystie profesje).
+
+25 listopada 2018 - wersja 0.1.17
+Optymalizacja kodu w pliku heroCreator.js.
+  Dodanie losowania pozostałych cech, umiejętności oraz ekwipunu.
+Drobne przerobienie wyświetlania wyników losowania postaci.
+  Rozpoczęcie adaptacji losowania umiejętności z poprzedenij wersji gry.

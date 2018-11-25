@@ -80,17 +80,39 @@ module.exports.newElement = function (nameElement, idName, text, whereAppend) {
   whereAppend.append(newElement);
 };
 
-//losowanie punktów
+//funkcja losująca płeć, rasy, profesji, oczu, włosów, skóry, tatuaży, wagi i wzrostu
+module.exports.random = function (table, position) {
+  var x = Math.round(Math.random() * (table.length - 1));
+  var y = table[x];
+  heroCreator.hero.splice(position, 1, y);
+};
+
+//losowanie imienia
+module.exports.nameRandom = function (table1, table2) {
+  if (heroCreator.hero[1] == "kobieta") {
+    var x = Math.round(Math.random() * (table1.length - 1));
+    var y = table1[x];
+    heroCreator.hero.splice(0, 1, y);
+  } else if (heroCreator.hero[1] == "mężczyzna") {
+    var _x = Math.round(Math.random() * (table2.length - 1));
+    var _y = table2[_x];
+    heroCreator.hero.splice(0, 1, _y);
+  } else {
+    var allNames = table2.concat(table1);
+    var _x2 = Math.round(Math.random() * (allNames.length - 1));
+    var _y2 = table2[_x2];
+    heroCreator.hero.splice(0, 1, _y2);
+  }
+};
+
+//losowanie punktów postaci
 function randomPoints(occupationsPoints, racePoints, tablePosition) {
   var randomPoints = Math.round(Math.random() * 50);
   var allPoints = randomPoints + occupationsPoints + racePoints;
   heroCreator.hero.splice(tablePosition, 1, allPoints);
-  console.log(randomPoints, occupationsPoints, racePoints);
 }
 
 module.exports.randomPoints2 = function (race, occupation) {
-  console.log(race, occupation);
-  //człowiek - wojownik
   if (race == "człowiek" && occupation == "wojownik") {
     randomPoints(heroCreator.warrior[0], heroCreator.human[0], 4);
     randomPoints(heroCreator.warrior[1], heroCreator.human[1], 5);
@@ -112,8 +134,52 @@ module.exports.randomPoints2 = function (race, occupation) {
   }
 };
 
+//dodawanie odstępu do wypisanej zawartości tablicy
+function distance(array) {
+  for (var i = 1; i < array.length; i++) {
+    array.splice(i, 1, " " + array[i]);
+  }
+}
+
+//losowanie umiejętności
+module.exports.randomSkills = function () {
+  //  let allSkills = array1.concat(array2, array3);
+  //  let skillNumber1 = Math.round(Math.random()*(allSkills.length-1)); let skill1 = allSkills[skillNumber1];
+  //let skillNumber2 = Math.round(Math.random()*(allSkills.length-1)); let skill2 = allSkills[skillNumber2];
+  //  let skillNumber3 = Math.round(Math.random()*(allSkills.length-1)); let skill3 = allSkills[skillNumber3];
+
+  //heroCreator.skills.splice(0, 1, skill1); heroCreator.skills.splice(1, 1, skill2); heroCreator.skills.splice(2, 1, skill3);
+  //dla wojownika
+  if (heroCreator.hero[3] === "wojownik") {
+    for (var i = 0; i < 3; i++) {
+      var random = Math.round(Math.random() * (heroCreator.skillsWarrior.length - 1));
+      var is = false;
+      for (var j = 0; j < heroCreator.skills.length; j++) {
+        if (heroCreator.skills[j] == random) is = true;
+      }if (is) i--;else heroCreator.skills[i] = random;
+    }
+    heroCreator.skills.splice(0, 1, heroCreator.skillsWarrior[heroCreator.skills[0]]);
+    heroCreator.skills.splice(1, 1, heroCreator.skillsWarrior[heroCreator.skills[1]]);
+    heroCreator.skills.splice(2, 1, heroCreator.skillsWarrior[heroCreator.skills[2]]);
+  }
+
+  distance(heroCreator.skills);
+};
+
+//losowanie ekwipunku
+module.exports.randomEquip = function (array1, array2, array3, array4) {
+  var allEquip = array1.concat(array2, array3, array4);
+  var equipNumber1 = Math.round(Math.random() * (allEquip.length - 1));var equip1 = allEquip[equipNumber1];
+  var equipNumber2 = Math.round(Math.random() * (allEquip.length - 1));var equip2 = allEquip[equipNumber2];
+  var equipNumber3 = Math.round(Math.random() * (allEquip.length - 1));var equip3 = allEquip[equipNumber3];
+  var equipNumber4 = Math.round(Math.random() * (allEquip.length - 1));var equip4 = allEquip[equipNumber4];
+  var equipNumber5 = Math.round(Math.random() * (allEquip.length - 1));var equip5 = allEquip[equipNumber5];
+  heroCreator.equip.splice(0, 1, equip1);heroCreator.equip.splice(1, 1, equip2);heroCreator.equip.splice(2, 1, equip3);heroCreator.equip.splice(3, 1, equip4);heroCreator.equip.splice(4, 1, equip5);
+  distance(heroCreator.equip);
+};
+
 //funkcja pokazująca wybór kreowania postaci
-module.exports.heroCreatorResult = function (hero) {
+module.exports.heroCreatorResult = function (hero, skills, equip) {
   $("#heroResults").show();
   $("#spanName").text(hero[0]);
   $("#spanSex").text(hero[1]);
@@ -130,6 +196,8 @@ module.exports.heroCreatorResult = function (hero) {
   $("#spanTattoo").text(hero[12]);
   $("#spanWeight").text(hero[13]);
   $("#spanHeight").text(hero[14]);
+  $("#spanSkills").text(skills);
+  $("#spanEquip").text(equip);
 };
 
 /***/ }),
@@ -147,10 +215,10 @@ var hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0,
 module.exports.hero = hero;
 
 //tablica ekwipunku
-var equip = [];
+var equip = [" ", " ", " ", " ", " "];module.exports.equip = equip;
 
 //tablica umiejętności
-var skills = [];
+var skills = [" ", " ", " "];module.exports.skills = skills;
 
 //tablica ze złotem
 var gold = [0];
@@ -180,7 +248,7 @@ var eyesColor = ["piwne", "szare", "brązowe", "niebieskie"];
 var skinColor = ["biała", "brązowa", "czarna", "czerwona", "zółta", "zielona", "brunatna", "błękitna"];
 
 //tablica z tatuażami
-var tattoo = ["brak", "więzienne", "plemienne", ""];
+var tattoo = ["brak", "więzienne", "plemienne", "dziwne"];
 
 //tablica z wagą
 var weight = ["niedowaga", "normalna", "nadwaga"];
@@ -197,6 +265,22 @@ var equipArmor = ["przeszywanica", "zbroja skórzana", "zbroja ćwiekowana"];
 
 //tarcze
 var equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+
+//inny ekwipunek
+var equipOther = ["kostur", "mieszek", "torba podróżna", "sakwa", "plecak", "manierka", "sagan", "koc", "tuba na perg.", "pęk piór do pis.", "pergaminy 5szt.", "zwykłe ubranie", "fikuśna czapka", "płaszcz", "skórzany pas", "igły i nici", "derka", "namiot", "drewniana miska", "drewniana łyżka", "pochodnia", "lampa oliwna", "kaganek", "lina 5m", "hubka i krzesiwo"];
+
+//tablice z umiejętnościami
+//wojownika
+var skillsWarrior = ["szt.przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+module.exports.skillsWarrior = skillsWarrior;
+
+//złoczyńcy
+var skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drewniana pałka"];
+module.exports.skillsCriminal = skillsCriminal;
+
+//czarodzieja
+var skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo", "leczenie ran", "rzuczanie czarów", "tworz. eliksirów", "tworz.mag. przedm.", "tworzenie maści", "tworzenie runów", "astrologia", "zielarstwo"];
+module.exports.skillsWizard = skillsWizard;
 
 //tablice ze modyfikatorami rasy i profesji - dla określenia ostatecznej ilości punktów postaci
 //indeksy: 0-siła, 1-wytrzymałość, 2-zręczność, 3-inteligencja, 4-charyzma
@@ -219,56 +303,22 @@ var semiGiant = [7, 7, -5, -3, 0];module.exports.semiGiant = semiGiant;
 //dodatkowa tablica dla losowania cech
 var randomFeatures = [0, 0, 0, 0, 0];
 
-//inny ekwipunek
-var equipOther = ["kostur", "mieszek", "torba podróżna", "sakwa", "plecak", "manierka", "sagan", "koc", "tuba na perg.", "pęk piór do pis.", "pergaminy 5szt.", "zwykłe ubranie", "fikuśna czapka", "płaszcz", "skórzany pas", "igły i nici", "derka", "namiot", "drewniana miska", "drewniana łyżka", "pochodnia", "lampa oliwna", "kaganek", "lina 5m", "hubka i krzesiwo"];
-
-//tablice z umiejętnościami
-//wojownika
-var skillsWarrior = ["szt.przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
-
-//złoczyńcy
-var skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drewniana pałka"];
-
-//czarodzieja
-var skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo", "leczenie ran", "rzuczanie czarów", "tworz. eliksirów", "tworz.mag. przedm.", "tworzenie maści", "tworzenie runów", "astrologia", "zielarstwo"];
-
 module.exports.random = function () {
 	$("#randomHero").on("click", function () {
-
-		//losowanie płci
-		var randomSexNumber = Math.round(Math.random() * (sex.length - 1));
-		var sexHero = sex[randomSexNumber];
-		hero.splice(1, 1, sexHero);
-
-		//losowanie imienia
-		if (hero[1] == "kobieta") {
-			var randomNameNumber = Math.round(Math.random() * (namesWomen.length - 1));
-			var nameHero = namesWomen[randomNameNumber];
-			hero.splice(0, 1, nameHero);
-		} else if (hero[1] == "mężczyzna") {
-			var _randomNameNumber = Math.round(Math.random() * (namesMan.length - 1));
-			var _nameHero = namesMan[_randomNameNumber];
-			hero.splice(0, 1, _nameHero);
-		} else {
-			var allNames = namesMan.concat(namesWomen);
-			var _randomNameNumber2 = Math.round(Math.random() * (allNames.length - 1));
-			var _nameHero2 = allNames[_randomNameNumber2];
-			hero.splice(0, 1, _nameHero2);
-		}
-
-		//losowanie rasy
-		var randomRaceNumber = Math.round(Math.random() * (races.length - 1));
-		var raceHero = races[randomRaceNumber];
-		hero.splice(2, 1, raceHero);
-
-		//losowanie profesji
-		var randomOccupationNumber = Math.round(Math.random() * (occupations.length - 1));
-		var occupationsHero = occupations[randomOccupationNumber];
-		hero.splice(3, 1, occupationsHero);
-
-		functions.randomPoints2(hero[2], hero[3]);
-
-		functions.heroCreatorResult(hero);
+		functions.random(sex, 1); //losowanie płci
+		functions.nameRandom(namesWomen, namesMan); //losowanie imienia
+		functions.random(races, 2); //losowanie rasy
+		functions.random(occupations, 3); //losowanie profesji
+		functions.randomPoints2(hero[2], hero[3]); //losowanie punktów
+		functions.random(eyesColor, 9); //losowanie koloru oczu
+		functions.random(hairColor, 10); //losowanie koloru włosów
+		functions.random(skinColor, 11); //losowanie koloru skóry
+		functions.random(tattoo, 12); //losowanie tatuaży
+		functions.random(weight, 13); //losowanie wagi
+		functions.random(height, 14); //losowanie wzrost
+		functions.randomSkills(); //losowanie umiejętności
+		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
+		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
 	});
 };

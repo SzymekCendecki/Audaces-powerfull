@@ -6,10 +6,10 @@ let hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0,
 module.exports.hero = hero;
 
 //tablica ekwipunku
-let equip = [];
+let equip = [" ", " ",  " ", " ", " "]; module.exports.equip = equip;
 
 //tablica umiejętności
-let skills = [];
+let skills = [" ", " ",  " "]; module.exports.skills = skills;
 
 //tablica ze złotem
 let gold = [0];
@@ -39,7 +39,7 @@ let eyesColor = ["piwne", "szare", "brązowe", "niebieskie"];
 let skinColor = ["biała", "brązowa", "czarna", "czerwona", "zółta", "zielona", "brunatna", "błękitna"];
 
 //tablica z tatuażami
-let tattoo = ["brak", "więzienne", "plemienne", ""]
+let tattoo = ["brak", "więzienne", "plemienne", "dziwne"]
 
 //tablica z wagą
 let weight = ["niedowaga", "normalna", "nadwaga"];
@@ -56,6 +56,23 @@ let equipArmor = ["przeszywanica", "zbroja skórzana", "zbroja ćwiekowana"];
 
 //tarcze
 let equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+
+//inny ekwipunek
+let equipOther = ["kostur", "mieszek", "torba podróżna", "sakwa", "plecak", "manierka", "sagan", "koc", "tuba na perg.", "pęk piór do pis.", "pergaminy 5szt.", "zwykłe ubranie", "fikuśna czapka", "płaszcz", "skórzany pas",  "igły i nici", "derka", "namiot", "drewniana miska", "drewniana łyżka", "pochodnia", "lampa oliwna", "kaganek", "lina 5m", "hubka i krzesiwo"];
+
+//tablice z umiejętnościami
+//wojownika
+let skillsWarrior = ["szt.przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+module.exports.skillsWarrior = skillsWarrior;
+
+//złoczyńcy
+let skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drewniana pałka"];
+module.exports.skillsCriminal = skillsCriminal;
+
+//czarodzieja
+let skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo", "leczenie ran", "rzuczanie czarów", "tworz. eliksirów", "tworz.mag. przedm.", "tworzenie maści", "tworzenie runów", "astrologia", "zielarstwo"];
+module.exports.skillsWizard = skillsWizard;
+
 
 //tablice ze modyfikatorami rasy i profesji - dla określenia ostatecznej ilości punktów postaci
 //indeksy: 0-siła, 1-wytrzymałość, 2-zręczność, 3-inteligencja, 4-charyzma
@@ -78,56 +95,22 @@ let equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"]
 //dodatkowa tablica dla losowania cech
 let randomFeatures = [0, 0, 0, 0, 0];
 
-//inny ekwipunek
-let equipOther = ["kostur", "mieszek", "torba podróżna", "sakwa", "plecak", "manierka", "sagan", "koc", "tuba na perg.", "pęk piór do pis.", "pergaminy 5szt.", "zwykłe ubranie", "fikuśna czapka", "płaszcz", "skórzany pas",  "igły i nici", "derka", "namiot", "drewniana miska", "drewniana łyżka", "pochodnia", "lampa oliwna", "kaganek", "lina 5m", "hubka i krzesiwo"];
-
-//tablice z umiejętnościami
-//wojownika
-let skillsWarrior = ["szt.przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
-
-//złoczyńcy
-let skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drewniana pałka"];
-
-//czarodzieja
-let skillsWizard = ["pisanie i czytanie", "przyw./odp. demona", "wróżbiarstwo", "leczenie ran", "rzuczanie czarów", "tworz. eliksirów", "tworz.mag. przedm.", "tworzenie maści", "tworzenie runów", "astrologia", "zielarstwo"];
-
 module.exports.random = function(){
 	$("#randomHero").on("click", ()=>{
-
-		//losowanie płci
-		let randomSexNumber = Math.round(Math.random()*(sex.length-1));
-		let sexHero = sex[randomSexNumber];
-		hero.splice(1, 1, sexHero);
-
-		//losowanie imienia
-		if(hero[1] == "kobieta"){
-			let randomNameNumber = Math.round(Math.random()*(namesWomen.length-1));
-			let nameHero = namesWomen[randomNameNumber];
-			hero.splice(0, 1, nameHero);
-		}else if(hero[1] == "mężczyzna"){
-			let randomNameNumber = Math.round(Math.random()*(namesMan.length-1));
-			let nameHero = namesMan[randomNameNumber];
-			hero.splice(0, 1, nameHero);
-		}else{
-			let allNames = namesMan.concat(namesWomen);
-			let randomNameNumber = Math.round(Math.random()*(allNames.length-1));
-			let nameHero = allNames[randomNameNumber];
-			hero.splice(0, 1, nameHero);
-		}
-
-		//losowanie rasy
-		let randomRaceNumber = Math.round(Math.random()*(races.length-1));
-		let raceHero = races[randomRaceNumber];
-		hero.splice(2, 1, raceHero);
-
-		//losowanie profesji
-  	let randomOccupationNumber = Math.round(Math.random()*(occupations.length-1));
-  	let occupationsHero = occupations[randomOccupationNumber];
-		hero.splice(3, 1, occupationsHero);
-
-		functions.randomPoints2(hero[2], hero[3]);
-
-		functions.heroCreatorResult(hero);
+		functions.random(sex, 1); //losowanie płci
+		functions.nameRandom(namesWomen, namesMan);//losowanie imienia
+		functions.random(races, 2); //losowanie rasy
+		functions.random(occupations, 3); //losowanie profesji
+		functions.randomPoints2(hero[2], hero[3]); //losowanie punktów
+		functions.random(eyesColor, 9); //losowanie koloru oczu
+		functions.random(hairColor, 10); //losowanie koloru włosów
+		functions.random(skinColor, 11); //losowanie koloru skóry
+		functions.random(tattoo, 12); //losowanie tatuaży
+		functions.random(weight, 13); //losowanie wagi
+		functions.random(height, 14); //losowanie wzrost
+		functions.randomSkills(); //losowanie umiejętności
+		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
+		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
 	});
 }
