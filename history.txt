@@ -80,3 +80,6 @@ Optymalizacja kodu w pliku heroCreator.js.
   Dodanie losowania pozostałych cech, umiejętności oraz ekwipunu.
 Drobne przerobienie wyświetlania wyników losowania postaci.
   Rozpoczęcie adaptacji losowania umiejętności z poprzedenij wersji gry.
+
+26 listopada 2018 - wersja 0.1.18
+Dodanie losowania umiejętności dla złoczyńcy.

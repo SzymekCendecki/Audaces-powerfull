@@ -86,6 +86,32 @@ heroCreator.skills.splice(1, 1, heroCreator.skillsWarrior[heroCreator.skills[1]]
 heroCreator.skills.splice(2, 1, heroCreator.skillsWarrior[heroCreator.skills[2]]);
 }
 
+//dla złoczyńcy
+else if(heroCreator.hero[3] === "złoczyńca"){
+  for (let i=0; i<3; i++) {
+    let  random = Math.round(Math.random()*(heroCreator.skillsCriminal.length-1));
+    let is = false;
+    for (let j=0; j<heroCreator.skills.length; j++) if (heroCreator.skills[j] == random) is = true;
+     if (is) i--;
+    else heroCreator.skills[i] = random;
+  }
+
+heroCreator.skills.splice(0, 1, heroCreator.skillsCriminal[heroCreator.skills[0]]);
+heroCreator.skills.splice(1, 1, heroCreator.skillsCriminal[heroCreator.skills[1]]);
+heroCreator.skills.splice(2, 1, heroCreator.skillsCriminal[heroCreator.skills[2]]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   distance(heroCreator.skills);

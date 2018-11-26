@@ -163,6 +163,21 @@ module.exports.randomSkills = function () {
     heroCreator.skills.splice(2, 1, heroCreator.skillsWarrior[heroCreator.skills[2]]);
   }
 
+  //dla złoczyńcy
+  else if (heroCreator.hero[3] === "złoczyńca") {
+      for (var _i = 0; _i < 3; _i++) {
+        var _random = Math.round(Math.random() * (heroCreator.skillsCriminal.length - 1));
+        var _is = false;
+        for (var _j = 0; _j < heroCreator.skills.length; _j++) {
+          if (heroCreator.skills[_j] == _random) _is = true;
+        }if (_is) _i--;else heroCreator.skills[_i] = _random;
+      }
+
+      heroCreator.skills.splice(0, 1, heroCreator.skillsCriminal[heroCreator.skills[0]]);
+      heroCreator.skills.splice(1, 1, heroCreator.skillsCriminal[heroCreator.skills[1]]);
+      heroCreator.skills.splice(2, 1, heroCreator.skillsCriminal[heroCreator.skills[2]]);
+    }
+
   distance(heroCreator.skills);
 };
 
