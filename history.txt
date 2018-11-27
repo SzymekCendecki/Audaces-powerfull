@@ -87,3 +87,6 @@ Dodanie losowania umiejętności dla złoczyńcy.
 26 listopada 2018 - wersja 0.1.19
 Dodanie losowania umiejętności dla czarodzieja.
     Dodano losowanie punktów dla pozostałych ras.
+
+27 listopada 2018 - wersja 0.1.20
+Optymalizacja losowania punktów dla losowanej wersji tworzenia postaci.

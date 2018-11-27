@@ -34,213 +34,48 @@ module.exports.nameRandom = function(table1, table2){
 }
 
 //losowanie punktów postaci
-function randomPoints(occupationsPoints, racePoints, tablePosition){
+function randomPoints(occupationArray, raceArray){
+  for(let i=0; i<5; i++){
     let randomPoints = Math.round(Math.random()*50);
-    let allPoints = randomPoints + occupationsPoints + racePoints;
-    heroCreator.hero.splice(tablePosition, 1, allPoints);
+    let points = occupationArray[i] + raceArray[i] + randomPoints;
+    heroCreator.hero.splice(i+4, 1, points);
+  }
 }
 
 module.exports.randomPoints2 = function(race, occupation){
-  if(race == "człowiek" && occupation == "wojownik"){
-    randomPoints(heroCreator.warrior[0], heroCreator.human[0], 4);
-    randomPoints(heroCreator.warrior[1], heroCreator.human[1], 5);
-    randomPoints(heroCreator.warrior[2], heroCreator.human[2], 6);
-    randomPoints(heroCreator.warrior[3], heroCreator.human[3], 7);
-    randomPoints(heroCreator.warrior[4], heroCreator.human[4], 8);
-  }else if (race == "człowiek" && occupation == "złoczyńca") {
-    randomPoints(heroCreator.criminal[0], heroCreator.human[0], 4);
-    randomPoints(heroCreator.criminal[1], heroCreator.human[1], 5);
-    randomPoints(heroCreator.criminal[2], heroCreator. human[2], 6);
-    randomPoints(heroCreator.criminal[3], heroCreator.human[3], 7);
-    randomPoints(heroCreator.criminal[4], heroCreator.human[4], 8);
-  }else if(race == "człowiek" && occupation == "czarodziej"){
-    randomPoints(heroCreator.wizard[0], heroCreator.human[0], 4);
-    randomPoints(heroCreator.wizard[1], heroCreator.human[1], 5);
-    randomPoints(heroCreator.wizard[2], heroCreator.human[2], 6);
-    randomPoints(heroCreator.wizard[3], heroCreator.human[3], 7);
-    randomPoints(heroCreator.wizard[4], heroCreator.human[4], 8);
-  }else if(race == "półork" && occupation == "wojownik"){
-    randomPoints(heroCreator.warrior[0], heroCreator.halfOrc[0], 4);
-    randomPoints(heroCreator.warrior[1], heroCreator.halfOrc[1], 5);
-    randomPoints(heroCreator.warrior[2], heroCreator.halfOrc[2], 6);
-    randomPoints(heroCreator.warrior[3], heroCreator.halfOrc[3], 7);
-    randomPoints(heroCreator.warrior[4], heroCreator.halfOrc[4], 8);
-}else if(race == "półork" && occupation == "złoczyńca"){
-  randomPoints(heroCreator.criminal[0], heroCreator.halfOrc[0], 4);
-  randomPoints(heroCreator.criminal[1], heroCreator.halfOrc[1], 5);
-  randomPoints(heroCreator.criminal[2], heroCreator.halfOrc[2], 6);
-  randomPoints(heroCreator.criminal[3], heroCreator.halfOrc[3], 7);
-  randomPoints(heroCreator.criminal[4], heroCreator.halfOrc[4], 8);
-}else if(race == "półork" && occupation == "czarodziej"){
-  randomPoints(heroCreator.wizard[0], heroCreator.halfOrc[0], 4);
-  randomPoints(heroCreator.wizard[1], heroCreator.halfOrc[1], 5);
-  randomPoints(heroCreator.wizard[2], heroCreator.halfOrc[2], 6);
-  randomPoints(heroCreator.wizard[3], heroCreator.halfOrc[3], 7);
-  randomPoints(heroCreator.wizard[4], heroCreator.halfOrc[4], 8);
-} else if(race == "ork" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.orc[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.orc[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.Orc[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.orc[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.orc[4], 8);
-}else if(race == "ork" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.orc[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.orc[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.orc[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.orc[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.orc[4], 8);
-}else if(race == "ork" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.orc[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.orc[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.orc[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.orc[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.orc[4], 8);
-} else if(race == "półelf" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.halfElv[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.halfElv[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.halfElv[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.halfElv[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.halfElv[4], 8);
-}else if(race == "półelf" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.halfElv[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.halfElv[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.halfElv[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.halfElv[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.halfElv[4], 8);
-}else if(race == "półelf" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.halfElv[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.halfElv[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.halfElv[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.halfElv[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.halfElv[4], 8);
-}else if(race == "elf" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.elv[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.elv[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.elv[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.elv[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.elv[4], 8);
-}else if(race == "elf" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.elv[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.elv[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.elv[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.elv[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.elv[4], 8);
-}else if(race == "elf" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.elv[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.elv[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.elv[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.elv[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.elv[4], 8);
-}else if(race == "krasnolud" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.dwarf[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.dwarf[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.dwarf[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.dwarf[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.dwarf[4], 8);
-}else if(race == "krasnolud" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.dwarf[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.dwarf[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.dwarf[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.dwarf[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.dwarf[4], 8);
-}else if(race == "krasnolud" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.dwarf[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.dwarf[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.dwarf[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.dwarf[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.dwarf[4], 8);
-}else if(race == "gnom" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.gnome[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.gnome[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.gnome[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.gnome[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.gnome[4], 8);
-}else if(race == "gnom" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.gnome[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.gnome[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.gnome[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.gnome[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.gnome[4], 8);
-}else if(race == "gnom" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.gnome[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.gnome[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.gnome[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.gnome[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.gnome[4], 8);
-}else if(race == "niziołek" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.halfling[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.halfling[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.halfling[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.halfling[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.halfling[4], 8);
-}else if(race == "niziołek" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.halfling[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.halfling[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.halfling[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.halfling[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.halfling[4], 8);
-}else if(race == "niziołek" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.halfling[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.halfling[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.halfling[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.halfling[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.halfling[4], 8);
-}else if(race == "goblin" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.goblin[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.goblin[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.goblin[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.goblin[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.goblin[4], 8);
-}else if(race == "goblin" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.goblin[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.goblin[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.goblin[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.goblin[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.goblin[4], 8);
-}else if(race == "goblin" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.goblin[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.goblin[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.goblin[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.goblin[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.goblin[4], 8);
-} else if(race == "troll" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.troll[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.troll[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.troll[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.troll[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.troll[4], 8);
-}else if(race == "troll" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.troll[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.troll[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.troll[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.troll[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.troll[4], 8);
-}else if(race == "troll" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.troll[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.troll[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.troll[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.troll[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.troll[4], 8);
-}else if(race == "półolbrzym" && occupation == "wojownik"){
-randomPoints(heroCreator.warrior[0], heroCreator.semiGiant[0], 4);
-randomPoints(heroCreator.warrior[1], heroCreator.semiGiant[1], 5);
-randomPoints(heroCreator.warrior[2], heroCreator.semiGiant[2], 6);
-randomPoints(heroCreator.warrior[3], heroCreator.semiGiant[3], 7);
-randomPoints(heroCreator.warrior[4], heroCreator.semiGiant[4], 8);
-}else if(race == "półolbrzym" && occupation == "złoczyńca"){
-randomPoints(heroCreator.criminal[0], heroCreator.semiGiant[0], 4);
-randomPoints(heroCreator.criminal[1], heroCreator.semiGiant[1], 5);
-randomPoints(heroCreator.criminal[2], heroCreator.semiGiant[2], 6);
-randomPoints(heroCreator.criminal[3], heroCreator.semiGiant[3], 7);
-randomPoints(heroCreator.criminal[4], heroCreator.semiGiant[4], 8);
-}else if(race == "półolbrzym" && occupation == "czarodziej"){
-randomPoints(heroCreator.wizard[0], heroCreator.semiGiant[0], 4);
-randomPoints(heroCreator.wizard[1], heroCreator.semiGiant[1], 5);
-randomPoints(heroCreator.wizard[2], heroCreator.semiGiant[2], 6);
-randomPoints(heroCreator.wizard[3], heroCreator.semiGiant[3], 7);
-randomPoints(heroCreator.wizard[4], heroCreator.semiGiant[4], 8);
-}
-
+  if(race == "człowiek" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.human);
+  }else if (race == "człowiek" && occupation == "złoczyńca") { randomPoints(heroCreator.criminal, heroCreator.human);
+  }else if(race == "człowiek" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.human);
+  }else if(race == "półork" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.halfOrc);
+  }else if(race == "półork" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.halfOrc);
+  }else if(race == "półork" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.halfOrc);
+  }else if(race == "ork" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.orc);
+  }else if(race == "ork" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.orc);
+  }else if(race == "ork" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.halfOrc);
+  }else if(race == "półelf" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.halfElv);
+  }else if(race == "półelf" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.halfElv);
+  }else if(race == "półelf" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.halfElv);
+  }else if(race == "elf" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.elv);
+  }else if(race == "elf" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.elv);
+  }else if(race == "elf" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.elv);
+  }else if(race == "krasnolud" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.dwarf);
+  }else if(race == "krasnolud" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.dwarf);
+  }else if(race == "krasnolud" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.dwarf);
+  }else if(race == "gnom" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.gnome);
+  }else if(race == "gnom" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.gnome);
+  }else if(race == "gnom" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.gnome);
+  }else if(race == "niziołek" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.halfling);
+  }else if(race == "niziołek" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.halfling);
+  }else if(race == "niziołek" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.halfling);
+  }else if(race == "goblin" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.goblin);
+  }else if(race == "goblin" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.goblin);
+  }else if(race == "goblin" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.goblin);
+  }else if(race == "troll" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.troll);
+  }else if(race == "troll" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.troll);
+  }else if(race == "troll" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.troll);
+  }else if(race == "półolbrzym" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.semiGiant);
+  }else if(race == "półolbrzym" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.semiGiant);
+  }else if(race == "półolbrzym" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.semiGiant); }
 }
 
 //dodawanie odstępu do wypisanej zawartości tablicy
