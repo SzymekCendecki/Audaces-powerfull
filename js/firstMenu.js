@@ -20,17 +20,6 @@ module.exports.firstMenuBtns = function(){
       $("#description").remove();
       $("#info, #licence, #tutorial, #game").remove();
   }, 3000);
-   $("#randomHero, #chooseHero").delay(3050).fadeIn(750);
-
-
-
-
-
-
-
-
-
-
-
+   $("#randomHero, #chooseHero, #gameInfo").delay(3050).fadeIn(750);
   });
 }

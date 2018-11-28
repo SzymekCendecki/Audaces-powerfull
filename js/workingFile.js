@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
  console.log("NIEWIERNE PSY RULEZ!!!!");
 
 //ukrywanie odpowiednich części
-$("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults").hide();
+$("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
@@ -20,4 +20,18 @@ setTimeout(function(){
 //funkcje dla przycisków pierwszego menu
  firstMenu.firstMenuBtns();
  heroCreator.random();
+
+//funkcje dla "wyskakującego" okienka dla informacji gry
+ $("#gameInfo").on("click", ()=>{
+   console.log("działa");
+   $("#heroBtns button").prop("disabled", true);
+   $("#gameInfoResult").show();
+ });
+
+ $("#gameInfoResult button").on("click", ()=>{
+   console.log("działa");
+   $("#heroBtns button").prop("disabled", false);
+   $("#gameInfoResult").hide();
+ });
+
 });//koniec DOMContentLoaded

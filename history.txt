@@ -90,3 +90,6 @@ Dodanie losowania umiejętności dla czarodzieja.
 
 27 listopada 2018 - wersja 0.1.20
 Optymalizacja losowania punktów dla losowanej wersji tworzenia postaci.
+
+28 listopada 2018 - wersja 0.1.21
+Rozpoczęto pracę nad "wyskakującym" okienkiem dla info gry.

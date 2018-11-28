@@ -416,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
 
   //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults").hide();
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -430,6 +430,19 @@ document.addEventListener("DOMContentLoaded", function () {
   //funkcje dla przycisków pierwszego menu
   firstMenu.firstMenuBtns();
   heroCreator.random();
+
+  //funkcje dla "wyskakującego" okienka dla informacji gry
+  $("#gameInfo").on("click", function () {
+    console.log("działa");
+    $("#heroBtns button").prop("disabled", true);
+    $("#gameInfoResult").show();
+  });
+
+  $("#gameInfoResult button").on("click", function () {
+    console.log("działa");
+    $("#heroBtns button").prop("disabled", false);
+    $("#gameInfoResult").hide();
+  });
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -467,7 +480,7 @@ module.exports.firstMenuBtns = function () {
       $("#description").remove();
       $("#info, #licence, #tutorial, #game").remove();
     }, 3000);
-    $("#randomHero, #chooseHero").delay(3050).fadeIn(750);
+    $("#randomHero, #chooseHero, #gameInfo").delay(3050).fadeIn(750);
   });
 };
 
