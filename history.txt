@@ -93,3 +93,7 @@ Optymalizacja losowania punktów dla losowanej wersji tworzenia postaci.
 
 28 listopada 2018 - wersja 0.1.21
 Rozpoczęto pracę nad "wyskakującym" okienkiem dla info gry.
+
+
+29 listopad 2018 - wersja 0.1.22
+Poprawki graficzne dla przycisku "info" oraz dala wyskakującego okna.
