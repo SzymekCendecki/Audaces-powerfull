@@ -433,13 +433,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //funkcje dla "wyskakującego" okienka dla informacji gry
   $("#gameInfo").on("click", function () {
-    console.log("działa");
     $("#heroBtns button").prop("disabled", true);
     $("#gameInfoResult").show();
   });
 
-  $("#gameInfoResult button").on("click", function () {
-    console.log("działa");
+  $("#gameInfoResult button:first-child").on("click", function () {
     $("#heroBtns button").prop("disabled", false);
     $("#gameInfoResult").hide();
   });

@@ -23,13 +23,11 @@ setTimeout(function(){
 
 //funkcje dla "wyskakującego" okienka dla informacji gry
  $("#gameInfo").on("click", ()=>{
-   console.log("działa");
    $("#heroBtns button").prop("disabled", true);
    $("#gameInfoResult").show();
  });
 
- $("#gameInfoResult button").on("click", ()=>{
-   console.log("działa");
+ $("#gameInfoResult button:first-child").on("click", ()=>{
    $("#heroBtns button").prop("disabled", false);
    $("#gameInfoResult").hide();
  });

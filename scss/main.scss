@@ -108,7 +108,7 @@ header{
   position: absolute;
   box-shadow:  0 0 20px black;
 
-  button{
+  button:first-child{
     background: radial-gradient( circle at top left, white 5%, red 95%);
     border-radius: 50%;
     width: 25px;
@@ -119,6 +119,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: -1% 0 0 99%;
 
     div:first-child{
       width: 5px;
@@ -138,7 +139,7 @@ header{
     }
   }
 
-  button:active{
+  button:first-child:active{
     animation-name: animClose;
     animation-duration: 0.5s;
 
@@ -150,5 +151,67 @@ header{
 
   button:focus{
     outline: none;
+  }
+}
+
+//style dla rozwijalnego menu w oknie info
+  /* ------------------------CZĘŚĆ-GÓRNA-MENU------------------------ */
+/* wygląd głównego elementu - ol */
+     ol {
+       list-style-type:none;
+       padding:0;
+       margin:0;
+       background-color:#FFF;
+       font-size:18px;
+       height:2em;
+       line-height:2em;
+       text-align:center;
+
+       li {
+               float:left;
+               width:150px;
+               margin-left:1px;
+               background-color:#FDD700;
+               height:2em;
+             }
+
+    li:first-child {
+        margin-left:0;
+      }
+
+      li:hover {
+        background-color:#EEE;
+      }
+
+
+      li:hover {
+        ul {
+                display:block;
+              }
+      }
+  }
+
+
+/* ------------------------CZĘŚĆ-ROZWIJANA-MENU------------------------ */
+
+/* wygląd głównych rozwijanych elementów - ul */
+ol{
+  li{
+    ul {
+      display:none;
+      list-style-type:none;
+      padding:0;
+      margin:0;
+      /* wygląd elementu - li - w części rozwijanej */
+   li {
+        position:relative;
+        background-color:#EEE;
+      }
+
+      li:hover {
+        background-color:#DDD;
+      }
+
+    }
   }
 }

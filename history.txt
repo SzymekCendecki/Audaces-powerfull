@@ -94,6 +94,9 @@ Optymalizacja losowania punktów dla losowanej wersji tworzenia postaci.
 28 listopada 2018 - wersja 0.1.21
 Rozpoczęto pracę nad "wyskakującym" okienkiem dla info gry.
 
-
 29 listopad 2018 - wersja 0.1.22
 Poprawki graficzne dla przycisku "info" oraz dala wyskakującego okna.
+
+30 listopada 2018 - wersja 0.1.23
+Poprawka w umiejscowieniu przycisku zamykania okna info.
+  Rozpoczęcie pracy nad rozwijalnym menu w oknie info - modyfikacja przykładu ze strony http://webkod.pl/kurs-css/lekcje/dzial-4/rozwijane-poziome-menu-css
