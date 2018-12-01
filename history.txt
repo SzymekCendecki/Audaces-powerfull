@@ -100,3 +100,8 @@ Poprawki graficzne dla przycisku "info" oraz dala wyskakującego okna.
 30 listopada 2018 - wersja 0.1.23
 Poprawka w umiejscowieniu przycisku zamykania okna info.
   Rozpoczęcie pracy nad rozwijalnym menu w oknie info - modyfikacja przykładu ze strony http://webkod.pl/kurs-css/lekcje/dzial-4/rozwijane-poziome-menu-css
+
+1 grudnia 2018 - wersja 0.1.24
+Poprawki wizualne dla okna info.
+  Przeniesienie odpowiednich linii kodu do pliku gameInfo.scss oraz gameInfo.js.
+Rozpoczęcie uzupełniania info gry.

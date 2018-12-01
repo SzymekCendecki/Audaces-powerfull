@@ -411,6 +411,7 @@ module.exports = __webpack_require__(3);
 var functions = __webpack_require__(0);
 var firstMenu = __webpack_require__(4);
 var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(5);
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
@@ -432,15 +433,7 @@ document.addEventListener("DOMContentLoaded", function () {
   heroCreator.random();
 
   //funkcje dla "wyskakującego" okienka dla informacji gry
-  $("#gameInfo").on("click", function () {
-    $("#heroBtns button").prop("disabled", true);
-    $("#gameInfoResult").show();
-  });
-
-  $("#gameInfoResult button:first-child").on("click", function () {
-    $("#heroBtns button").prop("disabled", false);
-    $("#gameInfoResult").hide();
-  });
+  gameInfo.gameInfo();
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -479,6 +472,52 @@ module.exports.firstMenuBtns = function () {
       $("#info, #licence, #tutorial, #game").remove();
     }, 3000);
     $("#randomHero, #chooseHero, #gameInfo").delay(3050).fadeIn(750);
+  });
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var heroCreator = "./heroCreator.js";
+
+var raceTexts = {
+  "race": "Wybór rasy determinuje wiele cech bohtera. Można wybrać spośród 13 dostępnych ras. Więcej szczegółów na temat każdej rasy dostępne jest po wyborze z opcji.",
+
+  "human": "Człowiek jedna z najbardziej licznych ras (ustępują jedynie goblinom). Są wszechstronni i wszędobylscy, dlatego też można spotkać ich na wszystkich kontynentach, parających się różnymi profesjami. Podstawowe cechy: wzrost: 150 - 210cm, waga: 40 - 120kg. Wiek: do 100 lat. Profesja: każda. Modyfikatory rasowe: brak",
+
+  "halfOrc": "Rasa ta posiada wymieszane cehy ludzi oraz orków. Są silniejsze i wytrzymasze niż przeciętny człowiek. Niestety od człowiek są mniej inteligentne i mniej charyzmatyczne. Wielu półorków stanowi ochronę karawan. Podstawowe cechy: wzrost: 170 - 220cm, waga: 50 - 140kg. Wiek: do 110 lat. Preferowana profesja: wojownik. Modyfikatory: siła +3, wytrzymałość +3, inteligencja -3, charyzma -3.",
+
+  "orc": "Orkowie to koczownicy wojownicy. Z powodu ich ciągłego przemieszczania, niewiele wiadomo o ich zwyczajach. Wiadomo, iż tolerują jedynie magię szamanów własnych klanów. Są nieufni w handlu. Stałe orcze osady są nieliczne, usytuowane na obrzeżach cywilizowanych krain. Podstawowe cechy: wzrost: 170 - 240cm, waga: 80 - 180kg. Wiek: do 120 lat. Preferowana profesja: wojownik. Modyfikatory: siła +5, wytrzymałość +5, inteligencja -5, charyzma -5."
+};
+
+module.exports.gameInfo = function () {
+  $("#gameInfo").on("click", function () {
+    $("#heroBtns button").prop("disabled", true);
+    $("#gameInfoResult").show();
+    $("#infoDescription").empty();
+  });
+
+  $("#gameInfoResult button:first-child").on("click", function () {
+    $("#heroBtns button").prop("disabled", false);
+    $("#gameInfoResult").hide();
+  });
+
+  $("ol li:first-child span").on("click", function () {
+    $("#infoDescription").empty().text(raceTexts.race);
+  });
+  $("ol li:first-child ul li:first-child").on("click", function () {
+    $("#infoDescription").empty().text(raceTexts.human);
+  });
+  $("ol li:first-child ul li:nth-child(2)").on("click", function () {
+    $("#infoDescription").empty().text(raceTexts.halfOrc);
+  });
+  $("ol li:first-child ul li:nth-child(3)").on("click", function () {
+    $("#infoDescription").empty().text(raceTexts.orc);
   });
 };
 

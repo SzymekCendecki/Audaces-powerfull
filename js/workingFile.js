@@ -1,6 +1,7 @@
 let functions=require("./functions.js");
 let firstMenu=require("./firstMenu.js");
 let heroCreator=require("./heroCreator.js");
+let gameInfo=require("./gameInfo.js");
 
 document.addEventListener("DOMContentLoaded", () => {
  console.log("NIEWIERNE PSY RULEZ!!!!");
@@ -22,14 +23,6 @@ setTimeout(function(){
  heroCreator.random();
 
 //funkcje dla "wyskakującego" okienka dla informacji gry
- $("#gameInfo").on("click", ()=>{
-   $("#heroBtns button").prop("disabled", true);
-   $("#gameInfoResult").show();
- });
-
- $("#gameInfoResult button:first-child").on("click", ()=>{
-   $("#heroBtns button").prop("disabled", false);
-   $("#gameInfoResult").hide();
- });
+gameInfo.gameInfo();
 
 });//koniec DOMContentLoaded
