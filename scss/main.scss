@@ -50,14 +50,10 @@ header{
   -webkit-text-fill-color: #fff;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
-
 }
 
 //style dla przycisków w cześci o id heroBtns
-#heroBtns{
-  display: flex;
-  justify-content: space-around;
-}
+#heroBtns{ display: flex; justify-content: space-around; }
 
 //style dla tekstu w części o id mainPart
 .standardText{
@@ -68,12 +64,5 @@ header{
 }
 
 //kolory tekstu zielony, czerwony
-.greenText{
-  color: green;
-  text-shadow: 0 0 2px green;
-}
-
-.redText{
-  color: red;
-  text-shadow: 0 0 2px red;
-}
+.greenText{ color: green; text-shadow: 0 0 2px green; }
+.redText{ color: red; text-shadow: 0 0 2px red; }

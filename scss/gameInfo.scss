@@ -111,16 +111,11 @@ ol{
       padding:0;
       margin:0;
       /* wygląd elementu - li - w części rozwijanej */
-      li {
-        position: relative;
-        background-color: #009900;
+      li { position: relative; background-color: #009900;
       }
       li:hover { background-color: #33FF33; }
     }
   }
 }
 
-#infoDescription{
-  text-indent: 20px;
-  padding: 10px 0 0 5px;
-}
+#infoDescription{ text-indent: 20px; padding: 10px 0 0 5px; }

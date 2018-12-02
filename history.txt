@@ -105,3 +105,8 @@ Poprawka w umiejscowieniu przycisku zamykania okna info.
 Poprawki wizualne dla okna info.
   Przeniesienie odpowiednich linii kodu do pliku gameInfo.scss oraz gameInfo.js.
 Rozpoczęcie uzupełniania info gry.
+
+2 grudnia 2018 - wersja 0.1.25
+Dodano opisy profesji dla info gry.
+  Dodano opisy puntów cech.
+Dodano wstępnie opisy ras.

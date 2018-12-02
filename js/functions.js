@@ -44,7 +44,7 @@ function randomPoints(occupationArray, raceArray){
 
 module.exports.randomPoints2 = function(race, occupation){
   if(race == "człowiek" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.human);
-  }else if (race == "człowiek" && occupation == "złoczyńca") { randomPoints(heroCreator.criminal, heroCreator.human);
+  }else if(race == "człowiek" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.human);
   }else if(race == "człowiek" && occupation == "czarodziej"){ randomPoints(heroCreator.wizard, heroCreator.human);
   }else if(race == "półork" && occupation == "wojownik"){ randomPoints(heroCreator.warrior, heroCreator.halfOrc);
   }else if(race == "półork" && occupation == "złoczyńca"){ randomPoints(heroCreator.criminal, heroCreator.halfOrc);
