@@ -36,9 +36,9 @@ module.exports.nameRandom = function(table1, table2){
 //losowanie punktów postaci
 function randomPoints(occupationArray, raceArray){
   for(let i=0; i<5; i++){
-    let randomPoints = Math.round(Math.random()*50);
-    let points = occupationArray[i] + raceArray[i] + randomPoints;
-    heroCreator.hero.splice(i+4, 1, points);
+    let randPoints = Math.round(Math.random()*50);
+    let points = occupationArray[i] + raceArray[i] + randPoints;
+    heroCreator.hero.splice(i + 4, 1, points);
   }
 }
 

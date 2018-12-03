@@ -110,3 +110,6 @@ Rozpoczęcie uzupełniania info gry.
 Dodano opisy profesji dla info gry.
   Dodano opisy puntów cech.
 Dodano wstępnie opisy ras.
+
+3 grudnia 2018 - wersja 0.1.26
+Poprawka literówki - wyeliminowanie błędu.

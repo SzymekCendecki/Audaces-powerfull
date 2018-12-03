@@ -84,16 +84,13 @@ module.exports.skillsWizard = skillsWizard;
   let halfOrc = [3, 3, 0, -3, -3]; module.exports.halfOrc = halfOrc;
   let orc = [5, 5, 0, -5, -5]; module.exports.orc = orc;
   let halfElv = [-3, -3, 0, 3, 3]; module.exports.halfElv = halfElv;
-	let elv = [-5, -5, 0, 5, 5]; module.exports.elc = elv;
+	let elv = [-5, -5, 0, 5, 5]; module.exports.elv = elv;
 	let dwarf = [4, 4, 0, -2, -3]; module.exports.dwarf = dwarf;
   let gnome = [-2, -2, 3, 3, 0]; module.exports.gnome = gnome;
   let halfling = [-3, 0, 6, 0, 0]; module.exports.halfling = halfling;
   let goblin = [2, -2, 4, 0, -4]; module.exports.goblin = goblin;
   let troll = [2, 0, 0, -2, -2]; module.exports.troll = troll;
   let semiGiant = [7, 7, -5, -3, 0]; module.exports.semiGiant = semiGiant;
-
-//dodatkowa tablica dla losowania cech
-let randomFeatures = [0, 0, 0, 0, 0];
 
 module.exports.random = function(){
 	$("#randomHero").on("click", ()=>{

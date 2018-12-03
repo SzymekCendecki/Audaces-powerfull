@@ -108,8 +108,8 @@ module.exports.nameRandom = function (table1, table2) {
 //losowanie punktów postaci
 function randomPoints(occupationArray, raceArray) {
   for (var i = 0; i < 5; i++) {
-    var _randomPoints = Math.round(Math.random() * 50);
-    var points = occupationArray[i] + raceArray[i] + _randomPoints;
+    var randPoints = Math.round(Math.random() * 50);
+    var points = occupationArray[i] + raceArray[i] + randPoints;
     heroCreator.hero.splice(i + 4, 1, points);
   }
 }
@@ -363,16 +363,13 @@ var human = [0, 0, 0, 0, 0];module.exports.human = human;
 var halfOrc = [3, 3, 0, -3, -3];module.exports.halfOrc = halfOrc;
 var orc = [5, 5, 0, -5, -5];module.exports.orc = orc;
 var halfElv = [-3, -3, 0, 3, 3];module.exports.halfElv = halfElv;
-var elv = [-5, -5, 0, 5, 5];module.exports.elc = elv;
+var elv = [-5, -5, 0, 5, 5];module.exports.elv = elv;
 var dwarf = [4, 4, 0, -2, -3];module.exports.dwarf = dwarf;
 var gnome = [-2, -2, 3, 3, 0];module.exports.gnome = gnome;
 var halfling = [-3, 0, 6, 0, 0];module.exports.halfling = halfling;
 var goblin = [2, -2, 4, 0, -4];module.exports.goblin = goblin;
 var troll = [2, 0, 0, -2, -2];module.exports.troll = troll;
 var semiGiant = [7, 7, -5, -3, 0];module.exports.semiGiant = semiGiant;
-
-//dodatkowa tablica dla losowania cech
-var randomFeatures = [0, 0, 0, 0, 0];
 
 module.exports.random = function () {
 	$("#randomHero").on("click", function () {
