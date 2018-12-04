@@ -109,5 +109,27 @@ module.exports.random = function(){
 		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
 		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
+
+		function rand(race){
+			if(race == "człowiek"){
+				let weight = Math.round(Math.random()*80 + 40);
+				let height = Math.round(Math.random()*60 + 150);
+				console.log(weight + " kg", height + " cm");
+			}else if(race == "półork"){
+				let weight = Math.round(Math.random()*90 + 50);
+				let height = Math.round(Math.random()*50 + 170);
+				console.log(weight + " kg", height + " cm");
+			}else if(race == "ork"){
+				let weight = Math.round(Math.random()*100 + 80);
+				let height = Math.round(Math.random()*70 + 170);
+				console.log(weight + " kg", height + " cm");
+			}else if(race == "półelf"){
+				et weight = Math.round(Math.random()*60 + 40);
+				let height = Math.round(Math.random()*45 + 165);
+				console.log(weight + " kg", height + " cm");
+			}
+		}
+
+		rand(hero[2]);
 	});
 }

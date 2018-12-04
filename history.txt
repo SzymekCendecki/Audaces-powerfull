@@ -113,3 +113,6 @@ Dodano wstępnie opisy ras.
 
 3 grudnia 2018 - wersja 0.1.26
 Poprawka literówki - wyeliminowanie błędu.
+
+4 grudnia 2018 - wersja 0.1.27
+Początek nowej wersji losowania wagi i wzrostu.
