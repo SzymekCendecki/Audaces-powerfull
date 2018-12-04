@@ -124,7 +124,7 @@ module.exports.random = function(){
 				let height = Math.round(Math.random()*70 + 170);
 				console.log(weight + " kg", height + " cm");
 			}else if(race == "półelf"){
-				et weight = Math.round(Math.random()*60 + 40);
+				let weight = Math.round(Math.random()*60 + 40);
 				let height = Math.round(Math.random()*45 + 165);
 				console.log(weight + " kg", height + " cm");
 			}
