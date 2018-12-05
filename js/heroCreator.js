@@ -41,12 +41,6 @@ let skinColor = ["biała", "brązowa", "czarna", "czerwona", "zółta", "zielona
 //tablica z tatuażami
 let tattoo = ["brak", "więzienne", "plemienne", "dziwne"]
 
-//tablica z wagą
-let weight = ["niedowaga", "normalna", "nadwaga"];
-
-//tablica ze wzrostem
-let height = ["niski", "normalny", "wysoki"];
-
 //tablice z ekwipunkiem
 //broń
 let equipWeapon = ["sztylet", "drewniana pałka", "krótki miecz", "szabla", "włócznia", "proca", "łuk"];
@@ -103,33 +97,10 @@ module.exports.random = function(){
 		functions.random(hairColor, 10); //losowanie koloru włosów
 		functions.random(skinColor, 11); //losowanie koloru skóry
 		functions.random(tattoo, 12); //losowanie tatuaży
-		functions.random(weight, 13); //losowanie wagi
-		functions.random(height, 14); //losowanie wzrost
+		functions.weigthHeight(hero[2]); //losowanie wagi i wzrostu
 		functions.randomSkills(); //losowanie umiejętności
 		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
 		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
-
-		function rand(race){
-			if(race == "człowiek"){
-				let weight = Math.round(Math.random()*80 + 40);
-				let height = Math.round(Math.random()*60 + 150);
-				console.log(weight + " kg", height + " cm");
-			}else if(race == "półork"){
-				let weight = Math.round(Math.random()*90 + 50);
-				let height = Math.round(Math.random()*50 + 170);
-				console.log(weight + " kg", height + " cm");
-			}else if(race == "ork"){
-				let weight = Math.round(Math.random()*100 + 80);
-				let height = Math.round(Math.random()*70 + 170);
-				console.log(weight + " kg", height + " cm");
-			}else if(race == "półelf"){
-				let weight = Math.round(Math.random()*60 + 40);
-				let height = Math.round(Math.random()*45 + 165);
-				console.log(weight + " kg", height + " cm");
-			}
-		}
-
-		rand(hero[2]);
 	});
 }

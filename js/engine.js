@@ -87,6 +87,38 @@ module.exports.random = function (table, position) {
   heroCreator.hero.splice(position, 1, y);
 };
 
+//funkcja losująca wagę/wzrost
+function randomWeightHeight(number1, number2, position, x) {
+  var what = Math.round(Math.random() * number1 + number2);
+  heroCreator.hero.splice(position, 1, what + x);
+}
+
+module.exports.weigthHeight = function (race) {
+  if (race == "człowiek") {
+    randomWeightHeight(80, 40, 13, " kg");randomWeightHeight(60, 150, 14, " cm");
+  } else if (race == "półork") {
+    randomWeightHeight(90, 50, 13, " kg");randomWeightHeight(50, 170, 14, " cm");
+  } else if (race == "ork") {
+    randomWeightHeight(100, 80, 13, " kg");randomWeightHeight(70, 170, 14, " cm");
+  } else if (race == "półelf") {
+    randomWeightHeight(60, 40, 13, " kg");randomWeightHeight(45, 165, 14, " cm");
+  } else if (race == "elf") {
+    randomWeightHeight(50, 40, 13, " kg");randomWeightHeight(30, 180, 14, " cm");
+  } else if (race == "krasnolud") {
+    randomWeightHeight(30, 70, 13, " kg");randomWeightHeight(45, 100, 14, " cm");
+  } else if (race == "gnom") {
+    randomWeightHeight(20, 50, 13, " kg");randomWeightHeight(50, 90, 14, " cm");
+  } else if (race == "niziołek") {
+    randomWeightHeight(40, 60, 13, " kg");randomWeightHeight(45, 105, 14, " cm");
+  } else if (race == "goblin") {
+    randomWeightHeight(30, 50, 13, " kg");randomWeightHeight(40, 80, 14, " cm");
+  } else if (race == "trol") {
+    randomWeightHeight(60, 100, 13, " kg");randomWeightHeight(70, 190, 14, " cm");
+  } else if (race == "półolbrzym") {
+    randomWeightHeight(90, 210, 13, " kg");randomWeightHeight(60, 260, 14, " cm");
+  }
+};
+
 //losowanie imienia
 module.exports.nameRandom = function (table1, table2) {
   if (heroCreator.hero[1] == "kobieta") {
@@ -321,12 +353,6 @@ var skinColor = ["biała", "brązowa", "czarna", "czerwona", "zółta", "zielona
 //tablica z tatuażami
 var tattoo = ["brak", "więzienne", "plemienne", "dziwne"];
 
-//tablica z wagą
-var weight = ["niedowaga", "normalna", "nadwaga"];
-
-//tablica ze wzrostem
-var height = ["niski", "normalny", "wysoki"];
-
 //tablice z ekwipunkiem
 //broń
 var equipWeapon = ["sztylet", "drewniana pałka", "krótki miecz", "szabla", "włócznia", "proca", "łuk"];
@@ -382,34 +408,11 @@ module.exports.random = function () {
 		functions.random(hairColor, 10); //losowanie koloru włosów
 		functions.random(skinColor, 11); //losowanie koloru skóry
 		functions.random(tattoo, 12); //losowanie tatuaży
-		functions.random(weight, 13); //losowanie wagi
-		functions.random(height, 14); //losowanie wzrost
+		functions.weigthHeight(hero[2]); //losowanie wagi i wzrostu
 		functions.randomSkills(); //losowanie umiejętności
 		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
 		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
-
-		function rand(race) {
-			if (race == "człowiek") {
-				var _weight = Math.round(Math.random() * 80 + 40);
-				var _height = Math.round(Math.random() * 60 + 150);
-				console.log(_weight + " kg", _height + " cm");
-			} else if (race == "półork") {
-				var _weight2 = Math.round(Math.random() * 90 + 50);
-				var _height2 = Math.round(Math.random() * 50 + 170);
-				console.log(_weight2 + " kg", _height2 + " cm");
-			} else if (race == "ork") {
-				var _weight3 = Math.round(Math.random() * 100 + 80);
-				var _height3 = Math.round(Math.random() * 70 + 170);
-				console.log(_weight3 + " kg", _height3 + " cm");
-			} else if (race == "półelf") {
-				var _weight4 = Math.round(Math.random() * 60 + 40);
-				var _height4 = Math.round(Math.random() * 45 + 165);
-				console.log(_weight4 + " kg", _height4 + " cm");
-			}
-		}
-
-		rand(hero[2]);
 	});
 };
 

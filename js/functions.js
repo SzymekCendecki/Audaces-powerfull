@@ -15,6 +15,27 @@ module.exports.random = function (table, position){
     heroCreator.hero.splice(position, 1, y);
 }
 
+//funkcja losująca wagę/wzrost
+function randomWeightHeight(number1, number2, position, x){
+  let what = Math.round(Math.random()*number1 + number2);
+  heroCreator.hero.splice(position, 1, what + x);
+}
+
+module.exports.weigthHeight = function(race){
+    if(race == "człowiek"){ randomWeightHeight(80, 40, 13, " kg"); randomWeightHeight(60, 150, 14, " cm");
+    }else if(race == "półork"){ randomWeightHeight(90, 50, 13, " kg"); randomWeightHeight(50, 170, 14, " cm");
+    }else if(race == "ork"){ randomWeightHeight(100, 80, 13, " kg"); randomWeightHeight(70, 170, 14, " cm");
+    }else if(race == "półelf"){ randomWeightHeight(60, 40, 13, " kg"); randomWeightHeight(45, 165, 14, " cm");
+    }else if(race == "elf"){ randomWeightHeight(50, 40, 13, " kg"); randomWeightHeight(30, 180, 14, " cm");
+    }else if(race == "krasnolud"){ randomWeightHeight(30, 70, 13, " kg"); randomWeightHeight(45, 100, 14, " cm");
+    }else if(race == "gnom"){ randomWeightHeight(20, 50, 13, " kg"); randomWeightHeight(50, 90, 14, " cm");
+    }else if(race == "niziołek"){ randomWeightHeight(40, 60, 13, " kg"); randomWeightHeight(45, 105, 14, " cm");
+    }else if(race == "goblin"){ randomWeightHeight(30, 50, 13, " kg"); randomWeightHeight(40, 80, 14, " cm");
+    }else if(race == "trol"){ randomWeightHeight(60, 100, 13, " kg"); randomWeightHeight(70, 190, 14, " cm");
+    }else if(race == "półolbrzym"){ randomWeightHeight(90, 210, 13, " kg"); randomWeightHeight(60, 260, 14, " cm");
+    }
+  }
+
 //losowanie imienia
 module.exports.nameRandom = function(table1, table2){
   if(heroCreator.hero[1] == "kobieta"){

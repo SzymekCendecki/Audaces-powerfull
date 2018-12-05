@@ -116,3 +116,6 @@ Poprawka literówki - wyeliminowanie błędu.
 
 4 grudnia 2018 - wersja 0.1.27
 Początek nowej wersji losowania wagi i wzrostu.
+
+5 grudnia 2018 - wersja 0.1.28
+Nowa wersja losownia wagi i wzrostu gotowa.
