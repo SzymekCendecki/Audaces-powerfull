@@ -399,6 +399,8 @@ var semiGiant = [7, 7, -5, -3, 0];module.exports.semiGiant = semiGiant;
 
 module.exports.random = function () {
 	$("#randomHero").on("click", function () {
+		$("#chooseResult").hide();
+		$("#randomResult").show();
 		functions.random(sex, 1); //losowanie płci
 		functions.nameRandom(namesWomen, namesMan); //losowanie imienia
 		functions.random(races, 2); //losowanie rasy
@@ -413,6 +415,13 @@ module.exports.random = function () {
 		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
 		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
+	});
+};
+
+module.exports.choose = function () {
+	$("#chooseHero").on("click", function () {
+		$("#chooseResult").show();
+		$("#randomResult").hide();
 	});
 };
 
@@ -439,7 +448,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
 
   //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult").hide();
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -453,6 +462,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //funkcje dla przycisków pierwszego menu
   firstMenu.firstMenuBtns();
   heroCreator.random();
+  heroCreator.choose();
 
   //funkcje dla "wyskakującego" okienka dla informacji gry
   gameInfo.gameInfo();

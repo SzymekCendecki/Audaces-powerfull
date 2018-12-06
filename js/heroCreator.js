@@ -88,6 +88,8 @@ module.exports.skillsWizard = skillsWizard;
 
 module.exports.random = function(){
 	$("#randomHero").on("click", ()=>{
+		$("#chooseResult").hide();
+		$("#randomResult").show();
 		functions.random(sex, 1); //losowanie płci
 		functions.nameRandom(namesWomen, namesMan);//losowanie imienia
 		functions.random(races, 2); //losowanie rasy
@@ -102,5 +104,12 @@ module.exports.random = function(){
 		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
 		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
+	});
+}
+
+module.exports.choose = function(){
+	$("#chooseHero").on("click", ()=>{
+		$("#chooseResult").show();
+		$("#randomResult").hide();
 	});
 }

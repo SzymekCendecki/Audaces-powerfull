@@ -119,3 +119,6 @@ Początek nowej wersji losowania wagi i wzrostu.
 
 5 grudnia 2018 - wersja 0.1.28
 Nowa wersja losownia wagi i wzrostu gotowa.
+
+6 grudnia 2018 - wersja 0.1.29
+Rozpoczęto pracę nad "ręcznym" tworzeniem postaci.
