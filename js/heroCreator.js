@@ -36,7 +36,7 @@ let hairColor = ["blond", "rude", "czarne", "farbowane"];
 let eyesColor = ["piwne", "szare", "brązowe", "niebieskie"];
 
 //tablica z kolorem skóry
-let skinColor = ["biała", "brązowa", "czarna", "czerwona", "zółta", "zielona", "brunatna", "błękitna"];
+let skinColor = ["biała", "brązowa", "czarna", "czerwona", "żółta", "zielona", "brunatna", "błękitna"];
 
 //tablica z tatuażami
 let tattoo = ["brak", "więzienne", "plemienne", "dziwne"]

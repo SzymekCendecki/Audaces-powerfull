@@ -348,7 +348,7 @@ var hairColor = ["blond", "rude", "czarne", "farbowane"];
 var eyesColor = ["piwne", "szare", "brązowe", "niebieskie"];
 
 //tablica z kolorem skóry
-var skinColor = ["biała", "brązowa", "czarna", "czerwona", "zółta", "zielona", "brunatna", "błękitna"];
+var skinColor = ["biała", "brązowa", "czarna", "czerwona", "żółta", "zielona", "brunatna", "błękitna"];
 
 //tablica z tatuażami
 var tattoo = ["brak", "więzienne", "plemienne", "dziwne"];

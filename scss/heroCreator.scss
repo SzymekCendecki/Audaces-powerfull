@@ -44,3 +44,55 @@
   p:nth-child(17), p:nth-child(18){
     width: 100%; margin-top: 2%; font-size: 125%; }
 }
+
+//style dla rozwijalnego menu w ręcznym tworzeniu postaci
+/* ------------------------CZĘŚĆ-GÓRNA-MENU------------------------ */
+/* wygląd głównego elementu - ol */
+     .chooseHeroMenu {
+       list-style-type: none;
+       padding:0;
+       margin:0;
+       background-color: blue;
+       height:2em;
+       line-height:2em;
+       text-align:center;
+       text-shadow: 1px 1px white;
+
+       li {
+          float:left;
+          width: 9%;
+          margin-left:1px;
+          background-color: #008000;
+          height:2em;
+		  
+		ul {
+			li{
+			width: 100%;
+			}
+		}		
+       }
+
+    li:first-child {  margin-left:0; }
+    li:hover { background-color: #33FF33; }
+    li:hover { ul { display:block; } }
+  }
+
+/* ------------------------CZĘŚĆ-ROZWIJANA-MENU------------------------ */
+
+/* wygląd głównych rozwijanych elementów - ul */
+ ol{
+  li{
+    ul {
+      display: none;
+      list-style-type: none;
+      padding:0;
+      margin:0;
+      /* wygląd elementu - li - w części rozwijanej */
+      li { position: relative; background-color: #009900; }
+      li:hover { background-color: #33FF33; }
+    }
+  }
+}
+
+#chooseHeroDescription{ text-indent: 20px; padding: 10px 0 0 5px; }
+
