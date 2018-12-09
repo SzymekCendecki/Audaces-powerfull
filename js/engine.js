@@ -282,8 +282,8 @@ module.exports.randomEquip = function (array1, array2, array3, array4) {
 };
 
 //funkcja pokazująca wybór kreowania postaci
-module.exports.heroCreatorResult = function (hero, skills, equip) {
-  $("#heroResults").show();
+module.exports.heroCreatorResult = function (hero, skills, equip, what) {
+  what.show();
   $("#spanName").text(hero[0]);
   $("#spanSex").text(hero[1]);
   $("#spanRace").text(hero[2]);
@@ -399,8 +399,7 @@ var semiGiant = [7, 7, -5, -3, 0];module.exports.semiGiant = semiGiant;
 
 module.exports.random = function () {
 	$("#randomHero").on("click", function () {
-		$("#chooseResult").hide();
-		$("#randomResult").show();
+		$("#chooseResult").hide();$("#randomResult").show();
 		functions.random(sex, 1); //losowanie płci
 		functions.nameRandom(namesWomen, namesMan); //losowanie imienia
 		functions.random(races, 2); //losowanie rasy
@@ -413,15 +412,44 @@ module.exports.random = function () {
 		functions.weigthHeight(hero[2]); //losowanie wagi i wzrostu
 		functions.randomSkills(); //losowanie umiejętności
 		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
-		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
+		functions.heroCreatorResult(hero, skills, equip, $("#heroResults")); //wyświetlanie wyniów losowania
 		$("#heroResults span").addClass("greenText");
 	});
 };
 
 module.exports.choose = function () {
 	$("#chooseHero").on("click", function () {
-		$("#chooseResult").show();
-		$("#randomResult").hide();
+		$("#chooseResult").show();$("#randomResult").hide();$("#chooseHeroDescription > div").hide();
+
+		hero.splice(0, 1, "nie wybrano");hero.splice(1, 1, "nie wybrano");hero.splice(2, 1, "nie wybrano");hero.splice(3, 1, "nie wybrano");hero.splice(4, 1, 0);hero.splice(5, 1, 0);hero.splice(6, 1, 0);hero.splice(7, 1, 0);hero.splice(8, 1, 0);hero.splice(9, 1, "nie wybrano");hero.splice(10, 1, "nie wybrano");hero.splice(11, 1, "nie wybrano");hero.splice(12, 1, "nie wybrano");hero.splice(113, 1, "nie wybrano");hero.splice(14, 1, "nie wybrano");
+
+		$("#chooseName").on("click", function () {
+			$("#chooseHeroDescription > div").hide();
+			$("#choosingName").show();
+
+			$("#choosingName button").on("click", function () {
+				var name = $("#nameForInput").val().replace(/\d/g, '');
+
+				if (name == "") {
+					$("#alerts").html("<p class='newRocker redText center'>Twoja postać musi mieć imię !!!</p>");
+					setTimeout(function () {
+						$("#alerts").empty();
+					}, 3000);
+				} else {
+					$("#alerts").html("<p class='newRocker greenText center'>Wybrano imię: " + name + "</p>");
+					setTimeout(function () {
+						$("#alerts").empty();
+					}, 3000);
+					hero.splice(0, 1, name);
+				}
+			});
+		});
+
+		$("#resultChoose").on("click", function () {
+			$("#chooseHeroDescription > div").hide();
+			$("#choosingResults").show();
+			console.log(hero);
+		});
 	});
 };
 

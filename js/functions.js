@@ -160,8 +160,8 @@ module.exports.randomEquip = function (array1, array2, array3, array4){
 }
 
 //funkcja pokazująca wybór kreowania postaci
-module.exports.heroCreatorResult = function(hero, skills, equip){
-  $("#heroResults").show();
+module.exports.heroCreatorResult = function(hero, skills, equip, what){
+  what.show();
   $("#spanName").text(hero[0]);
   $("#spanSex").text(hero[1]);
   $("#spanRace").text(hero[2]);

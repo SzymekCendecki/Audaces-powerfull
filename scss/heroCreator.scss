@@ -52,7 +52,7 @@
        list-style-type: none;
        padding:0;
        margin:0;
-       background-color: blue;
+       background-color: beige;
        height:2em;
        line-height:2em;
        text-align:center;
@@ -60,16 +60,12 @@
 
        li {
           float:left;
-          width: 9%;
+          width: 8.25%;
           margin-left:1px;
           background-color: #008000;
           height:2em;
-		  
-		ul {
-			li{
-			width: 100%;
-			}
-		}		
+
+		      ul { li{ width: 100%; } }
        }
 
     li:first-child {  margin-left:0; }
@@ -95,4 +91,3 @@
 }
 
 #chooseHeroDescription{ text-indent: 20px; padding: 10px 0 0 5px; }
-

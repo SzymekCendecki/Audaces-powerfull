@@ -131,7 +131,7 @@
 <div id="chooseResult">
 	<div>
 	<ol class="chooseHeroMenu">
-	<li><span>imię</span></li>
+	<li><span id="chooseName">imię</span></li>
     <li><span>płeć</span>
       <ul>
         <li>kobieta</li>
@@ -155,7 +155,7 @@
 		<li>półolbrzym</li>
       </ul>
     </li>
-	
+
 	<li><span>profesje</span>
       <ul>
         <li>wojownik</li>
@@ -173,7 +173,7 @@
 		<li>charyzma</li>
       </ul>
     </li>
-	
+
 	<li><span>kolor oczu</span>
       <ul>
         <li>piwne</li>
@@ -182,7 +182,7 @@
         <li>niebieskie</li>
       </ul>
     </li>
-	
+
 	<li><span>włosy</span>
       <ul>
         <li>blond</li>
@@ -191,7 +191,7 @@
         <li>farbowane</li>
       </ul>
     </li>
-	
+
 	<li><span>skóra</span>
       <ul>
         <li>biała</li>
@@ -204,7 +204,7 @@
         <li>błękitna</li>
       </ul>
     </li>
-	
+
 	<li><span>tatuaże</span>
       <ul>
         <li>brak</li>
@@ -215,9 +215,20 @@
     </li>
 	<li><span>waga</span></li>
 	<li><span>wzrost</span></li>
-  </ol>
+	<li><span id="resultChoose">wyniki</span></li>
+</ol>
 	</div>
-	<div id="chooseHeroDescription"></div>
+	<div id="chooseHeroDescription">
+		<div id="choosingName">
+				<p class="newRocker">W poniższym polu wpisz swoje imię, którym będzie posługiwał się Twój protagonista. </p>
+				<input type="text" id="nameForInput">
+				<button class="newRocker">zatwierdź</button>
+		</div>
+
+		<div id="choosingResults">
+				<p>Wyniki</p>
+		</div>
+	</div>
 </div>
 	<!-- część dla wyświetlania wyników tworzenia postaci koniec-->
 
@@ -226,7 +237,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.30 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.31 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>

@@ -124,4 +124,7 @@ Nowa wersja losownia wagi i wzrostu gotowa.
 Rozpoczęto pracę nad "ręcznym" tworzeniem postaci.
 
 8 grudnia 2018 - wersja 0.1.30
-Utworzpno menu ręcznego kreatora postaci (nie oskryptowane).
+Utworzono menu ręcznego kreatora postaci (nie oskryptowane).
+
+9 grudnia 2018 - wersja 0.1.31
+Dodano "ręczne" wybieranie imienia.
