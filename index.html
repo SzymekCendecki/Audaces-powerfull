@@ -132,11 +132,11 @@
 	<div>
 	<ol class="chooseHeroMenu">
 	<li><span id="chooseName">imię</span></li>
-    <li><span>płeć</span>
+    <li><span id="chooseSex">płeć</span>
       <ul>
-        <li>kobieta</li>
-        <li>mężczyzna</li>
-        <li>nie wiadomo</li>
+        <li><span id="women">kobieta</span></li>
+        <li><span id="men">mężczyzna</span></li>
+        <li><span id="other">nie wiadomo</span></li>
       </ul>
     </li>
 
@@ -220,14 +220,19 @@
 	</div>
 	<div id="chooseHeroDescription">
 		<div id="choosingName">
-				<p class="newRocker">W poniższym polu wpisz swoje imię, którym będzie posługiwał się Twój protagonista. </p>
+				<p class="newRocker">W poniższym polu wpisz swoje imię, którym będzie posługiwał się Twój protagonista.</p>
 				<input type="text" id="nameForInput">
-				<button class="newRocker">zatwierdź</button>
+				<button class="newRocker greenBtn">zatwierdź</button>
+		</div>
+
+		<div id="choosingSex">
+				<p class="newRocker">W tej części można wybrać płeć swojej postaci. Nie wpływa to (na razie) na współczynniki postaci. Wybór odbywa się za pomocą rozwijalnego menu.</p>
 		</div>
 
 		<div id="choosingResults">
 				<p>Wyniki</p>
 		</div>
+
 	</div>
 </div>
 	<!-- część dla wyświetlania wyników tworzenia postaci koniec-->
@@ -237,7 +242,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.31 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.32 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>

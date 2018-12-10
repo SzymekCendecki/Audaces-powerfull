@@ -112,13 +112,11 @@ module.exports.choose = function(){
 
 		hero.splice(0, 1, "nie wybrano"); hero.splice(1, 1, "nie wybrano"); hero.splice(2, 1, "nie wybrano"); hero.splice(3, 1, "nie wybrano");	hero.splice(4, 1, 0); hero.splice(5, 1, 0); hero.splice(6, 1, 0); hero.splice(7, 1, 0); hero.splice(8, 1, 0);	hero.splice(9, 1, "nie wybrano"); hero.splice(10, 1, "nie wybrano"); hero.splice(11, 1, "nie wybrano"); hero.splice(12, 1, "nie wybrano"); hero.splice(113, 1, "nie wybrano"); hero.splice(14, 1, "nie wybrano");
 
+//wybór imienia
 		$("#chooseName").on("click", ()=>{
-				$("#chooseHeroDescription > div").hide();
-				$("#choosingName").show();
-
+				$("#chooseHeroDescription > div").hide(); $("#choosingName").show();
 				$("#choosingName button").on("click", ()=>{
 					let name = $("#nameForInput").val().replace(/\d/g,'');
-
 					if(name == ""){
     				$("#alerts").html("<p class='newRocker redText center'>Twoja postać musi mieć imię !!!</p>");
 					 	setTimeout(function(){ $("#alerts").empty(); }, 3000);
@@ -127,10 +125,30 @@ module.exports.choose = function(){
 						setTimeout(function(){ $("#alerts").empty(); }, 3000);
 						hero.splice(0, 1, name);
   				}
-
 				});
 			});
 
+//wybór płci
+			$("#chooseSex").on("click", ()=>{ $("#chooseHeroDescription > div").hide(); $("#choosingSex").show(); });
+			$("#women").on("click", ()=>{
+				$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: kobieta.</p>");
+				setTimeout(function(){ $("#alerts").empty(); }, 3000);
+				hero.splice(1, 1, "kobieta");
+			});
+
+			$("#men").on("click", ()=>{
+				$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: mężczyzna.</p>");
+				setTimeout(function(){ $("#alerts").empty(); }, 3000);
+				hero.splice(1, 1, "mężczyzna");
+			});
+
+			$("#other").on("click", ()=>{
+				$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: nie wiadomo.</p>");
+				setTimeout(function(){ $("#alerts").empty(); }, 3000);
+				hero.splice(1, 1, "nie wiadomo");
+			});
+
+//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{
 			$("#chooseHeroDescription > div").hide();
 			$("#choosingResults").show();
