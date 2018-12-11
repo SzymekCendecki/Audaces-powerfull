@@ -132,27 +132,27 @@
 	<div>
 	<ol class="chooseHeroMenu">
 	<li><span id="chooseName">imię</span></li>
-    <li><span id="chooseSex">płeć</span>
+  <li><span id="chooseSex">płeć</span>
       <ul>
         <li><span id="women">kobieta</span></li>
         <li><span id="men">mężczyzna</span></li>
         <li><span id="other">nie wiadomo</span></li>
       </ul>
-    </li>
+  </li>
 
-    <li><span>rasa</span>
-      <ul>
-       <li>człowiek</li>
-        <li>półork</li>
-        <li>ork</li>
-        <li>półelf</li>
-        <li>elf</li>
-		<li>krasnolud</li>
-		<li>gnom</li>
-		<li>niziołek</li>
-		<li>goblin</li>
-		<li>trol</li>
-		<li>półolbrzym</li>
+  <li><span id="chooseRace">rasa</span>
+    <ul>
+       	<li><span id="human">człowiek</span></li>
+        <li><span id="halfOrc">półork</span></li>
+        <li><span id="orc">ork</span></li>
+        <li><span id="halfElv">półelf</span></li>
+        <li><span id="elv">elf</span></li>
+				<li><span id="dwarf">krasnolud</span></li>
+				<li><span id="gnome">gnom</span></li>
+				<li><span id="halfling">niziołek</span></li>
+				<li><span id="goblin">goblin</span></li>
+				<li><span id="troll">trol</span></li>
+				<li><span id="semiGiant">półolbrzym</span></li>
       </ul>
     </li>
 
@@ -218,6 +218,8 @@
 	<li><span id="resultChoose">wyniki</span></li>
 </ol>
 	</div>
+
+	<!-- wybór imienia -->
 	<div id="chooseHeroDescription">
 		<div id="choosingName">
 				<p class="newRocker">W poniższym polu wpisz swoje imię, którym będzie posługiwał się Twój protagonista.</p>
@@ -225,10 +227,17 @@
 				<button class="newRocker greenBtn">zatwierdź</button>
 		</div>
 
+		<!-- wybór płci-->
 		<div id="choosingSex">
 				<p class="newRocker">W tej części można wybrać płeć swojej postaci. Nie wpływa to (na razie) na współczynniki postaci. Wybór odbywa się za pomocą rozwijalnego menu.</p>
 		</div>
 
+<!-- wybór rasy-->
+		<div id="choosingRace">
+				<p class="newRocker"></p>
+		</div>
+
+		<!-- wynik wyborów -->
 		<div id="choosingResults">
 				<p>Wyniki</p>
 		</div>
@@ -242,7 +251,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.32 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.33 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>
