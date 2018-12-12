@@ -122,151 +122,51 @@ module.exports.choose = function(){
     				$("#alerts").html("<p class='newRocker redText center'>Twoja postać musi mieć imię !!!</p>");
 					 	setTimeout(function(){ $("#alerts").empty(); }, 3000);
   				}else{
-    				$("#alerts").html("<p class='newRocker greenText center'>Wybrano imię: "+ name + "</p>");
+    				$("#alerts").html("<p class='newRocker greenText center'>Wybrano imię: " + name + "</p>");
 						setTimeout(function(){ $("#alerts").empty(); }, 3000);
 						hero.splice(0, 1, name);
   				}
 				});
 			});
 
+//funkcja optymalizująca wpisywanie w tablicę wyborów oraz wyietlanie odpowiedniego alertu
+			function xxx(what, what1, position){
+				$("#alerts").html("<p class='newRocker greenText center'>Wybrano " + what + what1 + ".</p>");
+				setTimeout(function(){ $("#alerts").empty(); }, 3000);
+				hero.splice(position, 1, what1);
+			}
+
 //wybór płci
 			$("#chooseSex").on("click", ()=>{ $("#chooseHeroDescription > div").hide(); $("#choosingSex").show(); });
-			$("#women").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: kobieta.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(1, 1, "kobieta");
-			});
+			$("#women").on("click", ()=>{ xxx("płeć: ", "kobieta", 1); });
+			$("#men").on("click", ()=>{ xxx("płeć: ", "mężczyzna", 1); });
+			$("#other").on("click", ()=>{ xxx("płeć: ", "nie wiadomo", 1); });
 
-			$("#men").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: mężczyzna.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(1, 1, "mężczyzna");
-			});
-
-			$("#other").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: nie wiadomo.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(1, 1, "nie wiadomo");
-			});
-
-	//wybóe rasy
+	//wybór rasy
 		$("#chooseRace").on("click", ()=>{
 			$("#chooseHeroDescription > div").hide();
 			 $("#choosingRace").show();
 			 $("#choosingRace > p").empty().append(gameInfo.raceTexts.race);
 		  });
 
-			$("#human").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: człowiek.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "człowiek");
+	//funkcja optymalizująca wyświetlanie opisów dla wyborów
+	function yyy(description){
+		$("#chooseHeroDescription > div").hide();
+		 $("#choosingRace").show();
+		 $("#choosingRace > p").empty().append(description);
+	}
 
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.human);
-			});
-
-
-			$("#orc").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: ork.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "ork");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.orc);
-			});
-
-			$("#halfOrc").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: półork.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "półork");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.halfOrc);
-			});
-
-			$("#halfElv").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: półelf.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "półelf");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.halfElv);
-			});
-
-			$("#elv").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: elf.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "elf");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.elv);
-			});
-
-			$("#dwarf").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: krasnolud.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "krasnolud");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.dwarf);
-			});
-
-			$("#halfling").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: niziołek.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "niziołek");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.halfling);
-			});
-
-			$("#gnome").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: gnom.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "gnom");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.gnome);
-			});
-
-			$("#goblin").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: goblin.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "goblin");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.goblin);
-			});
-
-			$("#troll").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: trol.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "trol");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.troll);
-			});
-
-			$("#semiGiant").on("click", ()=>{
-				$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: półolbrzym.</p>");
-				setTimeout(function(){ $("#alerts").empty(); }, 3000);
-				hero.splice(2, 1, "półolbrzym");
-
-				$("#chooseHeroDescription > div").hide();
-				 $("#choosingRace").show();
-				 $("#choosingRace > p").empty().append(gameInfo.raceTexts.semiGiant);
-			});
-
+			$("#human").on("click", ()=>{ xxx("rasę :", "człowiek", 2); yyy(gameInfo.raceTexts.human); });
+			$("#orc").on("click", ()=>{ xxx("rasę :", "ork", 2); yyy(gameInfo.raceTexts.orc); });
+			$("#halfOrc").on("click", ()=>{ xxx("rasę :", "półork", 2); yyy(gameInfo.raceTexts.halfOrc); });
+			$("#halfElv").on("click", ()=>{ xxx("rasę :", "półelf", 2); yyy(gameInfo.raceTexts.halfElv); });
+			$("#elv").on("click", ()=>{ xxx("rasę :", "elf", 2); yyy(gameInfo.raceTexts.elv); });
+			$("#dwarf").on("click", ()=>{ xxx("rasę :", "krasnolud", 2); yyy(gameInfo.raceTexts.dwarf); });
+			$("#halfling").on("click", ()=>{ xxx("rasę :", "niziołek", 2); yyy(gameInfo.raceTexts.halfling); });
+			$("#gnome").on("click", ()=>{ xxx("rasę :", "gnom", 2); yyy(gameInfo.raceTexts.gnome); });
+			$("#goblin").on("click", ()=>{ xxx("rasę :", "goblin", 2); yyy(gameInfo.raceTexts.goblin); });
+			$("#troll").on("click", ()=>{ xxx("rasę :", "trol", 2); yyy(gameInfo.raceTexts.troll); });
+			$("#semiGiant").on("click", ()=>{ xxx("rasę :", "półolbrzym", 2); yyy(gameInfo.raceTexts.semiGiant); });
 
 //pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{

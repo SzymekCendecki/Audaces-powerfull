@@ -134,3 +134,5 @@ Poprawka wizualna przycisku zatwierdzającego imię bohatera.
 
 11 grudnia 2018 - wersja 0.1.33
 Dodano wybiernie profeji w "ręcznym" tworzeniu postaci.
+
+12 grudnia 2018 - wersja 0.1.34

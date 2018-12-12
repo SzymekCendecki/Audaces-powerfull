@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -311,7 +311,7 @@ module.exports.heroCreatorResult = function (hero, skills, equip, what) {
 
 
 var functions = __webpack_require__(0);
-var gameInfo = __webpack_require__(5);
+var gameInfo = __webpack_require__(2);
 
 //tablica zbiorcza z wyniami losowania lub wyborami postaci
 //0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
@@ -444,171 +444,75 @@ module.exports.choose = function () {
 			});
 		});
 
+		//funkcja optymalizująca wpisywanie w tablicę wyborów oraz wyietlanie odpowiedniego alertu
+		function xxx(what, what1, position) {
+			$("#alerts").html("<p class='newRocker greenText center'>Wybrano " + what + what1 + ".</p>");
+			setTimeout(function () {
+				$("#alerts").empty();
+			}, 3000);
+			hero.splice(position, 1, what1);
+		}
+
 		//wybór płci
 		$("#chooseSex").on("click", function () {
 			$("#chooseHeroDescription > div").hide();$("#choosingSex").show();
 		});
 		$("#women").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: kobieta.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(1, 1, "kobieta");
+			xxx("płeć: ", "kobieta", 1);
 		});
-
 		$("#men").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: mężczyzna.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(1, 1, "mężczyzna");
+			xxx("płeć: ", "mężczyzna", 1);
 		});
-
 		$("#other").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano płeć: nie wiadomo.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(1, 1, "nie wiadomo");
+			xxx("płeć: ", "nie wiadomo", 1);
 		});
 
-		//wybóe rasy
+		//wybór rasy
 		$("#chooseRace").on("click", function () {
 			$("#chooseHeroDescription > div").hide();
 			$("#choosingRace").show();
 			$("#choosingRace > p").empty().append(gameInfo.raceTexts.race);
 		});
 
+		//funkcja optymalizująca wyświetlanie opisów dla wyborów
+		function yyy(description) {
+			$("#chooseHeroDescription > div").hide();
+			$("#choosingRace").show();
+			$("#choosingRace > p").empty().append(description);
+		}
+
 		$("#human").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: człowiek.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "człowiek");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.human);
+			xxx("rasę :", "człowiek", 2);yyy(gameInfo.raceTexts.human);
 		});
-
 		$("#orc").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: ork.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "ork");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.orc);
+			xxx("rasę :", "ork", 2);yyy(gameInfo.raceTexts.orc);
 		});
-
 		$("#halfOrc").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: półork.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "półork");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.halfOrc);
+			xxx("rasę :", "półork", 2);yyy(gameInfo.raceTexts.halfOrc);
 		});
-
 		$("#halfElv").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: półelf.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "półelf");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.halfElv);
+			xxx("rasę :", "półelf", 2);yyy(gameInfo.raceTexts.halfElv);
 		});
-
 		$("#elv").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: elf.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "elf");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.elv);
+			xxx("rasę :", "elf", 2);yyy(gameInfo.raceTexts.elv);
 		});
-
 		$("#dwarf").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: krasnolud.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "krasnolud");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.dwarf);
+			xxx("rasę :", "krasnolud", 2);yyy(gameInfo.raceTexts.dwarf);
 		});
-
 		$("#halfling").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: niziołek.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "niziołek");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.halfling);
+			xxx("rasę :", "niziołek", 2);yyy(gameInfo.raceTexts.halfling);
 		});
-
 		$("#gnome").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: gnom.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "gnom");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.gnome);
+			xxx("rasę :", "gnom", 2);yyy(gameInfo.raceTexts.gnome);
 		});
-
 		$("#goblin").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: goblin.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "goblin");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.goblin);
+			xxx("rasę :", "goblin", 2);yyy(gameInfo.raceTexts.goblin);
 		});
-
 		$("#troll").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: trol.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "trol");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.troll);
+			xxx("rasę :", "trol", 2);yyy(gameInfo.raceTexts.troll);
 		});
-
 		$("#semiGiant").on("click", function () {
-			$("#alerts").html("<p class='newRocker greenText center'>Wybrano rasę: półolbrzym.</p>");
-			setTimeout(function () {
-				$("#alerts").empty();
-			}, 3000);
-			hero.splice(2, 1, "półolbrzym");
-
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.semiGiant);
+			xxx("rasę :", "półolbrzym", 2);yyy(gameInfo.raceTexts.semiGiant);
 		});
 
 		//pokazenie dokananych wyborów
@@ -622,88 +526,6 @@ module.exports.choose = function () {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(3);
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(4);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(5);
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("NIEWIERNE PSY RULEZ!!!!");
-
-  //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult").hide();
-
-  //przejście z pierwszego intro do pierwszego menu
-  setTimeout(function () {
-    $("header p, #heroBtns div").fadeIn(750);
-    $("body").fadeIn(750).css("background", "beige");
-    $("#mainPart h2, #mainPart h3").remove();
-    functions.newElement("p", "description", "", $("#mainPart"));
-    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
-  }, 16000);
-
-  //funkcje dla przycisków pierwszego menu
-  firstMenu.firstMenuBtns();
-  heroCreator.random();
-  heroCreator.choose();
-
-  //funkcje dla "wyskakującego" okienka dla informacji gry
-  gameInfo.gameInfo();
-}); //koniec DOMContentLoaded
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var heroCreator = "./heroCreator.js";
-
-//tekst powitalny
-module.exports.textHello = "Witaj w grze 'Audaces - serce z żelaza', pierwszej grze tekstowej Niewiernych Psów. Powyżej znajdują się cztery przyciski, dzięki którym poznasz podsatwowe informacje o tej wersji gry, licencji gry, samouczka obsługi interfejsu oraz rozpoczniesz grę AUDACES - serce z żelaza. Także tego. Studio Niewiernych Psów, życzy miłej zabawy.";
-
-var firstMenuBtnsText = '{"info":"<p>To kolejna wersja gry Audaces, w której wprowadzone zostały wszystkie nie zrealizowane wcześniej pomysły. Gra powstała dzięki użytym technologiom: HTML5, SASS, jQuery, EcmaScript 6. Fonty pobrane z: fonts.google.com. Dostępne rozdzielczości: 1366x768 px.</p>", "licence":"<p>UMOWA LICENCYJNA UŻYTKOWNIKA APLIKACJI AUDACES (oraz wszystkich jego wesji).</p><p>POSIADAJĄC APLIKACJĘ AKCEPTUJESZ PONIŻSZE WARUNKI LICENCJI.</p><p>Autor informuje, iż zawarte treści w aplikacji mogą być niestosowne dla osób niepełnoletnich, o innym światopoglądzie lub wyznawanej religii. Użytkownik używa aplikację na własne ryzyko. Twórca tej aplikacji infourmuje, iż aplikacja ta została stowrzona w celach hobbystycznych oraz w celu nauki programowania. Aplikacja ta może zawierać błędy, które niekoniecznie muszą być poprawione. Autor nie udziela żadnych gwarancji, obietnic oraz zapewnień na tą aplikację (i jej wersje) i nie odpowiada za błędne działanie lub użytkowanie programu. Autor aplikacji nie bierze na siebie żadnych reklamacji w sprawie wadliwego działania programu oraz nie poczuwa się do zadość uczynienia za spowodowane szkody. Prawa autorskie należą do Szymona Cendeckiego. Audaces jest rozprowadzany na zasadzie FREEWARE czyli: użytkownik dostaje aplikację za darmo, nie może w żaden sposób zmieniać aplikacji, może wykorzystywać aplikację na własny użytek, zabrnia się wykorzystywać aplikację w celach komercyjnych, zabrania się ujawniania kodu źródłowego.</p>", "tutorial":"<p>Początek gry. Ekran składa się z powitania oraz czterech przycisków. Po wciśnięciu przycisku Info, Licencja lub Tutorial obok pojawi się odpowiednia informacja. Po wciśnięciu przycisku <strong>GRA</strong>, użytkownik rozpocznie grę. Wtedy będzie można stworzyć lub wylosować swoją postać. Po tym, gracz przejdze do gry. Ekran będzie podzielony na część z przyciskami - głównymi oraz interakcji. W głównej części będzie pojawiał się opis danej lokacji. W części komunikatów będą pojawiać się informacje o dokonanych wyborach oraz dodatkowe inforamcje związane z grą. Część z przyciskami będzie posiadała przyciski umożliwiające dostęp do cech postaci, ekwipunku, umiejętności itd. oraz do opcji, które będzie mógł wybrać w trakcie gry. Na podstawie opisów z głównej części gry, gracz będzie mógł dokonywać wyborów z listy przycisków.</p>"}';
-
-var btnsText = JSON.parse(firstMenuBtnsText);
-
-module.exports.firstMenuBtns = function () {
-  $("#info").on("click", function () {
-    $("#description").empty().html(btnsText.info);
-  });
-  $("#licence").on("click", function () {
-    $("#description").empty().html(btnsText.licence);
-  });
-  $("#tutorial").on("click", function () {
-    $("#description").empty().html(btnsText.tutorial);
-  });
-
-  $("#game").on("click", function () {
-    $("#info, #licence, #tutorial, #game").addClass("animRotate");
-    $("#description").fadeOut(3000);
-    setTimeout(function () {
-      $("#description").remove();
-      $("#info, #licence, #tutorial, #game").remove();
-    }, 3000);
-    $("#randomHero, #chooseHero, #gameInfo").delay(3050).fadeIn(750);
-  });
-};
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -846,6 +668,88 @@ module.exports.gameInfo = function () {
   });
   $("ol li:nth-child(3) ul li:nth-child(5)").on("click", function () {
     $("#infoDescription").empty().text(pointsTexts.charisma);
+  });
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(4);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(5);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("NIEWIERNE PSY RULEZ!!!!");
+
+  //ukrywanie odpowiednich części
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult").hide();
+
+  //przejście z pierwszego intro do pierwszego menu
+  setTimeout(function () {
+    $("header p, #heroBtns div").fadeIn(750);
+    $("body").fadeIn(750).css("background", "beige");
+    $("#mainPart h2, #mainPart h3").remove();
+    functions.newElement("p", "description", "", $("#mainPart"));
+    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
+  }, 16000);
+
+  //funkcje dla przycisków pierwszego menu
+  firstMenu.firstMenuBtns();
+  heroCreator.random();
+  heroCreator.choose();
+
+  //funkcje dla "wyskakującego" okienka dla informacji gry
+  gameInfo.gameInfo();
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var heroCreator = "./heroCreator.js";
+
+//tekst powitalny
+module.exports.textHello = "Witaj w grze 'Audaces - serce z żelaza', pierwszej grze tekstowej Niewiernych Psów. Powyżej znajdują się cztery przyciski, dzięki którym poznasz podsatwowe informacje o tej wersji gry, licencji gry, samouczka obsługi interfejsu oraz rozpoczniesz grę AUDACES - serce z żelaza. Także tego. Studio Niewiernych Psów, życzy miłej zabawy.";
+
+var firstMenuBtnsText = '{"info":"<p>To kolejna wersja gry Audaces, w której wprowadzone zostały wszystkie nie zrealizowane wcześniej pomysły. Gra powstała dzięki użytym technologiom: HTML5, SASS, jQuery, EcmaScript 6. Fonty pobrane z: fonts.google.com. Dostępne rozdzielczości: 1366x768 px.</p>", "licence":"<p>UMOWA LICENCYJNA UŻYTKOWNIKA APLIKACJI AUDACES (oraz wszystkich jego wesji).</p><p>POSIADAJĄC APLIKACJĘ AKCEPTUJESZ PONIŻSZE WARUNKI LICENCJI.</p><p>Autor informuje, iż zawarte treści w aplikacji mogą być niestosowne dla osób niepełnoletnich, o innym światopoglądzie lub wyznawanej religii. Użytkownik używa aplikację na własne ryzyko. Twórca tej aplikacji infourmuje, iż aplikacja ta została stowrzona w celach hobbystycznych oraz w celu nauki programowania. Aplikacja ta może zawierać błędy, które niekoniecznie muszą być poprawione. Autor nie udziela żadnych gwarancji, obietnic oraz zapewnień na tą aplikację (i jej wersje) i nie odpowiada za błędne działanie lub użytkowanie programu. Autor aplikacji nie bierze na siebie żadnych reklamacji w sprawie wadliwego działania programu oraz nie poczuwa się do zadość uczynienia za spowodowane szkody. Prawa autorskie należą do Szymona Cendeckiego. Audaces jest rozprowadzany na zasadzie FREEWARE czyli: użytkownik dostaje aplikację za darmo, nie może w żaden sposób zmieniać aplikacji, może wykorzystywać aplikację na własny użytek, zabrnia się wykorzystywać aplikację w celach komercyjnych, zabrania się ujawniania kodu źródłowego.</p>", "tutorial":"<p>Początek gry. Ekran składa się z powitania oraz czterech przycisków. Po wciśnięciu przycisku Info, Licencja lub Tutorial obok pojawi się odpowiednia informacja. Po wciśnięciu przycisku <strong>GRA</strong>, użytkownik rozpocznie grę. Wtedy będzie można stworzyć lub wylosować swoją postać. Po tym, gracz przejdze do gry. Ekran będzie podzielony na część z przyciskami - głównymi oraz interakcji. W głównej części będzie pojawiał się opis danej lokacji. W części komunikatów będą pojawiać się informacje o dokonanych wyborach oraz dodatkowe inforamcje związane z grą. Część z przyciskami będzie posiadała przyciski umożliwiające dostęp do cech postaci, ekwipunku, umiejętności itd. oraz do opcji, które będzie mógł wybrać w trakcie gry. Na podstawie opisów z głównej części gry, gracz będzie mógł dokonywać wyborów z listy przycisków.</p>"}';
+
+var btnsText = JSON.parse(firstMenuBtnsText);
+
+module.exports.firstMenuBtns = function () {
+  $("#info").on("click", function () {
+    $("#description").empty().html(btnsText.info);
+  });
+  $("#licence").on("click", function () {
+    $("#description").empty().html(btnsText.licence);
+  });
+  $("#tutorial").on("click", function () {
+    $("#description").empty().html(btnsText.tutorial);
+  });
+
+  $("#game").on("click", function () {
+    $("#info, #licence, #tutorial, #game").addClass("animRotate");
+    $("#description").fadeOut(3000);
+    setTimeout(function () {
+      $("#description").remove();
+      $("#info, #licence, #tutorial, #game").remove();
+    }, 3000);
+    $("#randomHero, #chooseHero, #gameInfo").delay(3050).fadeIn(750);
   });
 };
 
