@@ -30,7 +30,7 @@ let raceTexts = {
 module.exports.raceTexts = raceTexts;
 
 let occupationTexts = {
-  "occupation":"Profesja to zawód, którym się par bohater na co dzień. Do wyboru są trzy profesje: wojownik, złoczyńca oraz czarodziej. Szczegóły są dostępne po wybraniu konkretnej opcji.",
+  "occupation":"Profesja to zawód, którym para się bohater na co dzień. Do wyboru są trzy profesje: wojownik, złoczyńca oraz czarodziej. Szczegóły są dostępne po wybraniu konkretnej opcji.",
 
   "warrior":"Wojownicy to specjaliści we władaniu każdą bronią białą bronią. Są podstawą wszystkich armii świata, ale także mogą podróżwać samotni lub w niewielkich grupach. Wielu idących drogą wojownika zdobyło sławę w bitwach czy pogromcy smoków. Będąc wojownikiem zwiedzisz świat.",
 
@@ -38,6 +38,8 @@ let occupationTexts = {
 
   "wizard":"Czarodziej to brzmi dumnie. Po wielu latach spędzonych na nauce. Będzie wzbudzał szacunek swoją tylko osobą, a wrogowie będą uciekać w panice przed Twoimi kulami ognia."
 }
+
+module.exports.occupationTexts = occupationTexts;
 
 let pointsTexts = {
   "points":"Punkty cech określają czy postać jest silna, wytrzymała, inteligentna lub charyzmatyczna. Im więcej punktów tym lepiej.",

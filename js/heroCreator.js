@@ -136,6 +136,13 @@ module.exports.choose = function(){
 				hero.splice(position, 1, what1);
 			}
 
+//funkcja optymalizująca wyświetlanie opisów dla wyborów
+			function yyy(description){
+				$("#chooseHeroDescription > div").hide();
+				 $("#choosingResults").show();
+				 $("#choosingResults > p").empty().append(description);
+			}
+
 //wybór płci
 			$("#chooseSex").on("click", ()=>{ $("#chooseHeroDescription > div").hide(); $("#choosingSex").show(); });
 			$("#women").on("click", ()=>{ xxx("płeć: ", "kobieta", 1); });
@@ -143,36 +150,28 @@ module.exports.choose = function(){
 			$("#other").on("click", ()=>{ xxx("płeć: ", "nie wiadomo", 1); });
 
 	//wybór rasy
-		$("#chooseRace").on("click", ()=>{
-			$("#chooseHeroDescription > div").hide();
-			 $("#choosingRace").show();
-			 $("#choosingRace > p").empty().append(gameInfo.raceTexts.race);
-		  });
+		$("#chooseRace").on("click", ()=>{ yyy(gameInfo.raceTexts.race); });
 
-	//funkcja optymalizująca wyświetlanie opisów dla wyborów
-	function yyy(description){
-		$("#chooseHeroDescription > div").hide();
-		 $("#choosingRace").show();
-		 $("#choosingRace > p").empty().append(description);
-	}
+		$("#human").on("click", ()=>{ xxx("rasę: ", "człowiek", 2); yyy(gameInfo.raceTexts.human); });
+		$("#orc").on("click", ()=>{ xxx("rasę: ", "ork", 2); yyy(gameInfo.raceTexts.orc); });
+		$("#halfOrc").on("click", ()=>{ xxx("rasę: ", "półork", 2); yyy(gameInfo.raceTexts.halfOrc); });
+		$("#halfElv").on("click", ()=>{ xxx("rasę: ", "półelf", 2); yyy(gameInfo.raceTexts.halfElv); });
+		$("#elv").on("click", ()=>{ xxx("rasę: ", "elf", 2); yyy(gameInfo.raceTexts.elv); });
+		$("#dwarf").on("click", ()=>{ xxx("rasę: ", "krasnolud", 2); yyy(gameInfo.raceTexts.dwarf); });
+		$("#halfling").on("click", ()=>{ xxx("rasę: ", "niziołek", 2); yyy(gameInfo.raceTexts.halfling); });
+		$("#gnome").on("click", ()=>{ xxx("rasę: ", "gnom", 2); yyy(gameInfo.raceTexts.gnome); });
+		$("#goblin").on("click", ()=>{ xxx("rasę: ", "goblin", 2); yyy(gameInfo.raceTexts.goblin); });
+		$("#troll").on("click", ()=>{ xxx("rasę: ", "trol", 2); yyy(gameInfo.raceTexts.troll); });
+		$("#semiGiant").on("click", ()=>{ xxx("rasę: ", "półolbrzym", 2); yyy(gameInfo.raceTexts.semiGiant); });
 
-			$("#human").on("click", ()=>{ xxx("rasę :", "człowiek", 2); yyy(gameInfo.raceTexts.human); });
-			$("#orc").on("click", ()=>{ xxx("rasę :", "ork", 2); yyy(gameInfo.raceTexts.orc); });
-			$("#halfOrc").on("click", ()=>{ xxx("rasę :", "półork", 2); yyy(gameInfo.raceTexts.halfOrc); });
-			$("#halfElv").on("click", ()=>{ xxx("rasę :", "półelf", 2); yyy(gameInfo.raceTexts.halfElv); });
-			$("#elv").on("click", ()=>{ xxx("rasę :", "elf", 2); yyy(gameInfo.raceTexts.elv); });
-			$("#dwarf").on("click", ()=>{ xxx("rasę :", "krasnolud", 2); yyy(gameInfo.raceTexts.dwarf); });
-			$("#halfling").on("click", ()=>{ xxx("rasę :", "niziołek", 2); yyy(gameInfo.raceTexts.halfling); });
-			$("#gnome").on("click", ()=>{ xxx("rasę :", "gnom", 2); yyy(gameInfo.raceTexts.gnome); });
-			$("#goblin").on("click", ()=>{ xxx("rasę :", "goblin", 2); yyy(gameInfo.raceTexts.goblin); });
-			$("#troll").on("click", ()=>{ xxx("rasę :", "trol", 2); yyy(gameInfo.raceTexts.troll); });
-			$("#semiGiant").on("click", ()=>{ xxx("rasę :", "półolbrzym", 2); yyy(gameInfo.raceTexts.semiGiant); });
+	//wybór profesji
+	$("#chooseOccupation").on("click", ()=>{ yyy(gameInfo.occupationTexts.occupation); 	});
+
+	$("#warrior").on("click", ()=>{ xxx("profesję: ", "wojownik", 3); yyy(gameInfo.occupationTexts.warrior); });
+ 	$("#criminal").on("click", ()=>{ xxx("profesję: ", "złoczyńca", 3); yyy(gameInfo.occupationTexts.criminal); });
+ 	$("#wizard").on("click", ()=>{ xxx("profesję: ", "czarodziej", 3); yyy(gameInfo.occupationTexts.wizard); });
 
 //pokazenie dokananych wyborów
-		$("#resultChoose").on("click", ()=>{
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingResults").show();
-			console.log(hero);
-		});
+		$("#resultChoose").on("click", ()=>{ console.log(hero); });
 	});
 }

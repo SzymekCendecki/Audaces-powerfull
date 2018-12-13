@@ -453,6 +453,13 @@ module.exports.choose = function () {
 			hero.splice(position, 1, what1);
 		}
 
+		//funkcja optymalizująca wyświetlanie opisów dla wyborów
+		function yyy(description) {
+			$("#chooseHeroDescription > div").hide();
+			$("#choosingResults").show();
+			$("#choosingResults > p").empty().append(description);
+		}
+
 		//wybór płci
 		$("#chooseSex").on("click", function () {
 			$("#chooseHeroDescription > div").hide();$("#choosingSex").show();
@@ -469,56 +476,60 @@ module.exports.choose = function () {
 
 		//wybór rasy
 		$("#chooseRace").on("click", function () {
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(gameInfo.raceTexts.race);
+			yyy(gameInfo.raceTexts.race);
 		});
-
-		//funkcja optymalizująca wyświetlanie opisów dla wyborów
-		function yyy(description) {
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingRace").show();
-			$("#choosingRace > p").empty().append(description);
-		}
 
 		$("#human").on("click", function () {
-			xxx("rasę :", "człowiek", 2);yyy(gameInfo.raceTexts.human);
+			xxx("rasę: ", "człowiek", 2);yyy(gameInfo.raceTexts.human);
 		});
 		$("#orc").on("click", function () {
-			xxx("rasę :", "ork", 2);yyy(gameInfo.raceTexts.orc);
+			xxx("rasę: ", "ork", 2);yyy(gameInfo.raceTexts.orc);
 		});
 		$("#halfOrc").on("click", function () {
-			xxx("rasę :", "półork", 2);yyy(gameInfo.raceTexts.halfOrc);
+			xxx("rasę: ", "półork", 2);yyy(gameInfo.raceTexts.halfOrc);
 		});
 		$("#halfElv").on("click", function () {
-			xxx("rasę :", "półelf", 2);yyy(gameInfo.raceTexts.halfElv);
+			xxx("rasę: ", "półelf", 2);yyy(gameInfo.raceTexts.halfElv);
 		});
 		$("#elv").on("click", function () {
-			xxx("rasę :", "elf", 2);yyy(gameInfo.raceTexts.elv);
+			xxx("rasę: ", "elf", 2);yyy(gameInfo.raceTexts.elv);
 		});
 		$("#dwarf").on("click", function () {
-			xxx("rasę :", "krasnolud", 2);yyy(gameInfo.raceTexts.dwarf);
+			xxx("rasę: ", "krasnolud", 2);yyy(gameInfo.raceTexts.dwarf);
 		});
 		$("#halfling").on("click", function () {
-			xxx("rasę :", "niziołek", 2);yyy(gameInfo.raceTexts.halfling);
+			xxx("rasę: ", "niziołek", 2);yyy(gameInfo.raceTexts.halfling);
 		});
 		$("#gnome").on("click", function () {
-			xxx("rasę :", "gnom", 2);yyy(gameInfo.raceTexts.gnome);
+			xxx("rasę: ", "gnom", 2);yyy(gameInfo.raceTexts.gnome);
 		});
 		$("#goblin").on("click", function () {
-			xxx("rasę :", "goblin", 2);yyy(gameInfo.raceTexts.goblin);
+			xxx("rasę: ", "goblin", 2);yyy(gameInfo.raceTexts.goblin);
 		});
 		$("#troll").on("click", function () {
-			xxx("rasę :", "trol", 2);yyy(gameInfo.raceTexts.troll);
+			xxx("rasę: ", "trol", 2);yyy(gameInfo.raceTexts.troll);
 		});
 		$("#semiGiant").on("click", function () {
-			xxx("rasę :", "półolbrzym", 2);yyy(gameInfo.raceTexts.semiGiant);
+			xxx("rasę: ", "półolbrzym", 2);yyy(gameInfo.raceTexts.semiGiant);
+		});
+
+		//wybór profesji
+		$("#chooseOccupation").on("click", function () {
+			yyy(gameInfo.occupationTexts.occupation);
+		});
+
+		$("#warrior").on("click", function () {
+			xxx("profesję: ", "wojownik", 3);yyy(gameInfo.occupationTexts.warrior);
+		});
+		$("#criminal").on("click", function () {
+			xxx("profesję: ", "złoczyńca", 3);yyy(gameInfo.occupationTexts.criminal);
+		});
+		$("#wizard").on("click", function () {
+			xxx("profesję: ", "czarodziej", 3);yyy(gameInfo.occupationTexts.wizard);
 		});
 
 		//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", function () {
-			$("#chooseHeroDescription > div").hide();
-			$("#choosingResults").show();
 			console.log(hero);
 		});
 	});
@@ -563,7 +574,7 @@ var raceTexts = {
 module.exports.raceTexts = raceTexts;
 
 var occupationTexts = {
-  "occupation": "Profesja to zawód, którym się par bohater na co dzień. Do wyboru są trzy profesje: wojownik, złoczyńca oraz czarodziej. Szczegóły są dostępne po wybraniu konkretnej opcji.",
+  "occupation": "Profesja to zawód, którym para się bohater na co dzień. Do wyboru są trzy profesje: wojownik, złoczyńca oraz czarodziej. Szczegóły są dostępne po wybraniu konkretnej opcji.",
 
   "warrior": "Wojownicy to specjaliści we władaniu każdą bronią białą bronią. Są podstawą wszystkich armii świata, ale także mogą podróżwać samotni lub w niewielkich grupach. Wielu idących drogą wojownika zdobyło sławę w bitwach czy pogromcy smoków. Będąc wojownikiem zwiedzisz świat.",
 
@@ -571,6 +582,8 @@ var occupationTexts = {
 
   "wizard": "Czarodziej to brzmi dumnie. Po wielu latach spędzonych na nauce. Będzie wzbudzał szacunek swoją tylko osobą, a wrogowie będą uciekać w panice przed Twoimi kulami ognia."
 };
+
+module.exports.occupationTexts = occupationTexts;
 
 var pointsTexts = {
   "points": "Punkty cech określają czy postać jest silna, wytrzymała, inteligentna lub charyzmatyczna. Im więcej punktów tym lepiej.",
