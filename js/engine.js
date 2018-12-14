@@ -528,6 +528,27 @@ module.exports.choose = function () {
 			xxx("profesję: ", "czarodziej", 3);yyy(gameInfo.occupationTexts.wizard);
 		});
 
+		//punkty cech
+		$("#choosePoints").on("click", function () {
+			yyy(gameInfo.pointsTexts.points);
+		});
+
+		$("#forcePoints").on("click", function () {
+			yyy(gameInfo.pointsTexts.force);
+		});
+		$("#strenghtPoints").on("click", function () {
+			yyy(gameInfo.pointsTexts.strenght);
+		});
+		$("#skillPoints").on("click", function () {
+			yyy(gameInfo.pointsTexts.skill);
+		});
+		$("#intellectualsPoints").on("click", function () {
+			yyy(gameInfo.pointsTexts.intellectuals);
+		});
+		$("#charismaPoints").on("click", function () {
+			yyy(gameInfo.pointsTexts.charisma);
+		});
+
 		//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", function () {
 			console.log(hero);
@@ -598,6 +619,8 @@ var pointsTexts = {
 
   "charisma": "CHARYZMA - określa sposób w jaki postać jest odbierana przez innych. Dzięki charyzmie, postać może np. przekonać rozmówcę do swoich racji. Ważna dla złoczyńcy i czarodziejów."
 };
+
+module.exports.pointsTexts = pointsTexts;
 
 module.exports.gameInfo = function () {
   $("#gameInfo").on("click", function () {

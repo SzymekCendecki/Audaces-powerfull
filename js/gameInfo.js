@@ -55,6 +55,8 @@ let pointsTexts = {
   "charisma":"CHARYZMA - określa sposób w jaki postać jest odbierana przez innych. Dzięki charyzmie, postać może np. przekonać rozmówcę do swoich racji. Ważna dla złoczyńcy i czarodziejów."
 }
 
+module.exports.pointsTexts = pointsTexts;
+
 module.exports.gameInfo = function(){
   $("#gameInfo").on("click", ()=>{
     $("#heroBtns button").prop("disabled", true);

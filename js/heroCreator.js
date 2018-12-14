@@ -171,6 +171,15 @@ module.exports.choose = function(){
  	$("#criminal").on("click", ()=>{ xxx("profesję: ", "złoczyńca", 3); yyy(gameInfo.occupationTexts.criminal); });
  	$("#wizard").on("click", ()=>{ xxx("profesję: ", "czarodziej", 3); yyy(gameInfo.occupationTexts.wizard); });
 
+	//punkty cech
+	$("#choosePoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.points); 	});
+
+	$("#forcePoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.force); });
+	$("#strenghtPoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.strenght); });
+	$("#skillPoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.skill); });
+	$("#intellectualsPoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.intellectuals); });
+	$("#charismaPoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.charisma); });
+
 //pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{ console.log(hero); });
 	});

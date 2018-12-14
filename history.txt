@@ -140,3 +140,6 @@ Dodano wybiernie profeji w "ręcznym" tworzeniu postaci.
 13 grudnia 2018 - wersja 0.1.35
 Dodano "ręczne" wybieranie profesji.
   Optymalizacja kodu.
+
+14 grudnia 2018 - wersja 0.1.36
+Rozpoczęcie pracy nad wybieraniem puntktów cech.
