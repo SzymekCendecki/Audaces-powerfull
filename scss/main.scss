@@ -69,3 +69,13 @@ header{
 
 //wyśrodkowanie tekstu
 .center{ text-align: center; }
+
+//brak wcięcia tekstu
+.textIndent0{ text-indent: 0; }
+
+//flot left
+.floatLeft{ float: left; }
+
+.clearFloats{
+  clear: both;
+}

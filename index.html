@@ -232,10 +232,31 @@
 				<p class="newRocker">W tej części można wybrać płeć swojej postaci. Nie wpływa to (na razie) na współczynniki postaci. Wybór odbywa się za pomocą rozwijalnego menu.</p>
 		</div>
 
-	<!-- wynik wyborów -->
-		<div id="choosingResults">
-				<p class="newRocker"></p>
-		</div>
+		<!-- wynik wyborów -->
+			<div id="choosingResults">
+					<p class="newRocker"></p>
+			</div>
+
+		<!-- punkty cech -->
+			<div id="choosingPoints" class="newRocker textIndent0">
+				<p>Wylosuj punkty cech oraz rozdziel je za pomocą suwaków.</p>
+				<button id="random" class="newRocker floatLeft">losuj</button><div id="pointsRandom" class="newRocker"></div>
+
+				<div class="newRocker clearFloats">siła</div>
+				<input type="range" min="0" max="0" value="0" id="forceSlider" class="floatLeft"><div id="forceScore" class="newRocker"></div>
+
+				<p class="newRocker clearFloats">wytrzymałość</p>
+				<input type="range" min="0" max="0" value="0" id="strenghtSlider" class="floatLeft"><div id="strenghtScore" class="newRocker"></div>
+
+				<p class="newRocker clearFloats">zręczność</p>
+				<input type="range" min="0" max="0" value="0" id="dexteritySlider" class="floatLeft"><div id="dexterityScore" class="newRocker"></div>
+
+				<p class="newRocker clearFloats">inteligencja</p>
+				<input type="range" min="0" max="0" value="0" id="intellectualsSlider" class="floatLeft"><div id="intellectualsScore" class="newRocker"></div>
+
+				<p class="newRocker clearFloats">charyzma</p>
+				<input type="range" min="0" max="0" value="0" id="charismaSlider" class="floatLeft"><div id="charismaScore" class="newRocker"></div>
+			</div>
 
 	</div>
 </div>
@@ -246,7 +267,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.36 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.37 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>

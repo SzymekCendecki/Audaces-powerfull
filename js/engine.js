@@ -530,7 +530,7 @@ module.exports.choose = function () {
 
 		//punkty cech
 		$("#choosePoints").on("click", function () {
-			yyy(gameInfo.pointsTexts.points);
+			yyy(gameInfo.pointsTexts.points);$("#choosingPoints").show();
 		});
 
 		$("#forcePoints").on("click", function () {
@@ -547,6 +547,38 @@ module.exports.choose = function () {
 		});
 		$("#charismaPoints").on("click", function () {
 			yyy(gameInfo.pointsTexts.charisma);
+		});
+
+		//losowanie punktów cech
+		$("#random").on("click", function () {
+			var randPoints = Math.round(Math.random() * 250);
+			$("#pointsRandom").empty().append(randPoints);
+
+			document.querySelector("#forceSlider").max = randPoints;
+			document.querySelector("#strenghtSlider").max = randPoints;
+			document.querySelector("#dexteritySlider").max = randPoints;
+			document.querySelector("#intellectualsSlider").max = randPoints;
+			document.querySelector("#charismaSlider").max = randPoints;
+		});
+
+		$("#forceSlider").on("input propertychange", function () {
+			$("#forceScore").empty().append(this.value);
+		});
+
+		$("#strenghtSlider").on("input propertychange", function () {
+			$("#strenghtScore").empty().append(this.value);
+		});
+
+		$("#dexteritySlider").on("input propertychange", function () {
+			$("#dexterityScore").empty().append(this.value);
+		});
+
+		$("#intellectualsSlider").on("input propertychange", function () {
+			$("#intellectualsScore").empty().append(this.value);
+		});
+
+		$("#charismaSlider").on("input propertychange", function () {
+			$("#charismaScore").empty().append(this.value);
 		});
 
 		//pokazenie dokananych wyborów

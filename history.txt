@@ -142,4 +142,7 @@ Dodano "ręczne" wybieranie profesji.
   Optymalizacja kodu.
 
 14 grudnia 2018 - wersja 0.1.36
-Rozpoczęcie pracy nad wybieraniem puntktów cech.
+Rozpoczęcie pracy nad wybieraniem punktów cech.
+
+15 grudnia 2018 - wersja 0.1.37
+Praca nad wybieraniem punktów.
