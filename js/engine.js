@@ -549,36 +549,51 @@ module.exports.choose = function () {
 			yyy(gameInfo.pointsTexts.charisma);
 		});
 
+		var tab = [0, 0, 0, 0, 0, 0, 0];
 		//losowanie punktów cech
 		$("#random").on("click", function () {
 			var randPoints = Math.round(Math.random() * 250);
 			$("#pointsRandom").empty().append(randPoints);
-
-			document.querySelector("#forceSlider").max = randPoints;
-			document.querySelector("#strenghtSlider").max = randPoints;
-			document.querySelector("#dexteritySlider").max = randPoints;
-			document.querySelector("#intellectualsSlider").max = randPoints;
-			document.querySelector("#charismaSlider").max = randPoints;
+			tab.splice(5, 1, randPoints);
 		});
 
 		$("#forceSlider").on("input propertychange", function () {
-			$("#forceScore").empty().append(this.value);
+			tab.splice(0, 1, this.value);
+			var x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
+			tab.splice(6, 1, x);
+			$("#pointsRandom").empty().append(tab[5] - tab[6]);
+			console.log(x, tab[5] - tab[6]);
 		});
-
 		$("#strenghtSlider").on("input propertychange", function () {
-			$("#strenghtScore").empty().append(this.value);
+			tab.splice(1, 1, this.value);
+			var x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
+			tab.splice(6, 1, x);
+			$("#pointsRandom").empty().append(tab[5] - tab[6]);
+			console.log(x, tab[5] - tab[6]);
 		});
-
 		$("#dexteritySlider").on("input propertychange", function () {
-			$("#dexterityScore").empty().append(this.value);
+			tab.splice(2, 1, this.value);
+			var x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
+			tab.splice(6, 1, x);
+			$("#pointsRandom").empty().append(tab[5] - tab[6]);
+			console.log(x, tab[5] - tab[6]);
 		});
 
 		$("#intellectualsSlider").on("input propertychange", function () {
-			$("#intellectualsScore").empty().append(this.value);
+			tab.splice(3, 1, this.value);
+			tab.splice(4, 1, this.value);
+			var x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
+			tab.splice(6, 1, x);
+			$("#pointsRandom").empty().append(tab[5] - tab[6]);
+			console.log(x, tab[5] - tab[6]);
 		});
 
 		$("#charismaSlider").on("input propertychange", function () {
-			$("#charismaScore").empty().append(this.value);
+			tab.splice(4, 1, this.value);
+			var x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
+			tab.splice(6, 1, x);
+			$("#pointsRandom").empty().append(tab[5] - tab[6]);
+			console.log(x, tab[5] - tab[6]);
 		});
 
 		//pokazenie dokananych wyborów
