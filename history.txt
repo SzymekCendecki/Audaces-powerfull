@@ -149,3 +149,6 @@ Praca nad wybieraniem punktów.
 
 16 grudnia 2018 - wersja 0.1.38
 Poprawiona wersja wybierania puntów (do dopracowania).
+
+17 grudnia 2018 - wersja 0.1.39
+Drobna poprawka wizualna wybierania ręcznego punktów cech oraz drobna optymalizacja kodu.

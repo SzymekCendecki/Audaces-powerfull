@@ -73,9 +73,15 @@ header{
 //brak wcięcia tekstu
 .textIndent0{ text-indent: 0; }
 
-//flot left
+//float left
 .floatLeft{ float: left; }
 
-.clearFloats{
-  clear: both;
+//czyszczenie floatów
+.clearFloats{ clear: both; }
+
+
+.displayFlex{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px 0 0 0;
 }

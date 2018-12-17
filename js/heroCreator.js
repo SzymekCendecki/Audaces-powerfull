@@ -181,53 +181,28 @@ module.exports.choose = function(){
 	$("#charismaPoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.charisma); });
 
 let tab = [0, 0, 0, 0, 0, 0, 0];
+
+$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", true);
+
 	//losowanie punktów cech
-	 $("#random").on("click", ()=>{
-		 let randPoints = Math.round(Math.random()*250);
-		 $("#pointsRandom").empty().append(randPoints);
-		 tab.splice(5, 1, randPoints);
+		$("#random").on("click", ()=>{
+			$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", false);
+		let randPoints = Math.round(Math.random()*250);
+		$("#pointsRandom").empty().append(randPoints);
+		tab.splice(5, 1, randPoints);
   });
 
-	$("#forceSlider").on("input propertychange",function(){
-			tab.splice(0, 1, (this.value));
-			let x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
-			tab.splice(6, 1, x);
-			$("#pointsRandom").empty().append(tab[5] - tab[6]);
-			console.log(x, tab[5] - tab[6]);
-	 });
-	$("#strenghtSlider").on("input propertychange",function(){
-	 tab.splice(1, 1, (this.value));
-	 	let x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
-		tab.splice(6, 1, x);
-		$("#pointsRandom").empty().append(tab[5] - tab[6]);
-		console.log(x, tab[5] - tab[6]);
-	});
-	$("#dexteritySlider").on("input propertychange",function(){
-		tab.splice(2, 1, (this.value));
+	function xyz(tab){
 		let x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
 		tab.splice(6, 1, x);
 		$("#pointsRandom").empty().append(tab[5] - tab[6]);
-		console.log(x, tab[5] - tab[6]);
-	});
+	}
 
-	$("#intellectualsSlider").on("input propertychange",function(){
-		tab.splice(3, 1, (this.value));
-		tab.splice(4, 1, (this.value));
-	let x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
-	tab.splice(6, 1, x);
-	$("#pointsRandom").empty().append(tab[5] - tab[6]);
-	console.log(x, tab[5] - tab[6]);
-
-	});
-
-	$("#charismaSlider").on("input propertychange",function(){
-		 tab.splice(4, 1, (this.value));
-		 let x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
-		 tab.splice(6, 1, x);
-		 $("#pointsRandom").empty().append(tab[5] - tab[6]);
- 		console.log(x, tab[5] - tab[6]);
-
-	 });
+	$("#forceSlider").on("input propertychange",function(){ tab.splice(0, 1, (this.value));	xyz(tab); });
+	$("#strenghtSlider").on("input propertychange",function(){ tab.splice(1, 1, (this.value)); xyz(tab); });
+	$("#dexteritySlider").on("input propertychange",function(){ tab.splice(2, 1, (this.value));  xyz(tab); });
+	$("#intellectualsSlider").on("input propertychange",function(){ tab.splice(3, 1, (this.value)); xyz(tab); });
+	$("#charismaSlider").on("input propertychange",function(){ tab.splice(4, 1, (this.value)); xyz(tab); });
 
 //pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{ console.log(hero); });
