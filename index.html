@@ -174,14 +174,7 @@
       </ul>
     </li>
 
-	<li><span>kolor oczu</span>
-      <ul>
-        <li>piwne</li>
-        <li>szare</li>
-        <li>brązowe</li>
-        <li>niebieskie</li>
-      </ul>
-    </li>
+	<li><span id="chooseEyes">kolor oczu</span></li>
 
 	<li><span>włosy</span>
       <ul>
@@ -239,26 +232,35 @@
 
 		<!-- punkty cech -->
 			<div id="choosingPoints" class="newRocker textIndent0">
-				<p>Wylosuj punkty cech oraz rozdziel je za pomocą dostępnych poniżej pól.</p>
+				<p>Wylosuj punkty cech oraz rozdziel je za pomocą dostępnych poniżej suwaków.</p>
 				<button id="random" class="newRocker greenBtn floatLeft">losuj</button><div id="pointsRandom" class="newRocker"></div>
 
 			<div class="displayFlex clearFloats">
 				<div class="newRocker">siła</div>
-				<input type="number" min="0" max="50" value="0" id="forceSlider" class="newRocker">
+				<input type="range" min="0" max="50" value="0" id="forceSlider" class="newRocker">
 
 				<p class="newRocker">wytrzymałość</p>
-				<input type="number" min="0" max="50" value="0" id="strenghtSlider" class="newRocker">
+				<input type="range" min="0" max="50" value="0" id="strenghtSlider" class="newRocker">
 
 				<p class="newRocker">zręczność</p>
-				<input type="number" min="0" max="50" value="0" id="dexteritySlider" class="newRocker">
+				<input type="range" min="0" max="50" value="0" id="dexteritySlider" class="newRocker">
 
 				<p class="newRocker">inteligencja</p>
-				<input type="number" min="0" max="50" value="0" id="intellectualsSlider" class="newRocker">
+				<input type="range" min="0" max="50" value="0" id="intellectualsSlider" class="newRocker">
 
 				<p class="newRocker">charyzma</p>
-				<input type="number" min="0" max="50" value="0" id="charismaSlider" class="newRocker">
+				<input type="range" min="0" max="50" value="0" id="charismaSlider" class="newRocker">
 			</div>
 
+			<button id="unlock" class="newRocker greenBtn">odblokuj</button>
+			</div>
+
+			<div id="choosingEyes" class="newRocker textIndent0">
+				<input type="range" min="0" max="255" value="0" id="colorEye1">
+				<input type="range" min="0" max="255" value="0" id="colorEye2">
+				<input type="range" min="0" max="255" value="0" id="colorEye3">
+				<p class="newRocker">kolor oczu</p>
+				<div id="resultColorEye"></div>
 			</div>
 
 	</div>
@@ -270,7 +272,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.39 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.40 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>

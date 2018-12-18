@@ -57,6 +57,12 @@ let pointsTexts = {
 
 module.exports.pointsTexts = pointsTexts;
 
+let otherTexts = {
+  "eyesColor":"W tej części można wybrać kolor oczu. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor."
+}
+
+module.exports.otherTexts = otherTexts;
+
 module.exports.gameInfo = function(){
   $("#gameInfo").on("click", ()=>{
     $("#heroBtns button").prop("disabled", true);

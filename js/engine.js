@@ -550,7 +550,6 @@ module.exports.choose = function () {
 		});
 
 		var tab = [0, 0, 0, 0, 0, 0, 0];
-
 		$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", true);
 
 		//losowanie punktów cech
@@ -565,6 +564,11 @@ module.exports.choose = function () {
 			var x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
 			tab.splice(6, 1, x);
 			$("#pointsRandom").empty().append(tab[5] - tab[6]);
+
+			if (tab[5] - tab[6] <= 0) {
+				$("#unlock").show();
+				$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", true);
+			}
 		}
 
 		$("#forceSlider").on("input propertychange", function () {
@@ -581,6 +585,32 @@ module.exports.choose = function () {
 		});
 		$("#charismaSlider").on("input propertychange", function () {
 			tab.splice(4, 1, this.value);xyz(tab);
+		});
+
+		$("#unlock").on("click", function () {
+			$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", false);
+			$("#unlock").hide();
+		});
+
+		//wybieranie koloru oczu
+		$("#chooseEyes").on("click", function () {
+			yyy(gameInfo.otherTexts.eyesColor);$("#choosingEyes").show();
+		});
+		var eyesColor = [0, 0, 0];
+
+		$("#colorEye1").on("input propertychange", function () {
+			eyesColor.splice(0, 1, this.value);
+			$("#resultColorEye").css("background-color", "rgb(" + parseInt(eyesColor[0]) + "," + parseInt(eyesColor[1]) + ", " + parseInt(eyesColor[2]));
+		});
+
+		$("#colorEye2").on("input propertychange", function () {
+			eyesColor.splice(1, 1, this.value);
+			$("#resultColorEye").css("background-color", "rgb(" + parseInt(eyesColor[0]) + "," + parseInt(eyesColor[1]) + ", " + parseInt(eyesColor[2]));
+		});
+
+		$("#colorEye3").on("input propertychange", function () {
+			eyesColor.splice(2, 1, this.value);
+			$("#resultColorEye").css("background-color", "rgb(" + parseInt(eyesColor[0]) + "," + parseInt(eyesColor[1]) + ", " + parseInt(eyesColor[2]));
 		});
 
 		//pokazenie dokananych wyborów
@@ -655,6 +685,12 @@ var pointsTexts = {
 };
 
 module.exports.pointsTexts = pointsTexts;
+
+var otherTexts = {
+  "eyesColor": "W tej części można wybrać kolor oczu. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor."
+};
+
+module.exports.otherTexts = otherTexts;
 
 module.exports.gameInfo = function () {
   $("#gameInfo").on("click", function () {
@@ -764,7 +800,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
 
   //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult").hide();
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult, #unlock").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {

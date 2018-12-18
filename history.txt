@@ -152,3 +152,7 @@ Poprawiona wersja wybierania puntów (do dopracowania).
 
 17 grudnia 2018 - wersja 0.1.39
 Drobna poprawka wizualna wybierania ręcznego punktów cech oraz drobna optymalizacja kodu.
+
+18 grudnia 2018 - wersja 0.1.40
+Poprawiono wybieranie punktów cech (przywrócono wybieranie punktów suwakiem).
+  Dodano wybieranie koloru oczu.

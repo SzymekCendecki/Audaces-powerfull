@@ -181,8 +181,7 @@ module.exports.choose = function(){
 	$("#charismaPoints").on("click", ()=>{ yyy(gameInfo.pointsTexts.charisma); });
 
 let tab = [0, 0, 0, 0, 0, 0, 0];
-
-$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", true);
+	$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", true);
 
 	//losowanie punktów cech
 		$("#random").on("click", ()=>{
@@ -196,6 +195,11 @@ $("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #chari
 		let x = parseInt(tab[0]) + parseInt(tab[1]) + parseInt(tab[2]) + parseInt(tab[3]) + parseInt(tab[4]);
 		tab.splice(6, 1, x);
 		$("#pointsRandom").empty().append(tab[5] - tab[6]);
+
+		if(tab[5] - tab[6] <=0 ){
+			$("#unlock").show();
+			$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", true);
+		}
 	}
 
 	$("#forceSlider").on("input propertychange",function(){ tab.splice(0, 1, (this.value));	xyz(tab); });
@@ -203,6 +207,27 @@ $("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #chari
 	$("#dexteritySlider").on("input propertychange",function(){ tab.splice(2, 1, (this.value));  xyz(tab); });
 	$("#intellectualsSlider").on("input propertychange",function(){ tab.splice(3, 1, (this.value)); xyz(tab); });
 	$("#charismaSlider").on("input propertychange",function(){ tab.splice(4, 1, (this.value)); xyz(tab); });
+
+	$("#unlock").on("click", ()=>{
+		$("#forceSlider, #strenghtSlider, #dexteritySlider, #intellectualsSlider, #charismaSlider").prop("disabled", false);
+			$("#unlock").hide();
+	});
+
+//wybieranie koloru oczu
+$("#chooseEyes").on("click", ()=>{ yyy(gameInfo.otherTexts.eyesColor); $("#choosingEyes").show(); });
+let eyesColor = [0, 0, 0];
+
+$("#colorEye1").on("input propertychange",function(){ eyesColor.splice(0, 1, this.value);
+	$("#resultColorEye").css("background-color", `rgb(${parseInt(eyesColor[0])},${parseInt(eyesColor[1])}, ${parseInt(eyesColor[2])}`);
+});
+
+$("#colorEye2").on("input propertychange",function(){eyesColor.splice(1, 1, this.value);
+	$("#resultColorEye").css("background-color", `rgb(${parseInt(eyesColor[0])},${parseInt(eyesColor[1])}, ${parseInt(eyesColor[2])}`);
+});
+
+$("#colorEye3").on("input propertychange",function(){ eyesColor.splice(2, 1, this.value);
+	$("#resultColorEye").css("background-color", `rgb(${parseInt(eyesColor[0])},${parseInt(eyesColor[1])}, ${parseInt(eyesColor[2])}`);
+});
 
 //pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{ console.log(hero); });
