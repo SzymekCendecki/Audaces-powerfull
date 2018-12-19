@@ -86,7 +86,13 @@ header{
   margin-top: 20px 0 0 0;
 }
 
-#resultColorEye{
+#resultColorEye, #resultColorHair, #resultColorSkin{
   width: 100px;
   height: 25px;
+}
+
+#resultWeight, #resultHeight{
+  width: 150px;
+  height: 25px;
+  text-align: center;
 }

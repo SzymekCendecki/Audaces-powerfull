@@ -73,12 +73,12 @@
         <li>ork</li>
         <li>półelf</li>
         <li>elf</li>
-		<li>krasnolud</li>
-		<li>gnom</li>
-		<li>niziołek</li>
-		<li>goblin</li>
-		<li>trol</li>
-		<li>półolbrzym</li>
+				<li>krasnolud</li>
+				<li>gnom</li>
+				<li>niziołek</li>
+				<li>goblin</li>
+				<li>trol</li>
+				<li>półolbrzym</li>
       </ul>
     </li>
 
@@ -175,39 +175,19 @@
     </li>
 
 	<li><span id="chooseEyes">kolor oczu</span></li>
+	<li><span id="chooseHair">kolor włosów</span></li>
+	<li><span id="chooseSkin">kolor skóry</span></li>
 
-	<li><span>włosy</span>
+	<li><span id="chooseTattoo">tatuaże</span>
       <ul>
-        <li>blond</li>
-        <li>rude</li>
-        <li>czarne</li>
-        <li>farbowane</li>
+        <li><span id="noneTattoo">brak</span></li>
+        <li><span id="jailTattoo">więzienne</span></li>
+        <li><span id="tribeTattoo">plemienne</span></li>
+        <li><span id="strangeTatoo">dziwne</span></li>
       </ul>
     </li>
-
-	<li><span>skóra</span>
-      <ul>
-        <li>biała</li>
-        <li>brązowa</li>
-        <li>czarna</li>
-        <li>czerwona</li>
-		<li>żółta</li>
-        <li>zielona</li>
-        <li>brunatna</li>
-        <li>błękitna</li>
-      </ul>
-    </li>
-
-	<li><span>tatuaże</span>
-      <ul>
-        <li>brak</li>
-        <li>więzienne</li>
-        <li>plemienne</li>
-        <li>dziwne</li>
-      </ul>
-    </li>
-	<li><span>waga</span></li>
-	<li><span>wzrost</span></li>
+	<li><span id="chooseWeight">waga</span></li>
+	<li><span id="chooseHeight">wzrost</span></li>
 	<li><span id="resultChoose">wyniki</span></li>
 </ol>
 	</div>
@@ -255,12 +235,38 @@
 			<button id="unlock" class="newRocker greenBtn">odblokuj</button>
 			</div>
 
+<!-- wybieranie kolorów oczy -->
 			<div id="choosingEyes" class="newRocker textIndent0">
-				<input type="range" min="0" max="255" value="0" id="colorEye1">
-				<input type="range" min="0" max="255" value="0" id="colorEye2">
-				<input type="range" min="0" max="255" value="0" id="colorEye3">
+				<input type="range" min="0" max="255" value="0" id="colorEye1" />
+				<input type="range" min="0" max="255" value="0" id="colorEye2" />
+				<input type="range" min="0" max="255" value="0" id="colorEye3" />
 				<p class="newRocker">kolor oczu</p>
 				<div id="resultColorEye"></div>
+			</div>
+
+<!-- wybieranie kolorów włosów -->
+			<div id="choosingHair" class="newRocker textIndent0">
+				<input type="range" min="0" max="255" value="0" id="colorHair1" />
+				<input type="range" min="0" max="255" value="0" id="colorHair2" />
+				<input type="range" min="0" max="255" value="0" id="colorHair3" />
+				<p class="newRocker">kolor włosów</p>
+				<div id="resultColorHair"></div>
+			</div>
+
+<!-- wybieranie kolorów skóry -->
+			<div id="choosingSkin" class="newRocker textIndent0">
+				<input type="range" min="0" max="255" value="0" id="colorSkin1" />
+				<input type="range" min="0" max="255" value="0" id="colorSkin2" />
+				<input type="range" min="0" max="255" value="0" id="colorSkin3" />
+				<p class="newRocker">kolor skóry</p>
+				<div id="resultColorSkin"></div>
+			</div>
+
+	<!-- wybieranie kolorów skóry -->
+			<div id="choosingWeight" class="newRocker textIndent0">
+				<input type="range" min="0" max="0" value="0" id="weight" />
+				<p class="newRocker">waga</p>
+				<div id="resultWeight"></div>
 			</div>
 
 	</div>
@@ -272,7 +278,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.40 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.41 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>

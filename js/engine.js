@@ -592,26 +592,79 @@ module.exports.choose = function () {
 			$("#unlock").hide();
 		});
 
+		// funkcja opymalizująca wybieranie koloru oczu, włosów i skóry
+		function ccc(what, tab, position, where) {
+			what.on("input propertychange", function () {
+				tab.splice(position, 1, this.value);
+				where.css("background-color", "rgb(" + parseInt(tab[0]) + "," + parseInt(tab[1]) + ", " + parseInt(tab[2]));
+			});
+		}
+
 		//wybieranie koloru oczu
 		$("#chooseEyes").on("click", function () {
 			yyy(gameInfo.otherTexts.eyesColor);$("#choosingEyes").show();
 		});
 		var eyesColor = [0, 0, 0];
 
-		$("#colorEye1").on("input propertychange", function () {
-			eyesColor.splice(0, 1, this.value);
-			$("#resultColorEye").css("background-color", "rgb(" + parseInt(eyesColor[0]) + "," + parseInt(eyesColor[1]) + ", " + parseInt(eyesColor[2]));
+		ccc($("#colorEye1"), eyesColor, 0, $("#resultColorEye"));
+		ccc($("#colorEye2"), eyesColor, 1, $("#resultColorEye"));
+		ccc($("#colorEye3"), eyesColor, 2, $("#resultColorEye"));
+
+		//wybieranie koloru włosów
+		$("#chooseHair").on("click", function () {
+			yyy(gameInfo.otherTexts.hairColor);$("#choosingHair").show();
+		});
+		var hairColor = [0, 0, 0];
+
+		ccc($("#colorHair1"), hairColor, 0, $("#resultColorHair"));
+		ccc($("#colorHair2"), hairColor, 1, $("#resultColorHair"));
+		ccc($("#colorHair3"), hairColor, 2, $("#resultColorHair"));
+
+		//wybieranie koloru skóry
+		$("#chooseSkin").on("click", function () {
+			yyy(gameInfo.otherTexts.skinColor);$("#choosingSkin").show();
+		});
+		var skinColor = [0, 0, 0];
+
+		ccc($("#colorSkin1"), skinColor, 0, $("#resultColorSkin"));
+		ccc($("#colorSkin2"), skinColor, 1, $("#resultColorSkin"));
+		ccc($("#colorSkin3"), skinColor, 2, $("#resultColorSkin"));
+
+		//wybieranie tatuaży
+		$("#chooseTattoo").on("click", function () {
+			yyy(gameInfo.otherTexts.tattoo);
 		});
 
-		$("#colorEye2").on("input propertychange", function () {
-			eyesColor.splice(1, 1, this.value);
-			$("#resultColorEye").css("background-color", "rgb(" + parseInt(eyesColor[0]) + "," + parseInt(eyesColor[1]) + ", " + parseInt(eyesColor[2]));
+		$("#noneTattoo").on("click", function () {
+			xxx("tatuaż: ", "brak", 12);yyy(gameInfo.otherTexts.noneTattoo);
+		});
+		$("#jailTattoo").on("click", function () {
+			xxx("tatuaż: ", "więzienny", 12);yyy(gameInfo.otherTexts.jailTattoo);
+		});
+		$("#tribeTattoo").on("click", function () {
+			xxx("tatuaż: ", "plemienny", 12);yyy(gameInfo.otherTexts.tribeTattoo);
+		});
+		$("#strangeTatoo").on("click", function () {
+			xxx("tatuaż: ", "dziwny", 12);yyy(gameInfo.otherTexts.strangeTatoo);
 		});
 
-		$("#colorEye3").on("input propertychange", function () {
-			eyesColor.splice(2, 1, this.value);
-			$("#resultColorEye").css("background-color", "rgb(" + parseInt(eyesColor[0]) + "," + parseInt(eyesColor[1]) + ", " + parseInt(eyesColor[2]));
+		//wybieranie wagi
+		function abc() {
+			if (hero[2] == "nie wybrano") {
+				$("#resultWeight").empty().append("<p class='redText'>Wybierz rasę.</p>" + hero[2]);
+			} else if (hero[2] == "człowiek") {
+				$("#resultWeight").empty().append(hero[2]);
+				document.querySelector("#weight").min = 40;
+				document.querySelector("#weight").max = 120;
+			}
+		}
+
+		$("#chooseWeight").on("click", function () {
+			yyy(gameInfo.otherTexts.weight);$("#choosingWeight").show();abc();
 		});
+		var weight = [0];
+
+		ccc($("#weight"), weight, 0, $("#resultWeight"));
 
 		//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", function () {
@@ -687,7 +740,16 @@ var pointsTexts = {
 module.exports.pointsTexts = pointsTexts;
 
 var otherTexts = {
-  "eyesColor": "W tej części można wybrać kolor oczu. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor."
+  "eyesColor": "W tej części można wybrać kolor oczu. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor oczu.",
+  "hairColor": "W tej części można wybrać kolor włosów. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor włosów.",
+  "skinColor": "W tej części można wybrać kolor skóry. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor skóry.",
+  "tattoo": "Tatuaże mogą być dziełem sztuki, wyznacznikiem statusu społecznego, miejsca w hierarchii oraz przynależności do klanu lub orgnizacji.",
+  "noneTattoo": "Skóra nie jest poryta żadnymi tatuażami.",
+  "jailTattoo": "Te tatuaże w więzieniach nazywane są 'dziarami'. Określają one status więźnia, jego miejsca odsiadki oraz jaka jest jego przestępcza specjalizacja. Czasami wytatuowane ważniejsze 'dokonania'.",
+  "tribeTattoo": "Tatuaże pleienne określają przynależność do określonego klanu oraz status/pozycję w tym klanie.",
+  "strangeTatoo": "Bliżej nie sprecyzowane wzory tatuaży, które najczęściej wzorowane są na wątpliwych wizjach osób parających się tatuowaniem.",
+  "weight": "Oreśla wagę postaci, którą można ustawić za pomocą suwaka.",
+  "height": "Określa zrost postaci, który można ustawić za pomocą suwaka."
 };
 
 module.exports.otherTexts = otherTexts;

@@ -156,3 +156,9 @@ Drobna poprawka wizualna wybierania ręcznego punktów cech oraz drobna optymali
 18 grudnia 2018 - wersja 0.1.40
 Poprawiono wybieranie punktów cech (przywrócono wybieranie punktów suwakiem).
   Dodano wybieranie koloru oczu.
+
+19 grudnia 2018 - wersja 0.1.41
+Dodano wybór koloru włosów.
+  Dodano wybór koloru skóry.
+Optymalizacja kodu wybierania koloru oczu, włosów i skóry.
+  Dodano wybieranie tatuaży.

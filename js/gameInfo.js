@@ -58,7 +58,16 @@ let pointsTexts = {
 module.exports.pointsTexts = pointsTexts;
 
 let otherTexts = {
-  "eyesColor":"W tej części można wybrać kolor oczu. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor."
+  "eyesColor":"W tej części można wybrać kolor oczu. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor oczu.",
+  "hairColor":"W tej części można wybrać kolor włosów. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor włosów.",
+  "skinColor":"W tej części można wybrać kolor skóry. Do tego celu służą trzy suwaki, dzięki którym można ustawić pożądany kolor skóry.",
+  "tattoo":"Tatuaże mogą być dziełem sztuki, wyznacznikiem statusu społecznego, miejsca w hierarchii oraz przynależności do klanu lub orgnizacji.",
+  "noneTattoo":"Skóra nie jest poryta żadnymi tatuażami.",
+  "jailTattoo":"Te tatuaże w więzieniach nazywane są 'dziarami'. Określają one status więźnia, jego miejsca odsiadki oraz jaka jest jego przestępcza specjalizacja. Czasami wytatuowane ważniejsze 'dokonania'.",
+  "tribeTattoo":"Tatuaże pleienne określają przynależność do określonego klanu oraz status/pozycję w tym klanie.",
+  "strangeTatoo":"Bliżej nie sprecyzowane wzory tatuaży, które najczęściej wzorowane są na wątpliwych wizjach osób parających się tatuowaniem.",
+  "weight":"Oreśla wagę postaci, którą można ustawić za pomocą suwaka.",
+  "height":"Określa zrost postaci, który można ustawić za pomocą suwaka."
 }
 
 module.exports.otherTexts = otherTexts;

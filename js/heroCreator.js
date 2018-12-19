@@ -213,21 +213,62 @@ let tab = [0, 0, 0, 0, 0, 0, 0];
 			$("#unlock").hide();
 	});
 
+// funkcja opymalizująca wybieranie koloru oczu, włosów i skóry
+	function ccc(what, tab, position, where){
+		what.on("input propertychange",function(){
+			tab.splice(position, 1, this.value);
+			where.css("background-color", `rgb(${parseInt(tab[0])},${parseInt(tab[1])}, ${parseInt(tab[2])}`);
+		});
+	}
+
 //wybieranie koloru oczu
 $("#chooseEyes").on("click", ()=>{ yyy(gameInfo.otherTexts.eyesColor); $("#choosingEyes").show(); });
 let eyesColor = [0, 0, 0];
 
-$("#colorEye1").on("input propertychange",function(){ eyesColor.splice(0, 1, this.value);
-	$("#resultColorEye").css("background-color", `rgb(${parseInt(eyesColor[0])},${parseInt(eyesColor[1])}, ${parseInt(eyesColor[2])}`);
-});
+ccc($("#colorEye1"), eyesColor, 0, $("#resultColorEye"));
+ccc($("#colorEye2"), eyesColor, 1, $("#resultColorEye"));
+ccc($("#colorEye3"), eyesColor, 2, $("#resultColorEye"));
 
-$("#colorEye2").on("input propertychange",function(){eyesColor.splice(1, 1, this.value);
-	$("#resultColorEye").css("background-color", `rgb(${parseInt(eyesColor[0])},${parseInt(eyesColor[1])}, ${parseInt(eyesColor[2])}`);
-});
+//wybieranie koloru włosów
+$("#chooseHair").on("click", ()=>{ yyy(gameInfo.otherTexts.hairColor); $("#choosingHair").show(); });
+let hairColor = [0, 0, 0];
 
-$("#colorEye3").on("input propertychange",function(){ eyesColor.splice(2, 1, this.value);
-	$("#resultColorEye").css("background-color", `rgb(${parseInt(eyesColor[0])},${parseInt(eyesColor[1])}, ${parseInt(eyesColor[2])}`);
-});
+ccc($("#colorHair1"), hairColor, 0, $("#resultColorHair"));
+ccc($("#colorHair2"), hairColor, 1, $("#resultColorHair"));
+ccc($("#colorHair3"), hairColor, 2, $("#resultColorHair"));
+
+//wybieranie koloru skóry
+$("#chooseSkin").on("click", ()=>{ yyy(gameInfo.otherTexts.skinColor); $("#choosingSkin").show(); });
+let skinColor = [0, 0, 0];
+
+ccc($("#colorSkin1"), skinColor, 0, $("#resultColorSkin"));
+ccc($("#colorSkin2"), skinColor, 1, $("#resultColorSkin"));
+ccc($("#colorSkin3"), skinColor, 2, $("#resultColorSkin"));
+
+//wybieranie tatuaży
+$("#chooseTattoo").on("click", ()=>{ yyy(gameInfo.otherTexts.tattoo); });
+
+$("#noneTattoo").on("click", ()=>{ xxx("tatuaż: ", "brak", 12); yyy(gameInfo.otherTexts.noneTattoo); });
+$("#jailTattoo").on("click", ()=>{ xxx("tatuaż: ", "więzienny", 12); yyy(gameInfo.otherTexts.jailTattoo); });
+$("#tribeTattoo").on("click", ()=>{ xxx("tatuaż: ", "plemienny", 12); yyy(gameInfo.otherTexts.tribeTattoo); });
+$("#strangeTatoo").on("click", ()=>{ xxx("tatuaż: ", "dziwny", 12); yyy(gameInfo.otherTexts.strangeTatoo); });
+
+//wybieranie wagi
+function abc(){
+	if(hero[2] == "nie wybrano"){
+		$("#resultWeight").empty().append("<p class='redText'>Wybierz rasę.</p>" + hero[2]);
+	}else if(hero[2] == "człowiek"){
+		$("#resultWeight").empty().append(hero[2]);
+		document.querySelector("#weight").min = 40;
+		document.querySelector("#weight").max = 120;
+	}
+}
+
+
+$("#chooseWeight").on("click", ()=>{ yyy(gameInfo.otherTexts.weight); $("#choosingWeight").show(); abc(); });
+let weight = [0];
+
+ccc($("#weight"), weight, 0, $("#resultWeight"));
 
 //pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{ console.log(hero); });
