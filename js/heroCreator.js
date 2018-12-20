@@ -253,24 +253,75 @@ $("#jailTattoo").on("click", ()=>{ xxx("tatuaż: ", "więzienny", 12); yyy(gameI
 $("#tribeTattoo").on("click", ()=>{ xxx("tatuaż: ", "plemienny", 12); yyy(gameInfo.otherTexts.tribeTattoo); });
 $("#strangeTatoo").on("click", ()=>{ xxx("tatuaż: ", "dziwny", 12); yyy(gameInfo.otherTexts.strangeTatoo); });
 
-//wybieranie wagi
-function abc(){
-	if(hero[2] == "nie wybrano"){
-		$("#resultWeight").empty().append("<p class='redText'>Wybierz rasę.</p>" + hero[2]);
-	}else if(hero[2] == "człowiek"){
-		$("#resultWeight").empty().append(hero[2]);
-		document.querySelector("#weight").min = 40;
-		document.querySelector("#weight").max = 120;
+//funkcja ustawiająca zakres suwaka wagi i wzrostu w zależności od wybranej rasy
+	function weightHeight(what, tab, position, where, heroPosition){
+		what.on("input propertychange",function(){
+			tab.splice(position, 1, this.value);
+			where.empty().append(`${parseInt(tab)}`);
+			hero.splice(heroPosition, 1, this.value);
+			console.log(hero);
+		});
 	}
+
+// funkcja opymalizująca wybieranie wagi i wzrostu
+function cba(where, tabPosition, what, num1, num2){
+	where.empty().append(tabPosition);
+	document.querySelector(what).min = num1;
+	document.querySelector(what).max = num2;
 }
 
+//wybieranie wagi
+//funkcja ustawiająca zakres suwaka
+function abc(){
+	if(hero[2] == "nie wybrano"){	$("#resultWeight").empty().append("<p class='redText'>Wybierz rasę.</p>" + hero[2]);
+	}else if(hero[2] == "człowiek"){ cba($("#resultWeight"), weight[0], "#weight", 40, 120);
+	}else if(hero[2] == "półork"){ cba($("#resultWeight"), weight[0], "#weight", 50, 140);
+	}else if(hero[2] == "ork"){ cba($("#resultWeight"), weight[0], "#weight", 80, 180);
+	}else if(hero[2] == "półelf"){ cba($("#resultWeight"), weight[0], "#weight", 40, 100);
+	}else if(hero[2] == "elf"){ cba($("#resultWeight"), weight[0], "#weight", 40, 90);
+	}else if(hero[2] == "krasnolud"){ cba($("#resultWeight"), weight[0], "#weight", 70, 100);
+	}else if(hero[2] == "gnom"){ cba($("#resultWeight"), weight[0], "#weight", 50, 70);
+	}else if(hero[2] == "niziołek"){ cba($("#resultWeight"), weight[0], "#weight", 60, 100);
+	}else if(hero[2] == "goblin"){ cba($("#resultWeight"), weight[0], "#weight", 50, 80);
+	}else if(hero[2] == "trol"){ cba($("#resultWeight"), weight[0], "#weight", 100, 160);
+	}else if(hero[2] == "półolbrzym"){ cba($("#resultWeight"), weight[0], "#weight", 210, 300);
+	}
+}
 
 $("#chooseWeight").on("click", ()=>{ yyy(gameInfo.otherTexts.weight); $("#choosingWeight").show(); abc(); });
 let weight = [0];
 
-ccc($("#weight"), weight, 0, $("#resultWeight"));
+weightHeight($("#weight"), weight, 0, $("#resultWeight"), 13);
+
+//wybieranie wzrostu
+//funkcja ustawiająca zakres suwaka
+function abcHeight(){
+	if(hero[2] == "nie wybrano"){	$("#resultHeight").empty().append("<p class='redText'>Wybierz rasę.</p>" + hero[2]);
+	}else if(hero[2] == "człowiek"){ cba($("#resultHeight"), height[0], "#height", 150, 210);
+	}else if(hero[2] == "półork"){ cba($("#resultHeight"), height[0], "#height", 170, 220);
+	}else if(hero[2] == "ork"){ cba($("#resultHeight"), height[0], "#height", 170, 240);
+	}else if(hero[2] == "półelf"){ cba($("#resultHeight"), height[0], "#height", 165, 210);
+	}else if(hero[2] == "elf"){ cba($("#resultHeight"), height[0], "#height", 180, 210);
+	}else if(hero[2] == "krasnolud"){ cba($("#resultHeight"), height[0], "#height", 100, 145);
+	}else if(hero[2] == "gnom"){ cba($("#resultHeight"), height[0], "#height", 90, 140);
+	}else if(hero[2] == "niziołek"){ cba($("#resultHeight"), height[0], "#height", 105, 150);
+	}else if(hero[2] == "goblin"){ cba($("#resultHeight"), height[0], "#height", 80, 120);
+	}else if(hero[2] == "trol"){ cba($("#resultHeight"), height[0], "#height", 190, 260);
+	}else if(hero[2] == "półolbrzym"){ cba($("#resultHeight"), height[0], "#height", 260, 320);
+	}
+}
+
+$("#chooseHeight").on("click", ()=>{ yyy(gameInfo.otherTexts.height); $("#choosingHeight").show(); abcHeight(); });
+let height = [0];
+
+weightHeight($("#height"), height, 0, $("#resultHeight"), 14);
 
 //pokazenie dokananych wyborów
-		$("#resultChoose").on("click", ()=>{ console.log(hero); });
+		$("#resultChoose").on("click", ()=>{ yyy();
+			functions.heroCreatorResult2(hero, skills, equip, $("#choosingResult"));
+			$("#choosingResults span").addClass("greenText");
+				console.log(hero, skills, equip);
+	});
+
 	});
 }

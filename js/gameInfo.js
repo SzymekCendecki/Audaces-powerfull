@@ -67,7 +67,7 @@ let otherTexts = {
   "tribeTattoo":"Tatuaże pleienne określają przynależność do określonego klanu oraz status/pozycję w tym klanie.",
   "strangeTatoo":"Bliżej nie sprecyzowane wzory tatuaży, które najczęściej wzorowane są na wątpliwych wizjach osób parających się tatuowaniem.",
   "weight":"Oreśla wagę postaci, którą można ustawić za pomocą suwaka.",
-  "height":"Określa zrost postaci, który można ustawić za pomocą suwaka."
+  "height":"Określa wzrost postaci, który można ustawić za pomocą suwaka."
 }
 
 module.exports.otherTexts = otherTexts;

@@ -180,3 +180,24 @@ module.exports.heroCreatorResult = function(hero, skills, equip, what){
   $("#spanSkills").text(skills);
   $("#spanEquip").text(equip);
 }
+
+module.exports.heroCreatorResult2 = function(hero, skills, equip, what){
+  what.show();
+  $("#choosingResult #spanName").text(hero[0]);
+  $("#choosingResult #spanSex").text(hero[1]);
+  $("#choosingResult #spanRace").text(hero[2]);
+  $("#choosingResult #spanOccupation").text(hero[3]);
+  $("#choosingResult #spanForce").text(hero[4]);
+  $("#choosingResult #spanStrenght").text(hero[5]);
+  $("#choosingResult #spanDexterity").text(hero[6]);
+  $("#choosingResult #spanIntelligence").text(hero[7]);
+  $("#choosingResult #spanCharisma").text(hero[8]);
+  $("#choosingResult #spanEyes").text(hero[9]);
+  $("#choosingResult #spanHair").text(hero[10]);
+  $("#choosingResult #spanSkin").text(hero[11]);
+  $("#choosingResult #spanTattoo").text(hero[12]);
+  $("#choosingResult #spanWeight").text(hero[13]);
+  $("#choosingResult #spanHeight").text(hero[14]);
+  $("#choosingResult #spanSkills").text(skills);
+  $("#choosingResult #spanEquip").text(equip);
+}
