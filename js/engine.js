@@ -303,27 +303,6 @@ module.exports.heroCreatorResult = function (hero, skills, equip, what) {
   $("#spanEquip").text(equip);
 };
 
-module.exports.heroCreatorResult2 = function (hero, skills, equip, what) {
-  what.show();
-  $("#choosingResult #spanName").text(hero[0]);
-  $("#choosingResult #spanSex").text(hero[1]);
-  $("#choosingResult #spanRace").text(hero[2]);
-  $("#choosingResult #spanOccupation").text(hero[3]);
-  $("#choosingResult #spanForce").text(hero[4]);
-  $("#choosingResult #spanStrenght").text(hero[5]);
-  $("#choosingResult #spanDexterity").text(hero[6]);
-  $("#choosingResult #spanIntelligence").text(hero[7]);
-  $("#choosingResult #spanCharisma").text(hero[8]);
-  $("#choosingResult #spanEyes").text(hero[9]);
-  $("#choosingResult #spanHair").text(hero[10]);
-  $("#choosingResult #spanSkin").text(hero[11]);
-  $("#choosingResult #spanTattoo").text(hero[12]);
-  $("#choosingResult #spanWeight").text(hero[13]);
-  $("#choosingResult #spanHeight").text(hero[14]);
-  $("#choosingResult #spanSkills").text(skills);
-  $("#choosingResult #spanEquip").text(equip);
-};
-
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -336,7 +315,7 @@ var gameInfo = __webpack_require__(2);
 
 //tablica zbiorcza z wyniami losowania lub wyborami postaci
 //0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
-var hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano"];
+var hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, [0, 0, 0], [0, 0, 0], [0, 0, 0], "nie wybrano", "nie wybrano", "nie wybrano"];
 module.exports.hero = hero;
 
 //tablica ekwipunku
@@ -593,19 +572,19 @@ module.exports.choose = function () {
 		}
 
 		$("#forceSlider").on("input propertychange", function () {
-			tab.splice(0, 1, this.value);xyz(tab);
+			tab.splice(0, 1, this.value);xyz(tab);hero.splice(4, 1, this.value);
 		});
 		$("#strenghtSlider").on("input propertychange", function () {
-			tab.splice(1, 1, this.value);xyz(tab);
+			tab.splice(1, 1, this.value);xyz(tab);hero.splice(5, 1, this.value);
 		});
 		$("#dexteritySlider").on("input propertychange", function () {
-			tab.splice(2, 1, this.value);xyz(tab);
+			tab.splice(2, 1, this.value);xyz(tab);hero.splice(6, 1, this.value);
 		});
 		$("#intellectualsSlider").on("input propertychange", function () {
-			tab.splice(3, 1, this.value);xyz(tab);
+			tab.splice(3, 1, this.value);xyz(tab);hero.splice(7, 1, this.value);
 		});
 		$("#charismaSlider").on("input propertychange", function () {
-			tab.splice(4, 1, this.value);xyz(tab);
+			tab.splice(4, 1, this.value);xyz(tab);hero.splice(8, 1, this.value);
 		});
 
 		$("#unlock").on("click", function () {
@@ -623,33 +602,34 @@ module.exports.choose = function () {
 
 		//wybieranie koloru oczu
 		$("#chooseEyes").on("click", function () {
-			yyy(gameInfo.otherTexts.eyesColor);$("#choosingEyes").show();
+			yyy(gameInfo.otherTexts.eyesColor);$("#choosingEyes").show();$("#resultColorEye").css("background-color", "rgb(" + parseInt(hero[9][0]) + "," + parseInt(hero[9][1]) + ", " + parseInt(hero[9][2]));
 		});
+
 		var eyesColor = [0, 0, 0];
 
-		ccc($("#colorEye1"), eyesColor, 0, $("#resultColorEye"));
-		ccc($("#colorEye2"), eyesColor, 1, $("#resultColorEye"));
-		ccc($("#colorEye3"), eyesColor, 2, $("#resultColorEye"));
+		ccc($("#colorEye1"), eyesColor, 0, $("#resultColorEye"), hero.splice(9, 1, eyesColor));
+		ccc($("#colorEye2"), eyesColor, 1, $("#resultColorEye"), hero.splice(9, 1, eyesColor));
+		ccc($("#colorEye3"), eyesColor, 2, $("#resultColorEye"), hero.splice(9, 1, eyesColor));
 
 		//wybieranie koloru włosów
 		$("#chooseHair").on("click", function () {
-			yyy(gameInfo.otherTexts.hairColor);$("#choosingHair").show();
+			yyy(gameInfo.otherTexts.hairColor);$("#choosingHair").show();$("#resultColorHair").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
 		});
 		var hairColor = [0, 0, 0];
 
-		ccc($("#colorHair1"), hairColor, 0, $("#resultColorHair"));
-		ccc($("#colorHair2"), hairColor, 1, $("#resultColorHair"));
-		ccc($("#colorHair3"), hairColor, 2, $("#resultColorHair"));
+		ccc($("#colorHair1"), hairColor, 0, $("#resultColorHair"), hero.splice(10, 1, hairColor));
+		ccc($("#colorHair2"), hairColor, 1, $("#resultColorHair"), hero.splice(10, 1, hairColor));
+		ccc($("#colorHair3"), hairColor, 2, $("#resultColorHair"), hero.splice(10, 1, hairColor));
 
 		//wybieranie koloru skóry
 		$("#chooseSkin").on("click", function () {
-			yyy(gameInfo.otherTexts.skinColor);$("#choosingSkin").show();
+			yyy(gameInfo.otherTexts.skinColor);$("#choosingSkin").show();$("#resultColorSkin").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
 		});
 		var skinColor = [0, 0, 0];
 
-		ccc($("#colorSkin1"), skinColor, 0, $("#resultColorSkin"));
-		ccc($("#colorSkin2"), skinColor, 1, $("#resultColorSkin"));
-		ccc($("#colorSkin3"), skinColor, 2, $("#resultColorSkin"));
+		ccc($("#colorSkin1"), skinColor, 0, $("#resultColorSkin"), hero.splice(11, 1, skinColor));
+		ccc($("#colorSkin2"), skinColor, 1, $("#resultColorSkin"), hero.splice(11, 1, skinColor));
+		ccc($("#colorSkin3"), skinColor, 2, $("#resultColorSkin"), hero.splice(11, 1, skinColor));
 
 		//wybieranie tatuaży
 		$("#chooseTattoo").on("click", function () {
@@ -763,9 +743,23 @@ module.exports.choose = function () {
 		//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", function () {
 			yyy();
-			functions.heroCreatorResult2(hero, skills, equip, $("#choosingResult"));
-			$("#choosingResults span").addClass("greenText");
-			console.log(hero, skills, equip);
+			console.log(hero);
+			$("#choosingResult").show();
+			$("#resultName p:nth-child(2)").empty().append(hero[0]);
+			$("#resultSex p:nth-child(2)").empty().append(hero[1]);
+			$("#resultRace p:nth-child(2)").empty().append(hero[2]);
+			$("#resultOccupation p:nth-child(2)").empty().append(hero[3]);
+			$("#points div:first-child p").empty().append(hero[4]);
+			$("#points div:nth-child(2) p").empty().append(hero[5]);
+			$("#points div:nth-child(3) p").empty().append(hero[6]);
+			$("#points div:nth-child(4) p").empty().append(hero[7]);
+			$("#points div:nth-child(5) p").empty().append(hero[8]);
+
+			$("#resultEyes p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[9][0]) + "," + parseInt(hero[9][1]) + ", " + parseInt(hero[9][2]));
+
+			$("#resultHair p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
+
+			$("#resultSkin p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
 		});
 	});
 };
