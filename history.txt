@@ -168,5 +168,8 @@ Dodano wybieranie wagi.
   Dodano wybieranie wzrostu.
 Rozpoczęto prace nad wyświetlaniem wyników "ręcznego" kreowania postaci.
 
-21 grudnia 2018 - wersja 0.1.43
+21 grudnia 2018 - wersja 0.1.44
 Praca nad wyświetlaniem wyników "ręcznego" kreowania postaci.
+
+23 grudnia 2018 - wersja 0.1.45
+Dodano wybieranie umiejętności.

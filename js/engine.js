@@ -322,7 +322,7 @@ module.exports.hero = hero;
 var equip = [" ", " ", " ", " ", " "];module.exports.equip = equip;
 
 //tablica umiejętności
-var skills = [" ", " ", " "];module.exports.skills = skills;
+var skills = [];module.exports.skills = skills;
 
 //tablica ze złotem
 var gold = [0];
@@ -740,6 +740,164 @@ module.exports.choose = function () {
 
 		weightHeight($("#height"), height, 0, $("#resultHeight"), 14);
 
+		//wybieranie umiejętności
+		$("#chooseSkills").on("click", function () {
+			yyy(gameInfo.otherTexts.skills);$("#choosingSkills").show();
+
+			$("#deleteSkills").show();
+
+			//funkcja optymalizująca wybieranie umiejętności
+			function sss(tab, tabLength, what) {
+				if (tab.indexOf(what + " ") !== -1) {
+					$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą umiejętność.</p>");
+					setTimeout(function () {
+						$("#alerts").empty();
+					}, 3000);
+				} else if (tab.length < tabLength) {
+					$("#alerts").html("<p class='newRocker greenText center'>Wybrano umiejętność: " + what + ".</p>");
+					setTimeout(function () {
+						$("#alerts").empty();
+					}, 3000);
+					tab.push(what + " ");
+					$("#resultSkills").append(what + " ");
+					console.log(skills);
+				} else if (tab.length >= tabLength) {
+					$("#alerts").html("<p class='newRocker redText center'>Wybrano już trzy umiejętności.</p>");
+					setTimeout(function () {
+						$("#alerts").empty();
+					}, 3000);
+					tab.splice(tabLength, 1);
+				}
+			}
+
+			$("#survivalSkill").on("click", function () {
+				sss(skills, 3, "sztuka przetrwania");
+			});
+			$("#disciplineSkill").on("click", function () {
+				sss(skills, 3, "dyscyplina");
+			});
+			$("#commandSkill").on("click", function () {
+				sss(skills, 3, "dowodzenie");
+			});
+			$("#hitShieldSkill").on("click", function () {
+				sss(skills, 3, "uderz. tarczą");
+			});
+			$("#horseRiddingSkill").on("click", function () {
+				sss(skills, 3, "jeździectwo");
+			});
+			$("#daggerSkill").on("click", function () {
+				sss(skills, 3, "sztylet");
+			});
+			$("#swordSkill").on("click", function () {
+				sss(skills, 3, "miecz");
+			});
+			$("#sabreSkill").on("click", function () {
+				sss(skills, 3, "szabla");
+			});
+			$("#spearSkill").on("click", function () {
+				sss(skills, 3, "włócznia");
+			});
+			$("#bowSkill").on("click", function () {
+				sss(skills, 3, "łuk");
+			});
+			$("#crossBowSkill").on("click", function () {
+				sss(skills, 3, "kusza");
+			});
+			$("#bucklerSkill").on("click", function () {
+				sss(skills, 3, "puklerz");
+			});
+			$("#smallShieldWoddenSkill").on("click", function () {
+				sss(skills, 3, "mała tarcza drew.");
+			});
+			$("#smallShieldMetalSkill").on("click", function () {
+				sss(skills, 3, "mała tarcza metal.");
+			});
+
+			//umiejętności złoczyńcy
+			$("#poisonsSkill").on("click", function () {
+				sss(skills, 3, "przyg. trucizn");
+			});
+			$("#climbingSkill").on("click", function () {
+				sss(skills, 3, "wspinaczka");
+			});
+			$("#actingSkill").on("click", function () {
+				sss(skills, 3, "aktorstwo");
+			});
+			$("#acrobaticsSkill").on("click", function () {
+				sss(skills, 3, "akrobatyka");
+			});
+			$("#trapsSkill").on("click", function () {
+				sss(skills, 3, "tworz. pułapek");
+			});
+			$("#sneakingSkill").on("click", function () {
+				sss(skills, 3, "szkradanie się");
+			});
+			$("#stealingSkill").on("click", function () {
+				sss(skills, 3, "kradzież kieszonkowa");
+			});
+			$("#evasionSkill").on("click", function () {
+				sss(skills, 3, "uniki");
+			});
+			$("#woodenStickSkill").on("click", function () {
+				sss(skills, 3, "drew. pałka");
+			});
+			$("#daggerSkill").on("click", function () {
+				sss(skills, 3, "sztylet");
+			});
+			$("#shortSwordSkill").on("click", function () {
+				sss(skills, 3, "krótki miecz");
+			});
+			$("#bluffingSkill").on("click", function () {
+				sss(skills, 3, "blefowanie");
+			});
+
+			//umiejętności czarodzieja
+			$("#readWriteSkill").on("click", function () {
+				sss(skills, 3, "pisanie i czytanie");
+			});
+			$("#demonsSkill").on("click", function () {
+				sss(skills, 3, "przyw./odp. demona");
+			});
+			$("#divinationSkill").on("click", function () {
+				sss(skills, 3, "wróżbiarstwo");
+			});
+			$("#healingSkill").on("click", function () {
+				sss(skills, 3, "leczenie ran");
+			});
+			$("#castSpellSkill").on("click", function () {
+				sss(skills, 3, "rzucanie czarów");
+			});
+			$("#createPotionsSkill").on("click", function () {
+				sss(skills, 3, "tworz. eliksirów");
+			});
+			$("#magicItemsSkill").on("click", function () {
+				sss(skills, 3, "tworz. mag. przedm.");
+			});
+			$("#createOintnentSkill").on("click", function () {
+				sss(skills, 3, "tworz. maści");
+			});
+			$("#astrologySkill").on("click", function () {
+				sss(skills, 3, "astrologia");
+			});
+			$("#createRunesSkill").on("click", function () {
+				sss(skills, 3, "tworz. runów");
+			});
+			$("#herbalistsSkill").on("click", function () {
+				sss(skills, 3, "zielarstwo");
+			});
+
+			$("#deleteSkills").on("click", function () {
+				console.log(skills);
+				skills.splice(0, 3);
+				$("#resultSkills").empty();
+				console.log(skills);
+			});
+		});
+		//wybieranie ekwipunku
+		$("#chooseEquip").on("click", function () {
+			yyy(gameInfo.otherTexts.equip);$("#choosingEquip").show();
+		});
+
 		//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", function () {
 			yyy();
@@ -760,6 +918,8 @@ module.exports.choose = function () {
 			$("#resultHair p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
 
 			$("#resultSkin p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
+
+			$("#resultSkills p:nth-child(2)").empty().append(skills);
 		});
 	});
 };
@@ -840,7 +1000,9 @@ var otherTexts = {
   "tribeTattoo": "Tatuaże pleienne określają przynależność do określonego klanu oraz status/pozycję w tym klanie.",
   "strangeTatoo": "Bliżej nie sprecyzowane wzory tatuaży, które najczęściej wzorowane są na wątpliwych wizjach osób parających się tatuowaniem.",
   "weight": "Oreśla wagę postaci, którą można ustawić za pomocą suwaka.",
-  "height": "Określa wzrost postaci, który można ustawić za pomocą suwaka."
+  "height": "Określa wzrost postaci, który można ustawić za pomocą suwaka.",
+  "skills": "Umiejętności określają to, co postać potrafi robić (lepiej lub gorzej). Możesz wybrać maksymalnie trzy umiejętności.",
+  "equip": "Ekwipunek to są wszytkie przedmioty, które może używać bohater."
 };
 
 module.exports.otherTexts = otherTexts;
@@ -953,7 +1115,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
 
   //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult, #unlock").hide();
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult, #unlock, #deleteSkills").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {

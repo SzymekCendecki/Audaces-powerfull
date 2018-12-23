@@ -67,7 +67,9 @@ let otherTexts = {
   "tribeTattoo":"Tatuaże pleienne określają przynależność do określonego klanu oraz status/pozycję w tym klanie.",
   "strangeTatoo":"Bliżej nie sprecyzowane wzory tatuaży, które najczęściej wzorowane są na wątpliwych wizjach osób parających się tatuowaniem.",
   "weight":"Oreśla wagę postaci, którą można ustawić za pomocą suwaka.",
-  "height":"Określa wzrost postaci, który można ustawić za pomocą suwaka."
+  "height":"Określa wzrost postaci, który można ustawić za pomocą suwaka.",
+  "skills":"Umiejętności określają to, co postać potrafi robić (lepiej lub gorzej). Możesz wybrać maksymalnie trzy umiejętności.",
+  "equip":"Ekwipunek to są wszytkie przedmioty, które może używać bohater."
 }
 
 module.exports.otherTexts = otherTexts;

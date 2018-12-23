@@ -10,7 +10,7 @@ module.exports.hero = hero;
 let equip = [" ", " ",  " ", " ", " "]; module.exports.equip = equip;
 
 //tablica umiejętności
-let skills = [" ", " ",  " "]; module.exports.skills = skills;
+let skills = []; module.exports.skills = skills;
 
 //tablica ze złotem
 let gold = [0];
@@ -318,6 +318,85 @@ let height = [0];
 
 weightHeight($("#height"), height, 0, $("#resultHeight"), 14);
 
+//wybieranie umiejętności
+$("#chooseSkills").on("click", ()=>{
+		yyy(gameInfo.otherTexts.skills); $("#choosingSkills").show();
+
+	$("#deleteSkills").show();
+
+	//funkcja optymalizująca wybieranie umiejętności
+	function sss(tab, tabLength, what){
+		if(tab.indexOf(what + " ") !== -1){
+				$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą umiejętność.</p>");
+				setTimeout(function(){ $("#alerts").empty(); }, 3000);
+		}else if( tab.length < tabLength){
+					$("#alerts").html("<p class='newRocker greenText center'>Wybrano umiejętność: " + what + ".</p>");
+				setTimeout(function(){ $("#alerts").empty(); }, 3000);
+				tab.push(what + " ");
+				$("#resultSkills").append(what + " ");
+				console.log(skills);
+			}else if( tab.length >= tabLength){
+				$("#alerts").html("<p class='newRocker redText center'>Wybrano już trzy umiejętności.</p>");
+				setTimeout(function(){ $("#alerts").empty(); }, 3000);
+				tab.splice(tabLength, 1);
+			}
+	}
+
+$("#survivalSkill").on("click", ()=>{ sss(skills, 3, "sztuka przetrwania"); });
+$("#disciplineSkill").on("click", ()=>{ sss(skills, 3, "dyscyplina"); });
+$("#commandSkill").on("click", ()=>{ sss(skills, 3, "dowodzenie"); });
+$("#hitShieldSkill").on("click", ()=>{ sss(skills, 3, "uderz. tarczą"); });
+$("#horseRiddingSkill").on("click", ()=>{ sss(skills, 3, "jeździectwo"); });
+$("#daggerSkill").on("click", ()=>{ sss(skills, 3, "sztylet"); });
+$("#swordSkill").on("click", ()=>{ sss(skills, 3, "miecz"); });
+$("#sabreSkill").on("click", ()=>{ sss(skills, 3, "szabla"); });
+$("#spearSkill").on("click", ()=>{ sss(skills, 3, "włócznia"); });
+$("#bowSkill").on("click", ()=>{ sss(skills, 3, "łuk"); });
+$("#crossBowSkill").on("click", ()=>{ sss(skills, 3, "kusza"); });
+$("#bucklerSkill").on("click", ()=>{ sss(skills, 3, "puklerz"); });
+$("#smallShieldWoddenSkill").on("click", ()=>{ sss(skills, 3, "mała tarcza drew."); });
+$("#smallShieldMetalSkill").on("click", ()=>{ sss(skills, 3, "mała tarcza metal."); });
+
+//umiejętności złoczyńcy
+$("#poisonsSkill").on("click", ()=>{ sss(skills, 3, "przyg. trucizn"); });
+$("#climbingSkill").on("click", ()=>{ sss(skills, 3, "wspinaczka"); });
+$("#actingSkill").on("click", ()=>{ sss(skills, 3, "aktorstwo"); });
+$("#acrobaticsSkill").on("click", ()=>{ sss(skills, 3, "akrobatyka"); });
+$("#trapsSkill").on("click", ()=>{ sss(skills, 3, "tworz. pułapek"); });
+$("#sneakingSkill").on("click", ()=>{ sss(skills, 3, "szkradanie się"); });
+$("#stealingSkill").on("click", ()=>{ sss(skills, 3, "kradzież kieszonkowa"); });
+$("#evasionSkill").on("click", ()=>{ sss(skills, 3, "uniki"); });
+$("#woodenStickSkill").on("click", ()=>{ sss(skills, 3, "drew. pałka"); });
+$("#daggerSkill").on("click", ()=>{ sss(skills, 3, "sztylet"); });
+$("#shortSwordSkill").on("click", ()=>{ sss(skills, 3, "krótki miecz"); });
+$("#bluffingSkill").on("click", ()=>{ sss(skills, 3, "blefowanie"); });
+
+//umiejętności czarodzieja
+$("#readWriteSkill").on("click", ()=>{ sss(skills, 3, "pisanie i czytanie"); });
+$("#demonsSkill").on("click", ()=>{ sss(skills, 3, "przyw./odp. demona"); });
+$("#divinationSkill").on("click", ()=>{ sss(skills, 3, "wróżbiarstwo"); });
+$("#healingSkill").on("click", ()=>{ sss(skills, 3, "leczenie ran"); });
+$("#castSpellSkill").on("click", ()=>{ sss(skills, 3, "rzucanie czarów"); });
+$("#createPotionsSkill").on("click", ()=>{ sss(skills, 3, "tworz. eliksirów"); });
+$("#magicItemsSkill").on("click", ()=>{ sss(skills, 3, "tworz. mag. przedm."); });
+$("#createOintnentSkill").on("click", ()=>{ sss(skills, 3, "tworz. maści"); });
+$("#astrologySkill").on("click", ()=>{ sss(skills, 3, "astrologia"); });
+$("#createRunesSkill").on("click", ()=>{ sss(skills, 3, "tworz. runów"); });
+$("#herbalistsSkill").on("click", ()=>{ sss(skills, 3, "zielarstwo"); });
+
+$("#deleteSkills").on("click", ()=>{
+	console.log(skills);
+		skills.splice(0, 3);
+		$("#resultSkills").empty();
+		console.log(skills);
+});
+
+});
+//wybieranie ekwipunku
+$("#chooseEquip").on("click", ()=>{
+		yyy(gameInfo.otherTexts.equip); $("#choosingEquip").show();
+});
+
 //pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{ yyy();
 			console.log(hero);
@@ -337,6 +416,8 @@ weightHeight($("#height"), height, 0, $("#resultHeight"), 14);
 				$("#resultHair p:nth-child(2)").css("background-color", `rgb(${parseInt(hero[10][0])},${parseInt(hero[10][1])}, ${parseInt(hero[10][2])}`);
 
 				$("#resultSkin p:nth-child(2)").css("background-color", `rgb(${parseInt(hero[11][0])},${parseInt(hero[11][1])}, ${parseInt(hero[11][2])}`);
+
+				$("#resultSkills p:nth-child(2)").empty().append(skills);
 	});
 
 	});

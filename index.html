@@ -164,7 +164,7 @@
       </ul>
     </li>
 
-    <li><span id="choosePoints">punkty cech</span>
+    <li><span id="choosePoints">pkt. cech</span>
       <ul>
         <li><span id="forcePoints">siła</span></li>
         <li><span id="strenghtPoints">wytrzymałość</span></li>
@@ -174,9 +174,9 @@
       </ul>
     </li>
 
-	<li><span id="chooseEyes">kolor oczu</span></li>
-	<li><span id="chooseHair">kolor włosów</span></li>
-	<li><span id="chooseSkin">kolor skóry</span></li>
+	<li><span id="chooseEyes">oczy</span></li>
+	<li><span id="chooseHair">włosy</span></li>
+	<li><span id="chooseSkin">skóra</span></li>
 
 	<li><span id="chooseTattoo">tatuaże</span>
       <ul>
@@ -188,6 +188,8 @@
     </li>
 	<li><span id="chooseWeight">waga</span></li>
 	<li><span id="chooseHeight">wzrost</span></li>
+	<li><span id="chooseSkills">umiejętności</span></li>
+	<li><span id="chooseEquip">ekwipunek</span></li>
 	<li><span id="resultChoose">wyniki</span></li>
 </ol>
 	</div>
@@ -275,7 +277,60 @@
 				<p class="newRocker">wzrost</p>
 				<div id="resultHeight"></div>
 			</div>
+	<!-- wybieranie umiejętności-->
+			<div id="choosingSkills" class="newRocker textIndent0">
+						<div class="skillsFlex">
 
+							<div id="survivalSkill">sztuka przetrw.</div>
+							<div id="disciplineSkill">dyscyplina</div>
+							<div id="commandSkill">dowodzenie</div>
+							<div id="hitShieldSkill">uderz. tarczą</div>
+							<div id="horseRiddingSkill">jeździectwo</div>
+							<div id="swordSkill">miecz</div>
+							<div id="sabreSkill">szabla</div>
+							<div id="spearSkill">włócznia</div>
+							<div id="bowSkill">łuk</div>
+							<div id="crossBowSkill">kusza</div>
+							<div id="bucklerSkill">puklerz</div>
+							<div id="smallShieldWoddenSkill">mała tarcza drew.</div>
+							<div id="smallShieldMetalSkill">mała tarcza metal.</div>
+
+							<div id="poisonsSkill">przygotowanie trucizn</div>
+							<div id="climbingSkill">wspinaczka</div>
+							<div id="actingSkill">aktorstwo</div>
+							<div id="acrobaticsSkill">akrobatyka</div>
+							<div id="trapsSkill">tworzenie pułapek</div>
+							<div id="sneakingSkill">skardanie się</div>
+							<div id="stealingSkill">kradzież kieszonkowa</div>
+							<div id="evasionSkill">uniki</div>
+							<div id="woodenStickSkill">drewniana pałka</div>
+							<div id="daggerSkill">sztylet</div>
+							<div id="shortSwordSkill">krótki miecz</div>
+							<div id="bluffingSkill">blefowanie</div>
+
+							<div id="readWriteSkill">pisanie i czytanie</div>
+							<div id="demonsSkill">przyw./odp. demona</div>
+							<div id="divinationSkill">wróżbiarstwo</div>
+							<div id="healingSkill">lecznie ran</div>
+							<div id="castSpellsSkill">rzucane czarów</div>
+							<div id="createPotionsSkill">tworz. eliksirów</div>
+							<div id="magicItemsSkill">tworz. mag. przedm.</div>
+							<div id="createOintnentSkill">tworz. maści</div>
+							<div id="astrologySkill">astrologia</div>
+							<div id="createRunesSkill">tworz. runów</div>
+							<div id="herbalistsSkill">zielarstwo</div>
+						</div>
+				<p class="blackUnderline greenText">Wybrane umiejętności</p>
+				<div id="resultSkills"></div>
+				<button id="deleteSkills">usuń umiejętności</button>
+			</div>
+	<!-- wybieranie ekwipunku-->
+			<div id="choosingEquip" class="newRocker textIndent0">
+				<p class="newRocker">ekwipunek</p>
+				<div id="resultEquip"></div>
+			</div>
+
+<!-- wyniki wybierania ręcznego -->
 			<div id="choosingResult">
 				<div id="resultName">
 						<p>imię</p><p></p>
@@ -320,7 +375,6 @@
 				<div id="resultEquip">
 						<p>ekwipunek</p><p></p>
 				</div>
-
 			</div>
 
 	</div>
@@ -332,7 +386,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.43 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.45 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>

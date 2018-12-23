@@ -95,3 +95,19 @@ header{
   height: 25px;
   text-align: center;
 }
+
+.skillsFlex{
+  display: flex;
+  flex-wrap: wrap;
+  p{ width: 100%; text-decoration: underline; }
+  div{ width: 15%; }
+}
+
+.blackUnderline{
+  text-decoration: underline;
+}
+
+#deleteSkills{
+  background-color: crimson;
+  color: white;
+}
