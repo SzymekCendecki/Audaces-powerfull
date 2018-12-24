@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
  console.log("NIEWIERNE PSY RULEZ!!!!");
 
 //ukrywanie odpowiednich części
-$("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult, #unlock, #deleteSkills").hide();
+$("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){

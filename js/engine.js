@@ -87,6 +87,18 @@ module.exports.random = function (table, position) {
   heroCreator.hero.splice(position, 1, y);
 };
 
+//funkcja losująca kolory dla włosów, skóry i oczu
+module.exports.randomColor = function (y) {
+  var color1 = [];
+  var a = Math.round(Math.random() * 255);
+  var b = Math.round(Math.random() * 255);
+  var c = Math.round(Math.random() * 255);
+  color1.splice(0, 1, a);
+  color1.splice(1, 1, b);
+  color1.splice(2, 1, c);
+  heroCreator.hero.splice(y, 1, color1);
+};
+
 //funkcja losująca wagę/wzrost
 function randomWeightHeight(number1, number2, position, x) {
   var what = Math.round(Math.random() * number1 + number2);
@@ -282,25 +294,26 @@ module.exports.randomEquip = function (array1, array2, array3, array4) {
 };
 
 //funkcja pokazująca wybór kreowania postaci
-module.exports.heroCreatorResult = function (hero, skills, equip, what) {
-  what.show();
-  $("#spanName").text(hero[0]);
-  $("#spanSex").text(hero[1]);
-  $("#spanRace").text(hero[2]);
-  $("#spanOccupation").text(hero[3]);
-  $("#spanForce").text(hero[4]);
-  $("#spanStrenght").text(hero[5]);
-  $("#spanDexterity").text(hero[6]);
-  $("#spanIntelligence").text(hero[7]);
-  $("#spanCharisma").text(hero[8]);
-  $("#spanEyes").text(hero[9]);
-  $("#spanHair").text(hero[10]);
-  $("#spanSkin").text(hero[11]);
-  $("#spanTattoo").text(hero[12]);
-  $("#spanWeight").text(hero[13]);
-  $("#spanHeight").text(hero[14]);
-  $("#spanSkills").text(skills);
-  $("#spanEquip").text(equip);
+module.exports.heroCreatorResult = function (hero, skills, equip) {
+  $("#randomResult").show();
+  $("#nameResult p:nth-child(2)").empty().append(hero[0]);
+  $("#sexResult p:nth-child(2)").empty().append(hero[1]);
+  $("#raceResult p:nth-child(2)").empty().append(hero[2]);
+  $("#occupationResult p:nth-child(2)").empty().append(hero[3]);
+  $("#pointsResult div:first-child p").empty().append(hero[4]);
+  $("#pointsResult div:nth-child(2) p").empty().append(hero[5]);
+  $("#pointsResult div:nth-child(3) p").empty().append(hero[6]);
+  $("#pointsResult div:nth-child(4) p").empty().append(hero[7]);
+  $("#pointsResult div:nth-child(5) p").empty().append(hero[8]);
+
+  $("#eyesResult p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[9][0]) + "," + parseInt(hero[9][1]) + ", " + parseInt(hero[9][2]));
+
+  $("#hairResult p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
+
+  $("#skinResult p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
+
+  $("#skillsResult p:nth-child(2)").empty().append(skills);
+  $("#randomResult #equipResult p:nth-child(2)").empty().append(equip);
 };
 
 /***/ }),
@@ -316,16 +329,17 @@ var gameInfo = __webpack_require__(2);
 //tablica zbiorcza z wyniami losowania lub wyborami postaci
 //0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
 var hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, [0, 0, 0], [0, 0, 0], [0, 0, 0], "nie wybrano", "nie wybrano", "nie wybrano"];
+
 module.exports.hero = hero;
 
 //tablica ekwipunku
-var equip = [" ", " ", " ", " ", " "];module.exports.equip = equip;
+var equip = [];module.exports.equip = equip;
 
 //tablica umiejętności
 var skills = [];module.exports.skills = skills;
 
 //tablica ze złotem
-var gold = [0];
+var gold = [0];module.exports.gold = gold;
 
 //tablica z imionami męskimi
 var namesMan = ["Wortigern", "Gintor", "Hegel", "Derig", "Diggramon", "Zengowetoryk", "Deggetm", "Zigamon", "Birduk", "Ardenor", "Winterks", "Joluntik", "Menigor", "Oltis", "Kurdir"];
@@ -341,15 +355,6 @@ var occupations = ["wojownik", "złoczyńca", "czarodziej"];
 
 //tabica z płcią
 var sex = ["kobieta", "mężczyzna", "nie wiadomo"];
-
-//tablica z kolorami włosów
-var hairColor = ["blond", "rude", "czarne", "farbowane"];
-
-//tablica z kolorem oczu
-var eyesColor = ["piwne", "szare", "brązowe", "niebieskie"];
-
-//tablica z kolorem skóry
-var skinColor = ["biała", "brązowa", "czarna", "czerwona", "żółta", "zielona", "brunatna", "błękitna"];
 
 //tablica z tatuażami
 var tattoo = ["brak", "więzienne", "plemienne", "dziwne"];
@@ -400,29 +405,29 @@ var semiGiant = [7, 7, -5, -3, 0];module.exports.semiGiant = semiGiant;
 
 module.exports.random = function () {
 	$("#randomHero").on("click", function () {
-		$("#chooseResult").hide();$("#randomResult").show();
+		$("#chooseResult").hide();skills.splice(0, 3);equip.splice(0, 5);
+		hero.splice(0, 1, "nie wybrano");hero.splice(1, 1, "nie wybrano");hero.splice(2, 1, "nie wybrano");hero.splice(3, 1, "nie wybrano");hero.splice(4, 1, 0);hero.splice(5, 1, 0);hero.splice(6, 1, 0);hero.splice(7, 1, 0);hero.splice(8, 1, 0);hero.splice(9, 1, [0, 0, 0]);hero.splice(10, 1, [0, 0, 0]);hero.splice(11, 1, [0, 0, 0]);hero.splice(12, 1, "nie wybrano");hero.splice(13, 1, "nie wybrano");hero.splice(14, 1, "nie wybrano");
+
 		functions.random(sex, 1); //losowanie płci
 		functions.nameRandom(namesWomen, namesMan); //losowanie imienia
 		functions.random(races, 2); //losowanie rasy
 		functions.random(occupations, 3); //losowanie profesji
 		functions.randomPoints2(hero[2], hero[3]); //losowanie punktów
-		functions.random(eyesColor, 9); //losowanie koloru oczu
-		functions.random(hairColor, 10); //losowanie koloru włosów
-		functions.random(skinColor, 11); //losowanie koloru skóry
+		functions.randomColor(9); //losowanie koloru oczu
+		functions.randomColor(10); //losowanie koloru włosów
+		functions.randomColor(11); //losowanie koloru skóry
 		functions.random(tattoo, 12); //losowanie tatuaży
 		functions.weigthHeight(hero[2]); //losowanie wagi i wzrostu
 		functions.randomSkills(); //losowanie umiejętności
 		functions.randomEquip(equipWeapon, equipArmor, equipShield, equipOther); //losowanie ekwipunku
-		functions.heroCreatorResult(hero, skills, equip, $("#heroResults")); //wyświetlanie wyniów losowania
-		$("#heroResults span").addClass("greenText");
+		functions.heroCreatorResult(hero, skills, equip); //wyświetlanie wyniów losowania
 	});
 };
 
 module.exports.choose = function () {
 	$("#chooseHero").on("click", function () {
-		$("#chooseResult").show();$("#randomResult").hide();$("#chooseHeroDescription > div").hide();
-
-		hero.splice(0, 1, "nie wybrano");hero.splice(1, 1, "nie wybrano");hero.splice(2, 1, "nie wybrano");hero.splice(3, 1, "nie wybrano");hero.splice(4, 1, 0);hero.splice(5, 1, 0);hero.splice(6, 1, 0);hero.splice(7, 1, 0);hero.splice(8, 1, 0);hero.splice(9, 1, "nie wybrano");hero.splice(10, 1, "nie wybrano");hero.splice(11, 1, "nie wybrano");hero.splice(12, 1, "nie wybrano");hero.splice(113, 1, "nie wybrano");hero.splice(14, 1, "nie wybrano");
+		$("#chooseResult").show();$("#randomResult").hide();$("#chooseHeroDescription > div").hide();skills.splice(0, 3);equip.splice(0, 5);
+		hero.splice(0, 1, "nie wybrano");hero.splice(1, 1, "nie wybrano");hero.splice(2, 1, "nie wybrano");hero.splice(3, 1, "nie wybrano");hero.splice(4, 1, 0);hero.splice(5, 1, 0);hero.splice(6, 1, 0);hero.splice(7, 1, 0);hero.splice(8, 1, 0);hero.splice(9, 1, [0, 0, 0]);hero.splice(10, 1, [0, 0, 0]);hero.splice(11, 1, [0, 0, 0]);hero.splice(12, 1, "nie wybrano");hero.splice(13, 1, "nie wybrano");hero.splice(14, 1, "nie wybrano");
 
 		//wybór imienia
 		$("#chooseName").on("click", function () {
@@ -602,7 +607,7 @@ module.exports.choose = function () {
 
 		//wybieranie koloru oczu
 		$("#chooseEyes").on("click", function () {
-			yyy(gameInfo.otherTexts.eyesColor);$("#choosingEyes").show();$("#resultColorEye").css("background-color", "rgb(" + parseInt(hero[9][0]) + "," + parseInt(hero[9][1]) + ", " + parseInt(hero[9][2]));
+			yyy(gameInfo.otherTexts.eyesColor);$("#choosingEyes").show();$("#chooseEyes #resultColorEye").css("background-color", "rgb(" + parseInt(hero[9][0]) + "," + parseInt(hero[9][1]) + ", " + parseInt(hero[9][2]));
 		});
 
 		var eyesColor = [0, 0, 0];
@@ -613,7 +618,7 @@ module.exports.choose = function () {
 
 		//wybieranie koloru włosów
 		$("#chooseHair").on("click", function () {
-			yyy(gameInfo.otherTexts.hairColor);$("#choosingHair").show();$("#resultColorHair").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
+			yyy(gameInfo.otherTexts.hairColor);$("#choosingHair").show();$("#chooseHair #resultColorHair").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
 		});
 		var hairColor = [0, 0, 0];
 
@@ -623,7 +628,7 @@ module.exports.choose = function () {
 
 		//wybieranie koloru skóry
 		$("#chooseSkin").on("click", function () {
-			yyy(gameInfo.otherTexts.skinColor);$("#choosingSkin").show();$("#resultColorSkin").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
+			yyy(gameInfo.otherTexts.skinColor);$("#choosingSkin").show();$("#chooseSkin #resultColorSkin").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
 		});
 		var skinColor = [0, 0, 0];
 
@@ -655,7 +660,6 @@ module.exports.choose = function () {
 				tab.splice(position, 1, this.value);
 				where.empty().append("" + parseInt(tab));
 				hero.splice(heroPosition, 1, this.value);
-				console.log(hero);
 			});
 		}
 
@@ -672,27 +676,27 @@ module.exports.choose = function () {
 			if (hero[2] == "nie wybrano") {
 				$("#resultWeight").empty().append("<p class='redText'>Wybierz rasę.</p>" + hero[2]);
 			} else if (hero[2] == "człowiek") {
-				cba($("#resultWeight"), weight[0], "#weight", 40, 120);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 40, 120);
 			} else if (hero[2] == "półork") {
-				cba($("#resultWeight"), weight[0], "#weight", 50, 140);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 50, 140);
 			} else if (hero[2] == "ork") {
-				cba($("#resultWeight"), weight[0], "#weight", 80, 180);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 80, 180);
 			} else if (hero[2] == "półelf") {
-				cba($("#resultWeight"), weight[0], "#weight", 40, 100);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 40, 100);
 			} else if (hero[2] == "elf") {
-				cba($("#resultWeight"), weight[0], "#weight", 40, 90);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 40, 90);
 			} else if (hero[2] == "krasnolud") {
-				cba($("#resultWeight"), weight[0], "#weight", 70, 100);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 70, 100);
 			} else if (hero[2] == "gnom") {
-				cba($("#resultWeight"), weight[0], "#weight", 50, 70);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 50, 70);
 			} else if (hero[2] == "niziołek") {
-				cba($("#resultWeight"), weight[0], "#weight", 60, 100);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 60, 100);
 			} else if (hero[2] == "goblin") {
-				cba($("#resultWeight"), weight[0], "#weight", 50, 80);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 50, 80);
 			} else if (hero[2] == "trol") {
-				cba($("#resultWeight"), weight[0], "#weight", 100, 160);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 100, 160);
 			} else if (hero[2] == "półolbrzym") {
-				cba($("#resultWeight"), weight[0], "#weight", 210, 300);
+				cba($("#choosingWeight #resultWeight"), weight[0], "#weight", 210, 300);
 			}
 		}
 
@@ -709,27 +713,27 @@ module.exports.choose = function () {
 			if (hero[2] == "nie wybrano") {
 				$("#resultHeight").empty().append("<p class='redText'>Wybierz rasę.</p>" + hero[2]);
 			} else if (hero[2] == "człowiek") {
-				cba($("#resultHeight"), height[0], "#height", 150, 210);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 150, 210);
 			} else if (hero[2] == "półork") {
-				cba($("#resultHeight"), height[0], "#height", 170, 220);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 170, 220);
 			} else if (hero[2] == "ork") {
-				cba($("#resultHeight"), height[0], "#height", 170, 240);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 170, 240);
 			} else if (hero[2] == "półelf") {
-				cba($("#resultHeight"), height[0], "#height", 165, 210);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 165, 210);
 			} else if (hero[2] == "elf") {
-				cba($("#resultHeight"), height[0], "#height", 180, 210);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 180, 210);
 			} else if (hero[2] == "krasnolud") {
-				cba($("#resultHeight"), height[0], "#height", 100, 145);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 100, 145);
 			} else if (hero[2] == "gnom") {
-				cba($("#resultHeight"), height[0], "#height", 90, 140);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 90, 140);
 			} else if (hero[2] == "niziołek") {
-				cba($("#resultHeight"), height[0], "#height", 105, 150);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 105, 150);
 			} else if (hero[2] == "goblin") {
-				cba($("#resultHeight"), height[0], "#height", 80, 120);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 80, 120);
 			} else if (hero[2] == "trol") {
-				cba($("#resultHeight"), height[0], "#height", 190, 260);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 190, 260);
 			} else if (hero[2] == "półolbrzym") {
-				cba($("#resultHeight"), height[0], "#height", 260, 320);
+				cba($("#chooseHeight #resultHeight"), height[0], "#height", 260, 320);
 			}
 		}
 
@@ -740,186 +744,293 @@ module.exports.choose = function () {
 
 		weightHeight($("#height"), height, 0, $("#resultHeight"), 14);
 
+		//funkcja optymalizująca wybieranie umiejętności i ekwipunku
+		function sss(tab, tabLength, what, x, y, z) {
+			if (tab.indexOf(what + " ") !== -1) {
+				$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą " + x + ".</p>");
+				setTimeout(function () {
+					$("#alerts").empty();
+				}, 3000);
+			} else if (tab.length < tabLength) {
+				$("#alerts").html("<p class='newRocker greenText center'>Wybrano " + x + ": " + what + ".</p>");
+				setTimeout(function () {
+					$("#alerts").empty();
+				}, 3000);
+				tab.push(what + " ");
+				z.append(what + " ");
+			} else if (tab.length >= tabLength) {
+				$("#alerts").html("<p class='newRocker redText center'>Wybrano już " + y + ".</p>");
+				setTimeout(function () {
+					$("#alerts").empty();
+				}, 3000);
+				tab.splice(tabLength, 1);
+			}
+		}
+
 		//wybieranie umiejętności
 		$("#chooseSkills").on("click", function () {
-			yyy(gameInfo.otherTexts.skills);$("#choosingSkills").show();
-
-			$("#deleteSkills").show();
-
-			//funkcja optymalizująca wybieranie umiejętności
-			function sss(tab, tabLength, what) {
-				if (tab.indexOf(what + " ") !== -1) {
-					$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą umiejętność.</p>");
-					setTimeout(function () {
-						$("#alerts").empty();
-					}, 3000);
-				} else if (tab.length < tabLength) {
-					$("#alerts").html("<p class='newRocker greenText center'>Wybrano umiejętność: " + what + ".</p>");
-					setTimeout(function () {
-						$("#alerts").empty();
-					}, 3000);
-					tab.push(what + " ");
-					$("#resultSkills").append(what + " ");
-					console.log(skills);
-				} else if (tab.length >= tabLength) {
-					$("#alerts").html("<p class='newRocker redText center'>Wybrano już trzy umiejętności.</p>");
-					setTimeout(function () {
-						$("#alerts").empty();
-					}, 3000);
-					tab.splice(tabLength, 1);
-				}
-			}
+			yyy(gameInfo.otherTexts.skills);$("#choosingSkills").show();$("#deleteSkills").show();
 
 			$("#survivalSkill").on("click", function () {
-				sss(skills, 3, "sztuka przetrwania");
+				sss(skills, 3, "sztuka przetrwania", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#disciplineSkill").on("click", function () {
-				sss(skills, 3, "dyscyplina");
+				sss(skills, 3, "dyscyplina", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#commandSkill").on("click", function () {
-				sss(skills, 3, "dowodzenie");
+				sss(skills, 3, "dowodzenie", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#hitShieldSkill").on("click", function () {
-				sss(skills, 3, "uderz. tarczą");
+				sss(skills, 3, "uderz. tarczą", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#horseRiddingSkill").on("click", function () {
-				sss(skills, 3, "jeździectwo");
+				sss(skills, 3, "jeździectwo", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#daggerSkill").on("click", function () {
-				sss(skills, 3, "sztylet");
+				sss(skills, 3, "sztylet", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#swordSkill").on("click", function () {
-				sss(skills, 3, "miecz");
+				sss(skills, 3, "miecz", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#sabreSkill").on("click", function () {
-				sss(skills, 3, "szabla");
+				sss(skills, 3, "szabla", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#spearSkill").on("click", function () {
-				sss(skills, 3, "włócznia");
+				sss(skills, 3, "włócznia", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#bowSkill").on("click", function () {
-				sss(skills, 3, "łuk");
+				sss(skills, 3, "łuk", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#crossBowSkill").on("click", function () {
-				sss(skills, 3, "kusza");
+				sss(skills, 3, "kusza", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#bucklerSkill").on("click", function () {
-				sss(skills, 3, "puklerz");
+				sss(skills, 3, "puklerz", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#smallShieldWoddenSkill").on("click", function () {
-				sss(skills, 3, "mała tarcza drew.");
+				sss(skills, 3, "mała tarcza drew.", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#smallShieldMetalSkill").on("click", function () {
-				sss(skills, 3, "mała tarcza metal.");
+				sss(skills, 3, "mała tarcza metal.", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 
-			//umiejętności złoczyńcy
 			$("#poisonsSkill").on("click", function () {
-				sss(skills, 3, "przyg. trucizn");
+				sss(skills, 3, "przyg. trucizn", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#climbingSkill").on("click", function () {
-				sss(skills, 3, "wspinaczka");
+				sss(skills, 3, "wspinaczka", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#actingSkill").on("click", function () {
-				sss(skills, 3, "aktorstwo");
+				sss(skills, 3, "aktorstwo", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#acrobaticsSkill").on("click", function () {
-				sss(skills, 3, "akrobatyka");
+				sss(skills, 3, "akrobatyka", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#trapsSkill").on("click", function () {
-				sss(skills, 3, "tworz. pułapek");
+				sss(skills, 3, "tworz. pułapek", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#sneakingSkill").on("click", function () {
-				sss(skills, 3, "szkradanie się");
+				sss(skills, 3, "szkradanie się", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#stealingSkill").on("click", function () {
-				sss(skills, 3, "kradzież kieszonkowa");
+				sss(skills, 3, "kradzież kieszonkowa", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#evasionSkill").on("click", function () {
-				sss(skills, 3, "uniki");
+				sss(skills, 3, "uniki", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#woodenStickSkill").on("click", function () {
-				sss(skills, 3, "drew. pałka");
+				sss(skills, 3, "drew. pałka", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#daggerSkill").on("click", function () {
-				sss(skills, 3, "sztylet");
+				sss(skills, 3, "sztylet", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#shortSwordSkill").on("click", function () {
-				sss(skills, 3, "krótki miecz");
+				sss(skills, 3, "krótki miecz", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#bluffingSkill").on("click", function () {
-				sss(skills, 3, "blefowanie");
+				sss(skills, 3, "blefowanie", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 
-			//umiejętności czarodzieja
 			$("#readWriteSkill").on("click", function () {
-				sss(skills, 3, "pisanie i czytanie");
+				sss(skills, 3, "pisanie i czytanie", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#demonsSkill").on("click", function () {
-				sss(skills, 3, "przyw./odp. demona");
+				sss(skills, 3, "przyw./odp. demona", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#divinationSkill").on("click", function () {
-				sss(skills, 3, "wróżbiarstwo");
+				sss(skills, 3, "wróżbiarstwo", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#healingSkill").on("click", function () {
-				sss(skills, 3, "leczenie ran");
+				sss(skills, 3, "leczenie ran", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#castSpellSkill").on("click", function () {
-				sss(skills, 3, "rzucanie czarów");
+				sss(skills, 3, "rzucanie czarów", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#createPotionsSkill").on("click", function () {
-				sss(skills, 3, "tworz. eliksirów");
+				sss(skills, 3, "tworz. eliksirów", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#magicItemsSkill").on("click", function () {
-				sss(skills, 3, "tworz. mag. przedm.");
+				sss(skills, 3, "tworz. mag. przedm.", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#createOintnentSkill").on("click", function () {
-				sss(skills, 3, "tworz. maści");
+				sss(skills, 3, "tworz. maści", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#astrologySkill").on("click", function () {
-				sss(skills, 3, "astrologia");
+				sss(skills, 3, "astrologia", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#createRunesSkill").on("click", function () {
-				sss(skills, 3, "tworz. runów");
+				sss(skills, 3, "tworz. runów", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 			$("#herbalistsSkill").on("click", function () {
-				sss(skills, 3, "zielarstwo");
+				sss(skills, 3, "zielarstwo", "umiejętność", "trzy umiejętności", $("#resultSkills"));
 			});
 
 			$("#deleteSkills").on("click", function () {
-				console.log(skills);
-				skills.splice(0, 3);
-				$("#resultSkills").empty();
-				console.log(skills);
+				skills.splice(0, 3);$("#resultSkills").empty();
 			});
 		});
+
 		//wybieranie ekwipunku
 		$("#chooseEquip").on("click", function () {
-			yyy(gameInfo.otherTexts.equip);$("#choosingEquip").show();
+			yyy(gameInfo.otherTexts.equip);$("#choosingEquip").show();$("#deleteEquip").show();
+			$("#daggerEquip").on("click", function () {
+				sss(equip, 5, "sztylet", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#woodenStickEquip").on("click", function () {
+				sss(equip, 5, "drewniana pałka", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#shortSwordEquip").on("click", function () {
+				sss(equip, 5, "krótki miecz", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#sabreEquip").on("click", function () {
+				sss(equip, 5, "szabla", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#spearEquip").on("click", function () {
+				sss(equip, 5, "włócznia", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#slingShotEquip").on("click", function () {
+				sss(equip, 5, "proca", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#bowEquip").on("click", function () {
+				sss(equip, 5, "łuk", "rzecz", "pięć", $("#resultEquip"));
+			});
+
+			$("#gambisonEquip").on("click", function () {
+				sss(equip, 5, "przeszywanica", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#leatherArmorEquip").on("click", function () {
+				sss(equip, 5, "zbr. skórzana", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#studdedArmorEquip").on("click", function () {
+				sss(equip, 5, "zbr. ćwiekowana", "rzecz", "pięć", $("#resultEquip"));
+			});
+
+			$("#sbucklerEquip").on("click", function () {
+				sss(equip, 5, "puklerz", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#smallShieldWoddenEquip").on("click", function () {
+				sss(equip, 5, "mała tarcza drew.", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#smallShieldWMetalEquip").on("click", function () {
+				sss(equip, 5, "mała tarcza metal.", "rzecz", "pięć", $("#resultEquip"));
+			});
+
+			$("#tindersEquip").on("click", function () {
+				sss(equip, 5, "hubka i krzesiwo", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#moneyBagEquip").on("click", function () {
+				sss(equip, 5, "mieszek", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#leatherBeltEquip").on("click", function () {
+				sss(equip, 5, "pas skórzany", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#needlesThreadEquip").on("click", function () {
+				sss(equip, 5, "igły i nici", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#tubePartschmenEquip").on("click", function () {
+				sss(equip, 5, "tuba na pergaminy", "rzecz", "pięć", $("#resultEquip"));
+			});
+
+			$("#penWritingEquip").on("click", function () {
+				sss(equip, 5, "pęk piór do pisania", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#parchments5piecesEquip").on("click", function () {
+				sss(equip, 5, "pergaminy 5szt.", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#ordinaryClothesEquip").on("click", function () {
+				sss(equip, 5, "zwykłe ubranie", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#clothesEquip").on("click", function () {
+				sss(equip, 5, "płaszcz", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#fussyHatEquip").on("click", function () {
+				sss(equip, 5, "fikuśny kapelusz", "rzecz", "pięć", $("#resultEquip"));
+			});
+
+			$("#travelBagEquip").on("click", function () {
+				sss(equip, 5, "torba podróżna", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#purseEquip").on("click", function () {
+				sss(equip, 5, "sakwa", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#blanketEquip").on("click", function () {
+				sss(equip, 5, "koc", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#tentEquip").on("click", function () {
+				sss(equip, 5, "namiot", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#wooddenBowlEquip").on("click", function () {
+				sss(equip, 5, "drewniana miska", "rzecz", "pięć", $("#resultEquip"));
+			});
+
+			$("#woodenSpoonEquip").on("click", function () {
+				sss(equip, 5, "drewniana łyżka", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#torchEquip").on("click", function () {
+				sss(equip, 5, "pochodnia", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#oilLampEquip").on("click", function () {
+				sss(equip, 5, "lampa oliwna", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#lampOilEquip").on("click", function () {
+				sss(equip, 5, "kaganek", "rzecz", "pięć", $("#resultEquip"));
+			});
+			$("#rope5mEquip").on("click", function () {
+				sss(equip, 5, "lina 5m", "rzecz", "pięć", $("#resultEquip"));
+			});
+
+			$("#deleteEquip").on("click", function () {
+				equip.splice(0, 5);$("#resultEquip").empty();
+			});
 		});
 
 		//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", function () {
 			yyy();
-			console.log(hero);
 			$("#choosingResult").show();
-			$("#resultName p:nth-child(2)").empty().append(hero[0]);
-			$("#resultSex p:nth-child(2)").empty().append(hero[1]);
-			$("#resultRace p:nth-child(2)").empty().append(hero[2]);
-			$("#resultOccupation p:nth-child(2)").empty().append(hero[3]);
-			$("#points div:first-child p").empty().append(hero[4]);
-			$("#points div:nth-child(2) p").empty().append(hero[5]);
-			$("#points div:nth-child(3) p").empty().append(hero[6]);
-			$("#points div:nth-child(4) p").empty().append(hero[7]);
-			$("#points div:nth-child(5) p").empty().append(hero[8]);
+			$("#choosingResult #resultName p:nth-child(2)").empty().append(hero[0]);
+			$("#choosingResult #resultSex p:nth-child(2)").empty().append(hero[1]);
+			$("#choosingResult #resultRace p:nth-child(2)").empty().append(hero[2]);
+			$("#choosingResult #resultOccupation p:nth-child(2)").empty().append(hero[3]);
 
-			$("#resultEyes p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[9][0]) + "," + parseInt(hero[9][1]) + ", " + parseInt(hero[9][2]));
+			$("#choosingResult #points div:first-child p").empty().append(hero[4]);
+			$("#choosingResult #points div:nth-child(2) p").empty().append(hero[5]);
+			$("#choosingResult #points div:nth-child(3) p").empty().append(hero[6]);
+			$("#choosingResult #points div:nth-child(4) p").empty().append(hero[7]);
+			$("#choosingResult #points div:nth-child(5) p").empty().append(hero[8]);
 
-			$("#resultHair p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
+			$("#choosingResult #resultEyes p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[9][0]) + "," + parseInt(hero[9][1]) + ", " + parseInt(hero[9][2]));
 
-			$("#resultSkin p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
+			$("#choosingResult #resultHair p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[10][0]) + "," + parseInt(hero[10][1]) + ", " + parseInt(hero[10][2]));
 
-			$("#resultSkills p:nth-child(2)").empty().append(skills);
+			$("#choosingResult #resultSkin p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
+
+			$("#choosingResult #resultTattoo p:nth-child(2)").empty().append(hero[12]);
+			$("#choosingResult #resultWeight p:nth-child(2)").empty().append(hero[13]);
+			$("#choosingResult #resultHeight p:nth-child(2)").empty().append(hero[14]);
+
+			$("#choosingResult #resultSkills p:nth-child(2)").empty().append(skills);
+			$("#choosingResult #resultEquip p:nth-child(2)").empty().append(equip);
 		});
 	});
 };
@@ -1115,7 +1226,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
 
   //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #chooseResult, #unlock, #deleteSkills").hide();
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {

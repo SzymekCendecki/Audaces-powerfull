@@ -15,6 +15,18 @@ module.exports.random = function (table, position){
     heroCreator.hero.splice(position, 1, y);
 }
 
+//funkcja losująca kolory dla włosów, skóry i oczu
+module.exports.randomColor = function(y){
+  let color1 = [];
+      let a = Math.round(Math.random()*255);
+  	let b = Math.round(Math.random()*255);
+  	let c = Math.round(Math.random()*255);
+  	color1.splice(0, 1, a);
+  	color1.splice(1, 1, b);
+  	color1.splice(2, 1, c);
+  	heroCreator.hero.splice(y, 1, color1)
+}
+
 //funkcja losująca wagę/wzrost
 function randomWeightHeight(number1, number2, position, x){
   let what = Math.round(Math.random()*number1 + number2);
@@ -160,23 +172,24 @@ module.exports.randomEquip = function (array1, array2, array3, array4){
 }
 
 //funkcja pokazująca wybór kreowania postaci
-module.exports.heroCreatorResult = function(hero, skills, equip, what){
-  what.show();
-  $("#spanName").text(hero[0]);
-  $("#spanSex").text(hero[1]);
-  $("#spanRace").text(hero[2]);
-  $("#spanOccupation").text(hero[3]);
-  $("#spanForce").text(hero[4]);
-  $("#spanStrenght").text(hero[5]);
-  $("#spanDexterity").text(hero[6]);
-  $("#spanIntelligence").text(hero[7]);
-  $("#spanCharisma").text(hero[8]);
-  $("#spanEyes").text(hero[9]);
-  $("#spanHair").text(hero[10]);
-  $("#spanSkin").text(hero[11]);
-  $("#spanTattoo").text(hero[12]);
-  $("#spanWeight").text(hero[13]);
-  $("#spanHeight").text(hero[14]);
-  $("#spanSkills").text(skills);
-  $("#spanEquip").text(equip);
+module.exports.heroCreatorResult = function(hero, skills, equip){
+  $("#randomResult").show();
+  $("#nameResult p:nth-child(2)").empty().append(hero[0]);
+  $("#sexResult p:nth-child(2)").empty().append(hero[1]);
+  $("#raceResult p:nth-child(2)").empty().append(hero[2]);
+  $("#occupationResult p:nth-child(2)").empty().append(hero[3]);
+  $("#pointsResult div:first-child p").empty().append(hero[4]);
+  $("#pointsResult div:nth-child(2) p").empty().append(hero[5]);
+  $("#pointsResult div:nth-child(3) p").empty().append(hero[6]);
+  $("#pointsResult div:nth-child(4) p").empty().append(hero[7]);
+  $("#pointsResult div:nth-child(5) p").empty().append(hero[8]);
+
+  $("#eyesResult p:nth-child(2)").css("background-color", `rgb(${parseInt(hero[9][0])},${parseInt(hero[9][1])}, ${parseInt(hero[9][2])}`);
+
+  $("#hairResult p:nth-child(2)").css("background-color", `rgb(${parseInt(hero[10][0])},${parseInt(hero[10][1])}, ${parseInt(hero[10][2])}`);
+
+  $("#skinResult p:nth-child(2)").css("background-color", `rgb(${parseInt(hero[11][0])},${parseInt(hero[11][1])}, ${parseInt(hero[11][2])}`);
+
+  $("#skillsResult p:nth-child(2)").empty().append(skills);
+  $("#randomResult #equipResult p:nth-child(2)").empty().append(equip);
 }

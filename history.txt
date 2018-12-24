@@ -173,3 +173,8 @@ Praca nad wyświetlaniem wyników "ręcznego" kreowania postaci.
 
 23 grudnia 2018 - wersja 0.1.45
 Dodano wybieranie umiejętności.
+
+24 grudnia 2018 - wersja 0.1.46
+Poprawki dla wybierania umiejętności.
+  Dodano wybieranie rzeczy.
+Rozpoczęto pracę nad dostosowaniem "losowego" oraz "ręcznego" tworzenia postaci do potrzeb gry.
