@@ -41,10 +41,14 @@
 			</div>
 
 		<!--div dla przycisków "głównych" - przyciski pierwszego menu oraz przechodzenie pomiędzy paragrafami-->
-		<div id="mainBtns"></div>
+		<div id="mainBtns" class="displayFlexMainBtns">
+			<button id="play" class="greenBtn newRocker">graj</button>
+		</div>
 
 		<!--div dla przycisków interakcji w danym paragrafie -->
-		<div id="interactionsBtns"></div>
+		<div id="interactionsBtns" class="justifyCenter">
+				<button id="skip" class="greenBtn newRocker">pomiń</button>
+		</div>
 	</nav>
 		<!-- koniec nawigacji -->
 
@@ -447,12 +451,16 @@
 </div>
 	<!-- część dla wyświetlania wyników tworzenia postaci koniec-->
 
+<!--część dla intro gry - początek-->
+	<div id="introGameTexts" class="newRocker center"></div>
+<!--część dla intro gry - koniec-->
+
 	</div>
 	<!-- koniec części głównej-->
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.46 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.47 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>

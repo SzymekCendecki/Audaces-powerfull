@@ -178,3 +178,8 @@ Dodano wybieranie umiejętności.
 Poprawki dla wybierania umiejętności.
   Dodano wybieranie rzeczy.
 Rozpoczęto pracę nad dostosowaniem "losowego" oraz "ręcznego" tworzenia postaci do potrzeb gry.
+
+25 grudnia 2018 - wersja 0.1.47
+Poprawki wyświetlania wyników dla losowego tworzenia postaci.
+  Dodano przycisk rozpoczynający grę po stworzeniu postaci.
+Dodano intro gry.

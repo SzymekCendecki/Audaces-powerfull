@@ -312,6 +312,10 @@ module.exports.heroCreatorResult = function (hero, skills, equip) {
 
   $("#skinResult p:nth-child(2)").css("background-color", "rgb(" + parseInt(hero[11][0]) + "," + parseInt(hero[11][1]) + ", " + parseInt(hero[11][2]));
 
+  $("#tattooResult p:nth-child(2)").empty().append(hero[12]);
+  $("#weightResult p:nth-child(2)").empty().append(hero[13]);
+  $("#heightResult p:nth-child(2)").empty().append(hero[14]);
+
   $("#skillsResult p:nth-child(2)").empty().append(skills);
   $("#randomResult #equipResult p:nth-child(2)").empty().append(equip);
 };
@@ -329,6 +333,15 @@ var gameInfo = __webpack_require__(2);
 //tablica zbiorcza z wyniami losowania lub wyborami postaci
 //0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
 var hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, [0, 0, 0], [0, 0, 0], [0, 0, 0], "nie wybrano", "nie wybrano", "nie wybrano"];
+
+function check(hero) {
+	var x = "nie wybrano";
+	if (hero[0] === x && hero[1] === x && hero[2] === x && hero[3] === x && hero[4] === 0 && hero[5] === 0 && hero[6] === 0 && hero[7] === 0 && hero[8] === 0 && hero[12] === x && hero[13] === x && hero[14] === x) {
+		$("#play").hide();
+	} else {
+		$("#play").show();
+	}
+}
 
 module.exports.hero = hero;
 
@@ -408,6 +421,8 @@ module.exports.random = function () {
 		$("#chooseResult").hide();skills.splice(0, 3);equip.splice(0, 5);
 		hero.splice(0, 1, "nie wybrano");hero.splice(1, 1, "nie wybrano");hero.splice(2, 1, "nie wybrano");hero.splice(3, 1, "nie wybrano");hero.splice(4, 1, 0);hero.splice(5, 1, 0);hero.splice(6, 1, 0);hero.splice(7, 1, 0);hero.splice(8, 1, 0);hero.splice(9, 1, [0, 0, 0]);hero.splice(10, 1, [0, 0, 0]);hero.splice(11, 1, [0, 0, 0]);hero.splice(12, 1, "nie wybrano");hero.splice(13, 1, "nie wybrano");hero.splice(14, 1, "nie wybrano");
 
+		$("#play").show();
+
 		functions.random(sex, 1); //losowanie płci
 		functions.nameRandom(namesWomen, namesMan); //losowanie imienia
 		functions.random(races, 2); //losowanie rasy
@@ -426,7 +441,7 @@ module.exports.random = function () {
 
 module.exports.choose = function () {
 	$("#chooseHero").on("click", function () {
-		$("#chooseResult").show();$("#randomResult").hide();$("#chooseHeroDescription > div").hide();skills.splice(0, 3);equip.splice(0, 5);
+		$("#chooseResult").show();$("#randomResult").hide();$("#chooseHeroDescription > div").hide();skills.splice(0, 3);equip.splice(0, 5);$("#play").hide();
 		hero.splice(0, 1, "nie wybrano");hero.splice(1, 1, "nie wybrano");hero.splice(2, 1, "nie wybrano");hero.splice(3, 1, "nie wybrano");hero.splice(4, 1, 0);hero.splice(5, 1, 0);hero.splice(6, 1, 0);hero.splice(7, 1, 0);hero.splice(8, 1, 0);hero.splice(9, 1, [0, 0, 0]);hero.splice(10, 1, [0, 0, 0]);hero.splice(11, 1, [0, 0, 0]);hero.splice(12, 1, "nie wybrano");hero.splice(13, 1, "nie wybrano");hero.splice(14, 1, "nie wybrano");
 
 		//wybór imienia
@@ -1007,6 +1022,8 @@ module.exports.choose = function () {
 		//pokazenie dokananych wyborów
 		$("#resultChoose").on("click", function () {
 			yyy();
+			check(hero);
+
 			$("#choosingResult").show();
 			$("#choosingResult #resultName p:nth-child(2)").empty().append(hero[0]);
 			$("#choosingResult #resultSex p:nth-child(2)").empty().append(hero[1]);
@@ -1221,12 +1238,13 @@ var functions = __webpack_require__(0);
 var firstMenu = __webpack_require__(5);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(6);
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
 
   //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult").hide();
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -1244,6 +1262,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //funkcje dla "wyskakującego" okienka dla informacji gry
   gameInfo.gameInfo();
+
+  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
+  introGame.showIntro();
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -1282,6 +1303,67 @@ module.exports.firstMenuBtns = function () {
       $("#info, #licence, #tutorial, #game").remove();
     }, 3000);
     $("#randomHero, #chooseHero, #gameInfo").delay(3050).fadeIn(750);
+  });
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var heroCreator = "./heroCreator.js";
+
+var introGameTexts = {
+  "text1": "<p class='animOpacity01'>Mówią, że Dzikie Pustkowia to kraina opuszczona przez Bogów.</p>",
+  "text2": "<p class='animOpacity01'>Pełna siedzib mrocznych kultów, wyrzutków społeczeństwa, krwiożerczych bestii i demonów, przywołanych czarną magią z innych wymiarów.</p>",
+  "text3": "<p class='animOpacity01'>Krąży wiele legend o ukrytych, nieprzebranych skarbach, o herosach - smokobójcach.</p>",
+  "text4": "<p class='animOpacity01'>Dzikie Pustkowia fascynuję i przerażają, jednak wielu śmiałków wędruje w tą część świata w poszukiwaniu bogactw i chwały.</p>",
+  "text5": "<p class='animOpacity01'>Większość nie wraca...</p>",
+  "text6": "<p class='animOpacity01'>Twoja historia zaczyna się w mieście Erharuf.</p>",
+  "text7": "<p class='animOpacity01'>W ostatnim bezpiecznym mieście przed Dzikimi Pustkowiami.</p>",
+  "text8": "<p class='animOpacity01'>Na usilną prośbę znajomego kapłana zgadzasz się dostarczyć małą paczkę dla tamtejszego mnicha, rezydującego w niewielkiej wiosce, która leży tuż przy granicy z Dzikimi Pustkowiami.</p>"
+};
+
+module.exports.occupationTexts = introGameTexts;
+
+module.exports.showIntro = function () {
+  $("#play").on("click", function () {
+    $("#randomHero, #chooseHero, #play, #randomResult, #chooseResult").hide();
+    $("#introGameTexts, #skip").show();
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text1);
+    }, 0);
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text2);
+    }, 4000);
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text3);
+    }, 8000);
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text4);
+    }, 12000);
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text5);
+    }, 16000);
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text6);
+    }, 20000);
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text7);
+    }, 24000);
+    setTimeout(function () {
+      $("#introGameTexts").append(introGameTexts.text8);
+    }, 28000);
+    setTimeout(function () {
+      $("#introGameTexts, #skip").hide();
+    }, 35000);
+
+    $("#skip").on("click", function () {
+      $("#skip, #introGameTexts").hide();
+    });
   });
 };
 

@@ -5,6 +5,15 @@ let gameInfo=require("./gameInfo.js");
 //0-imię, 1-płeć, 2-rasa, 3-profesja, 4-siła, 5-wytrzymałość, 6-zręczność, 7-inteligencja, 8-charyzma, 9-kolor oczu, 10-kolor włosów, 11-kolor skóry, 12 - tatuaże, 13 - waga, 14-wzrost
 let hero = ["nie wybrano", "nie wybrano", "nie wybrano", "nie wybrano", 0, 0, 0, 0, 0, [0, 0, 0], [0, 0, 0], [0, 0, 0], "nie wybrano", "nie wybrano", "nie wybrano"];
 
+function check(hero){
+	let x = "nie wybrano";
+	if(hero[0] === x && hero[1] === x && hero[2] === x && hero[3] === x && hero[4] === 0 && hero[5] === 0 && hero[6] === 0 && hero[7] === 0 && hero[8] === 0 && hero[12] === x && hero[13] === x && hero[14] === x){
+		$("#play").hide();
+	}else {
+		$("#play").show();
+	}
+}
+
 module.exports.hero = hero;
 
 //tablica ekwipunku
@@ -82,6 +91,8 @@ module.exports.random = function(){
 	$("#randomHero").on("click", ()=>{ $("#chooseResult").hide(); skills.splice(0,3); equip.splice(0,5);
 		hero.splice(0, 1, "nie wybrano"); hero.splice(1, 1, "nie wybrano"); hero.splice(2, 1, "nie wybrano"); hero.splice(3, 1, "nie wybrano");	hero.splice(4, 1, 0); hero.splice(5, 1, 0); hero.splice(6, 1, 0); hero.splice(7, 1, 0); hero.splice(8, 1, 0);	hero.splice(9, 1, [0,0,0]); hero.splice(10, 1, [0,0,0]); hero.splice(11, 1, [0,0,0]); hero.splice(12, 1, "nie wybrano"); hero.splice(13, 1, "nie wybrano"); hero.splice(14, 1, "nie wybrano");
 
+		$("#play").show();
+
 		functions.random(sex, 1); //losowanie płci
 		functions.nameRandom(namesWomen, namesMan);//losowanie imienia
 		functions.random(races, 2); //losowanie rasy
@@ -99,7 +110,7 @@ module.exports.random = function(){
 }
 
 module.exports.choose = function(){
-	$("#chooseHero").on("click", ()=>{ $("#chooseResult").show(); $("#randomResult").hide(); $("#chooseHeroDescription > div").hide(); skills.splice(0,3); equip.splice(0,5);
+	$("#chooseHero").on("click", ()=>{ $("#chooseResult").show(); $("#randomResult").hide(); $("#chooseHeroDescription > div").hide(); skills.splice(0,3); equip.splice(0,5); $("#play").hide();
 		hero.splice(0, 1, "nie wybrano"); hero.splice(1, 1, "nie wybrano"); hero.splice(2, 1, "nie wybrano"); hero.splice(3, 1, "nie wybrano");	hero.splice(4, 1, 0); hero.splice(5, 1, 0); hero.splice(6, 1, 0); hero.splice(7, 1, 0); hero.splice(8, 1, 0);	hero.splice(9, 1, [0,0,0]); hero.splice(10, 1, [0,0,0]); hero.splice(11, 1, [0,0,0]); hero.splice(12, 1, "nie wybrano"); hero.splice(13, 1, "nie wybrano"); hero.splice(14, 1, "nie wybrano");
 
 	//wybór imienia
@@ -416,6 +427,8 @@ $("#deleteEquip").on("click", ()=>{ equip.splice(0, 5); $("#resultEquip").empty(
 
 //pokazenie dokananych wyborów
 		$("#resultChoose").on("click", ()=>{ yyy();
+				check(hero);
+
 				$("#choosingResult").show();
 				$("#choosingResult #resultName p:nth-child(2)").empty().append(hero[0]);
 				$("#choosingResult #resultSex p:nth-child(2)").empty().append(hero[1]);

@@ -190,6 +190,10 @@ module.exports.heroCreatorResult = function(hero, skills, equip){
 
   $("#skinResult p:nth-child(2)").css("background-color", `rgb(${parseInt(hero[11][0])},${parseInt(hero[11][1])}, ${parseInt(hero[11][2])}`);
 
+  $("#tattooResult p:nth-child(2)").empty().append(hero[12]);
+  $("#weightResult p:nth-child(2)").empty().append(hero[13]);
+  $("#heightResult p:nth-child(2)").empty().append(hero[14]);
+
   $("#skillsResult p:nth-child(2)").empty().append(skills);
   $("#randomResult #equipResult p:nth-child(2)").empty().append(equip);
 }

@@ -2,12 +2,13 @@ let functions=require("./functions.js");
 let firstMenu=require("./firstMenu.js");
 let heroCreator=require("./heroCreator.js");
 let gameInfo=require("./gameInfo.js");
+let introGame=require("./introGame.js");
 
 document.addEventListener("DOMContentLoaded", () => {
  console.log("NIEWIERNE PSY RULEZ!!!!");
 
 //ukrywanie odpowiednich części
-$("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult").hide();
+$("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
@@ -25,5 +26,8 @@ setTimeout(function(){
 
 //funkcje dla "wyskakującego" okienka dla informacji gry
 gameInfo.gameInfo();
+
+//funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
+introGame.showIntro();
 
 });//koniec DOMContentLoaded

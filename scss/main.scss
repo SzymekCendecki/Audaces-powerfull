@@ -76,6 +76,9 @@ header{
 //float left
 .floatLeft{ float: left; }
 
+//float right
+.floatRight{ float: right; }
+
 //czyszczenie floatów
 .clearFloats{ clear: both; }
 
@@ -83,6 +86,17 @@ header{
   display: flex;
   justify-content: space-between;
   margin-top: 20px 0 0 0;
+}
+
+.displayFlexMainBtns{
+  display: flex;
+  justify-content: space-around;
+}
+
+.justifyCenter{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 #resultColorEye, #resultColorHair, #resultColorSkin{
@@ -103,11 +117,29 @@ header{
   div{ width: 15%; }
 }
 
-.blackUnderline{
-  text-decoration: underline;
-}
+.blackUnderline{ text-decoration: underline; }
 
-#deleteSkills{
+#deleteSkills, #deleteEquip{
   background-color: crimson;
   color: white;
+}
+
+.animOpacity01{
+  animation: opacity01 4s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes opacity01{
+  0% { opacity: 0; }
+  100% { opacity: 1%;}
+}
+
+.animOpacity10{
+  animation: opacity10 4s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes opacity10{
+  0% { opacity: 1; }
+  100% { opacity: 0;}
 }
