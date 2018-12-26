@@ -25,6 +25,9 @@ let skills = []; module.exports.skills = skills;
 //tablica ze złotem
 let gold = [0]; module.exports.gold = gold;
 
+//tablica dla zadań
+let tasks = ["Zanieś paczkę mnichowi."]; module.exports.tasks = tasks;
+
 //tablica z imionami męskimi
 let namesMan = ["Wortigern", "Gintor", "Hegel", "Derig", "Diggramon", "Zengowetoryk", "Deggetm", "Zigamon", "Birduk", "Ardenor", "Winterks", "Joluntik", "Menigor", "Oltis", "Kurdir"];
 

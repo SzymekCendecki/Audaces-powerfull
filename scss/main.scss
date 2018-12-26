@@ -99,6 +99,12 @@ header{
   margin-top: 10px;
 }
 
+.anotherFlex{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 #resultColorEye, #resultColorHair, #resultColorSkin{
   width: 100px;
   height: 25px;
@@ -143,3 +149,20 @@ header{
   0% { opacity: 1; }
   100% { opacity: 0;}
 }
+
+#features, #equip, #skills, #tasks{
+  width: 20%;
+  height: 80%;
+  color: white;
+  font-size: 170%;
+  text-shadow: 1px 1px black;
+  outline: none;
+}
+
+.width24p{ width: 24%; }
+.width33p{ width: 33%; }
+.width100p{ width: 100%; }
+
+.height15px{ height: 15px; }
+
+.margin2000p{ margin: 2% 0 0 0; }

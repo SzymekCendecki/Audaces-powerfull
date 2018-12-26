@@ -28,6 +28,9 @@ module.exports.showIntro = function(){
     setTimeout(()=>{ $("#introGameTexts").append(introGameTexts.text8); }, 28000);
     setTimeout(()=>{ $("#introGameTexts, #skip").hide(); }, 35000);
 
-    $("#skip").on("click", ()=>{ $("#skip, #introGameTexts").hide(); });
+    $("#skip").on("click", ()=>{
+      $("#skip, #introGameTexts").hide();
+      $("#features, #equip, #skills, #tasks").show();
+    });
   });
 }

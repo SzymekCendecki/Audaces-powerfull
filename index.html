@@ -32,9 +32,15 @@
 				<div id="tutorial"><button class="newRocker">tutorial</button></div>
 				<div id="game"><button class="newRocker">gra</button></div>
 
-				<!-- przyciki dla wybierania sposobu tworzenia postaci-->
+				<!-- przyciki dla wybierania sposobu tworzenia postaci -->
 				<button id="randomHero" class="crateHeroBtn randomHero newRocker">wylosuj</button>
 				<button id="chooseHero" class="crateHeroBtn chooseHero newRocker">wybierz</button>
+
+				<!-- przyciki dla wybierania cech, umiejętności, ekwipunku w trakcie gry -->
+				<button id="features" class="newRocker greenBtn">cechy</button>
+				<button id="equip" class="newRocker greenBtn">ekwipunek</button>
+				<button id="skills" class="newRocker greenBtn">umiejętności</button>
+				<button id="tasks" class="newRocker greenBtn">zadania</button>
 
 				<!-- przycisk info-->
 				<button id="gameInfo" class="gameInfo newRocker">info</button>
@@ -107,6 +113,14 @@
 		<div id="infoDescription" class="newRocker"></div>
 	</div>
 	<!-- koniec menu rozwijalnego w oknie info -->
+
+<!-- wyskakujące okno dla cech, ekwipunku, umiejętności oraz zadań po rozpoczęciu gry -->
+
+<div id="heroInfo" class="gameInfoResult">
+	<button><div></div><div></div></button>
+	<div id="heroInfoDescription" class="newRocker anotherFlex center">
+	</div>
+</div>
 
 <!-- losowe wybieranie postaci -->
 <div id="randomResult" class="newRocker">
@@ -460,7 +474,7 @@
 
 <!-- początek stopki-->
   <footer>
-		<div id="version" class="merienda">ver. 0.1.47 - powerfull</div>
+		<div id="version" class="merienda">ver. 0.1.48 - powerfull</div>
 		<p><a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"
         src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 	</footer>
