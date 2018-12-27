@@ -21,9 +21,6 @@ module.exports.mainGameBtns = function(){
     $("#sColor").css("background-color", `rgb(${parseInt(heroCreator.hero[11][0])}, ${parseInt(heroCreator.hero[11][1])}, ${parseInt(heroCreator.hero[11][2])}`).addClass("height15px");
   });
 
-
-
-
 //zdarzenia dla wyświetlania ekwipunku w grze
   $("#equip").on("click", ()=>{
     $("#heroInfo").show()

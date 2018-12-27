@@ -1,5 +1,6 @@
 let functions=require("./functions.js");
-let heroCreator=("./heroCreator.js");
+let heroCreator=require("./heroCreator.js");
+let room=require("./room.js");
 
 let introGameTexts = {
   "text1":"<p class='animOpacity01'>Mówią, że Dzikie Pustkowia to kraina opuszczona przez Bogów.</p>",
@@ -31,6 +32,8 @@ module.exports.showIntro = function(){
     $("#skip").on("click", ()=>{
       $("#skip, #introGameTexts").hide();
       $("#features, #equip, #skills, #tasks").show();
+      $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").show();
+      $("#mainPartDescription").before(room.roomTexts.firstText);
     });
   });
 }

@@ -1,5 +1,5 @@
 let functions=require("./functions.js");
-let heroCreator=("./heroCreator.js");
+let heroCreator=require("./heroCreator.js");
 
 let raceTexts = {
   "race":"Wybór rasy determinuje wiele cech bohtera. Można wybrać spośród 13 dostępnych ras. Więcej szczegółów na temat każdej rasy dostępne jest po wyborze z opcji.",

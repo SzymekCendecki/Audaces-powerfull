@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -764,7 +764,7 @@ module.exports.choose = function () {
 
 		//funkcja optymalizująca wybieranie umiejętności i ekwipunku
 		function sss(tab, tabLength, what, x, y, z) {
-			if (tab.indexOf(what + " ") !== -1) {
+			if (tab.indexOf(" " + what) !== -1) {
 				$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą " + x + ".</p>");
 				setTimeout(function () {
 					$("#alerts").empty();
@@ -774,8 +774,8 @@ module.exports.choose = function () {
 				setTimeout(function () {
 					$("#alerts").empty();
 				}, 3000);
-				tab.push(what + " ");
-				z.append(what + " ");
+				tab.push(" " + what);
+				z.append(" " + what);
 			} else if (tab.length >= tabLength) {
 				$("#alerts").html("<p class='newRocker redText center'>Wybrano już " + y + ".</p>");
 				setTimeout(function () {
@@ -1063,7 +1063,7 @@ module.exports.choose = function () {
 
 
 var functions = __webpack_require__(0);
-var heroCreator = "./heroCreator.js";
+var heroCreator = __webpack_require__(1);
 
 var raceTexts = {
   "race": "Wybór rasy determinuje wiele cech bohtera. Można wybrać spośród 13 dostępnych ras. Więcej szczegółów na temat każdej rasy dostępne jest po wyborze z opcji.",
@@ -1227,57 +1227,6 @@ module.exports.gameInfo = function () {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(4);
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(5);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(6);
-var mainGameBtns = __webpack_require__(7);
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("NIEWIERNE PSY RULEZ!!!!");
-
-  //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
-
-  //przejście z pierwszego intro do pierwszego menu
-  setTimeout(function () {
-    $("header p, #heroBtns div").fadeIn(750);
-    $("body").fadeIn(750).css("background", "beige");
-    $("#mainPart h2, #mainPart h3").remove();
-    functions.newElement("p", "description", "", $("#mainPart"));
-    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
-  }, 16000);
-
-  //funkcje dla przycisków pierwszego menu
-  firstMenu.firstMenuBtns();
-  heroCreator.random();
-  heroCreator.choose();
-
-  //funkcje dla "wyskakującego" okienka dla informacji gry
-  gameInfo.gameInfo();
-
-  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
-  introGame.showIntro();
-
-  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
-  mainGameBtns.mainGameBtns();
-}); //koniec DOMContentLoaded
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -1314,14 +1263,15 @@ module.exports.firstMenuBtns = function () {
 };
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var functions = __webpack_require__(0);
-var heroCreator = "./heroCreator.js";
+var heroCreator = __webpack_require__(1);
+var room = __webpack_require__(8);
 
 var introGameTexts = {
   "text1": "<p class='animOpacity01'>Mówią, że Dzikie Pustkowia to kraina opuszczona przez Bogów.</p>",
@@ -1371,9 +1321,69 @@ module.exports.showIntro = function () {
     $("#skip").on("click", function () {
       $("#skip, #introGameTexts").hide();
       $("#features, #equip, #skills, #tasks").show();
+      $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").show();
+      $("#mainPartDescription").before(room.roomTexts.firstText);
     });
   });
 };
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(6);
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var mainGameBtns = __webpack_require__(7);
+var room = __webpack_require__(8);
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("NIEWIERNE PSY RULEZ!!!!");
+
+  //ukrywanie odpowiednich części
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
+
+  //pokój
+  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
+
+  //przejście z pierwszego intro do pierwszego menu
+  setTimeout(function () {
+    $("header p, #heroBtns div").fadeIn(750);
+    $("body").fadeIn(750).css("background", "beige");
+    $("#mainPart h2, #mainPart h3").remove();
+    functions.newElement("p", "description", "", $("#mainPart"));
+    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
+  }, 16000);
+
+  //funkcje dla przycisków pierwszego menu
+  firstMenu.firstMenuBtns();
+  heroCreator.random();
+  heroCreator.choose();
+
+  //funkcje dla "wyskakującego" okienka dla informacji gry
+  gameInfo.gameInfo();
+
+  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
+  introGame.showIntro();
+
+  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
+  mainGameBtns.mainGameBtns();
+
+  //zdarzenia dla pokoju
+  room.roomEvents(heroCreator.equip, heroCreator.hero);
+}); //koniec DOMContentLoaded
 
 /***/ }),
 /* 7 */
@@ -1383,10 +1393,10 @@ module.exports.showIntro = function () {
 
 
 var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(5);
+var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(6);
+var introGame = __webpack_require__(4);
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("NIEWIERNE PSY RULEZ!!!!");
@@ -1428,6 +1438,106 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#heroInfo").hide();
     });
   };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("NIEWIERNE PSY RULEZ!!!!");
+
+  var roomTexts = {
+    "firstText": "<p class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia. Na stoliku leży zawniątko, które musisz oddać mnichowi w przygranicznej wiosce. Co robisz?</p>",
+
+    "lookAroundRoom": "<p class='newRocker textIndent15px margin2000p'>Rozglądasz się po pokoju. Widzisz drewnianą szafę, stojącą w rogu pokoju. Pod oknem stoi niewielka, drewniana skrzynia. Naprzeciw drzwi stoi łóżko. W pomieszczeniu niemiłosiernie wali stęchlizną i kupą szczurów.</p>",
+
+    "wardrobe1": "<p class='newRocker textIndent15px margin2000p'>Otworzyłeś szafę, w której wisi <span id='coat' class='greenText'>płaszcz</span>.</p>",
+    "wardrobe2": "<p class='newRocker textIndent15px margin2000p'>Otworzyłeś szafę. Jest pusta.</p>",
+
+    "wardrobe3": "<p class='newRocker textIndent15px margin2000p'>Otworzyłaś szafę, w której wisi <span id='coat' class='greenText'>płaszcz</span>.</p>",
+    "wardrobe4": "<p class='newRocker textIndent15px margin2000p'>Otworzyłaś szafę. Jest pusta.</p>",
+
+    "wardrobe5": "<p class='newRocker textIndent15px margin2000p'>Szafa jest pusta.</p>",
+
+    "chest1": "<p class='newRocker textIndent15px margin2000p'>Otworzyłeś skrzynię, w której znajduje się <span id='gold' class='greenText'>12 sztuk</span> złota.</p>",
+    "chest2": "<p class='newRocker textIndent15px margin2000p'>Otworzyłeś skrzynię. Jest pusta.</p>",
+
+    "chest3": "<p class='newRocker textIndent15px margin2000p'>Otworzyłaś skrzynię, w której znajduje się <span id='gold' class='greenText'>12 sztuk</span> złota.</p>",
+    "chest4": "<p class='newRocker textIndent15px margin2000p'>Otworzyłaś skrzynię. Jest pusta.</p>",
+
+    "chest5": "<p class='newRocker textIndent15px margin2000p'>Skrzynia jest pusta.</p>"
+  };
+
+  module.exports.roomTexts = roomTexts;
+
+  module.exports.roomEvents = function (equip, hero) {
+    //zdarzenie dla rozglądania się
+    $("#lookAroundRoom").on("click", function () {
+      $("#mainPartDescription").empty().append(roomTexts.lookAroundRoom);
+    });
+
+    //zdarzenie dla szafy
+    $("#wardrobe").on("click", function () {
+      if (heroCreator.equip.indexOf("płaszcz") !== -1) {
+        if (heroCreator.hero[1] === "kobieta") {
+          $("#mainPartDescription").empty().append(roomTexts.wardrobe4);
+        } else if (heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo") {
+          $("#mainPartDescription").empty().append(roomTexts.wardrobe2);
+        }
+      } else {
+        if (heroCreator.hero[1] === "kobieta") {
+          $("#mainPartDescription").empty().append(roomTexts.wardrobe3);
+        } else if (heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo") {
+          $("#mainPartDescription").empty().append(roomTexts.wardrobe1);
+        }
+      }
+
+      $("#coat").on('click', function () {
+        $("#mainPartDescription").empty().append(roomTexts.wardrobe5);
+        heroCreator.equip.push(" płaszcz");
+      });
+    });
+
+    //zdarzenie dla skrzyni
+    $("#chest").on("click", function () {
+      if (heroCreator.gold[0] == 0) {
+        if (heroCreator.hero[1] === "kobieta") {
+          $("#mainPartDescription").empty().append(roomTexts.chest3);
+        } else if (heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo") {
+          $("#mainPartDescription").empty().append(roomTexts.chest1);
+        }
+      } else if (heroCreator.gold[0] > 0) {
+        if (heroCreator.hero[1] === "kobieta") {
+          $("#mainPartDescription").empty().append(roomTexts.chest4);
+        } else if (heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo") {
+          $("#mainPartDescription").empty().append(roomTexts.chest2);
+        }
+      }
+
+      $("#gold").on('click', function () {
+        $("#mainPartDescription").empty().append(roomTexts.chest5);
+        heroCreator.gold.splice(0, 1, 12);
+      });
+    });
+
+    //zdarzenie dla paczki
+    $("#package").on("click", function () {
+      console.log("paczka");
+    });
+  };
+
+  //pokój  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
+
 }); //koniec DOMContentLoaded
 
 /***/ })

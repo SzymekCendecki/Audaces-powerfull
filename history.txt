@@ -186,3 +186,6 @@ Dodano intro gry.
 
 26 grudnia 2018 - wersja 0.1.48
 Dodano główne przyciski gry - cechy, ekwipunek, umiejętności oraz zadania.
+
+27 grudnia 2018 - wersja 0.1.49
+Praca nad zdarzeniami lokacji: pokój.
