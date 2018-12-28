@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1271,7 +1271,7 @@ module.exports.firstMenuBtns = function () {
 
 var functions = __webpack_require__(0);
 var heroCreator = __webpack_require__(1);
-var room = __webpack_require__(8);
+var room = __webpack_require__(5);
 
 var introGameTexts = {
   "text1": "<p class='animOpacity01'>Mówią, że Dzikie Pustkowia to kraina opuszczona przez Bogów.</p>",
@@ -1322,6 +1322,7 @@ module.exports.showIntro = function () {
       $("#skip, #introGameTexts").hide();
       $("#features, #equip, #skills, #tasks").show();
       $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").show();
+      $("#outRoom").prop("disabled", true);
       $("#mainPartDescription").before(room.roomTexts.firstText);
     });
   });
@@ -1329,119 +1330,6 @@ module.exports.showIntro = function () {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(6);
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(3);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(4);
-var mainGameBtns = __webpack_require__(7);
-var room = __webpack_require__(8);
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("NIEWIERNE PSY RULEZ!!!!");
-
-  //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
-
-  //pokój
-  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
-
-  //przejście z pierwszego intro do pierwszego menu
-  setTimeout(function () {
-    $("header p, #heroBtns div").fadeIn(750);
-    $("body").fadeIn(750).css("background", "beige");
-    $("#mainPart h2, #mainPart h3").remove();
-    functions.newElement("p", "description", "", $("#mainPart"));
-    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
-  }, 16000);
-
-  //funkcje dla przycisków pierwszego menu
-  firstMenu.firstMenuBtns();
-  heroCreator.random();
-  heroCreator.choose();
-
-  //funkcje dla "wyskakującego" okienka dla informacji gry
-  gameInfo.gameInfo();
-
-  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
-  introGame.showIntro();
-
-  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
-  mainGameBtns.mainGameBtns();
-
-  //zdarzenia dla pokoju
-  room.roomEvents(heroCreator.equip, heroCreator.hero);
-}); //koniec DOMContentLoaded
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(3);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(4);
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("NIEWIERNE PSY RULEZ!!!!");
-
-  //#features, #equip, #skills, #tasks
-
-  module.exports.mainGameBtns = function () {
-
-    //zdarzenia dla wyświetlania cech postaci w grze
-    $("#features").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").html("<div class='width24p margin2000p'><p>imi\u0119</p><p>" + heroCreator.hero[0] + "</p></div><div class='width24p margin2000p'><p>p\u0142e\u0107</p><p>" + heroCreator.hero[1] + "</p></div><div class='width24p margin2000p'><p>rasa</p><p>" + heroCreator.hero[2] + "</p></div><div class='width24p margin2000p'><p>profesja</p><p>" + heroCreator.hero[3] + "</p></div><div class='width100p anotherFlex margin2000p'><div class='width33p'><p>si\u0142a</p><p'>" + heroCreator.hero[4] + "</p></div><div class='width33p'><p>wytrzyma\u0142o\u015B\u0107</p><p>" + heroCreator.hero[5] + "</p></div><div class='width33p'><p>zr\u0119czno\u015B\u0107</p><p>" + heroCreator.hero[6] + "</p></div><div class='width33p'><p>inteligencja</p><p>" + heroCreator.hero[7] + "</p></div><div class='width33p'><p>charyzma</p><p>" + heroCreator.hero[8] + "</p></div></div><div class='width24p margin2000p'><p>kolor oczu</p><p  id=\"eColor\"></p></div><div class='width24p margin2000p'><p>kolor w\u0142os\xF3w</p><p id=\"hColor\"></p></div><div class='width24p margin2000p'><p>kolor sk\xF3ry</p><p id=\"sColor\"></p></div><div class='width24p margin2000p'><p>tatua\u017Ce</p><p>" + heroCreator.hero[12] + "</p></div><div class='width24p margin2000p'><p>waga</p><p>" + heroCreator.hero[13] + "</p></div><div class='width24p margin2000p'><p>wzrost</p><p>" + heroCreator.hero[14] + "</p></div>");
-
-      $("#eColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[9][0]) + "," + parseInt(heroCreator.hero[9][1]) + ", " + parseInt(heroCreator.hero[9][2])).addClass("height15px");
-      $("#hColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[10][0]) + ", " + parseInt(heroCreator.hero[10][1]) + ", " + parseInt(heroCreator.hero[10][2])).addClass("height15px");
-      $("#sColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[11][0]) + ", " + parseInt(heroCreator.hero[11][1]) + ", " + parseInt(heroCreator.hero[11][2])).addClass("height15px");
-    });
-
-    //zdarzenia dla wyświetlania ekwipunku w grze
-    $("#equip").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").empty().append(heroCreator.equip);
-    });
-
-    //zdarzenia dla wyświetlania umiejętności w grze
-    $("#skills").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").empty().append(heroCreator.skills);
-    });
-
-    //zdarzenia dla wyświetlania zadań w grze
-    $("#tasks").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").empty().append(heroCreator.tasks);
-    });
-
-    $("#heroInfo button:first-child").on("click", function () {
-      $("#heroBtns button").prop("disabled", false);
-      $("#heroInfo").hide();
-    });
-  };
-}); //koniec DOMContentLoaded
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1488,17 +1376,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //zdarzenie dla szafy
     $("#wardrobe").on("click", function () {
-      if (heroCreator.equip.indexOf("płaszcz") !== -1) {
-        if (heroCreator.hero[1] === "kobieta") {
-          $("#mainPartDescription").empty().append(roomTexts.wardrobe4);
-        } else if (heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo") {
-          $("#mainPartDescription").empty().append(roomTexts.wardrobe2);
+      if (heroCreator.equip.indexOf(" płaszcz") !== -1) {
+        switch (heroCreator.hero[1]) {
+          case "kobieta":
+            $("#mainPartDescription").empty().append(roomTexts.wardrobe4);break;
+          case "mężczyzna":
+            $("#mainPartDescription").empty().append(roomTexts.wardrobe2);break;
+          case "nie wiadomo":
+            $("#mainPartDescription").empty().append(roomTexts.wardrobe2);break;
         }
       } else {
-        if (heroCreator.hero[1] === "kobieta") {
-          $("#mainPartDescription").empty().append(roomTexts.wardrobe3);
-        } else if (heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo") {
-          $("#mainPartDescription").empty().append(roomTexts.wardrobe1);
+        switch (heroCreator.hero[1]) {
+          case "kobieta":
+            $("#mainPartDescription").empty().append(roomTexts.wardrobe3);break;
+          case "mężczyzna":
+            $("#mainPartDescription").empty().append(roomTexts.wardrobe1);break;
+          case "nie wiadomo":
+            $("#mainPartDescription").empty().append(roomTexts.wardrobe1);break;
         }
       }
 
@@ -1532,12 +1426,127 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //zdarzenie dla paczki
     $("#package").on("click", function () {
-      console.log("paczka");
+      $("#outRoom").prop("disabled", false).css("background", "green");
+      heroCreator.equip.push(" paczka");
+      $("#package").remove();
     });
   };
 
   //pokój  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
 
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(7);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var mainGameBtns = __webpack_require__(8);
+var room = __webpack_require__(5);
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("NIEWIERNE PSY RULEZ!!!!");
+
+  //ukrywanie odpowiednich części
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
+
+  //pokój
+  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
+
+  //przejście z pierwszego intro do pierwszego menu
+  setTimeout(function () {
+    $("header p, #heroBtns div").fadeIn(750);
+    $("body").fadeIn(750).css("background", "beige");
+    $("#mainPart h2, #mainPart h3").remove();
+    functions.newElement("p", "description", "", $("#mainPart"));
+    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
+  }, 16000);
+
+  //funkcje dla przycisków pierwszego menu
+  firstMenu.firstMenuBtns();
+  heroCreator.random();
+  heroCreator.choose();
+
+  //funkcje dla "wyskakującego" okienka dla informacji gry
+  gameInfo.gameInfo();
+
+  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
+  introGame.showIntro();
+
+  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
+  mainGameBtns.mainGameBtns();
+
+  //zdarzenia dla pokoju
+  room.roomEvents(heroCreator.equip, heroCreator.hero);
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("NIEWIERNE PSY RULEZ!!!!");
+
+  //#features, #equip, #skills, #tasks
+
+  module.exports.mainGameBtns = function () {
+
+    //zdarzenia dla wyświetlania cech postaci w grze
+    $("#features").on("click", function () {
+      $("#heroInfo").show();
+      $("#heroInfoDescription").html("<div class='width24p margin2000p'><p>imi\u0119</p><p>" + heroCreator.hero[0] + "</p></div><div class='width24p margin2000p'><p>p\u0142e\u0107</p><p>" + heroCreator.hero[1] + "</p></div><div class='width24p margin2000p'><p>rasa</p><p>" + heroCreator.hero[2] + "</p></div><div class='width24p margin2000p'><p>profesja</p><p>" + heroCreator.hero[3] + "</p></div><div class='width100p anotherFlex margin2000p'><div class='width33p'><p>si\u0142a</p><p'>" + heroCreator.hero[4] + "</p></div><div class='width33p'><p>wytrzyma\u0142o\u015B\u0107</p><p>" + heroCreator.hero[5] + "</p></div><div class='width33p'><p>zr\u0119czno\u015B\u0107</p><p>" + heroCreator.hero[6] + "</p></div><div class='width33p'><p>inteligencja</p><p>" + heroCreator.hero[7] + "</p></div><div class='width33p'><p>charyzma</p><p>" + heroCreator.hero[8] + "</p></div></div><div class='width24p margin2000p'><p>kolor oczu</p><p  id=\"eColor\"></p></div><div class='width24p margin2000p'><p>kolor w\u0142os\xF3w</p><p id=\"hColor\"></p></div><div class='width24p margin2000p'><p>kolor sk\xF3ry</p><p id=\"sColor\"></p></div><div class='width24p margin2000p'><p>tatua\u017Ce</p><p>" + heroCreator.hero[12] + "</p></div><div class='width24p margin2000p'><p>waga</p><p>" + heroCreator.hero[13] + "</p></div><div class='width24p margin2000p'><p>wzrost</p><p>" + heroCreator.hero[14] + "</p></div>");
+
+      $("#eColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[9][0]) + "," + parseInt(heroCreator.hero[9][1]) + ", " + parseInt(heroCreator.hero[9][2])).addClass("height15px");
+      $("#hColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[10][0]) + ", " + parseInt(heroCreator.hero[10][1]) + ", " + parseInt(heroCreator.hero[10][2])).addClass("height15px");
+      $("#sColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[11][0]) + ", " + parseInt(heroCreator.hero[11][1]) + ", " + parseInt(heroCreator.hero[11][2])).addClass("height15px");
+    });
+
+    //zdarzenia dla wyświetlania ekwipunku w grze
+    $("#equip").on("click", function () {
+      $("#heroInfo").show();
+      $("#heroInfoDescription").empty().append(heroCreator.equip).append("<p class='newRocker textIndent15px'>z\u0142oto: <span class=\"greenText\">" + heroCreator.gold + "</span> szt. z\u0142.</p>");
+    });
+
+    //zdarzenia dla wyświetlania umiejętności w grze
+    $("#skills").on("click", function () {
+      $("#heroInfo").show();
+      $("#heroInfoDescription").empty().append(heroCreator.skills);
+    });
+
+    //zdarzenia dla wyświetlania zadań w grze
+    $("#tasks").on("click", function () {
+      $("#heroInfo").show();
+      $("#heroInfoDescription").empty().append(heroCreator.tasks);
+    });
+
+    $("#heroInfo button:first-child").on("click", function () {
+      $("#heroBtns button").prop("disabled", false);
+      $("#heroInfo").hide();
+    });
+  };
 }); //koniec DOMContentLoaded
 
 /***/ })

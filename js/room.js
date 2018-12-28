@@ -39,19 +39,19 @@ module.exports.roomEvents = function(equip, hero){
 
   //zdarzenie dla szafy
   $("#wardrobe").on("click", ()=>{
-      if(heroCreator.equip.indexOf("płaszcz") !== -1){
-        if(heroCreator.hero[1] === "kobieta"){
-            $("#mainPartDescription").empty().append(roomTexts.wardrobe4);
-        }else if(heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo"){
-          $("#mainPartDescription").empty().append(roomTexts.wardrobe2);
-        }
-      }else {
-        if(heroCreator.hero[1] === "kobieta"){
-            $("#mainPartDescription").empty().append(roomTexts.wardrobe3);
-        }else if(heroCreator.hero[1] === "mężczyzna" || heroCreator.hero[1] === "nie wiadomo"){
-          $("#mainPartDescription").empty().append(roomTexts.wardrobe1);
-        }
-      }
+    if(heroCreator.equip.indexOf(" płaszcz") !== -1){
+  	   switch (heroCreator.hero[1]){
+    		case "kobieta": $("#mainPartDescription").empty().append(roomTexts.wardrobe4); break;
+    		case "mężczyzna": $("#mainPartDescription").empty().append(roomTexts.wardrobe2); break;
+        case "nie wiadomo": $("#mainPartDescription").empty().append(roomTexts.wardrobe2); break;
+    	}
+    }else{
+      switch (heroCreator.hero[1]){
+       case "kobieta": $("#mainPartDescription").empty().append(roomTexts.wardrobe3); break;
+       case "mężczyzna": $("#mainPartDescription").empty().append(roomTexts.wardrobe1); break;
+       case "nie wiadomo": $("#mainPartDescription").empty().append(roomTexts.wardrobe1); break;
+    }
+  }
 
       $("#coat").on('click', ()=>{
         $("#mainPartDescription").empty().append(roomTexts.wardrobe5);
@@ -83,7 +83,9 @@ module.exports.roomEvents = function(equip, hero){
 
 //zdarzenie dla paczki
   $("#package").on("click", ()=>{
-    console.log("paczka");
+    $("#outRoom").prop("disabled", false).css("background", "green");
+    heroCreator.equip.push(" paczka");
+    $("#package").remove();
   });
 }
 

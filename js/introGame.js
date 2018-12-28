@@ -33,6 +33,7 @@ module.exports.showIntro = function(){
       $("#skip, #introGameTexts").hide();
       $("#features, #equip, #skills, #tasks").show();
       $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").show();
+      $("#outRoom").prop("disabled", true);
       $("#mainPartDescription").before(room.roomTexts.firstText);
     });
   });

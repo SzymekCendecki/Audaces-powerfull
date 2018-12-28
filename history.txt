@@ -189,3 +189,9 @@ Dodano główne przyciski gry - cechy, ekwipunek, umiejętności oraz zadania.
 
 27 grudnia 2018 - wersja 0.1.49
 Praca nad zdarzeniami lokacji: pokój.
+
+28 grudnia 2018 - wersja 0.1.50
+Poprawiony błąd dodawania płaszcza.
+ Dodano wyświetlanie ilości złota w ekwipunku.
+Poprawka graficzna przycisku "wyjdź".
+  Dodano zdarzenie dla zabierania paczki.

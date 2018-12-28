@@ -24,7 +24,7 @@ module.exports.mainGameBtns = function(){
 //zdarzenia dla wyświetlania ekwipunku w grze
   $("#equip").on("click", ()=>{
     $("#heroInfo").show()
-    $("#heroInfoDescription").empty().append(heroCreator.equip);
+    $("#heroInfoDescription").empty().append(heroCreator.equip).append(`<p class='newRocker textIndent15px'>złoto: <span class="greenText">${heroCreator.gold}</span> szt. zł.</p>`);
   });
 
 //zdarzenia dla wyświetlania umiejętności w grze
