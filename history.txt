@@ -195,3 +195,6 @@ Poprawiony błąd dodawania płaszcza.
  Dodano wyświetlanie ilości złota w ekwipunku.
 Poprawka graficzna przycisku "wyjdź".
   Dodano zdarzenie dla zabierania paczki.
+
+29 grudnia 2018 - wersja 0.1.51
+Dodano skróty klawiszowe dla gry: e - ekwipunek, u - umiejętności, z - zadania, c - cechy.

@@ -5,7 +5,6 @@ let gameInfo=require("./gameInfo.js");
 let introGame=require("./introGame.js");
 
 document.addEventListener("DOMContentLoaded", () => {
- console.log("NIEWIERNE PSY RULEZ!!!!");
 
  let roomTexts = {
    "firstText":"<p class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia. Na stoliku leży zawniątko, które musisz oddać mnichowi w przygranicznej wiosce. Co robisz?</p>",

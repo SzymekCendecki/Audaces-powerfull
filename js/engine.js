@@ -320,6 +320,40 @@ module.exports.heroCreatorResult = function (hero, skills, equip) {
   $("#randomResult #equipResult p:nth-child(2)").empty().append(equip);
 };
 
+//zdarzenia dla okien z informacjami
+//dla cech
+module.exports.featuresShow = function () {
+  $("#heroInfo").show();
+  $("#heroInfoDescription").html("<div class='width24p margin2000p'><p>imi\u0119</p><p>" + heroCreator.hero[0] + "</p></div><div class='width24p margin2000p'><p>p\u0142e\u0107</p><p>" + heroCreator.hero[1] + "</p></div><div class='width24p margin2000p'><p>rasa</p><p>" + heroCreator.hero[2] + "</p></div><div class='width24p margin2000p'><p>profesja</p><p>" + heroCreator.hero[3] + "</p></div><div class='width100p anotherFlex margin2000p'><div class='width33p'><p>si\u0142a</p><p'>" + heroCreator.hero[4] + "</p></div><div class='width33p'><p>wytrzyma\u0142o\u015B\u0107</p><p>" + heroCreator.hero[5] + "</p></div><div class='width33p'><p>zr\u0119czno\u015B\u0107</p><p>" + heroCreator.hero[6] + "</p></div><div class='width33p'><p>inteligencja</p><p>" + heroCreator.hero[7] + "</p></div><div class='width33p'><p>charyzma</p><p>" + heroCreator.hero[8] + "</p></div></div><div class='width24p margin2000p'><p>kolor oczu</p><p  id=\"eColor\"></p></div><div class='width24p margin2000p'><p>kolor w\u0142os\xF3w</p><p id=\"hColor\"></p></div><div class='width24p margin2000p'><p>kolor sk\xF3ry</p><p id=\"sColor\"></p></div><div class='width24p margin2000p'><p>tatua\u017Ce</p><p>" + heroCreator.hero[12] + "</p></div><div class='width24p margin2000p'><p>waga</p><p>" + heroCreator.hero[13] + "</p></div><div class='width24p margin2000p'><p>wzrost</p><p>" + heroCreator.hero[14] + "</p></div>");
+
+  $("#eColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[9][0]) + "," + parseInt(heroCreator.hero[9][1]) + ", " + parseInt(heroCreator.hero[9][2])).addClass("height15px");
+  $("#hColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[10][0]) + ", " + parseInt(heroCreator.hero[10][1]) + ", " + parseInt(heroCreator.hero[10][2])).addClass("height15px");
+  $("#sColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[11][0]) + ", " + parseInt(heroCreator.hero[11][1]) + ", " + parseInt(heroCreator.hero[11][2])).addClass("height15px");
+};
+//dla ekwipunku
+module.exports.equipShow = function () {
+  $("#heroInfo").show();
+  $("#heroInfoDescription").empty().append(heroCreator.equip).append("<p class='newRocker textIndent15px'>z\u0142oto: <span class=\"greenText\">" + heroCreator.gold + "</span> szt. z\u0142.</p>");
+};
+
+//dla umiejętności
+module.exports.skillsShow = function () {
+  $("#heroInfo").show();
+  $("#heroInfoDescription").empty().append(heroCreator.skills);
+};
+
+//dla zadań
+module.exports.tasksShow = function () {
+  $("#heroInfo").show();
+  $("#heroInfoDescription").empty().append(heroCreator.tasks);
+};
+
+//zamykanie okien
+module.exports.closeWindow = function () {
+  $("#heroBtns button").prop("disabled", false);
+  $("#heroInfo").hide();
+};
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1342,7 +1376,6 @@ var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("NIEWIERNE PSY RULEZ!!!!");
 
   var roomTexts = {
     "firstText": "<p class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia. Na stoliku leży zawniątko, które musisz oddać mnichowi w przygranicznej wiosce. Co robisz?</p>",
@@ -1455,12 +1488,11 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
+var keys = __webpack_require__(9);
 var mainGameBtns = __webpack_require__(8);
 var room = __webpack_require__(5);
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("NIEWIERNE PSY RULEZ!!!!");
-
   //ukrywanie odpowiednich części
   $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
 
@@ -1487,6 +1519,9 @@ document.addEventListener("DOMContentLoaded", function () {
   //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
   introGame.showIntro();
 
+  //zdarzenia pod przyciskiem
+  keys.keys();
+
   //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
   mainGameBtns.mainGameBtns();
 
@@ -1508,43 +1543,98 @@ var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("NIEWIERNE PSY RULEZ!!!!");
-
   //#features, #equip, #skills, #tasks
 
   module.exports.mainGameBtns = function () {
-
     //zdarzenia dla wyświetlania cech postaci w grze
     $("#features").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").html("<div class='width24p margin2000p'><p>imi\u0119</p><p>" + heroCreator.hero[0] + "</p></div><div class='width24p margin2000p'><p>p\u0142e\u0107</p><p>" + heroCreator.hero[1] + "</p></div><div class='width24p margin2000p'><p>rasa</p><p>" + heroCreator.hero[2] + "</p></div><div class='width24p margin2000p'><p>profesja</p><p>" + heroCreator.hero[3] + "</p></div><div class='width100p anotherFlex margin2000p'><div class='width33p'><p>si\u0142a</p><p'>" + heroCreator.hero[4] + "</p></div><div class='width33p'><p>wytrzyma\u0142o\u015B\u0107</p><p>" + heroCreator.hero[5] + "</p></div><div class='width33p'><p>zr\u0119czno\u015B\u0107</p><p>" + heroCreator.hero[6] + "</p></div><div class='width33p'><p>inteligencja</p><p>" + heroCreator.hero[7] + "</p></div><div class='width33p'><p>charyzma</p><p>" + heroCreator.hero[8] + "</p></div></div><div class='width24p margin2000p'><p>kolor oczu</p><p  id=\"eColor\"></p></div><div class='width24p margin2000p'><p>kolor w\u0142os\xF3w</p><p id=\"hColor\"></p></div><div class='width24p margin2000p'><p>kolor sk\xF3ry</p><p id=\"sColor\"></p></div><div class='width24p margin2000p'><p>tatua\u017Ce</p><p>" + heroCreator.hero[12] + "</p></div><div class='width24p margin2000p'><p>waga</p><p>" + heroCreator.hero[13] + "</p></div><div class='width24p margin2000p'><p>wzrost</p><p>" + heroCreator.hero[14] + "</p></div>");
-
-      $("#eColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[9][0]) + "," + parseInt(heroCreator.hero[9][1]) + ", " + parseInt(heroCreator.hero[9][2])).addClass("height15px");
-      $("#hColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[10][0]) + ", " + parseInt(heroCreator.hero[10][1]) + ", " + parseInt(heroCreator.hero[10][2])).addClass("height15px");
-      $("#sColor").css("background-color", "rgb(" + parseInt(heroCreator.hero[11][0]) + ", " + parseInt(heroCreator.hero[11][1]) + ", " + parseInt(heroCreator.hero[11][2])).addClass("height15px");
+      functions.featuresShow();
     });
 
     //zdarzenia dla wyświetlania ekwipunku w grze
     $("#equip").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").empty().append(heroCreator.equip).append("<p class='newRocker textIndent15px'>z\u0142oto: <span class=\"greenText\">" + heroCreator.gold + "</span> szt. z\u0142.</p>");
+      functions.equipShow();
     });
 
     //zdarzenia dla wyświetlania umiejętności w grze
     $("#skills").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").empty().append(heroCreator.skills);
+      functions.skillsShow();
     });
 
     //zdarzenia dla wyświetlania zadań w grze
     $("#tasks").on("click", function () {
-      $("#heroInfo").show();
-      $("#heroInfoDescription").empty().append(heroCreator.tasks);
+      functions.tasksShow();
     });
 
+    //zamykanie okna
     $("#heroInfo button:first-child").on("click", function () {
-      $("#heroBtns button").prop("disabled", false);
-      $("#heroInfo").hide();
+      functions.closeWindow();
+    });
+  };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+  //skróty klawiszowe dla otwierania okien
+  module.exports.keys = function () {
+    //dla cech
+    $("body").keypress(function (e) {
+      if (e.key == "c") {
+        functions.featuresShow();
+      }
+    });
+    $("body").keyup(function (e) {
+      if (e.key == "c") {
+        functions.closeWindow();
+      }
+    });
+
+    //dla ekwipunku
+    $("body").keypress(function (e) {
+      if (e.key == "e") {
+        functions.equipShow();
+      }
+    });
+    $("body").keyup(function (e) {
+      if (e.key == "e") {
+        functions.closeWindow();
+      }
+    });
+
+    //dla umiejętności
+    $("body").keypress(function (e) {
+      if (e.key == "u") {
+        functions.skillsShow();
+      }
+    });
+    $("body").keyup(function (e) {
+      if (e.key == "u") {
+        functions.closeWindow();
+      }
+    });
+
+    //dla zadań
+    $("body").keypress(function (e) {
+      if (e.key == "z") {
+        functions.tasksShow();
+      }
+    });
+    $("body").keyup(function (e) {
+      if (e.key == "z") {
+        functions.closeWindow();
+      }
     });
   };
 }); //koniec DOMContentLoaded
