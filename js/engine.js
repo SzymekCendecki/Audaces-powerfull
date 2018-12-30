@@ -1378,7 +1378,9 @@ var introGame = __webpack_require__(4);
 document.addEventListener("DOMContentLoaded", function () {
 
   var roomTexts = {
-    "firstText": "<p class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia. Na stoliku leży zawniątko, które musisz oddać mnichowi w przygranicznej wiosce. Co robisz?</p>",
+    "firstText": "<p id='firstTextRoom' class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia. Na stoliku leży zawniątko, które musisz oddać mnichowi w przygranicznej wiosce. Co robisz?</p>",
+
+    "secondText": "<p id='secondTextRoom' class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia.</p>",
 
     "lookAroundRoom": "<p class='newRocker textIndent15px margin2000p'>Rozglądasz się po pokoju. Widzisz drewnianą szafę, stojącą w rogu pokoju. Pod oknem stoi niewielka, drewniana skrzynia. Naprzeciw drzwi stoi łóżko. W pomieszczeniu niemiłosiernie wali stęchlizną i kupą szczurów.</p>",
 
@@ -1402,7 +1404,14 @@ document.addEventListener("DOMContentLoaded", function () {
   module.exports.roomTexts = roomTexts;
 
   module.exports.roomEvents = function (equip, hero) {
-    //zdarzenie dla rozglądania się
+    $("#inRoom").on("click", function () {
+      $("#outRoom, #wardrobe, #chest, #lookAroundRoom").show();
+      $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+      $("#firstTextStreet").remove();
+      $("#mainPartDescription").before(roomTexts.secondText);
+    });
+
+    //zdarzenie dla rozglądania się - pokój
     $("#lookAroundRoom").on("click", function () {
       $("#mainPartDescription").empty().append(roomTexts.lookAroundRoom);
     });
@@ -1459,14 +1468,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //zdarzenie dla paczki
     $("#package").on("click", function () {
-      $("#outRoom").prop("disabled", false).css("background", "green");
+      $("#outRoom").prop("disabled", false).removeClass("redBtn").addClass("greenBtn");
       heroCreator.equip.push(" paczka");
       $("#package").remove();
+      $("#firstTextRoom").remove();
+      $("#mainPartDescription").before(roomTexts.secondText).empty();
     });
   };
-
-  //pokój  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
-
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -1488,9 +1496,10 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var keys = __webpack_require__(9);
-var mainGameBtns = __webpack_require__(8);
+var keys = __webpack_require__(8);
+var mainGameBtns = __webpack_require__(9);
 var room = __webpack_require__(5);
+var street = __webpack_require__(10);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -1498,6 +1507,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //pokój
   $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
+
+  //ulica
+  $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -1527,54 +1539,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //zdarzenia dla pokoju
   room.roomEvents(heroCreator.equip, heroCreator.hero);
+
+  //zdarzenia dla ulicy
+  street.streetEvents();
 }); //koniec DOMContentLoaded
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(3);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(4);
-
-document.addEventListener("DOMContentLoaded", function () {
-  //#features, #equip, #skills, #tasks
-
-  module.exports.mainGameBtns = function () {
-    //zdarzenia dla wyświetlania cech postaci w grze
-    $("#features").on("click", function () {
-      functions.featuresShow();
-    });
-
-    //zdarzenia dla wyświetlania ekwipunku w grze
-    $("#equip").on("click", function () {
-      functions.equipShow();
-    });
-
-    //zdarzenia dla wyświetlania umiejętności w grze
-    $("#skills").on("click", function () {
-      functions.skillsShow();
-    });
-
-    //zdarzenia dla wyświetlania zadań w grze
-    $("#tasks").on("click", function () {
-      functions.tasksShow();
-    });
-
-    //zamykanie okna
-    $("#heroInfo button:first-child").on("click", function () {
-      functions.closeWindow();
-    });
-  };
-}); //koniec DOMContentLoaded
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1635,6 +1606,112 @@ document.addEventListener("DOMContentLoaded", function () {
       if (e.key == "z") {
         functions.closeWindow();
       }
+    });
+
+    //dla info
+    $("body").keypress(function (e) {
+      if (e.key == "i") {
+        gameInfo.gameInfo();
+      }
+    });
+    $("body").keyup(function (e) {
+      if (e.key == "i") {
+        functions.closeWindow();
+      }
+    });
+  };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+  //#features, #equip, #skills, #tasks
+
+  module.exports.mainGameBtns = function () {
+    //zdarzenia dla wyświetlania cech postaci w grze
+    $("#features").on("click", function () {
+      functions.featuresShow();
+    });
+
+    //zdarzenia dla wyświetlania ekwipunku w grze
+    $("#equip").on("click", function () {
+      functions.equipShow();
+    });
+
+    //zdarzenia dla wyświetlania umiejętności w grze
+    $("#skills").on("click", function () {
+      functions.skillsShow();
+    });
+
+    //zdarzenia dla wyświetlania zadań w grze
+    $("#tasks").on("click", function () {
+      functions.tasksShow();
+    });
+
+    //zamykanie okna
+    $("#heroInfo button:first-child").on("click", function () {
+      functions.closeWindow();
+    });
+  };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+  var streetTexts = {
+    "firstText": "<p id='firstTextStreet' class='newRocker textIndent15px'>Stoisz przed domem. Aby udać się do wyznaczonego celu, najlepiej zabrać się z jakąś karawaną. Idziesz w kierunku bramy miasta. Przy bramie znajduje się targ. To dobry czas i miejsce, aby uzupełnić zapasy na dalszą podróż. Co robisz?</p>",
+    "lookAroundStreet": "<p class='newRocker textIndent15px margin2000p'>Typowa ulica dzielnicy Najemników, miasta Erharuf. Częściowo brukowana. Pobliskie budynki są niskie i drewniane, maksymalnie jednopiętrowe. Nic specjalnego.</p>"
+  };
+
+  module.exports.roomTexts = streetTexts;
+
+  module.exports.streetEvents = function () {
+
+    //zdarzenie dla wchodzenie do pokoju
+    $("#outRoom").on("click", function () {
+      $("#outRoom, #wardrobe, #chest, #lookAroundRoom").hide();
+      $("#inRoom, #lookAroundStreet, #caravans, #market").show();
+      $("#secondTextRoom").remove();
+      $("#mainPartDescription").before(streetTexts.firstText).empty();
+    });
+
+    //zdarzenie dla pójścia do karawan
+    $("#caravans").on("click", function () {
+      $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+      $("#firstTextStreet").remove();
+    });
+
+    //zdarzenie dla pójścia do targu
+    $("#market").on("click", function () {
+      $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+      $("#firstTextStreet").remove();
+    });
+
+    //zdarzenie dla rozglądania się - ulica
+    $("#lookAroundStreet").on("click", function () {
+      $("#mainPartDescription").empty().append(streetTexts.lookAroundStreet);
     });
   };
 }); //koniec DOMContentLoaded

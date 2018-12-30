@@ -198,3 +198,6 @@ Poprawka graficzna przycisku "wyjdź".
 
 29 grudnia 2018 - wersja 0.1.51
 Dodano skróty klawiszowe dla gry: e - ekwipunek, u - umiejętności, z - zadania, c - cechy.
+
+30 grudnia 2018 - wersja 0.1.52
+Dodano zdarzenia dla lokacji ulica.

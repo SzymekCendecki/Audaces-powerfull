@@ -7,7 +7,9 @@ let introGame=require("./introGame.js");
 document.addEventListener("DOMContentLoaded", () => {
 
  let roomTexts = {
-   "firstText":"<p class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia. Na stoliku leży zawniątko, które musisz oddać mnichowi w przygranicznej wiosce. Co robisz?</p>",
+   "firstText":"<p id='firstTextRoom' class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia. Na stoliku leży zawniątko, które musisz oddać mnichowi w przygranicznej wiosce. Co robisz?</p>",
+
+   "secondText":"<p id='secondTextRoom' class='newRocker textIndent15px'>Stoisz w swoim pokoju, w którym znajduje się tylko łóżko, szafa, mały stolik i drewniana skrzynia.</p>",
 
    "lookAroundRoom":"<p class='newRocker textIndent15px margin2000p'>Rozglądasz się po pokoju. Widzisz drewnianą szafę, stojącą w rogu pokoju. Pod oknem stoi niewielka, drewniana skrzynia. Naprzeciw drzwi stoi łóżko. W pomieszczeniu niemiłosiernie wali stęchlizną i kupą szczurów.</p>",
 
@@ -31,7 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
  module.exports.roomTexts = roomTexts;
 
 module.exports.roomEvents = function(equip, hero){
-  //zdarzenie dla rozglądania się
+  $("#inRoom").on("click", ()=>{
+    $("#outRoom, #wardrobe, #chest, #lookAroundRoom").show();
+    $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+    $("#firstTextStreet").remove();
+    $("#mainPartDescription").before(roomTexts.secondText);
+  });
+
+  //zdarzenie dla rozglądania się - pokój
   $("#lookAroundRoom").on("click", ()=>{
     $("#mainPartDescription").empty().append(roomTexts.lookAroundRoom);
   });
@@ -82,14 +91,12 @@ module.exports.roomEvents = function(equip, hero){
 
 //zdarzenie dla paczki
   $("#package").on("click", ()=>{
-    $("#outRoom").prop("disabled", false).css("background", "green");
+    $("#outRoom").prop("disabled", false).removeClass("redBtn").addClass("greenBtn");
     heroCreator.equip.push(" paczka");
     $("#package").remove();
+    $("#firstTextRoom").remove();
+    $("#mainPartDescription").before(roomTexts.secondText).empty();
   });
 }
-
-
- //pokój  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
-
 
 });//koniec DOMContentLoaded

@@ -6,6 +6,7 @@ let introGame=require("./introGame.js");
 let keys=require("./keys.js");
 let mainGameBtns=require("./mainGameBtns.js");
 let room=require("./room.js");
+let street=require("./street.js");
 
 document.addEventListener("DOMContentLoaded", () => {
 //ukrywanie odpowiednich części
@@ -13,6 +14,9 @@ $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  
 
 //pokój
 $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
+
+//ulica
+  $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
@@ -42,5 +46,8 @@ mainGameBtns.mainGameBtns();
 
 //zdarzenia dla pokoju
 room.roomEvents(heroCreator.equip, heroCreator.hero);
+
+//zdarzenia dla ulicy
+street.streetEvents();
 
 });//koniec DOMContentLoaded

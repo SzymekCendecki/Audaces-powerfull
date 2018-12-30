@@ -22,6 +22,10 @@ module.exports.keys = function(){
  //dla zadań
  $("body").keypress((e)=>{ if(e.key == "z"){ functions.tasksShow(); } });
  $("body").keyup((e)=>{ if(e.key == "z"){ functions.closeWindow(); } });
+
+ //dla info
+ $("body").keypress((e)=>{ if(e.key == "i"){ gameInfo.gameInfo(); } });
+ $("body").keyup((e)=>{ if(e.key == "i"){ functions.closeWindow(); } });
 }
 
 });//koniec DOMContentLoaded
