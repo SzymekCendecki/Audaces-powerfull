@@ -201,3 +201,6 @@ Dodano skróty klawiszowe dla gry: e - ekwipunek, u - umiejętności, z - zadani
 
 30 grudnia 2018 - wersja 0.1.52
 Dodano zdarzenia dla lokacji ulica.
+
+31 grudnia 2018 - wersja 0.1.53
+Dodano zdarzenia dla lokacji postoju karawan.

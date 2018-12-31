@@ -379,6 +379,10 @@ function check(hero) {
 
 module.exports.hero = hero;
 
+//tablica ze zmiennymi, które będą potrzebne w trakcie gry
+//indeks: 0 dla określania czy postać zapytała się na postoju karawan
+var variables = [0];module.exports.variables = variables;
+
 //tablica ekwipunku
 var equip = [];module.exports.equip = equip;
 
@@ -1500,6 +1504,7 @@ var keys = __webpack_require__(8);
 var mainGameBtns = __webpack_require__(9);
 var room = __webpack_require__(5);
 var street = __webpack_require__(10);
+var caravans = __webpack_require__(11);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -1510,6 +1515,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //ulica
   $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+
+  //ulica
+  $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -1542,6 +1550,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //zdarzenia dla ulicy
   street.streetEvents();
+
+  //zdarzenia dla caravan
+  caravans.caravansEvents();
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -1678,6 +1689,7 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
+var caravans = __webpack_require__(11);
 
 document.addEventListener("DOMContentLoaded", function () {
   var streetTexts = {
@@ -1685,7 +1697,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "lookAroundStreet": "<p class='newRocker textIndent15px margin2000p'>Typowa ulica dzielnicy Najemników, miasta Erharuf. Częściowo brukowana. Pobliskie budynki są niskie i drewniane, maksymalnie jednopiętrowe. Nic specjalnego.</p>"
   };
 
-  module.exports.roomTexts = streetTexts;
+  module.exports.streetTexts = streetTexts;
 
   module.exports.streetEvents = function () {
 
@@ -1700,7 +1712,15 @@ document.addEventListener("DOMContentLoaded", function () {
     //zdarzenie dla pójścia do karawan
     $("#caravans").on("click", function () {
       $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+      $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();
       $("#firstTextStreet").remove();
+      $("#mainPartDescription").before(caravans.caravansTexts.firstText);
+
+      if (heroCreator.variables[0] == 0) {
+        $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();$("#agree").hide();
+      } else {
+        $("#agree, #lookAroundCaravans, #toStreet, #toMarket").show();$("#ask").hide();
+      }
     });
 
     //zdarzenie dla pójścia do targu
@@ -1712,6 +1732,69 @@ document.addEventListener("DOMContentLoaded", function () {
     //zdarzenie dla rozglądania się - ulica
     $("#lookAroundStreet").on("click", function () {
       $("#mainPartDescription").empty().append(streetTexts.lookAroundStreet);
+    });
+  };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var street = __webpack_require__(10);
+
+document.addEventListener("DOMContentLoaded", function () {
+  var caravansTexts = {
+    "firstText": "<p id='firstTextCaravans' class='newRocker textIndent15px'>Idziesz w kierunku głównej bramy. Mijasz ludzi, zwierzęta i taplające się w błocie dzieci. Gdy dochodzisz do bramy robi się coraz tłoczniej. Przez bramę przejeżdżają wozy, ludzie łażą w każdą stronę, wartownicy na murach ziewają z nudów. W końcu udało się wyjść z miasta. Przed sobą widzisz wielki plac, na którym jakaś karawana szykuje się właśnie do odjazdu. Może warto spytać się, czy jedzie do przygranicznej wioski? Co robisz?</p>",
+
+    "lookAroundCaravans": "<p class='newRocker textIndent15px margin2000p'>Za sobą masz bramę do miasta oraz wysokie mury miasta Erharuf. Przed sobą widzisz wielki plac, na którym karawany mogą przygotować się do podróży. W dali widniej ciemna linia prastarego lasu.</p>",
+
+    "ask": "<p class='newRocker textIndent15px margin2000p'>Podchodzisz bliżej. Widzisz postać krasnoluda, który wydziera się w niebo głosy i pogania wszystkich wokół. Gdy jesteś już blisko, pytasz: 'Mości krasnoludzie, czy ta karawana jedzie do wioski na pograniczu?' 'Że co? Aaaa... Tak! Jedziemy dalej, ale będziemy przez nią przejeżdżać. Jak chcesz się zabrać to musisz się pospiesz z wsiadaniem. Na ostatnim wozie jest jeszcze trochę miejsca.'- odpowiedział i wrócił do swoich obowiązków.</p>",
+
+    "agree": "<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>"
+  };
+
+  module.exports.caravansTexts = caravansTexts;
+
+  var z = 0;
+  module.exports.z = z;
+
+  module.exports.caravansEvents = function () {
+    //zdarzenie dla pójścia na ulicę
+    $("#toStreet").on("click", function () {
+      $("#ask, #agree, #lookAroundCaravans, #toMarket, #toStreet").hide();
+      $("#market, #caravans, #lookAroundStreet, #inRoom").show();
+      $("#firstTextCaravans").remove();
+      $("#mainPartDescription").before(street.streetTexts.firstText);
+    });
+
+    //pytane się dla w lokacji: karawany
+    $("#ask").on("click", function () {
+      $("#mainPartDescription").empty().append(caravansTexts.ask);
+      $("#ask").hide();
+      $("#agree").show();
+
+      heroCreator.variables.splice(0, 1, 1);
+    });
+
+    //rozglądanie się w lokacji: karawany
+    $("#lookAroundCaravans").on("click", function () {
+      $("#mainPartDescription").empty().append(caravansTexts.lookAroundCaravans);
+    });
+
+    //zgoda się w lokacji: karawany
+    $("#agree").on("click", function () {
+      $("#mainPartDescription").empty().append(caravansTexts.agree);
+      $("#toMarket, #toStreet, #agree, #lookAroundCaravans").hide();
+      $("#firstTextCaravans").remove();
+      $("#mainPartDescription").empty();
     });
   };
 }); //koniec DOMContentLoaded

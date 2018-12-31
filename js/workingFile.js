@@ -7,6 +7,7 @@ let keys=require("./keys.js");
 let mainGameBtns=require("./mainGameBtns.js");
 let room=require("./room.js");
 let street=require("./street.js");
+let caravans=require("./caravans.js");
 
 document.addEventListener("DOMContentLoaded", () => {
 //ukrywanie odpowiednich części
@@ -17,6 +18,9 @@ $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
 
 //ulica
   $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+
+//ulica
+  $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
@@ -49,5 +53,8 @@ room.roomEvents(heroCreator.equip, heroCreator.hero);
 
 //zdarzenia dla ulicy
 street.streetEvents();
+
+//zdarzenia dla caravan
+caravans.caravansEvents();
 
 });//koniec DOMContentLoaded

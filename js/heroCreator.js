@@ -16,6 +16,10 @@ function check(hero){
 
 module.exports.hero = hero;
 
+//tablica ze zmiennymi, które będą potrzebne w trakcie gry
+//indeks: 0 dla określania czy postać zapytała się na postoju karawan
+let variables = [0]; module.exports.variables = variables;
+
 //tablica ekwipunku
 let equip = []; module.exports.equip = equip;
 

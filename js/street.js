@@ -3,6 +3,7 @@ let firstMenu=require("./firstMenu.js");
 let heroCreator=require("./heroCreator.js");
 let gameInfo=require("./gameInfo.js");
 let introGame=require("./introGame.js");
+let caravans=require("./caravans.js");
 
 document.addEventListener("DOMContentLoaded", () => {
   let streetTexts = {
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "lookAroundStreet":"<p class='newRocker textIndent15px margin2000p'>Typowa ulica dzielnicy Najemników, miasta Erharuf. Częściowo brukowana. Pobliskie budynki są niskie i drewniane, maksymalnie jednopiętrowe. Nic specjalnego.</p>"
   }
 
-  module.exports.roomTexts = streetTexts;
+module.exports.streetTexts = streetTexts;
 
 module.exports.streetEvents = function(){
 
@@ -25,7 +26,16 @@ module.exports.streetEvents = function(){
 //zdarzenie dla pójścia do karawan
   $("#caravans").on("click", ()=>{
     $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+    $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();
     $("#firstTextStreet").remove();
+    $("#mainPartDescription").before(caravans.caravansTexts.firstText);
+
+    if(heroCreator.variables[0] == 0){
+      $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show(); $("#agree").hide();
+    }else{
+      $("#agree, #lookAroundCaravans, #toStreet, #toMarket").show(); $("#ask").hide();
+    }
+
   });
 
   //zdarzenie dla pójścia do targu
