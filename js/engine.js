@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1485,8 +1485,63 @@ document.addEventListener("DOMContentLoaded", function () {
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(7);
+"use strict";
 
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var caravans = __webpack_require__(7);
+var market = __webpack_require__(12);
+
+document.addEventListener("DOMContentLoaded", function () {
+  var streetTexts = {
+    "firstText": "<p id='firstTextStreet' class='newRocker textIndent15px'>Stoisz przed domem. Aby udać się do wyznaczonego celu, najlepiej zabrać się z jakąś karawaną. Idziesz w kierunku bramy miasta. Przy bramie znajduje się targ. To dobry czas i miejsce, aby uzupełnić zapasy na dalszą podróż. Co robisz?</p>",
+    "lookAroundStreet": "<p class='newRocker textIndent15px margin2000p'>Typowa ulica dzielnicy Najemników, miasta Erharuf. Częściowo brukowana. Pobliskie budynki są niskie i drewniane, maksymalnie jednopiętrowe. Nic specjalnego.</p>"
+  };
+
+  module.exports.streetTexts = streetTexts;
+
+  module.exports.streetEvents = function () {
+
+    //zdarzenie dla wchodzenie do pokoju
+    $("#outRoom").on("click", function () {
+      $("#outRoom, #wardrobe, #chest, #lookAroundRoom").hide();
+      $("#inRoom, #lookAroundStreet, #caravans, #market").show();
+      $("#secondTextRoom").remove();
+      $("#mainPartDescription").before(streetTexts.firstText).empty();
+    });
+
+    //zdarzenie dla pójścia do karawan
+    $("#caravans").on("click", function () {
+      $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+      $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();
+      $("#firstTextStreet").remove();
+      $("#mainPartDescription").before(caravans.caravansTexts.firstText);
+
+      if (heroCreator.variables[0] == 0) {
+        $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();$("#agree").hide();
+      } else {
+        $("#agree, #lookAroundCaravans, #toStreet, #toMarket").show();$("#ask").hide();
+      }
+    });
+
+    //zdarzenie dla pójścia do targu
+    $("#market").on("click", function () {
+      $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+      $("#firstTextStreet").remove();
+      $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").show();
+      $("#mainPartDescription").before(market.marketTexts.firstText);
+    });
+
+    //zdarzenie dla rozglądania się - ulica
+    $("#lookAroundStreet").on("click", function () {
+      $("#mainPartDescription").empty().append(streetTexts.lookAroundStreet);
+    });
+  };
+}); //koniec DOMContentLoaded
 
 /***/ }),
 /* 7 */
@@ -1500,11 +1555,89 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var keys = __webpack_require__(8);
-var mainGameBtns = __webpack_require__(9);
+var street = __webpack_require__(6);
+var market = __webpack_require__(12);
+
+document.addEventListener("DOMContentLoaded", function () {
+  var caravansTexts = {
+    "firstText": "<p id='firstTextCaravans' class='newRocker textIndent15px'>Idziesz w kierunku głównej bramy. Mijasz ludzi, zwierzęta i taplające się w błocie dzieci. Gdy dochodzisz do bramy robi się coraz tłoczniej. Przez bramę przejeżdżają wozy, ludzie łażą w każdą stronę, wartownicy na murach ziewają z nudów. W końcu udało się wyjść z miasta. Przed sobą widzisz wielki plac, na którym jakaś karawana szykuje się właśnie do odjazdu. Może warto spytać się, czy jedzie do przygranicznej wioski? Co robisz?</p>",
+
+    "lookAroundCaravans": "<p id='lookAroundCaravans' class='newRocker textIndent15px margin2000p'>Za sobą masz bramę do miasta oraz wysokie mury miasta Erharuf. Przed sobą widzisz wielki plac, na którym karawany mogą przygotować się do podróży. W dali widniej ciemna linia prastarego lasu.</p>",
+
+    "ask": "<p class='newRocker textIndent15px margin2000p'>Podchodzisz bliżej. Widzisz postać krasnoluda, który wydziera się w niebo głosy i pogania wszystkich wokół. Gdy jesteś już blisko, pytasz: 'Mości krasnoludzie, czy ta karawana jedzie do wioski na pograniczu?' 'Że co? Aaaa... Tak! Jedziemy dalej, ale będziemy przez nią przejeżdżać. Jak chcesz się zabrać to musisz się pospiesz z wsiadaniem. Na ostatnim wozie jest jeszcze trochę miejsca.'- odpowiedział i wrócił do swoich obowiązków.</p>",
+
+    "agree": "<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>"
+  };
+
+  module.exports.caravansTexts = caravansTexts;
+
+  var z = 0;
+  module.exports.z = z;
+
+  module.exports.caravansEvents = function () {
+    //zdarzenie dla pójścia na ulicę
+    $("#toStreet").on("click", function () {
+      $("#ask, #agree, #lookAroundCaravans, #toMarket, #toStreet").hide();
+      $("#market, #caravans, #lookAroundStreet, #inRoom").show();
+      $("#firstTextCaravans").remove();
+      $("#mainPartDescription").before(street.streetTexts.firstText);
+    });
+    //zdarzenie dla pójścia na targ
+    $("#toMarket").on("click", function () {
+      $("#ask, #agree, #lookAroundCaravans, #toMarket, #toStreet").hide();
+      $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").show();
+      $("#firstTextCaravans").remove();
+      $("#mainPartDescription").before(market.marketTexts.firstText);
+    });
+
+    //pytane się dla w lokacji: karawany
+    $("#ask").on("click", function () {
+      $("#mainPartDescription").empty().append(caravansTexts.ask);
+      $("#ask").hide();
+      $("#agree").show();
+
+      heroCreator.variables.splice(0, 1, 1);
+    });
+
+    //rozglądanie się w lokacji: karawany
+    $("#lookAroundCaravans").on("click", function () {
+      $("#mainPartDescription").empty().append(caravansTexts.lookAroundCaravans);
+    });
+
+    //zgoda się w lokacji: karawany
+    $("#agree").on("click", function () {
+      $("#mainPartDescription").empty().append(caravansTexts.agree);
+      $("#toMarket, #toStreet, #agree, #lookAroundCaravans").hide();
+      $("#firstTextCaravans").remove();
+      $("#mainPartDescription").empty();
+    });
+  };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(9);
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var keys = __webpack_require__(10);
+var mainGameBtns = __webpack_require__(11);
 var room = __webpack_require__(5);
-var street = __webpack_require__(10);
-var caravans = __webpack_require__(11);
+var street = __webpack_require__(6);
+var caravans = __webpack_require__(7);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -1518,6 +1651,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //ulica
   $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
+
+  //ulica
+  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -1556,7 +1692,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1634,7 +1770,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1678,7 +1814,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1689,114 +1825,89 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var caravans = __webpack_require__(11);
+var keys = __webpack_require__(10);
+var mainGameBtns = __webpack_require__(11);
+var room = __webpack_require__(5);
+var street = __webpack_require__(6);
+var caravans = __webpack_require__(7);
 
 document.addEventListener("DOMContentLoaded", function () {
-  var streetTexts = {
-    "firstText": "<p id='firstTextStreet' class='newRocker textIndent15px'>Stoisz przed domem. Aby udać się do wyznaczonego celu, najlepiej zabrać się z jakąś karawaną. Idziesz w kierunku bramy miasta. Przy bramie znajduje się targ. To dobry czas i miejsce, aby uzupełnić zapasy na dalszą podróż. Co robisz?</p>",
-    "lookAroundStreet": "<p class='newRocker textIndent15px margin2000p'>Typowa ulica dzielnicy Najemników, miasta Erharuf. Częściowo brukowana. Pobliskie budynki są niskie i drewniane, maksymalnie jednopiętrowe. Nic specjalnego.</p>"
+  var marketTexts = {
+    "firstText": "<p id='firstTextMarket' class='newRocker textIndent15px'>Stoisz na środku placu targowego. Wokół widzisz stragany, na których możesz kupić potrzebne rzeczy. Co robisz?</p>",
+
+    "lookAroundMarket": "<p class='newRocker textIndent15px margin2000p'>Rozglądasz się po targowisku. Sporo straganów i jeszcze więcej chętnych do zakupu czegokolwiek.</p>"
   };
 
-  module.exports.streetTexts = streetTexts;
+  module.exports.marketTexts = marketTexts;
 
-  module.exports.streetEvents = function () {
+  //zdarzenie dla pójścia na ulicę
+  $("#marketToStreet").on("click", function () {
+    $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").hide();
+    $("#market, #caravans, #lookAroundStreet, #inRoom").show();
+    $("#firstTextMarket").remove();
+    $("#mainPartDescription").before(street.streetTexts.firstText).empty();
+  });
 
-    //zdarzenie dla wchodzenie do pokoju
-    $("#outRoom").on("click", function () {
-      $("#outRoom, #wardrobe, #chest, #lookAroundRoom").hide();
-      $("#inRoom, #lookAroundStreet, #caravans, #market").show();
-      $("#secondTextRoom").remove();
-      $("#mainPartDescription").before(streetTexts.firstText).empty();
-    });
+  //zdarzenie dla pójścia na postój karawan
+  $("#marketToCaravans").on("click", function () {
+    $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").hide();
+    $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();
+    $("#firstTextMarket").remove();
+    $("#mainPartDescription").before(caravans.caravansTexts.firstText).empty();
 
-    //zdarzenie dla pójścia do karawan
-    $("#caravans").on("click", function () {
-      $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
-      $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();
-      $("#firstTextStreet").remove();
-      $("#mainPartDescription").before(caravans.caravansTexts.firstText);
+    if (heroCreator.variables[0] == 0) {
+      $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();$("#agree").hide();
+    } else {
+      $("#agree, #lookAroundCaravans, #toStreet, #toMarket").show();$("#ask").hide();
+    }
+  });
 
-      if (heroCreator.variables[0] == 0) {
-        $("#ask, #lookAroundCaravans, #toStreet, #toMarket").show();$("#agree").hide();
-      } else {
-        $("#agree, #lookAroundCaravans, #toStreet, #toMarket").show();$("#ask").hide();
-      }
-    });
+  //zdarzenia dla kupowania
+  var buyItem = ["namiot", "torba", "derka", "lampa", "lina", "racja żyw", "sztylet", "kusza", "siodło", "drew. pałka", "pulerz"];
+  var priceBuyItem = [5, 1, 1, 1, 1, 1, 8, 12, 10, 4, 12];
 
-    //zdarzenie dla pójścia do targu
-    $("#market").on("click", function () {
-      $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
-      $("#firstTextStreet").remove();
-    });
+  $("#buy").on("click", function () {
+    $("#mainPartDescription").empty();
 
-    //zdarzenie dla rozglądania się - ulica
-    $("#lookAroundStreet").on("click", function () {
-      $("#mainPartDescription").empty().append(streetTexts.lookAroundStreet);
-    });
-  };
-}); //koniec DOMContentLoaded
+    var _loop = function _loop(i) {
+      $("#mainPartDescription").append("<p id='" + i + "'></p>");
+      $("#" + i).append("<span class='greenText'>" + buyItem[i] + "</span>");
+      $("#" + i).append(" " + priceBuyItem[i] + " szt. zł.");
 
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
+      $("#" + i).on("click", function () {
+        if (priceBuyItem[i] <= heroCreator.gold[0]) {
+          heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
+          heroCreator.equip.push(" " + buyItem[i]);
+          $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
+          setTimeout(function () {
+            $("#alerts").empty();
+          }, 3000);
+        } else {
+          $("#alerts").html("<p class='newRocker redText center margin2000p'>Brak złota !!!</p>");
+          setTimeout(function () {
+            $("#alerts").empty();
+          }, 3000);
+        }
+      });
+    };
 
-"use strict";
+    for (var i = 0; i < buyItem.length; i++) {
+      _loop(i);
+    }
+  });
 
+  $("#sell").on("click", function () {
+    $("#mainPartDescription").empty();
+    for (var i = 0; i < heroCreator.equip.length; i++) {
+      $("#mainPartDescription").append("<p id='" + i + "'></p>");
+      $("#" + i).append("<span class='greenText'>" + heroCreator.equip[i] + "</span>");
+    }
+  });
 
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(3);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(4);
-var street = __webpack_require__(10);
-
-document.addEventListener("DOMContentLoaded", function () {
-  var caravansTexts = {
-    "firstText": "<p id='firstTextCaravans' class='newRocker textIndent15px'>Idziesz w kierunku głównej bramy. Mijasz ludzi, zwierzęta i taplające się w błocie dzieci. Gdy dochodzisz do bramy robi się coraz tłoczniej. Przez bramę przejeżdżają wozy, ludzie łażą w każdą stronę, wartownicy na murach ziewają z nudów. W końcu udało się wyjść z miasta. Przed sobą widzisz wielki plac, na którym jakaś karawana szykuje się właśnie do odjazdu. Może warto spytać się, czy jedzie do przygranicznej wioski? Co robisz?</p>",
-
-    "lookAroundCaravans": "<p class='newRocker textIndent15px margin2000p'>Za sobą masz bramę do miasta oraz wysokie mury miasta Erharuf. Przed sobą widzisz wielki plac, na którym karawany mogą przygotować się do podróży. W dali widniej ciemna linia prastarego lasu.</p>",
-
-    "ask": "<p class='newRocker textIndent15px margin2000p'>Podchodzisz bliżej. Widzisz postać krasnoluda, który wydziera się w niebo głosy i pogania wszystkich wokół. Gdy jesteś już blisko, pytasz: 'Mości krasnoludzie, czy ta karawana jedzie do wioski na pograniczu?' 'Że co? Aaaa... Tak! Jedziemy dalej, ale będziemy przez nią przejeżdżać. Jak chcesz się zabrać to musisz się pospiesz z wsiadaniem. Na ostatnim wozie jest jeszcze trochę miejsca.'- odpowiedział i wrócił do swoich obowiązków.</p>",
-
-    "agree": "<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>"
-  };
-
-  module.exports.caravansTexts = caravansTexts;
-
-  var z = 0;
-  module.exports.z = z;
-
-  module.exports.caravansEvents = function () {
-    //zdarzenie dla pójścia na ulicę
-    $("#toStreet").on("click", function () {
-      $("#ask, #agree, #lookAroundCaravans, #toMarket, #toStreet").hide();
-      $("#market, #caravans, #lookAroundStreet, #inRoom").show();
-      $("#firstTextCaravans").remove();
-      $("#mainPartDescription").before(street.streetTexts.firstText);
-    });
-
-    //pytane się dla w lokacji: karawany
-    $("#ask").on("click", function () {
-      $("#mainPartDescription").empty().append(caravansTexts.ask);
-      $("#ask").hide();
-      $("#agree").show();
-
-      heroCreator.variables.splice(0, 1, 1);
-    });
-
-    //rozglądanie się w lokacji: karawany
-    $("#lookAroundCaravans").on("click", function () {
-      $("#mainPartDescription").empty().append(caravansTexts.lookAroundCaravans);
-    });
-
-    //zgoda się w lokacji: karawany
-    $("#agree").on("click", function () {
-      $("#mainPartDescription").empty().append(caravansTexts.agree);
-      $("#toMarket, #toStreet, #agree, #lookAroundCaravans").hide();
-      $("#firstTextCaravans").remove();
-      $("#mainPartDescription").empty();
-    });
-  };
+  //rozglądanie się w lokacji: targ
+  $("#lookAroundMarket").on("click", function () {
+    $("#mainPartDescription").empty().append(marketTexts.lookAroundMarket);
+  });
 }); //koniec DOMContentLoaded
 
 /***/ })

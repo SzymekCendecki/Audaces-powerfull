@@ -4,6 +4,7 @@ let heroCreator=require("./heroCreator.js");
 let gameInfo=require("./gameInfo.js");
 let introGame=require("./introGame.js");
 let caravans=require("./caravans.js");
+let market=require("./market.js");
 
 document.addEventListener("DOMContentLoaded", () => {
   let streetTexts = {
@@ -42,6 +43,8 @@ module.exports.streetEvents = function(){
     $("#market").on("click", ()=>{
       $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
       $("#firstTextStreet").remove();
+      $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").show();
+      $("#mainPartDescription").before(market.marketTexts.firstText);
     });
 
   //zdarzenie dla rozglądania się - ulica
