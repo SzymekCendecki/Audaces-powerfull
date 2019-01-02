@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1494,7 +1494,7 @@ var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
 var caravans = __webpack_require__(7);
-var market = __webpack_require__(12);
+var market = __webpack_require__(10);
 
 document.addEventListener("DOMContentLoaded", function () {
   var streetTexts = {
@@ -1556,7 +1556,7 @@ var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
 var street = __webpack_require__(6);
-var market = __webpack_require__(12);
+var market = __webpack_require__(10);
 
 document.addEventListener("DOMContentLoaded", function () {
   var caravansTexts = {
@@ -1616,83 +1616,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(9);
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(3);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(4);
-var keys = __webpack_require__(10);
-var mainGameBtns = __webpack_require__(11);
-var room = __webpack_require__(5);
-var street = __webpack_require__(6);
-var caravans = __webpack_require__(7);
-
-document.addEventListener("DOMContentLoaded", function () {
-  //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
-
-  //pokój
-  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
-
-  //ulica
-  $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
-
-  //ulica
-  $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
-
-  //ulica
-  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").hide();
-
-  //przejście z pierwszego intro do pierwszego menu
-  setTimeout(function () {
-    $("header p, #heroBtns div").fadeIn(750);
-    $("body").fadeIn(750).css("background", "beige");
-    $("#mainPart h2, #mainPart h3").remove();
-    functions.newElement("p", "description", "", $("#mainPart"));
-    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
-  }, 16000);
-
-  //funkcje dla przycisków pierwszego menu
-  firstMenu.firstMenuBtns();
-  heroCreator.random();
-  heroCreator.choose();
-
-  //funkcje dla "wyskakującego" okienka dla informacji gry
-  gameInfo.gameInfo();
-
-  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
-  introGame.showIntro();
-
-  //zdarzenia pod przyciskiem
-  keys.keys();
-
-  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
-  mainGameBtns.mainGameBtns();
-
-  //zdarzenia dla pokoju
-  room.roomEvents(heroCreator.equip, heroCreator.hero);
-
-  //zdarzenia dla ulicy
-  street.streetEvents();
-
-  //zdarzenia dla caravan
-  caravans.caravansEvents();
-}); //koniec DOMContentLoaded
-
-/***/ }),
-/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1770,7 +1693,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1814,7 +1737,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1825,8 +1748,8 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var keys = __webpack_require__(10);
-var mainGameBtns = __webpack_require__(11);
+var keys = __webpack_require__(8);
+var mainGameBtns = __webpack_require__(9);
 var room = __webpack_require__(5);
 var street = __webpack_require__(6);
 var caravans = __webpack_require__(7);
@@ -1898,9 +1821,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
   $("#sell").on("click", function () {
     $("#mainPartDescription").empty();
-    for (var i = 0; i < heroCreator.equip.length; i++) {
+
+    var _loop2 = function _loop2(i) {
       $("#mainPartDescription").append("<p id='" + i + "'></p>");
-      $("#" + i).append("<span class='greenText'>" + heroCreator.equip[i] + "</span>");
+      if (heroCreator.equip[i] == " paczka") {
+        $("#" + i).append("<span class='redText'>" + heroCreator.equip[i] + "</span>").prop("disabled", true);
+      } else {
+        $("#" + i).append("<span class='greenText'>" + heroCreator.equip[i] + "</span>");
+      }
+
+      $("#" + i).on("click", function () {
+        if ($("#" + i).text() == " paczka") {
+          $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
+          setTimeout(function () {
+            $("#alerts").empty();
+          }, 3000);
+        } else {
+          $("#alerts").html("<p class='newRocker greenText center margin2000p'>Sprzedano: " + $("#" + i) + "</p>");
+          setTimeout(function () {
+            $("#alerts").empty();
+          }, 3000);
+
+          console.log($("#" + i + " span").text());
+          console.log(heroCreator.equip);
+          console.log(heroCreator.equip.indexOf($("#" + i).text()));
+          if (heroCreator.equip.indexOf($("#" + i + " span").text()) !== -1) {
+            heroCreator.equip.splice($("#" + i + " span").text(), 1);
+            $("#" + i).remove();
+          }
+
+          console.log(heroCreator.equip);
+
+          var newGold = heroCreator.gold[0] + 0.5;
+          heroCreator.gold.splice(0, 1, newGold);
+        }
+      });
+    };
+
+    for (var i = 0; i < heroCreator.equip.length; i++) {
+      _loop2(i);
     }
   });
 
@@ -1908,6 +1867,83 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#lookAroundMarket").on("click", function () {
     $("#mainPartDescription").empty().append(marketTexts.lookAroundMarket);
   });
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(12);
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var keys = __webpack_require__(8);
+var mainGameBtns = __webpack_require__(9);
+var room = __webpack_require__(5);
+var street = __webpack_require__(6);
+var caravans = __webpack_require__(7);
+
+document.addEventListener("DOMContentLoaded", function () {
+  //ukrywanie odpowiednich części
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
+
+  //pokój
+  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
+
+  //ulica
+  $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+
+  //ulica
+  $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
+
+  //ulica
+  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").hide();
+
+  //przejście z pierwszego intro do pierwszego menu
+  setTimeout(function () {
+    $("header p, #heroBtns div").fadeIn(750);
+    $("body").fadeIn(750).css("background", "beige");
+    $("#mainPart h2, #mainPart h3").remove();
+    functions.newElement("p", "description", "", $("#mainPart"));
+    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
+  }, 16000);
+
+  //funkcje dla przycisków pierwszego menu
+  firstMenu.firstMenuBtns();
+  heroCreator.random();
+  heroCreator.choose();
+
+  //funkcje dla "wyskakującego" okienka dla informacji gry
+  gameInfo.gameInfo();
+
+  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
+  introGame.showIntro();
+
+  //zdarzenia pod przyciskiem
+  keys.keys();
+
+  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
+  mainGameBtns.mainGameBtns();
+
+  //zdarzenia dla pokoju
+  room.roomEvents(heroCreator.equip, heroCreator.hero);
+
+  //zdarzenia dla ulicy
+  street.streetEvents();
+
+  //zdarzenia dla caravan
+  caravans.caravansEvents();
 }); //koniec DOMContentLoaded
 
 /***/ })

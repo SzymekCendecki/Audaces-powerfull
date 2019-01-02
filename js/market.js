@@ -70,8 +70,37 @@ module.exports.marketTexts = marketTexts;
          $("#mainPartDescription").empty();
          for(let i=0; i<heroCreator.equip.length; i++){
            $("#mainPartDescription").append("<p id='"+i+"'></p>");
-           $("#"+i).append("<span class='greenText'>"+ heroCreator.equip[i]+"</span>");
+           if(heroCreator.equip[i] == " paczka"){
+             $("#"+i).append("<span class='redText'>"+ heroCreator.equip[i]+"</span>").prop("disabled", true);
+           }else{
+             $("#"+i).append("<span class='greenText'>"+ heroCreator.equip[i]+"</span>");
+           }
 
+           $("#"+i).on("click", ()=>{
+         		  if($("#"+i).text() == " paczka"){
+                $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
+                setTimeout(function(){ $("#alerts").empty(); }, 3000);
+           		}else{
+                $("#alerts").html("<p class='newRocker greenText center margin2000p'>Sprzedano: "+ $("#"+i) + "</p>");
+                setTimeout(function(){ $("#alerts").empty(); }, 3000);
+
+                console.log($("#"+i+ " span").text());
+                console.log(heroCreator.equip);
+                console.log(heroCreator.equip.indexOf($("#"+i).text()));
+                if(heroCreator.equip.indexOf($("#"+i+ " span").text()) !== -1){
+                  heroCreator.equip.splice($("#"+i+ " span").text(), 1);
+                  $("#"+i).remove();
+                }
+
+                  console.log(heroCreator.equip);
+
+                let newGold = heroCreator.gold[0] + 0.5;
+                heroCreator.gold.splice(0, 1, newGold);
+
+
+
+              }
+           	});
          }
        });
 

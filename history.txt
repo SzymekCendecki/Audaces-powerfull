@@ -207,3 +207,6 @@ Dodano zdarzenia dla lokacji postoju karawan.
 
 1 stycznia 2019 - wersja 0.1.54
 Praca z lokacją targ.
+
+2 stycznia 2019 - wersja 0.1.55
+Praca z lokacją targ - ze sprzedawaniem.
