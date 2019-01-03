@@ -9,7 +9,6 @@ let room=require("./room.js");
 let street=require("./street.js");
 let caravans=require("./caravans.js");
 
-
 document.addEventListener("DOMContentLoaded", () => {
   let marketTexts = {
     "firstText":"<p id='firstTextMarket' class='newRocker textIndent15px'>Stoisz na środku placu targowego. Wokół widzisz stragany, na których możesz kupić potrzebne rzeczy. Co robisz?</p>",
@@ -69,41 +68,25 @@ module.exports.marketTexts = marketTexts;
        $("#sell").on("click", ()=>{
          $("#mainPartDescription").empty();
          for(let i=0; i<heroCreator.equip.length; i++){
-           $("#mainPartDescription").append("<p id='"+i+"'></p>");
-           if(heroCreator.equip[i] == " paczka"){
-             $("#"+i).append("<span class='redText'>"+ heroCreator.equip[i]+"</span>").prop("disabled", true);
-           }else{
-             $("#"+i).append("<span class='greenText'>"+ heroCreator.equip[i]+"</span>");
-           }
-
-           $("#"+i).on("click", ()=>{
-         		  if($("#"+i).text() == " paczka"){
-                $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
-                setTimeout(function(){ $("#alerts").empty(); }, 3000);
-           		}else{
-                $("#alerts").html("<p class='newRocker greenText center margin2000p'>Sprzedano: "+ $("#"+i) + "</p>");
-                setTimeout(function(){ $("#alerts").empty(); }, 3000);
-
-                console.log($("#"+i+ " span").text());
-                console.log(heroCreator.equip);
-                console.log(heroCreator.equip.indexOf($("#"+i).text()));
-                if(heroCreator.equip.indexOf($("#"+i+ " span").text()) !== -1){
-                  heroCreator.equip.splice($("#"+i+ " span").text(), 1);
-                  $("#"+i).remove();
-                }
-
-                  console.log(heroCreator.equip);
-
-                let newGold = heroCreator.gold[0] + 0.5;
-                heroCreator.gold.splice(0, 1, newGold);
-
-
-
-              }
-           	});
+           $("#mainPartDescription").append("<p id='"+heroCreator.equip[i]+"' class='greenText newRocker'>"+heroCreator.equip[i]+" 0,5 szt. zł.</p>");
          }
-       });
 
+         $("#mainPartDescription p").click(function () {
+            if($(this).attr("id") == "paczka"){
+              $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
+              setTimeout(function(){ $("#alerts").empty(); }, 3000);
+            }else{
+              $(this).remove();
+              if(heroCreator.equip.indexOf($(this).attr("id")) !== -1){
+                  heroCreator.equip.splice(heroCreator.equip.indexOf($(this).attr("id")), 1);
+                  heroCreator.gold.splice(0, 1, heroCreator.gold[0] + 0.5)
+              }
+            }
+          });
+
+    $("#paczka").removeClass("greenText").addClass("redText");
+    $("#paczka").prop('disabled', false);
+       });
 
     //rozglądanie się w lokacji: targ
       $("#lookAroundMarket").on("click", ()=>{
