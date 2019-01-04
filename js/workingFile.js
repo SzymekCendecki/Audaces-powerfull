@@ -23,7 +23,7 @@ $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
   $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
 
 //ulica
-  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").hide();
+  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){

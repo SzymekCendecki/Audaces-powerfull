@@ -15,7 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     "ask":"<p class='newRocker textIndent15px margin2000p'>Podchodzisz bliżej. Widzisz postać krasnoluda, który wydziera się w niebo głosy i pogania wszystkich wokół. Gdy jesteś już blisko, pytasz: 'Mości krasnoludzie, czy ta karawana jedzie do wioski na pograniczu?' 'Że co? Aaaa... Tak! Jedziemy dalej, ale będziemy przez nią przejeżdżać. Jak chcesz się zabrać to musisz się pospiesz z wsiadaniem. Na ostatnim wozie jest jeszcze trochę miejsca.'- odpowiedział i wrócił do swoich obowiązków.</p>",
 
-    "agree":"<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>"
+    "agree":"<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>",
+
+    "go":"<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>",
+
+    "lookAroundWagon":"<p class='newRocker textIndent15px margin2000p'>Wóz jak wóz. Kilka pakunków. Dwóch woźniców: krasnolud i człowiek.</p>"
   }
 
 module.exports.caravansTexts = caravansTexts;
@@ -57,8 +61,19 @@ module.exports.caravansEvents = function(){
     $("#agree").on("click", ()=>{
       $("#mainPartDescription").empty().append(caravansTexts.agree);
       $("#toMarket, #toStreet, #agree, #lookAroundCaravans").hide();
+      $("#go, #lookAroundWagon").show();
       $("#firstTextCaravans").remove();
-      $("#mainPartDescription").empty();
+    });
+
+    //rozglądanie się w lokacji: karawany => wóz
+      $("#lookAroundWagon").on("click", ()=>{
+        $("#mainPartDescription").append(caravansTexts.lookAroundWagon);
+      });
+
+    //przycisk
+    $("#go").on("click", ()=>{
+        $("#go, #lookAroundWagon").hide();
+          $("#mainPartDescription").empty();
     });
 }
 

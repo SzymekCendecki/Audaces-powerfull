@@ -326,14 +326,14 @@ weightHeight($("#height"), height, 0, $("#resultHeight"), 14);
 
 //funkcja optymalizująca wybieranie umiejętności i ekwipunku
 function sss(tab, tabLength, what, x, y, z){
-	if(tab.indexOf(what) !== -1){
+	if(tab.indexOf(" " + what) !== -1){
 			$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą " + x +".</p>");
 			setTimeout(function(){ $("#alerts").empty(); }, 3000);
 	}else if( tab.length < tabLength){
 				$("#alerts").html("<p class='newRocker greenText center'>Wybrano " + x + ": " + what + ".</p>");
 			setTimeout(function(){ $("#alerts").empty(); }, 3000);
-			tab.push(what);
-			z.append(what);
+			tab.push(" " + what);
+			z.append(" " + what);
 		}else if( tab.length >= tabLength){
 			$("#alerts").html("<p class='newRocker redText center'>Wybrano już " + y +".</p>");
 			setTimeout(function(){ $("#alerts").empty(); }, 3000);

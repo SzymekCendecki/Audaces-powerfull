@@ -48,8 +48,7 @@ module.exports.marketTexts = marketTexts;
         $("#mainPartDescription").empty();
         for(let i=0; i<buyItem.length; i++){
 	         $("#mainPartDescription").append("<p id='"+i+"'></p>");
-	         $("#"+i).append("<span class='greenText'>"+buyItem[i]+"</span>");
-           $("#"+i).append(" " + priceBuyItem[i] + " szt. zł.");
+	         $("#"+i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
 
            $("#"+i).on("click", ()=>{
             if(priceBuyItem[i] <= heroCreator.gold[0]){
@@ -68,11 +67,15 @@ module.exports.marketTexts = marketTexts;
        $("#sell").on("click", ()=>{
          $("#mainPartDescription").empty();
          for(let i=0; i<heroCreator.equip.length; i++){
-           $("#mainPartDescription").append("<p id='"+heroCreator.equip[i]+"' class='greenText newRocker'>"+heroCreator.equip[i]+" 0,5 szt. zł.</p>");
+           if(heroCreator.equip[i] == " paczka"){
+              $("#mainPartDescription").append("<p id='"+heroCreator.equip[i]+"' class='redText newRocker'>"+heroCreator.equip[i]+"</p>");
+           }else{
+             $("#mainPartDescription").append("<p id='"+heroCreator.equip[i]+"' class='greenText newRocker'>"+heroCreator.equip[i]+" <span class='blackText'>0,5 szt. zł.</span</p>");
+           }
          }
 
          $("#mainPartDescription p").click(function () {
-            if($(this).attr("id") == "paczka"){
+            if($(this).attr("id") == " paczka"){
               $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
               setTimeout(function(){ $("#alerts").empty(); }, 3000);
             }else{
@@ -83,9 +86,6 @@ module.exports.marketTexts = marketTexts;
               }
             }
           });
-
-    $("#paczka").removeClass("greenText").addClass("redText");
-    $("#paczka").prop('disabled', false);
        });
 
     //rozglądanie się w lokacji: targ

@@ -63,9 +63,10 @@ header{
   text-shadow: 1px 1px white;
 }
 
-//kolory tekstu zielony, czerwony
+//kolory tekstu zielony, czerwony, czarny
 .greenText{ color: green; text-shadow: 0 0 2px green; }
 .redText{ color: red; text-shadow: 0 0 2px red; }
+.blackText{ color: black; text-shadow: 0 0 2px black; }
 
 //wyśrodkowanie tekstu
 .center{ text-align: center; }

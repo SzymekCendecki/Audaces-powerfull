@@ -278,7 +278,7 @@ module.exports.randomSkills = function () {
         heroCreator.skills.splice(1, 1, heroCreator.skillsWizard[heroCreator.skills[1]]);
         heroCreator.skills.splice(2, 1, heroCreator.skillsWizard[heroCreator.skills[2]]);
       }
-  //distance(heroCreator.skills); //funkcja towrząca odstęp powiędzy elementami w tablicy z umiejętnościami
+  distance(heroCreator.skills); //funkcja towrząca odstęp powiędzy elementami w tablicy z umiejętnościami
 };
 
 //losowanie ekwipunku
@@ -290,7 +290,7 @@ module.exports.randomEquip = function (array1, array2, array3, array4) {
   var equipNumber4 = Math.round(Math.random() * (allEquip.length - 1));var equip4 = allEquip[equipNumber4];
   var equipNumber5 = Math.round(Math.random() * (allEquip.length - 1));var equip5 = allEquip[equipNumber5];
   heroCreator.equip.splice(0, 1, equip1);heroCreator.equip.splice(1, 1, equip2);heroCreator.equip.splice(2, 1, equip3);heroCreator.equip.splice(3, 1, equip4);heroCreator.equip.splice(4, 1, equip5);
-  //  distance(heroCreator.equip);//funkcja towrząca odstęp powiędzy elementami w tablicy z ekwipunkiem
+  distance(heroCreator.equip); //funkcja towrząca odstęp powiędzy elementami w tablicy z ekwipunkiem
 };
 
 //funkcja pokazująca wybór kreowania postaci
@@ -802,7 +802,7 @@ module.exports.choose = function () {
 
 		//funkcja optymalizująca wybieranie umiejętności i ekwipunku
 		function sss(tab, tabLength, what, x, y, z) {
-			if (tab.indexOf(what) !== -1) {
+			if (tab.indexOf(" " + what) !== -1) {
 				$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą " + x + ".</p>");
 				setTimeout(function () {
 					$("#alerts").empty();
@@ -812,8 +812,8 @@ module.exports.choose = function () {
 				setTimeout(function () {
 					$("#alerts").empty();
 				}, 3000);
-				tab.push(what);
-				z.append(what);
+				tab.push(" " + what);
+				z.append(" " + what);
 			} else if (tab.length >= tabLength) {
 				$("#alerts").html("<p class='newRocker redText center'>Wybrano już " + y + ".</p>");
 				setTimeout(function () {
@@ -1444,7 +1444,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       $("#coat").on('click', function () {
         $("#mainPartDescription").empty().append(roomTexts.wardrobe5);
-        heroCreator.equip.push("płaszcz");
+        heroCreator.equip.push(" płaszcz");
       });
     });
 
@@ -1473,7 +1473,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //zdarzenie dla paczki
     $("#package").on("click", function () {
       $("#outRoom").prop("disabled", false).removeClass("redBtn").addClass("greenBtn");
-      heroCreator.equip.push("paczka");
+      heroCreator.equip.push(" paczka");
       $("#package").remove();
       $("#firstTextRoom").remove();
       $("#mainPartDescription").before(roomTexts.secondText).empty();
@@ -1566,7 +1566,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     "ask": "<p class='newRocker textIndent15px margin2000p'>Podchodzisz bliżej. Widzisz postać krasnoluda, który wydziera się w niebo głosy i pogania wszystkich wokół. Gdy jesteś już blisko, pytasz: 'Mości krasnoludzie, czy ta karawana jedzie do wioski na pograniczu?' 'Że co? Aaaa... Tak! Jedziemy dalej, ale będziemy przez nią przejeżdżać. Jak chcesz się zabrać to musisz się pospiesz z wsiadaniem. Na ostatnim wozie jest jeszcze trochę miejsca.'- odpowiedział i wrócił do swoich obowiązków.</p>",
 
-    "agree": "<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>"
+    "agree": "<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>",
+
+    "go": "<p class='newRocker textIndent15px margin2000p'>Na ostatnim wozie okazało się, że jest jeszcze sporo miejsca, dzięki czemu będzie można podróżować dość wygodnie. Po kilkunastu minutach karawana ruszyła...</p>",
+
+    "lookAroundWagon": "<p class='newRocker textIndent15px margin2000p'>Wóz jak wóz. Kilka pakunków. Dwóch woźniców: krasnolud i człowiek.</p>"
   };
 
   module.exports.caravansTexts = caravansTexts;
@@ -1608,7 +1612,18 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#agree").on("click", function () {
       $("#mainPartDescription").empty().append(caravansTexts.agree);
       $("#toMarket, #toStreet, #agree, #lookAroundCaravans").hide();
+      $("#go, #lookAroundWagon").show();
       $("#firstTextCaravans").remove();
+    });
+
+    //rozglądanie się w lokacji: karawany => wóz
+    $("#lookAroundWagon").on("click", function () {
+      $("#mainPartDescription").append(caravansTexts.lookAroundWagon);
+    });
+
+    //przycisk
+    $("#go").on("click", function () {
+      $("#go, #lookAroundWagon").hide();
       $("#mainPartDescription").empty();
     });
   };
@@ -1794,8 +1809,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var _loop = function _loop(i) {
       $("#mainPartDescription").append("<p id='" + i + "'></p>");
-      $("#" + i).append("<span class='greenText'>" + buyItem[i] + "</span>");
-      $("#" + i).append(" " + priceBuyItem[i] + " szt. zł.");
+      $("#" + i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
 
       $("#" + i).on("click", function () {
         if (priceBuyItem[i] <= heroCreator.gold[0]) {
@@ -1822,11 +1836,15 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#sell").on("click", function () {
     $("#mainPartDescription").empty();
     for (var i = 0; i < heroCreator.equip.length; i++) {
-      $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='greenText newRocker'>" + heroCreator.equip[i] + " 0,5 szt. zł.</p>");
+      if (heroCreator.equip[i] == " paczka") {
+        $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='redText newRocker'>" + heroCreator.equip[i] + "</p>");
+      } else {
+        $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='greenText newRocker'>" + heroCreator.equip[i] + " <span class='blackText'>0,5 szt. zł.</span</p>");
+      }
     }
 
     $("#mainPartDescription p").click(function () {
-      if ($(this).attr("id") == "paczka") {
+      if ($(this).attr("id") == " paczka") {
         $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
         setTimeout(function () {
           $("#alerts").empty();
@@ -1839,9 +1857,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
-
-    $("#paczka").removeClass("greenText").addClass("redText");
-    $("#paczka").prop('disabled', false);
   });
 
   //rozglądanie się w lokacji: targ
@@ -1889,7 +1904,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
 
   //ulica
-  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans").hide();
+  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {

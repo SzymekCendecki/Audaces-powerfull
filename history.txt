@@ -210,3 +210,9 @@ Praca z lokacją targ.
 
 2 stycznia 2019 - wersja 0.1.55
 Praca z lokacją targ - ze sprzedawaniem.
+
+3 stycznie 2019 - wersja 0.1.56
+Naprawienie problemu ze sprzedawaniem.
+
+4 stycznia 2019 - wersja 0.1.57
+Poprawka wyświetlania rzeczy i umiejętności w ekwipunku, części z umiejętnościami oraz na targu (sprzedawanie/kupowanie).
