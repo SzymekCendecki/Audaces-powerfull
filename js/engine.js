@@ -229,11 +229,7 @@ module.exports.randomPoints2 = function (race, occupation) {
 };
 
 //dodawanie odstępu do wypisanej zawartości tablicy
-function distance(array) {
-  for (var i = 1; i < array.length; i++) {
-    array.splice(i, 1, " " + array[i]);
-  }
-}
+//function distance(array){ for(let i=1; i<array.length; i++){ array.splice(i, 1, " " + array[i]); } }
 
 //losowanie umiejętności
 module.exports.randomSkills = function () {
@@ -278,7 +274,7 @@ module.exports.randomSkills = function () {
         heroCreator.skills.splice(1, 1, heroCreator.skillsWizard[heroCreator.skills[1]]);
         heroCreator.skills.splice(2, 1, heroCreator.skillsWizard[heroCreator.skills[2]]);
       }
-  distance(heroCreator.skills); //funkcja towrząca odstęp powiędzy elementami w tablicy z umiejętnościami
+  //distance(heroCreator.skills); //funkcja towrząca odstęp powiędzy elementami w tablicy z umiejętnościami
 };
 
 //losowanie ekwipunku
@@ -290,7 +286,7 @@ module.exports.randomEquip = function (array1, array2, array3, array4) {
   var equipNumber4 = Math.round(Math.random() * (allEquip.length - 1));var equip4 = allEquip[equipNumber4];
   var equipNumber5 = Math.round(Math.random() * (allEquip.length - 1));var equip5 = allEquip[equipNumber5];
   heroCreator.equip.splice(0, 1, equip1);heroCreator.equip.splice(1, 1, equip2);heroCreator.equip.splice(2, 1, equip3);heroCreator.equip.splice(3, 1, equip4);heroCreator.equip.splice(4, 1, equip5);
-  distance(heroCreator.equip); //funkcja towrząca odstęp powiędzy elementami w tablicy z ekwipunkiem
+  //distance(heroCreator.equip);//funkcja towrząca odstęp powiędzy elementami w tablicy z ekwipunkiem
 };
 
 //funkcja pokazująca wybór kreowania postaci
@@ -316,8 +312,15 @@ module.exports.heroCreatorResult = function (hero, skills, equip) {
   $("#weightResult p:nth-child(2)").empty().append(hero[13]);
   $("#heightResult p:nth-child(2)").empty().append(hero[14]);
 
-  $("#skillsResult p:nth-child(2)").empty().append(skills);
-  $("#randomResult #equipResult p:nth-child(2)").empty().append(equip);
+  $("#skillsResult p:nth-child(2), #randomResult #equipResult p:nth-child(2)").empty();
+
+  for (var i = 0; i < skills.length; i++) {
+    $("#skillsResult p:nth-child(2)").append(heroCreator.skills[i] + " ");
+  }
+
+  for (var _i3 = 0; _i3 < equip.length; _i3++) {
+    $("#randomResult #equipResult p:nth-child(2)").append(heroCreator.equip[_i3] + " ");
+  }
 };
 
 //zdarzenia dla okien z informacjami
@@ -333,19 +336,29 @@ module.exports.featuresShow = function () {
 //dla ekwipunku
 module.exports.equipShow = function () {
   $("#heroInfo").show();
-  $("#heroInfoDescription").empty().append(heroCreator.equip).append("<p class='newRocker textIndent15px'>z\u0142oto: <span class=\"greenText\">" + heroCreator.gold + "</span> szt. z\u0142.</p>");
+  $("#heroInfoDescription").empty();
+  for (var i = 0; i < heroCreator.equip.length; i++) {
+    $("#heroInfoDescription").append(heroCreator.equip[i] + " ");
+  }
+  $("#heroInfoDescription").append("<p class='newRocker textIndent15px'>z\u0142oto: <span class=\"greenText\">" + heroCreator.gold + "</span> szt. z\u0142.</p>");
 };
 
 //dla umiejętności
 module.exports.skillsShow = function () {
   $("#heroInfo").show();
-  $("#heroInfoDescription").empty().append(heroCreator.skills);
+  $("#heroInfoDescription").empty();
+  for (var i = 0; i < heroCreator.skills.length; i++) {
+    $("#heroInfoDescription").append(heroCreator.skills[i] + " ");
+  }
 };
 
 //dla zadań
 module.exports.tasksShow = function () {
   $("#heroInfo").show();
-  $("#heroInfoDescription").empty().append(heroCreator.tasks);
+  $("#heroInfoDescription").empty();
+  for (var i = 0; i < heroCreator.tasks.length; i++) {
+    $("#heroInfoDescription").append(heroCreator.tasks[i] + " ");
+  }
 };
 
 //zamykanie okien
@@ -415,24 +428,24 @@ var tattoo = ["brak", "więzienne", "plemienne", "dziwne"];
 
 //tablice z ekwipunkiem
 //broń
-var equipWeapon = ["sztylet", "drewniana pałka", "krótki miecz", "szabla", "włócznia", "proca", "łuk"];
+var equipWeapon = ["sztylet", "drew. pałka", "krótki miecz", "szabla", "włócznia", "proca", "łuk"];
 
 //zbroja
 var equipArmor = ["przeszywanica", "zbroja skórzana", "zbroja ćwiekowana"];
 
 //tarcze
-var equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+var equipShield = ["puklerz", "mała tarcza drew.", "mała tarcza metal."];
 
 //inny ekwipunek
 var equipOther = ["kostur", "mieszek", "torba podróżna", "sakwa", "plecak", "manierka", "sagan", "koc", "tuba na perg.", "pęk piór do pis.", "pergaminy 5szt.", "zwykłe ubranie", "fikuśna czapka", "płaszcz", "skórzany pas", "igły i nici", "derka", "namiot", "drewniana miska", "drewniana łyżka", "pochodnia", "lampa oliwna", "kaganek", "lina 5m", "hubka i krzesiwo"];
 
 //tablice z umiejętnościami
 //wojownika
-var skillsWarrior = ["szt.przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+var skillsWarrior = ["szt. przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drew.", "mała tarcza metal."];
 module.exports.skillsWarrior = skillsWarrior;
 
 //złoczyńcy
-var skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drewniana pałka"];
+var skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drew. pałka"];
 module.exports.skillsCriminal = skillsCriminal;
 
 //czarodzieja
@@ -802,7 +815,7 @@ module.exports.choose = function () {
 
 		//funkcja optymalizująca wybieranie umiejętności i ekwipunku
 		function sss(tab, tabLength, what, x, y, z) {
-			if (tab.indexOf(" " + what) !== -1) {
+			if (tab.indexOf(what) !== -1) {
 				$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą " + x + ".</p>");
 				setTimeout(function () {
 					$("#alerts").empty();
@@ -812,8 +825,8 @@ module.exports.choose = function () {
 				setTimeout(function () {
 					$("#alerts").empty();
 				}, 3000);
-				tab.push(" " + what);
-				z.append(" " + what);
+				tab.push(what);
+				z.append(what);
 			} else if (tab.length >= tabLength) {
 				$("#alerts").html("<p class='newRocker redText center'>Wybrano już " + y + ".</p>");
 				setTimeout(function () {
@@ -953,7 +966,7 @@ module.exports.choose = function () {
 				sss(equip, 5, "sztylet", "rzecz", "pięć", $("#resultEquip"));
 			});
 			$("#woodenStickEquip").on("click", function () {
-				sss(equip, 5, "drewniana pałka", "rzecz", "pięć", $("#resultEquip"));
+				sss(equip, 5, "drew. pałka", "rzecz", "pięć", $("#resultEquip"));
 			});
 			$("#shortSwordEquip").on("click", function () {
 				sss(equip, 5, "krótki miecz", "rzecz", "pięć", $("#resultEquip"));
@@ -1040,7 +1053,7 @@ module.exports.choose = function () {
 			});
 
 			$("#woodenSpoonEquip").on("click", function () {
-				sss(equip, 5, "drewniana łyżka", "rzecz", "pięć", $("#resultEquip"));
+				sss(equip, 5, "drew. łyżka", "rzecz", "pięć", $("#resultEquip"));
 			});
 			$("#torchEquip").on("click", function () {
 				sss(equip, 5, "pochodnia", "rzecz", "pięć", $("#resultEquip"));
@@ -1444,7 +1457,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       $("#coat").on('click', function () {
         $("#mainPartDescription").empty().append(roomTexts.wardrobe5);
-        heroCreator.equip.push(" płaszcz");
+        heroCreator.equip.push("płaszcz");
       });
     });
 
@@ -1473,7 +1486,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //zdarzenie dla paczki
     $("#package").on("click", function () {
       $("#outRoom").prop("disabled", false).removeClass("redBtn").addClass("greenBtn");
-      heroCreator.equip.push(" paczka");
+      heroCreator.equip.push("paczka");
       $("#package").remove();
       $("#firstTextRoom").remove();
       $("#mainPartDescription").before(roomTexts.secondText).empty();
@@ -1557,6 +1570,7 @@ var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
 var street = __webpack_require__(6);
 var market = __webpack_require__(10);
+var firstFight = __webpack_require__(13);
 
 document.addEventListener("DOMContentLoaded", function () {
   var caravansTexts = {
@@ -1625,6 +1639,9 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#go").on("click", function () {
       $("#go, #lookAroundWagon").hide();
       $("#mainPartDescription").empty();
+      $("#prepare, #afterFirstBattle").show();
+      $("#mainPartDescription").before(firstFight.firstFightTexts.firstText);
+      $("#afterFirstBattle").prop("disabled", true);
     });
   };
 }); //koniec DOMContentLoaded
@@ -1801,7 +1818,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   //zdarzenia dla kupowania
-  var buyItem = ["namiot", "torba", "derka", "lampa", "lina", "racja żyw", "sztylet", "kusza", "siodło", "drew. pałka", "pulerz"];
+  var buyItem = ["namiot", "torba", "derka", "lampa", "lina", "racja żyw", "sztylet", "kusza", "siodło", "drew. pałka", "puklerz"];
   var priceBuyItem = [5, 1, 1, 1, 1, 1, 8, 12, 10, 4, 12];
 
   $("#buy").on("click", function () {
@@ -1814,7 +1831,7 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#" + i).on("click", function () {
         if (priceBuyItem[i] <= heroCreator.gold[0]) {
           heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
-          heroCreator.equip.push(" " + buyItem[i]);
+          heroCreator.equip.push(buyItem[i]);
           $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
           setTimeout(function () {
             $("#alerts").empty();
@@ -1836,7 +1853,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#sell").on("click", function () {
     $("#mainPartDescription").empty();
     for (var i = 0; i < heroCreator.equip.length; i++) {
-      if (heroCreator.equip[i] == " paczka") {
+      if (heroCreator.equip[i] == "paczka") {
         $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='redText newRocker'>" + heroCreator.equip[i] + "</p>");
       } else {
         $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='greenText newRocker'>" + heroCreator.equip[i] + " <span class='blackText'>0,5 szt. zł.</span</p>");
@@ -1844,7 +1861,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     $("#mainPartDescription p").click(function () {
-      if ($(this).attr("id") == " paczka") {
+      if ($(this).attr("id") == "paczka") {
         $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
         setTimeout(function () {
           $("#alerts").empty();
@@ -1889,6 +1906,7 @@ var mainGameBtns = __webpack_require__(9);
 var room = __webpack_require__(5);
 var street = __webpack_require__(6);
 var caravans = __webpack_require__(7);
+var firstFight = __webpack_require__(13);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -1900,11 +1918,14 @@ document.addEventListener("DOMContentLoaded", function () {
   //ulica
   $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
 
-  //ulica
+  //karawany
   $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
 
-  //ulica
+  //targ
   $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
+
+  //karawany
+  $("#prepare, #afterFirstBattle").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -1940,6 +1961,80 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //zdarzenia dla caravan
   caravans.caravansEvents();
+
+  //zdarzenia dla pierwszej walki
+  firstFight.firstFightEvents();
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var firstFightTexts = {
+    "firstText": "<p id='firstTextFirstFight' class='newRocker textIndent15px'>Jedziecie sobie spokojnie. Czas mija na oglądaniu pejzaży z jadącego wozu. Niestety ta sielanka skończyła się wieczorem drugiego dnia. Zaczęło się od zawalonej, przez drzewa drogi. Gdy uczestnicy, z pierwszych wozów karawany uprzątali drzewa, nastąpił atak. Wszyscy muszą walczyć!. Ciebie atakuje bandyta z wielkim mieczem. Po lewej stronie znajduje się przycisk 'przygotuj się', aby wybrać ekwipunek.</p>",
+
+    "title": "<p id='titleFirstFight' class='newRocker greenText'>Wbierz ekwipunek oraz umiejętności.</p>",
+
+    "weapon": "<p id='weaponFirstFight' class='newRocker blackText'>broń</p>",
+
+    "armor": "<p id='armorFirstFight' class='newRocker blackText'>zbroje</p>",
+
+    "shield": "<p id='shieldFirstFight' class='newRocker blackText'>tarcze</p>",
+
+    "skills": "<p id='skillsFirstFight' class='newRocker blackText'>umiejętności</p>"
+
+  };
+
+  module.exports.firstFightTexts = firstFightTexts;
+
+  module.exports.firstFightEvents = function (equip, hero) {
+    $("#prepare").on("click", function () {
+      console.log(heroCreator.equip);
+      $("#mainPartDescription").append(firstFightTexts.title, firstFightTexts.weapon, firstFightTexts.armor, firstFightTexts.shield, firstFightTexts.skills);
+
+      //wyświetlenie dostępnej broni
+      var weapon = heroCreator.equip.filter(function (el) {
+        return el === 'sztylet' || el == "drew. pałka" || el == "krótki miecz" || el == "szabla" || el == "włócznia" || el == "proca" || el == "łuk" || el == "kusza" || el == "kostur";
+      });
+
+      for (var i = 0; i < weapon.length; i++) {
+        $("#weaponFirstFight").append("<span class='greenText'>" + weapon[i] + " </span>");
+      }
+
+      //wyświetlenie dostępnych zbroi
+      var armor = heroCreator.equip.filter(function (el) {
+        return el === 'przeszywanica' || el == "zbroja skórzana" || el == "zbroja ćwiekowana";
+      });
+
+      for (var _i = 0; _i < armor.length; _i++) {
+        $("#armorFirstFight").append("<span class='greenText'>" + armor[_i] + " </span>");
+      }
+
+      //wyświetlenie dostępnych zbroi
+      var shield = heroCreator.equip.filter(function (el) {
+        return el === 'puklerz' || el == "mała tarcza drew." || el == "mała tarcza metal.";
+      });
+
+      for (var _i2 = 0; _i2 < shield.length; _i2++) {
+        $("#shieldFirstFight").append("<span class='greenText'>" + shield[_i2] + " </span>");
+      }
+
+      $("p span").click(function () {
+        console.log($(this).text());
+      });
+    });
+  };
 }); //koniec DOMContentLoaded
 
 /***/ })

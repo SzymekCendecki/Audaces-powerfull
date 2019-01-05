@@ -63,7 +63,7 @@ module.exports.roomEvents = function(equip, hero){
 
       $("#coat").on('click', ()=>{
         $("#mainPartDescription").empty().append(roomTexts.wardrobe5);
-        heroCreator.equip.push(" płaszcz");
+        heroCreator.equip.push("płaszcz");
       });
     });
 
@@ -92,7 +92,7 @@ module.exports.roomEvents = function(equip, hero){
 //zdarzenie dla paczki
   $("#package").on("click", ()=>{
     $("#outRoom").prop("disabled", false).removeClass("redBtn").addClass("greenBtn");
-    heroCreator.equip.push(" paczka");
+    heroCreator.equip.push("paczka");
     $("#package").remove();
     $("#firstTextRoom").remove();
     $("#mainPartDescription").before(roomTexts.secondText).empty();

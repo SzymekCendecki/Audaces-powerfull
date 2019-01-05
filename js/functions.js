@@ -18,7 +18,7 @@ module.exports.random = function (table, position){
 //funkcja losująca kolory dla włosów, skóry i oczu
 module.exports.randomColor = function(y){
   let color1 = [];
-      let a = Math.round(Math.random()*255);
+    let a = Math.round(Math.random()*255);
   	let b = Math.round(Math.random()*255);
   	let c = Math.round(Math.random()*255);
   	color1.splice(0, 1, a);
@@ -112,7 +112,7 @@ module.exports.randomPoints2 = function(race, occupation){
 }
 
 //dodawanie odstępu do wypisanej zawartości tablicy
-function distance(array){ for(let i=1; i<array.length; i++){ array.splice(i, 1, " " + array[i]); } }
+//function distance(array){ for(let i=1; i<array.length; i++){ array.splice(i, 1, " " + array[i]); } }
 
 //losowanie umiejętności
 module.exports.randomSkills  = function(){
@@ -156,7 +156,7 @@ else if(heroCreator.hero[3] === "czarodziej"){
   heroCreator.skills.splice(1, 1, heroCreator.skillsWizard[heroCreator.skills[1]]);
 	heroCreator.skills.splice(2, 1, heroCreator.skillsWizard[heroCreator.skills[2]]);
  }
-distance(heroCreator.skills); //funkcja towrząca odstęp powiędzy elementami w tablicy z umiejętnościami
+//distance(heroCreator.skills); //funkcja towrząca odstęp powiędzy elementami w tablicy z umiejętnościami
 }
 
 //losowanie ekwipunku
@@ -168,7 +168,7 @@ module.exports.randomEquip = function (array1, array2, array3, array4){
   let equipNumber4 = Math.round(Math.random()*(allEquip.length-1)); let equip4 = allEquip[equipNumber4];
   let equipNumber5 = Math.round(Math.random()*(allEquip.length-1)); let equip5 = allEquip[equipNumber5];
   heroCreator.equip.splice(0, 1, equip1); heroCreator.equip.splice(1, 1, equip2); heroCreator.equip.splice(2, 1, equip3); heroCreator.equip.splice(3, 1, equip4); heroCreator.equip.splice(4, 1, equip5);
-  distance(heroCreator.equip);//funkcja towrząca odstęp powiędzy elementami w tablicy z ekwipunkiem
+  //distance(heroCreator.equip);//funkcja towrząca odstęp powiędzy elementami w tablicy z ekwipunkiem
 }
 
 //funkcja pokazująca wybór kreowania postaci
@@ -194,8 +194,15 @@ module.exports.heroCreatorResult = function(hero, skills, equip){
   $("#weightResult p:nth-child(2)").empty().append(hero[13]);
   $("#heightResult p:nth-child(2)").empty().append(hero[14]);
 
-  $("#skillsResult p:nth-child(2)").empty().append(skills);
-  $("#randomResult #equipResult p:nth-child(2)").empty().append(equip);
+$("#skillsResult p:nth-child(2), #randomResult #equipResult p:nth-child(2)").empty();
+
+  for(let i=0; i<skills.length; i++){
+    $("#skillsResult p:nth-child(2)").append(heroCreator.skills[i] + " ");
+  }
+
+  for(let i=0; i<equip.length; i++){
+    $("#randomResult #equipResult p:nth-child(2)").append(heroCreator.equip[i] + " ");
+  }
 }
 
 //zdarzenia dla okien z informacjami
@@ -210,20 +217,30 @@ module.exports.featuresShow = function(){
 }
 //dla ekwipunku
 module.exports.equipShow = function(){
-  $("#heroInfo").show()
-  $("#heroInfoDescription").empty().append(heroCreator.equip).append(`<p class='newRocker textIndent15px'>złoto: <span class="greenText">${heroCreator.gold}</span> szt. zł.</p>`);
+  $("#heroInfo").show();
+  $("#heroInfoDescription").empty();
+  for(let i=0; i<heroCreator.equip.length; i++){
+    $("#heroInfoDescription").append(heroCreator.equip[i] + " ");
+  }
+  $("#heroInfoDescription").append(`<p class='newRocker textIndent15px'>złoto: <span class="greenText">${heroCreator.gold}</span> szt. zł.</p>`);
 }
 
 //dla umiejętności
 module.exports.skillsShow = function(){
   $("#heroInfo").show();
-  $("#heroInfoDescription").empty().append(heroCreator.skills);
+  $("#heroInfoDescription").empty();
+  for(let i=0; i<heroCreator.skills.length; i++){
+    $("#heroInfoDescription").append(heroCreator.skills[i] + " ");
+  }
 }
 
 //dla zadań
 module.exports.tasksShow = function(){
   $("#heroInfo").show()
-  $("#heroInfoDescription").empty().append(heroCreator.tasks);
+  $("#heroInfoDescription").empty();
+  for(let i=0; i<heroCreator.tasks.length; i++){
+    $("#heroInfoDescription").append(heroCreator.tasks[i] + " ");
+  }
 }
 
 //zamykanie okien

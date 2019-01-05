@@ -216,3 +216,6 @@ Naprawienie problemu ze sprzedawaniem.
 
 4 stycznia 2019 - wersja 0.1.57
 Poprawka wyświetlania rzeczy i umiejętności w ekwipunku, części z umiejętnościami oraz na targu (sprzedawanie/kupowanie).
+
+5 stycznia 2019 - wersja 0.1.58
+Rozpoczęcie pracy nad pierwszą walką.

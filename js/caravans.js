@@ -5,6 +5,7 @@ let gameInfo=require("./gameInfo.js");
 let introGame=require("./introGame.js");
 let street=require("./street.js");
 let market=require("./market.js");
+let firstFight=require("./firstFight.js");
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -73,7 +74,10 @@ module.exports.caravansEvents = function(){
     //przycisk
     $("#go").on("click", ()=>{
         $("#go, #lookAroundWagon").hide();
-          $("#mainPartDescription").empty();
+        $("#mainPartDescription").empty();
+        $("#prepare, #afterFirstBattle").show();
+        $("#mainPartDescription").before(firstFight.firstFightTexts.firstText);
+        $("#afterFirstBattle").prop("disabled", true);
     });
 }
 

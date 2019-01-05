@@ -52,24 +52,24 @@ let tattoo = ["brak", "więzienne", "plemienne", "dziwne"]
 
 //tablice z ekwipunkiem
 //broń
-let equipWeapon = ["sztylet", "drewniana pałka", "krótki miecz", "szabla", "włócznia", "proca", "łuk"];
+let equipWeapon = ["sztylet", "drew. pałka", "krótki miecz", "szabla", "włócznia", "proca", "łuk"];
 
 //zbroja
 let equipArmor = ["przeszywanica", "zbroja skórzana", "zbroja ćwiekowana"];
 
 //tarcze
-let equipShield = ["puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+let equipShield = ["puklerz", "mała tarcza drew.", "mała tarcza metal."];
 
 //inny ekwipunek
 let equipOther = ["kostur", "mieszek", "torba podróżna", "sakwa", "plecak", "manierka", "sagan", "koc", "tuba na perg.", "pęk piór do pis.", "pergaminy 5szt.", "zwykłe ubranie", "fikuśna czapka", "płaszcz", "skórzany pas",  "igły i nici", "derka", "namiot", "drewniana miska", "drewniana łyżka", "pochodnia", "lampa oliwna", "kaganek", "lina 5m", "hubka i krzesiwo"];
 
 //tablice z umiejętnościami
 //wojownika
-let skillsWarrior = ["szt.przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drewniana", "mała tarcza metalowa"];
+let skillsWarrior = ["szt. przetrwania", "dyscyplina", "dowodzenie", "uderzenie tarczą", "jeździectwo", "sztylet", "krótki miecz", "szabla", "włócznia", "łuk", "puklerz", "mała tarcza drew.", "mała tarcza metal."];
 module.exports.skillsWarrior = skillsWarrior;
 
 //złoczyńcy
-let skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drewniana pałka"];
+let skillsCriminal = ["trucizny", "wspinaczka", "aktorstwo", "akrobatyka", "pułapki", "skradanie się", "kradzież", "uniki", "blefowanie", "drew. pałka"];
 module.exports.skillsCriminal = skillsCriminal;
 
 //czarodzieja
@@ -326,14 +326,14 @@ weightHeight($("#height"), height, 0, $("#resultHeight"), 14);
 
 //funkcja optymalizująca wybieranie umiejętności i ekwipunku
 function sss(tab, tabLength, what, x, y, z){
-	if(tab.indexOf(" " + what) !== -1){
+	if(tab.indexOf(what) !== -1){
 			$("#alerts").html("<p class='newRocker redText center'>Wybrano już tą " + x +".</p>");
 			setTimeout(function(){ $("#alerts").empty(); }, 3000);
 	}else if( tab.length < tabLength){
 				$("#alerts").html("<p class='newRocker greenText center'>Wybrano " + x + ": " + what + ".</p>");
 			setTimeout(function(){ $("#alerts").empty(); }, 3000);
-			tab.push(" " + what);
-			z.append(" " + what);
+			tab.push(what);
+			z.append(what);
 		}else if( tab.length >= tabLength){
 			$("#alerts").html("<p class='newRocker redText center'>Wybrano już " + y +".</p>");
 			setTimeout(function(){ $("#alerts").empty(); }, 3000);
@@ -390,7 +390,7 @@ $("#deleteSkills").on("click", ()=>{ skills.splice(0, 3); $("#resultSkills").emp
 //wybieranie ekwipunku
 $("#chooseEquip").on("click", ()=>{ yyy(gameInfo.otherTexts.equip); $("#choosingEquip").show(); $("#deleteEquip").show();
 $("#daggerEquip").on("click", ()=>{ sss(equip, 5, "sztylet", "rzecz", "pięć", $("#resultEquip")); });
-$("#woodenStickEquip").on("click", ()=>{ sss(equip, 5, "drewniana pałka", "rzecz", "pięć", $("#resultEquip")); });
+$("#woodenStickEquip").on("click", ()=>{ sss(equip, 5, "drew. pałka", "rzecz", "pięć", $("#resultEquip")); });
 $("#shortSwordEquip").on("click", ()=>{ sss(equip, 5, "krótki miecz", "rzecz", "pięć", $("#resultEquip")); });
 $("#sabreEquip").on("click", ()=>{ sss(equip, 5, "szabla", "rzecz", "pięć", $("#resultEquip")); });
 $("#spearEquip").on("click", ()=>{ sss(equip, 5, "włócznia", "rzecz", "pięć", $("#resultEquip")); });
@@ -423,7 +423,7 @@ $("#blanketEquip").on("click", ()=>{ sss(equip, 5, "koc", "rzecz", "pięć", $("
 $("#tentEquip").on("click", ()=>{ sss(equip, 5, "namiot", "rzecz", "pięć", $("#resultEquip")); });
 $("#wooddenBowlEquip").on("click", ()=>{ sss(equip, 5, "drewniana miska", "rzecz", "pięć", $("#resultEquip")); });
 
-$("#woodenSpoonEquip").on("click", ()=>{ sss(equip, 5, "drewniana łyżka", "rzecz", "pięć", $("#resultEquip")); });
+$("#woodenSpoonEquip").on("click", ()=>{ sss(equip, 5, "drew. łyżka", "rzecz", "pięć", $("#resultEquip")); });
 $("#torchEquip").on("click", ()=>{ sss(equip, 5, "pochodnia", "rzecz", "pięć", $("#resultEquip")); });
 $("#oilLampEquip").on("click", ()=>{ sss(equip, 5, "lampa oliwna", "rzecz", "pięć", $("#resultEquip")); });
 $("#lampOilEquip").on("click", ()=>{ sss(equip, 5, "kaganek", "rzecz", "pięć", $("#resultEquip")); });
