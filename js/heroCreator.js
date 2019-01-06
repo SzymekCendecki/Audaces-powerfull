@@ -401,7 +401,7 @@ $("#gambisonEquip").on("click", ()=>{ sss(equip, 5, "przeszywanica", "rzecz", "p
 $("#leatherArmorEquip").on("click", ()=>{ sss(equip, 5, "zbr. skórzana", "rzecz", "pięć", $("#resultEquip")); });
 $("#studdedArmorEquip").on("click", ()=>{ sss(equip, 5, "zbr. ćwiekowana", "rzecz", "pięć", $("#resultEquip")); });
 
-$("#sbucklerEquip").on("click", ()=>{ sss(equip, 5, "puklerz", "rzecz", "pięć", $("#resultEquip")); });
+$("#bucklerEquip").on("click", ()=>{ sss(equip, 5, "puklerz", "rzecz", "pięć", $("#resultEquip")); });
 $("#smallShieldWoddenEquip").on("click", ()=>{ sss(equip, 5, "mała tarcza drew.", "rzecz", "pięć", $("#resultEquip")); });
 $("#smallShieldWMetalEquip").on("click", ()=>{ sss(equip, 5, "mała tarcza metal.", "rzecz", "pięć", $("#resultEquip")); });
 
@@ -436,7 +436,7 @@ $("#deleteEquip").on("click", ()=>{ equip.splice(0, 5); $("#resultEquip").empty(
 		$("#resultChoose").on("click", ()=>{ yyy();
 				check(hero);
 
-				$("#choosingResult").show();
+				$("#choosingResult").show().addClass("newRocker");
 				$("#choosingResult #resultName p:nth-child(2)").empty().append(hero[0]);
 				$("#choosingResult #resultSex p:nth-child(2)").empty().append(hero[1]);
 				$("#choosingResult #resultRace p:nth-child(2)").empty().append(hero[2]);
@@ -458,8 +458,8 @@ $("#deleteEquip").on("click", ()=>{ equip.splice(0, 5); $("#resultEquip").empty(
 				$("#choosingResult #resultWeight p:nth-child(2)").empty().append(hero[13]);
 				$("#choosingResult #resultHeight p:nth-child(2)").empty().append(hero[14]);
 
-				$("#choosingResult #resultSkills p:nth-child(2)").empty().append(skills);
-				$("#choosingResult #resultEquip p:nth-child(2)").empty().append(equip);
+				$("#choosingResult #resultSkills p:nth-child(2)").empty().append(skills + " ");
+				$("#choosingResult #resultEquip p:nth-child(2)").empty().append(equip + " ");
 	});
 
 	});

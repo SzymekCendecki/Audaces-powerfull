@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -994,7 +994,7 @@ module.exports.choose = function () {
 				sss(equip, 5, "zbr. ćwiekowana", "rzecz", "pięć", $("#resultEquip"));
 			});
 
-			$("#sbucklerEquip").on("click", function () {
+			$("#bucklerEquip").on("click", function () {
 				sss(equip, 5, "puklerz", "rzecz", "pięć", $("#resultEquip"));
 			});
 			$("#smallShieldWoddenEquip").on("click", function () {
@@ -1078,7 +1078,7 @@ module.exports.choose = function () {
 			yyy();
 			check(hero);
 
-			$("#choosingResult").show();
+			$("#choosingResult").show().addClass("newRocker");
 			$("#choosingResult #resultName p:nth-child(2)").empty().append(hero[0]);
 			$("#choosingResult #resultSex p:nth-child(2)").empty().append(hero[1]);
 			$("#choosingResult #resultRace p:nth-child(2)").empty().append(hero[2]);
@@ -1100,8 +1100,8 @@ module.exports.choose = function () {
 			$("#choosingResult #resultWeight p:nth-child(2)").empty().append(hero[13]);
 			$("#choosingResult #resultHeight p:nth-child(2)").empty().append(hero[14]);
 
-			$("#choosingResult #resultSkills p:nth-child(2)").empty().append(skills);
-			$("#choosingResult #resultEquip p:nth-child(2)").empty().append(equip);
+			$("#choosingResult #resultSkills p:nth-child(2)").empty().append(skills + " ");
+			$("#choosingResult #resultEquip p:nth-child(2)").empty().append(equip + " ");
 		});
 	});
 };
@@ -1570,7 +1570,7 @@ var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
 var street = __webpack_require__(6);
 var market = __webpack_require__(10);
-var firstFight = __webpack_require__(13);
+var firstFight = __webpack_require__(11);
 
 document.addEventListener("DOMContentLoaded", function () {
   var caravansTexts = {
@@ -1641,7 +1641,6 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#mainPartDescription").empty();
       $("#prepare, #afterFirstBattle").show();
       $("#mainPartDescription").before(firstFight.firstFightTexts.firstText);
-      $("#afterFirstBattle").prop("disabled", true);
     });
   };
 }); //koniec DOMContentLoaded
@@ -1886,11 +1885,96 @@ document.addEventListener("DOMContentLoaded", function () {
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+"use strict";
 
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+  var firstFightTexts = {
+    "firstText": "<p id='firstTextFirstFight' class='newRocker textIndent15px'>Jedziecie sobie spokojnie. Czas mija na oglądaniu pejzaży z jadącego wozu. Niestety ta sielanka skończyła się wieczorem drugiego dnia. Zaczęło się od zawalonej, przez drzewa drogi. Gdy uczestnicy, z pierwszych wozów karawany uprzątali drzewa, nastąpił atak. Wszyscy muszą walczyć!. Ciebie atakuje bandyta z wielkim mieczem. Po lewej stronie znajduje się przycisk 'przygotuj się', aby wybrać ekwipunek.</p>",
+    "title": "<p id='titleFirstFight' class='newRocker greenText'>Posiadasz poniższy ekwipunek.</p>",
+    "weapon": "<p id='weaponFirstFight' class='newRocker blackText'>broń</p>",
+    "armor": "<p id='armorFirstFight' class='newRocker blackText'>zbroje</p>",
+    "shield": "<p id='shieldFirstFight' class='newRocker blackText'>tarcze</p>"
+  };
+
+  module.exports.firstFightTexts = firstFightTexts;
+
+  //funkcja optymalizująca pętle dla broni, zbroi i tarczy
+  function battleLoop(where, array) {
+    for (var i = 0; i < array.length; i++) {
+      where.append("<span class='greenText'>" + array[i] + " </span>");
+    }
+  }
+
+  module.exports.firstFightEvents = function (equip, hero) {
+    $("#prepare").on("click", function () {
+
+      $("#mainPartDescription").append(firstFightTexts.title, firstFightTexts.weapon, firstFightTexts.armor, firstFightTexts.shield, firstFightTexts.skills);
+
+      //wyświetlenie dostępnej broni
+      var weapon = heroCreator.equip.filter(function (el) {
+        return el === 'sztylet' || el == "drew. pałka" || el == "krótki miecz" || el == "szabla" || el == "włócznia" || el == "proca" || el == "łuk" || el == "kusza" || el == "kostur";
+      });
+
+      battleLoop($("#weaponFirstFight"), weapon);
+
+      //wyświetlenie dostępnych zbroi
+      var armor = heroCreator.equip.filter(function (el) {
+        return el === 'przeszywanica' || el == "zbroja skórzana" || el == "zbroja ćwiekowana";
+      });
+
+      battleLoop($("#armorFirstFight"), armor);
+
+      //wyświetlenie dostępnych zbroi
+      var shield = heroCreator.equip.filter(function (el) {
+        return el === 'puklerz' || el == "mała tarcza drew." || el == "mała tarcza metal.";
+      });
+
+      battleLoop($("#shieldFirstFight"), shield);
+
+      var r = ["nie wybrano", "nie wybrano", "nie wybrano"];
+      $("p span").click(function () {
+        console.log($(this).text());
+
+        if ($(this).text() == "sztylet") {
+          r.splice(0, 1, $(this).text());
+        } else if ($(this).text() == "przeszywanica" || $(this).text() == "zbroja skórzana" || $(this).text() == "zbroja ćwiekowana") {
+          r.splice(1, 1, $(this).text());
+        } else if ($(this).text() == "puklerz" || $(this).text() == "mała tarcza drew." || $(this).text() == "mała tarcza metal.") {
+          r.splice(2, 1, $(this).text());
+        }
+
+        console.log(r);
+      });
+
+      //resetowanie wyników wyborów
+      $("#reset").on("click", function () {
+        $("#result2").empty();
+      });
+
+      //akceptacja wyborów
+      $("#agrreChoose").on("click", function () {
+        $("#mainPartDescription").empty();
+      });
+    });
+  };
+}); //koniec DOMContentLoaded
 
 /***/ }),
 /* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(13);
+
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1906,7 +1990,7 @@ var mainGameBtns = __webpack_require__(9);
 var room = __webpack_require__(5);
 var street = __webpack_require__(6);
 var caravans = __webpack_require__(7);
-var firstFight = __webpack_require__(13);
+var firstFight = __webpack_require__(11);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -1964,77 +2048,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //zdarzenia dla pierwszej walki
   firstFight.firstFightEvents();
-}); //koniec DOMContentLoaded
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(3);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(4);
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  var firstFightTexts = {
-    "firstText": "<p id='firstTextFirstFight' class='newRocker textIndent15px'>Jedziecie sobie spokojnie. Czas mija na oglądaniu pejzaży z jadącego wozu. Niestety ta sielanka skończyła się wieczorem drugiego dnia. Zaczęło się od zawalonej, przez drzewa drogi. Gdy uczestnicy, z pierwszych wozów karawany uprzątali drzewa, nastąpił atak. Wszyscy muszą walczyć!. Ciebie atakuje bandyta z wielkim mieczem. Po lewej stronie znajduje się przycisk 'przygotuj się', aby wybrać ekwipunek.</p>",
-
-    "title": "<p id='titleFirstFight' class='newRocker greenText'>Wbierz ekwipunek oraz umiejętności.</p>",
-
-    "weapon": "<p id='weaponFirstFight' class='newRocker blackText'>broń</p>",
-
-    "armor": "<p id='armorFirstFight' class='newRocker blackText'>zbroje</p>",
-
-    "shield": "<p id='shieldFirstFight' class='newRocker blackText'>tarcze</p>",
-
-    "skills": "<p id='skillsFirstFight' class='newRocker blackText'>umiejętności</p>"
-
-  };
-
-  module.exports.firstFightTexts = firstFightTexts;
-
-  module.exports.firstFightEvents = function (equip, hero) {
-    $("#prepare").on("click", function () {
-      console.log(heroCreator.equip);
-      $("#mainPartDescription").append(firstFightTexts.title, firstFightTexts.weapon, firstFightTexts.armor, firstFightTexts.shield, firstFightTexts.skills);
-
-      //wyświetlenie dostępnej broni
-      var weapon = heroCreator.equip.filter(function (el) {
-        return el === 'sztylet' || el == "drew. pałka" || el == "krótki miecz" || el == "szabla" || el == "włócznia" || el == "proca" || el == "łuk" || el == "kusza" || el == "kostur";
-      });
-
-      for (var i = 0; i < weapon.length; i++) {
-        $("#weaponFirstFight").append("<span class='greenText'>" + weapon[i] + " </span>");
-      }
-
-      //wyświetlenie dostępnych zbroi
-      var armor = heroCreator.equip.filter(function (el) {
-        return el === 'przeszywanica' || el == "zbroja skórzana" || el == "zbroja ćwiekowana";
-      });
-
-      for (var _i = 0; _i < armor.length; _i++) {
-        $("#armorFirstFight").append("<span class='greenText'>" + armor[_i] + " </span>");
-      }
-
-      //wyświetlenie dostępnych zbroi
-      var shield = heroCreator.equip.filter(function (el) {
-        return el === 'puklerz' || el == "mała tarcza drew." || el == "mała tarcza metal.";
-      });
-
-      for (var _i2 = 0; _i2 < shield.length; _i2++) {
-        $("#shieldFirstFight").append("<span class='greenText'>" + shield[_i2] + " </span>");
-      }
-
-      $("p span").click(function () {
-        console.log($(this).text());
-      });
-    });
-  };
 }); //koniec DOMContentLoaded
 
 /***/ })

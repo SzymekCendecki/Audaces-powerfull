@@ -219,3 +219,8 @@ Poprawka wyświetlania rzeczy i umiejętności w ekwipunku, części z umiejętn
 
 5 stycznia 2019 - wersja 0.1.58
 Rozpoczęcie pracy nad pierwszą walką.
+
+6 stycznia 2019 - wersja 0.1.59
+Naprawiono wybieranie umiejętności/ekwipunku puklerza.
+  Poprawiono wizualnie wyswietlanie wyników ręcznego wybierania.
+Testowanie rozwiązań dlapierwszej walki.

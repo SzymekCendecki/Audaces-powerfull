@@ -77,7 +77,6 @@ module.exports.caravansEvents = function(){
         $("#mainPartDescription").empty();
         $("#prepare, #afterFirstBattle").show();
         $("#mainPartDescription").before(firstFight.firstFightTexts.firstText);
-        $("#afterFirstBattle").prop("disabled", true);
     });
 }
 
