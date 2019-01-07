@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
    "title":"<p id='titleFirstFight' class='newRocker greenText'>Posiadasz poniższy ekwipunek.</p>",
    "weapon":"<p id='weaponFirstFight' class='newRocker blackText'>broń</p>",
    "armor":"<p id='armorFirstFight' class='newRocker blackText'>zbroje</p>",
-   "shield":"<p id='shieldFirstFight' class='newRocker blackText'>tarcze</p>"
+   "shield":"<p id='shieldFirstFight' class='newRocker blackText'>tarcze</p>",
+   "resultItems":"<p id='resultItems' class='newRocker height15px'></p>",
+   "reset":"<p id='reset' class='newRocker redText'>usuń rzeczy</p>"
   }
 
  module.exports.firstFightTexts = firstFightTexts;
@@ -25,7 +27,7 @@ function battleLoop(where, array){
 module.exports.firstFightEvents = function(equip, hero){
   $("#prepare").on("click", ()=>{
 
-  $("#mainPartDescription").append(firstFightTexts.title, firstFightTexts.weapon, firstFightTexts.armor, firstFightTexts.shield, firstFightTexts.skills);
+  $("#mainPartDescription").append(firstFightTexts.title, firstFightTexts.weapon, firstFightTexts.armor, firstFightTexts.shield, firstFightTexts.skills, firstFightTexts.resultItems, firstFightTexts.reset);
 
 //wyświetlenie dostępnej broni
     let weapon = heroCreator.equip.filter(function(el) {
@@ -48,24 +50,31 @@ module.exports.firstFightEvents = function(equip, hero){
 
         battleLoop($("#shieldFirstFight"), shield);
 
-let r = ["nie wybrano", "nie wybrano", "nie wybrano"];
+let arr = [];
+
         $("p span").click(function () {
          console.log($(this).text());
+         arr.push($(this).text());
 
+         if(arr.length > 0){
+             $("#afterFirstBattle").prop("disabled", false).removeClass("redBtn").addClass("greenBtn");
+         }
 
-          if($(this).text() == "sztylet"){
-             r.splice(0,1, $(this).text());
-          }else if ($(this).text() == "przeszywanica" || $(this).text() == "zbroja skórzana" || $(this).text() == "zbroja ćwiekowana"){
-            r.splice(1,1, $(this).text());
-          }else if ($(this).text() == "puklerz" || $(this).text() == "mała tarcza drew." || $(this).text() == "mała tarcza metal."){
-            r.splice(2,1, $(this).text());
-          }
+          if(arr.length > 3){
+           arr.splice(3, 1);
+           $("#alerts").html("<p class='newRocker redText center margin2000p'>Możesz wybrać tylko trzy rzeczy !!!</p>");
+           setTimeout(function(){ $("#alerts").empty(); }, 3000);
+         }
 
-
-         console.log(r);
+         $("#resultItems").empty().append(arr);
+        console.log(arr);
     });
 
-
+    $("#reset").on("click", ()=>{
+        arr.splice(0, 3);
+       $("#resultItems").empty().append(arr);
+      $("#afterFirstBattle").prop("disabled", true).removeClass("greenBtn").addClass("redBtn");
+    });
 
 
     //resetowanie wyników wyborów

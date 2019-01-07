@@ -211,7 +211,7 @@ Praca z lokacją targ.
 2 stycznia 2019 - wersja 0.1.55
 Praca z lokacją targ - ze sprzedawaniem.
 
-3 stycznie 2019 - wersja 0.1.56
+3 stycznia 2019 - wersja 0.1.56
 Naprawienie problemu ze sprzedawaniem.
 
 4 stycznia 2019 - wersja 0.1.57
@@ -223,4 +223,7 @@ Rozpoczęcie pracy nad pierwszą walką.
 6 stycznia 2019 - wersja 0.1.59
 Naprawiono wybieranie umiejętności/ekwipunku puklerza.
   Poprawiono wizualnie wyswietlanie wyników ręcznego wybierania.
-Testowanie rozwiązań dlapierwszej walki.
+Testowanie rozwiązań dla pierwszej walki.
+
+7 stycznia 2019 - wersja 0.1.60
+Ostateczna wersja wybierania rzeczy do walki.
