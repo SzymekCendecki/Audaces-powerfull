@@ -1639,9 +1639,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#go").on("click", function () {
       $("#go, #lookAroundWagon").hide();
       $("#mainPartDescription").empty();
-      $("#prepare, #afterFirstBattle").show();
+      $("#prepare, #afterPrepareFirstBattle").show();
       $("#mainPartDescription").before(firstFight.firstFightTexts.firstText);
-      $("#afterFirstBattle").prop("disabled", true);
     });
   };
 }); //koniec DOMContentLoaded
@@ -1944,12 +1943,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var arr = [];
 
       $("p span").click(function () {
-        console.log($(this).text());
         arr.push($(this).text());
-
-        if (arr.length > 0) {
-          $("#afterFirstBattle").prop("disabled", false).removeClass("redBtn").addClass("greenBtn");
-        }
 
         if (arr.length > 3) {
           arr.splice(3, 1);
@@ -1958,15 +1952,12 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#alerts").empty();
           }, 3000);
         }
-
         $("#resultItems").empty().append(arr);
-        console.log(arr);
       });
 
       $("#reset").on("click", function () {
         arr.splice(0, 3);
         $("#resultItems").empty().append(arr);
-        $("#afterFirstBattle").prop("disabled", true).removeClass("greenBtn").addClass("redBtn");
       });
 
       //resetowanie wyników wyborów
@@ -1978,6 +1969,31 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#agrreChoose").on("click", function () {
         $("#mainPartDescription").empty();
       });
+    });
+
+    $("#afterPrepareFirstBattle").on("click", function () {
+      var textVar = [];
+      if (heroCreator.hero[1] === "kobieta") {
+        textVar.splice(0, 1, "trafiłaś");
+        textVar.splice(1, 1, "wysłałaś");
+        textVar.splice(2, 1, "przeżyłaś");
+        textVar.splice(3, 1, "Rozejrzałaś");
+      } else {
+        textVar.splice(0, 1, "trafiłeś");
+        textVar.splice(1, 1, "wysłałeś");
+        textVar.splice(2, 1, "przeżyłeś");
+        textVar.splice(3, 1, "Rozejrzałeś");
+      }
+      $("#mainPartDescription").empty().before("<p id='afterFirstBattle' class='newRocker'>Jednym z cios\xF3w, " + textVar[0] + " swojego przeciwnika i " + textVar[1] + " go do piachu. Szcz\u0119\u015Bliwie " + textVar[2] + " walk\u0119. " + textVar[3] + " si\u0119. Walka r\xF3wnie szybko si\u0119 sko\u0144czy\u0142a jak zacz\u0119\u0142a. Karawana odczea\u0142a w gotowo\u015Bci jescze kilka minut. Po nich pochowali\u015Bcie cia\u0142a poleg\u0142ych obro\u0144c\xF3w i atakuj\u0105cych w jednej, zbiorowej mogile, niedaleko drogi. Po kr\xF3tkich modlitwach odjechali\u015Bcie. Twoje cechy podnios\u0142y si\u0119.</p>");
+
+      $("#firstTextFirstFight").remove();
+      $("#prepare, #afterPrepareFirstBattle").hide();
+
+      heroCreator.hero.splice(4, 1, heroCreator.hero[4] + 5);
+      heroCreator.hero.splice(5, 1, heroCreator.hero[5] + 5);
+      heroCreator.hero.splice(6, 1, heroCreator.hero[6] + 5);
+      heroCreator.hero.splice(7, 1, heroCreator.hero[7] + 5);
+      heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
     });
   };
 }); //koniec DOMContentLoaded
@@ -2025,7 +2041,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
 
   //karawany
-  $("#prepare, #afterFirstBattle").hide();
+  $("#prepare, #afterPrepareFirstBattle").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {

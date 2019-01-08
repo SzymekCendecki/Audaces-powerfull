@@ -75,9 +75,8 @@ module.exports.caravansEvents = function(){
     $("#go").on("click", ()=>{
         $("#go, #lookAroundWagon").hide();
         $("#mainPartDescription").empty();
-        $("#prepare, #afterFirstBattle").show();
+        $("#prepare, #afterPrepareFirstBattle").show();
         $("#mainPartDescription").before(firstFight.firstFightTexts.firstText);
-        $("#afterFirstBattle").prop("disabled", true);
     });
 }
 

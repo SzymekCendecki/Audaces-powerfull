@@ -27,7 +27,7 @@ $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
   $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
 
 //karawany
-  $("#prepare, #afterFirstBattle").hide();
+  $("#prepare, #afterPrepareFirstBattle").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){

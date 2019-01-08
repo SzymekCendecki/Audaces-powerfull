@@ -227,3 +227,6 @@ Testowanie rozwiązań dla pierwszej walki.
 
 7 stycznia 2019 - wersja 0.1.60
 Ostateczna wersja wybierania rzeczy do walki.
+
+8 stycznia 2019 - wersja 0.1.61
+Dodano akapit po pierwszej walce.
