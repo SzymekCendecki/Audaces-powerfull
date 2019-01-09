@@ -230,3 +230,6 @@ Ostateczna wersja wybierania rzeczy do walki.
 
 8 stycznia 2019 - wersja 0.1.61
 Dodano akapit po pierwszej walce.
+
+9 stycznia 2019 - wersja 0.1.62
+Dodano przybycie do wioski.

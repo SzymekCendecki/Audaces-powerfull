@@ -9,6 +9,7 @@ let room=require("./room.js");
 let street=require("./street.js");
 let caravans=require("./caravans.js");
 let firstFight=require("./firstFight.js");
+let village=require("./village.js");
 
 document.addEventListener("DOMContentLoaded", () => {
 //ukrywanie odpowiednich części
@@ -26,8 +27,11 @@ $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
 //targ
   $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
 
-//karawany
-  $("#prepare, #afterPrepareFirstBattle").hide();
+//pierwsza walka - obrona karawany
+  $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
+
+  //po walce - wioska - przybycie karawany do wioski
+    $("#enterVillage, #lookAroundEnterVillage").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
@@ -66,5 +70,8 @@ caravans.caravansEvents();
 
 //zdarzenia dla pierwszej walki
 firstFight.firstFightEvents();
+
+//zdarzenia dla wioski
+village.village();
 
 });//koniec DOMContentLoaded

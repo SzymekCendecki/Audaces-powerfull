@@ -81,7 +81,7 @@ let arr = [];
 $("#afterPrepareFirstBattle").on("click", ()=>{
   let textVar = [];
   if(heroCreator.hero[1] === "kobieta"){
-    textVar.splice(0, 1, "trafiłaś"); 
+    textVar.splice(0, 1, "trafiłaś");
     textVar.splice(1, 1, "wysłałaś");
     textVar.splice(2, 1, "przeżyłaś");
     textVar.splice(3, 1, "Rozejrzałaś");
@@ -91,19 +91,18 @@ $("#afterPrepareFirstBattle").on("click", ()=>{
     textVar.splice(2, 1, "przeżyłeś");
     textVar.splice(3, 1, "Rozejrzałeś");
   }
-      $("#mainPartDescription").empty().before(`<p id='afterFirstBattle' class='newRocker'>Jednym z ciosów, ${textVar[0]} swojego przeciwnika i ${textVar[1]} go do piachu. Szczęśliwie ${textVar[2]} walkę. ${textVar[3]} się. Walka równie szybko się skończyła jak zaczęła. Karawana odczeała w gotowości jescze kilka minut. Po nich pochowaliście ciała poległych obrońców i atakujących w jednej, zbiorowej mogile, niedaleko drogi. Po krótkich modlitwach odjechaliście. Twoje cechy podniosły się.</p>`);
+      $("#mainPartDescription").empty().before(`<p id='afterFirstBattle' class='newRocker textIndent15px'>Jednym z ciosów, ${textVar[0]} swojego przeciwnika i ${textVar[1]} go do piachu. Szczęśliwie ${textVar[2]} walkę. ${textVar[3]} się. Walka równie szybko się skończyła jak zaczęła. Karawana odczeała w gotowości jescze kilka minut. Po nich pochowaliście ciała poległych obrońców i atakujących w jednej, zbiorowej mogile, niedaleko drogi. Po krótkich modlitwach odjechaliście. Twoje cechy podniosły się.</p>`);
 
-  $("#firstTextFirstFight").remove();
-  $("#prepare, #afterPrepareFirstBattle").hide();
+          $("#firstTextFirstFight").remove();
+          $("#prepare, #afterPrepareFirstBattle").hide();
+          $("#toVillage").show();
 
-heroCreator.hero.splice(4, 1, (heroCreator.hero[4] + 5));
-heroCreator.hero.splice(5, 1, (heroCreator.hero[5] + 5));
-heroCreator.hero.splice(6, 1, (heroCreator.hero[6] + 5));
-heroCreator.hero.splice(7, 1, (heroCreator.hero[7] + 5));
-heroCreator.hero.splice(8, 1, (heroCreator.hero[8] + 5));
-});
-
-
+    heroCreator.hero.splice(4, 1, (heroCreator.hero[4] + 5));
+    heroCreator.hero.splice(5, 1, (heroCreator.hero[5] + 5));
+    heroCreator.hero.splice(6, 1, (heroCreator.hero[6] + 5));
+    heroCreator.hero.splice(7, 1, (heroCreator.hero[7] + 5));
+    heroCreator.hero.splice(8, 1, (heroCreator.hero[8] + 5));
+  });
 }
 
 });//koniec DOMContentLoaded

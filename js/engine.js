@@ -1984,10 +1984,11 @@ document.addEventListener("DOMContentLoaded", function () {
         textVar.splice(2, 1, "przeżyłeś");
         textVar.splice(3, 1, "Rozejrzałeś");
       }
-      $("#mainPartDescription").empty().before("<p id='afterFirstBattle' class='newRocker'>Jednym z cios\xF3w, " + textVar[0] + " swojego przeciwnika i " + textVar[1] + " go do piachu. Szcz\u0119\u015Bliwie " + textVar[2] + " walk\u0119. " + textVar[3] + " si\u0119. Walka r\xF3wnie szybko si\u0119 sko\u0144czy\u0142a jak zacz\u0119\u0142a. Karawana odczea\u0142a w gotowo\u015Bci jescze kilka minut. Po nich pochowali\u015Bcie cia\u0142a poleg\u0142ych obro\u0144c\xF3w i atakuj\u0105cych w jednej, zbiorowej mogile, niedaleko drogi. Po kr\xF3tkich modlitwach odjechali\u015Bcie. Twoje cechy podnios\u0142y si\u0119.</p>");
+      $("#mainPartDescription").empty().before("<p id='afterFirstBattle' class='newRocker textIndent15px'>Jednym z cios\xF3w, " + textVar[0] + " swojego przeciwnika i " + textVar[1] + " go do piachu. Szcz\u0119\u015Bliwie " + textVar[2] + " walk\u0119. " + textVar[3] + " si\u0119. Walka r\xF3wnie szybko si\u0119 sko\u0144czy\u0142a jak zacz\u0119\u0142a. Karawana odczea\u0142a w gotowo\u015Bci jescze kilka minut. Po nich pochowali\u015Bcie cia\u0142a poleg\u0142ych obro\u0144c\xF3w i atakuj\u0105cych w jednej, zbiorowej mogile, niedaleko drogi. Po kr\xF3tkich modlitwach odjechali\u015Bcie. Twoje cechy podnios\u0142y si\u0119.</p>");
 
       $("#firstTextFirstFight").remove();
       $("#prepare, #afterPrepareFirstBattle").hide();
+      $("#toVillage").show();
 
       heroCreator.hero.splice(4, 1, heroCreator.hero[4] + 5);
       heroCreator.hero.splice(5, 1, heroCreator.hero[5] + 5);
@@ -2023,6 +2024,7 @@ var room = __webpack_require__(5);
 var street = __webpack_require__(6);
 var caravans = __webpack_require__(7);
 var firstFight = __webpack_require__(11);
+var village = __webpack_require__(14);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -2040,8 +2042,11 @@ document.addEventListener("DOMContentLoaded", function () {
   //targ
   $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
 
-  //karawany
-  $("#prepare, #afterPrepareFirstBattle").hide();
+  //pierwsza walka - obrona karawany
+  $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
+
+  //po walce - wioska - przybycie karawany do wioski
+  $("#enterVillage, #lookAroundEnterVillage").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -2080,6 +2085,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //zdarzenia dla pierwszej walki
   firstFight.firstFightEvents();
+
+  //zdarzenia dla wioski
+  village.village();
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var villageTexts = {
+    "arriveVillage": "<p id='arriveVillage' class='newRocker textIndent15px'>Po trzech dniach, dotarliście już bez przeszkód do Przygranicznej wioski. Rozbiliście obozowisko, przy starym młynie. Zaciekawieni mieszkańcy wyszli ze swych chałup i obleźli karawanę. Co robisz?</p>",
+
+    "lookAroundEnterVillage": "<p id='lookAroundEnterVillage' class='newRocker textIndent15px'>Wioska jest dość duża, składa się z prawie 40 chałup. Otoczona jest wałem ziemnym, z wbitymi w niego, zaostrzonymi palikami. To typowe umocnienie w tym rejonie. Przy rzece stoi stary młyn. Wokół wioski, jak okiem sięgnąć rozciągają się pola.</p>"
+  };
+
+  module.exports.village = function () {
+    $("#toVillage").on("click", function () {
+      $("#toVillage, #afterFirstBattle").hide();
+      $("#enterVillage, #lookAroundEnterVillage").show();
+      $("#mainPartDescription").before(villageTexts.arriveVillage);
+    });
+
+    $("#lookAroundEnterVillage").on("click", function () {
+      $("#mainPartDescription").empty().append(villageTexts.lookAroundEnterVillage);
+    });
+  };
 }); //koniec DOMContentLoaded
 
 /***/ })
