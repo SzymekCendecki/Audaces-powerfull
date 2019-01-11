@@ -2105,17 +2105,18 @@ var introGame = __webpack_require__(4);
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  var villageTexts = {
-    "arriveVillage": "<p id='arriveVillage' class='newRocker textIndent15px'>Po trzech dniach, dotarliście już bez przeszkód do Przygranicznej wioski. Rozbiliście obozowisko, przy starym młynie. Zaciekawieni mieszkańcy wyszli ze swych chałup i obleźli karawanę. Co robisz?</p>",
-
-    "lookAroundEnterVillage": "<p id='lookAroundEnterVillage' class='newRocker textIndent15px'>Wioska jest dość duża, składa się z prawie 40 chałup. Otoczona jest wałem ziemnym, z wbitymi w niego, zaostrzonymi palikami. To typowe umocnienie w tym rejonie. Przy rzece stoi stary młyn. Wokół wioski, jak okiem sięgnąć rozciągają się pola.</p>",
-
-    "mainSquareVillage": "<p id='mainSquareVillage' class='newRocker textIndent15px'>Stoisz na placu pośrodku wioski. Przed sobą widzisz kamienną karczmę. Po Twojej lewej stronie jest mały 'kościółek'. Pewnie tam jest mnich, któremu musisz odda paczkę. Co robisz?</p>",
-
-    "lookAroundVillage": "<p id='lookAroundVillage' class='newRocker textIndent15px'>Wioska jakich wiele w regionie. Bydło i ptactwo jest wszędzie. W oddali słychać odgłosy kuźni. Uwagę przykuwa karczma, jedyny kamienny budynek we wiosce.</p>"
-  };
-
   module.exports.village = function () {
+
+    var villageTexts = {
+      "arriveVillage": "<p id='arriveVillage' class='newRocker textIndent15px'>Po trzech dniach, dotarliście już bez przeszkód do Przygranicznej wioski. Rozbiliście obozowisko, przy starym młynie. Zaciekawieni mieszkańcy wyszli ze swych chałup i obleźli karawanę. Co robisz?</p>",
+
+      "lookAroundEnterVillage": "<p id='lookAroundEnterVillage' class='newRocker textIndent15px'>Wioska jest dość duża, składa się z prawie 40 chałup. Otoczona jest wałem ziemnym, z wbitymi w niego, zaostrzonymi palikami. To typowe umocnienie w tym rejonie. Przy rzece stoi stary młyn. Wokół wioski, jak okiem sięgnąć rozciągają się pola.</p>",
+
+      "mainSquareVillage": "<p id='mainSquareVillage' class='newRocker textIndent15px'>Stoisz na placu pośrodku wioski. Przed sobą widzisz kamienną karczmę. Po Twojej lewej stronie jest mały 'kościółek'. Pewnie tam jest mnich, któremu musisz odda paczkę. Co robisz?</p>",
+
+      "lookAroundVillage": "<p id='lookAroundVillage' class='newRocker textIndent15px'>Wioska jakich wiele w regionie. Bydło i ptactwo jest wszędzie. W oddali słychać odgłosy kuźni. Uwagę przykuwa karczma, jedyny kamienny budynek we wiosce.</p>"
+    };
+
     $("#toVillage").on("click", function () {
       $("#toVillage, #afterFirstBattle").hide();
       $("#enterVillage, #lookAroundEnterVillage").show();
@@ -2135,6 +2136,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $("#lookAroundVillage").on("click", function () {
       $("#mainPartDescription").empty().append(villageTexts.lookAroundVillage);
+    });
+
+    $("#monk").on("click", function () {
+      var c = [];
+      if (heroCreator.hero[1] == "kobieta") {
+        c.splice(0, 1, "Weszłaś");
+      } else {
+        c.splice(0, 1, "Wszedłeś");
+      }
+
+      $("#mainPartDescription").empty().append("<p id='monk' class='newRocker textIndent15px'>" + c[0] + " do ko\u015Bcio\u0142a. Panuje w nim lekki zaduch i niewielki p\xF3\u0142mrok. Podesz\u0142a\u015B do stoj\u0105cego przy o\u0142tarzu mnicha. Mnich odwr\xF3ci\u0142 si\u0119 i powiedzia\u0142: Witaj! Spodziewa\u0142em si\u0119 Ciebie. Pono\u0107 masz dla mnie przesy\u0142k\u0119? Co robisz?</p>");
     });
   };
 }); //koniec DOMContentLoaded
