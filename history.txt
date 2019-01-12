@@ -239,3 +239,6 @@ Dodano wejście na główny plac wioski.
 
 11 stycnia 2019 - wersja 0.1.64
 Praca z interakcjami we wiosce - mnich.
+
+12 stycznia 2019 - wersja 0.1.65
+Praca z wioską - mnich część druga.
