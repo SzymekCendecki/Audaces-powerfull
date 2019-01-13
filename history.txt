@@ -242,3 +242,7 @@ Praca z interakcjami we wiosce - mnich.
 
 12 stycznia 2019 - wersja 0.1.65
 Praca z wioską - mnich część druga.
+
+13 stycznia 2019 - wersja 0.1.66
+Poprawka wyświetlania tekstu dla wychodzenia od mnicha (w zależności od tego czy oddało się paczkę).
+  Rozpoczęcie pracy nad interakcją z kowalem.

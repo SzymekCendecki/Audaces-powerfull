@@ -2046,7 +2046,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
 
   //po walce - wioska - przybycie karawany do wioski
-  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch").hide();
+  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmitch").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -2112,13 +2112,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       "lookAroundEnterVillage": "<p id='lookAroundEnterVillage' class='newRocker textIndent15px'>Wioska jest dość duża, składa się z prawie 40 chałup. Otoczona jest wałem ziemnym, z wbitymi w niego, zaostrzonymi palikami. To typowe umocnienie w tym rejonie. Przy rzece stoi stary młyn. Wokół wioski, jak okiem sięgnąć rozciągają się pola.</p>",
 
-      "mainSquareVillage": "<p id='mainSquareVillage' class='newRocker textIndent15px'>Stoisz na placu pośrodku wioski. Przed sobą widzisz kamienną karczmę. Po Twojej lewej stronie jest mały 'kościółek'. Pewnie tam jest mnich, któremu musisz odda paczkę. Co robisz?</p>",
+      "mainSquareVillage": "<p id='mainSquareVillage' class='newRocker textIndent15px'>Stoisz na placu pośrodku wioski. Przed sobą widzisz kamienną karczmę. Po Twojej lewej stronie jest mały 'kościółek'. Pewnie tam jest mnich, któremu musisz oddać paczkę. Co robisz?</p>",
+
+      "mainSquareVillage2": "<p id='mainSquareVillage2' class='newRocker textIndent15px'>Stoisz na placu pośrodku wioski. Przed sobą widzisz kamienną karczmę. Po Twojej lewej stronie jest mały 'kościółek'. Co robisz?</p>",
 
       "lookAroundVillage": "<p id='lookAroundVillage' class='newRocker textIndent15px'>Wioska jakich wiele w regionie. Bydło i ptactwo jest wszędzie. W oddali słychać odgłosy kuźni. Uwagę przykuwa karczma, jedyny kamienny budynek we wiosce.</p>",
 
-      "lookAroundChurch": "<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>",
-
-      "monkAgain": "<p id='monkAgain' class='newRocker textIndent15px'>Witaj ponownie.</p>"
+      "lookAroundChurch": "<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>"
     };
 
     $("#toVillage").on("click", function () {
@@ -2144,10 +2144,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //zdarzenia dla mnicha
     $("#monk").on("click", function () {
-      $("#lookAroundChurch, #outChurch").show();
-      $("#monk, #blacksmith, #tavern, #mainSquareVillage").hide();
-      $("#mainPartDescription").empty();
-
       var c = ["", ""];
 
       if (heroCreator.hero[1] == "kobieta") {
@@ -2157,6 +2153,10 @@ document.addEventListener("DOMContentLoaded", function () {
         c.splice(0, 1, "Wszedłeś");
         c.splice(1, 1, "Podszedłeś");
       }
+
+      $("#lookAroundChurch, #outChurch").show();
+      $("#monk, #blacksmith, #tavern, #mainSquareVillage").hide();
+      $("#mainPartDescription").empty();
 
       if (heroCreator.equip.indexOf("paczka") !== -1) {
         $("#givePackage").show();
@@ -2176,7 +2176,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       } else {
-        $("#mainPartDescription").before(villageTexts.monkAgain);
+        $("#mainPartDescription").before("<p id='monkFirst' class='newRocker textIndent15px'>" + c[0] + " do ko\u015Bcio\u0142a. Panuje w nim lekki zaduch i niewielki p\xF3\u0142mrok. " + c[1] + " do stoj\u0105cego przy o\u0142tarzu mnicha. Co robisz?</p>");
       }
 
       //zdarzenie dla rozglądania się w kościele
@@ -2184,12 +2184,32 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#mainPartDescription").empty().append(villageTexts.lookAroundChurch);
       });
 
+      //wyjście z kościoła
       $("#outChurch").on("click", function () {
         $("#outChurch, #lookAroundChurch, #givePackage, #monkFirst, #monkAgain").hide();
-        $("#monk, #blacksmith, #tavern, #mainSquareVillage").show();
+        $("#monk, #blacksmith, #tavern").show();
         $("#mainPartDescription").empty();
+
+        if (heroCreator.equip.indexOf("paczka") !== -1) {
+          $("#mainSquareVillage").show();
+        } else {
+          $("#mainPartDescription").empty().append(villageTexts.mainSquareVillage2);
+        }
       });
     }); // koniec zdarzeń dla mnicha
+
+    //zdarzenia dla kowala
+    $("#blacksmith").on("click", function () {
+      $("#lookAroundBlackSmith, #outBlacksmitch").show();
+      $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").hide();
+      $("#mainPartDescription").empty();
+    });
+
+    $("#outBlacksmitch").on("click", function () {
+      $("#lookAroundBlackSmith, #outBlacksmitch").hide();
+      $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").show();
+      $("#mainPartDescription").empty();
+    });
   };
 }); //koniec DOMContentLoaded
 
