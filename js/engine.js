@@ -2046,7 +2046,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
 
   //po walce - wioska - przybycie karawany do wioski
-  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmitch").hide();
+  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -2118,7 +2118,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       "lookAroundVillage": "<p id='lookAroundVillage' class='newRocker textIndent15px'>Wioska jakich wiele w regionie. Bydło i ptactwo jest wszędzie. W oddali słychać odgłosy kuźni. Uwagę przykuwa karczma, jedyny kamienny budynek we wiosce.</p>",
 
-      "lookAroundChurch": "<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>"
+      "lookAroundChurch": "<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>",
+
+      "lookAroundBlackSmith": "p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielka kuźnia, ale ja na wioskę dobrze wyposażona.</p>"
     };
 
     $("#toVillage").on("click", function () {
@@ -2200,15 +2202,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //zdarzenia dla kowala
     $("#blacksmith").on("click", function () {
-      $("#lookAroundBlackSmith, #outBlacksmitch").show();
+      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").show();
       $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").hide();
       $("#mainPartDescription").empty();
     });
 
-    $("#outBlacksmitch").on("click", function () {
-      $("#lookAroundBlackSmith, #outBlacksmitch").hide();
-      $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").show();
+    //zdarzenia dla kupowania
+    var buyItem = ["młot", "topór", "pług", "podkowa", "gwoździe", "brona", "siekiera"];
+    var priceBuyItem = [5, 5, 10, 1, 0.5, 20, 3];
+
+    $("#buyBlackSmith").on("click", function () {
       $("#mainPartDescription").empty();
+
+      var _loop = function _loop(i) {
+        $("#mainPartDescription").append("<p id='" + i + "'></p>");
+        $("#" + i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
+
+        $("#" + i).on("click", function () {
+          if (priceBuyItem[i] <= heroCreator.gold[0]) {
+            heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
+            heroCreator.equip.push(buyItem[i]);
+            $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
+            setTimeout(function () {
+              $("#alerts").empty();
+            }, 3000);
+          } else {
+            $("#alerts").html("<p class='newRocker redText center margin2000p'>Brak złota !!!</p>");
+            setTimeout(function () {
+              $("#alerts").empty();
+            }, 3000);
+          }
+        });
+      };
+
+      for (var i = 0; i < buyItem.length; i++) {
+        _loop(i);
+      }
+    });
+
+    //wyjście od kowala
+    $("#outBlacksmitch").on("click", function () {
+      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").hide();
+      $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
+      $("#mainPartDescription").empty();
+
+      if (heroCreator.equip.indexOf("paczka") !== -1) {
+        $("#mainSquareVillage").show();
+      } else {
+        $("#mainPartDescription").empty().append(villageTexts.mainSquareVillage2);
+      }
+    });
+
+    $("#lookAroundBlackSmith").on("click", function () {
+      $("#mainPartDescription").empty().append(villageTexts.lookAroundBlackSmith);
     });
   };
 }); //koniec DOMContentLoaded

@@ -246,3 +246,6 @@ Praca z wioską - mnich część druga.
 13 stycznia 2019 - wersja 0.1.66
 Poprawka wyświetlania tekstu dla wychodzenia od mnicha (w zależności od tego czy oddało się paczkę).
   Rozpoczęcie pracy nad interakcją z kowalem.
+
+14 stycznia 2019 - wersja 0.1.67
+Praca z kowalem cz. II.

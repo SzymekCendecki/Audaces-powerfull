@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       "lookAroundVillage": "<p id='lookAroundVillage' class='newRocker textIndent15px'>Wioska jakich wiele w regionie. Bydło i ptactwo jest wszędzie. W oddali słychać odgłosy kuźni. Uwagę przykuwa karczma, jedyny kamienny budynek we wiosce.</p>",
 
-      "lookAroundChurch":"<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>"
+      "lookAroundChurch":"<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>",
+
+      "lookAroundBlackSmith":"p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielka kuźnia, ale ja na wioskę dobrze wyposażona.</p>"
     }
 
     $("#toVillage").on("click", () => {
@@ -102,15 +104,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //zdarzenia dla kowala
       $("#blacksmith").on("click", ()=>{
-        $("#lookAroundBlackSmith, #outBlacksmitch").show();
+        $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").show();
         $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").hide();
         $("#mainPartDescription").empty();
       });
 
-      $("#outBlacksmitch").on("click", ()=>{
-        $("#lookAroundBlackSmith, #outBlacksmitch").hide();
-        $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").show();
+      //zdarzenia dla kupowania
+  let buyItem = ["młot", "topór", "pług", "podkowa", "gwoździe", "brona", "siekiera"];
+  let priceBuyItem = [5, 5, 10, 1, 0.5, 20, 3];
+
+      $("#buyBlackSmith").on("click", ()=>{
         $("#mainPartDescription").empty();
+        for(let i=0; i<buyItem.length; i++){
+           $("#mainPartDescription").append("<p id='"+i+"'></p>");
+           $("#"+i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
+
+           $("#"+i).on("click", ()=>{
+            if(priceBuyItem[i] <= heroCreator.gold[0]){
+              heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
+              heroCreator.equip.push(buyItem[i]);
+              $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
+              setTimeout(function(){ $("#alerts").empty(); }, 3000);
+            }else{
+              $("#alerts").html("<p class='newRocker redText center margin2000p'>Brak złota !!!</p>");
+              setTimeout(function(){ $("#alerts").empty(); }, 3000);
+            }
+          });
+         }
+       });
+
+//wyjście od kowala
+      $("#outBlacksmitch").on("click", ()=>{
+        $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").hide();
+        $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
+        $("#mainPartDescription").empty();
+
+        if(heroCreator.equip.indexOf("paczka") !== -1){
+          $("#mainSquareVillage").show();
+        }else{
+            $("#mainPartDescription").empty().append(villageTexts.mainSquareVillage2);
+        }
+      });
+
+      $("#lookAroundBlackSmith").on("click", () => {
+        $("#mainPartDescription").empty().append(villageTexts.lookAroundBlackSmith);
       });
   }
 
