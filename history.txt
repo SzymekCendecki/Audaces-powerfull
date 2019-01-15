@@ -248,4 +248,7 @@ Poprawka wyświetlania tekstu dla wychodzenia od mnicha (w zależności od tego 
   Rozpoczęcie pracy nad interakcją z kowalem.
 
 14 stycznia 2019 - wersja 0.1.67
-Praca z kowalem cz. II.
+Praca z kowalem cz. II. - dodanie opcji kupna.
+
+15 stycznia 2019 - wersja 0.1.68
+Praca z kowalem cz. III. - dodanie opcji sprzedaży oraz tekstu wejścia do kowala.

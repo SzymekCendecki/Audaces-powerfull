@@ -367,6 +367,63 @@ module.exports.closeWindow = function () {
   $("#heroInfo").hide();
 };
 
+//kupowanie
+module.exports.buying = function (buyItem, priceBuyItem) {
+  $("#mainPartDescription").empty();
+
+  var _loop = function _loop(i) {
+    $("#mainPartDescription").append("<p id='" + i + "'></p>");
+    $("#" + i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
+
+    $("#" + i).on("click", function () {
+      if (priceBuyItem[i] <= heroCreator.gold[0]) {
+        heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
+        heroCreator.equip.push(buyItem[i]);
+        $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
+        setTimeout(function () {
+          $("#alerts").empty();
+        }, 3000);
+      } else {
+        $("#alerts").html("<p class='newRocker redText center margin2000p'>Brak złota !!!</p>");
+        setTimeout(function () {
+          $("#alerts").empty();
+        }, 3000);
+      }
+    });
+  };
+
+  for (var i = 0; i < buyItem.length; i++) {
+    _loop(i);
+  }
+};
+
+//sprzedawanie
+module.exports.selling = function () {
+  $("#mainPartDescription").empty();
+  for (var i = 0; i < heroCreator.equip.length; i++) {
+    if (heroCreator.equip[i] == "paczka") {
+      $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='redText newRocker'>" + heroCreator.equip[i] + "</p>");
+    } else {
+      $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='greenText newRocker'>" + heroCreator.equip[i] + " <span class='blackText'>0,5 szt. zł.</span</p>");
+    }
+  }
+
+  $("#mainPartDescription p").click(function () {
+    if ($(this).attr("id") == "paczka") {
+      $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
+      setTimeout(function () {
+        $("#alerts").empty();
+      }, 3000);
+    } else {
+      $(this).remove();
+      if (heroCreator.equip.indexOf($(this).attr("id")) !== -1) {
+        heroCreator.equip.splice(heroCreator.equip.indexOf($(this).attr("id")), 1);
+        heroCreator.gold.splice(0, 1, heroCreator.gold[0] + 0.5);
+      }
+    }
+  });
+};
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1816,63 +1873,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  //zdarzenia dla kupowania
+  //zdarzenia dla kupowania i sprzedawania
   var buyItem = ["namiot", "torba", "derka", "lampa", "lina", "racja żyw", "sztylet", "kusza", "siodło", "drew. pałka", "puklerz"];
   var priceBuyItem = [5, 1, 1, 1, 1, 1, 8, 12, 10, 4, 12];
 
   $("#buy").on("click", function () {
-    $("#mainPartDescription").empty();
-
-    var _loop = function _loop(i) {
-      $("#mainPartDescription").append("<p id='" + i + "'></p>");
-      $("#" + i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
-
-      $("#" + i).on("click", function () {
-        if (priceBuyItem[i] <= heroCreator.gold[0]) {
-          heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
-          heroCreator.equip.push(buyItem[i]);
-          $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
-          setTimeout(function () {
-            $("#alerts").empty();
-          }, 3000);
-        } else {
-          $("#alerts").html("<p class='newRocker redText center margin2000p'>Brak złota !!!</p>");
-          setTimeout(function () {
-            $("#alerts").empty();
-          }, 3000);
-        }
-      });
-    };
-
-    for (var i = 0; i < buyItem.length; i++) {
-      _loop(i);
-    }
+    functions.buying(buyItem, priceBuyItem);
   });
-
   $("#sell").on("click", function () {
-    $("#mainPartDescription").empty();
-    for (var i = 0; i < heroCreator.equip.length; i++) {
-      if (heroCreator.equip[i] == "paczka") {
-        $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='redText newRocker'>" + heroCreator.equip[i] + "</p>");
-      } else {
-        $("#mainPartDescription").append("<p id='" + heroCreator.equip[i] + "' class='greenText newRocker'>" + heroCreator.equip[i] + " <span class='blackText'>0,5 szt. zł.</span</p>");
-      }
-    }
-
-    $("#mainPartDescription p").click(function () {
-      if ($(this).attr("id") == "paczka") {
-        $("#alerts").html("<p class='newRocker redText center margin2000p'>Nie możesz sprzedać przedmiotu fabularnego.</p>");
-        setTimeout(function () {
-          $("#alerts").empty();
-        }, 3000);
-      } else {
-        $(this).remove();
-        if (heroCreator.equip.indexOf($(this).attr("id")) !== -1) {
-          heroCreator.equip.splice(heroCreator.equip.indexOf($(this).attr("id")), 1);
-          heroCreator.gold.splice(0, 1, heroCreator.gold[0] + 0.5);
-        }
-      }
-    });
+    functions.selling();
   });
 
   //rozglądanie się w lokacji: targ
@@ -2046,7 +2055,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
 
   //po walce - wioska - przybycie karawany do wioski
-  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").hide();
+  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -2120,7 +2129,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       "lookAroundChurch": "<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>",
 
-      "lookAroundBlackSmith": "p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielka kuźnia, ale ja na wioskę dobrze wyposażona.</p>"
+      "lookAroundBlackSmith": "<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielka kuźnia, ale jak na wioskę dobrze wyposażona.</p>",
+
+      "enterBlackSmith": "<p id='enterBlackSmith' class='newRocker textIndent15px'>Wchodzisz do kuźni. Przy kowadle stoi krasnolud i zawzięcie naparza w kawał jakiegoś żelastwa.</p>"
     };
 
     $("#toVillage").on("click", function () {
@@ -2202,8 +2213,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //zdarzenia dla kowala
     $("#blacksmith").on("click", function () {
-      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").show();
+      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith").show();
       $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").hide();
+      $("#mainPartDescription").before(villageTexts.enterBlackSmith);
       $("#mainPartDescription").empty();
     });
 
@@ -2212,37 +2224,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var priceBuyItem = [5, 5, 10, 1, 0.5, 20, 3];
 
     $("#buyBlackSmith").on("click", function () {
-      $("#mainPartDescription").empty();
-
-      var _loop = function _loop(i) {
-        $("#mainPartDescription").append("<p id='" + i + "'></p>");
-        $("#" + i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
-
-        $("#" + i).on("click", function () {
-          if (priceBuyItem[i] <= heroCreator.gold[0]) {
-            heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
-            heroCreator.equip.push(buyItem[i]);
-            $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
-            setTimeout(function () {
-              $("#alerts").empty();
-            }, 3000);
-          } else {
-            $("#alerts").html("<p class='newRocker redText center margin2000p'>Brak złota !!!</p>");
-            setTimeout(function () {
-              $("#alerts").empty();
-            }, 3000);
-          }
-        });
-      };
-
-      for (var i = 0; i < buyItem.length; i++) {
-        _loop(i);
-      }
+      functions.buying(buyItem, priceBuyItem);
+    });
+    $("#sellBlacksmith").on("click", function () {
+      functions.selling();
     });
 
     //wyjście od kowala
     $("#outBlacksmitch").on("click", function () {
-      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").hide();
+      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith, #enterBlackSmith").hide();
       $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
       $("#mainPartDescription").empty();
 

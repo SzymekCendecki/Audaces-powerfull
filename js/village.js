@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       "lookAroundChurch":"<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielki kościółek. Kilka prostych ław. Na końcu stoi niewielki ołtarz poświęcony jakiemuś lokalnemu Bogu.</p>",
 
-      "lookAroundBlackSmith":"p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielka kuźnia, ale ja na wioskę dobrze wyposażona.</p>"
+      "lookAroundBlackSmith":"<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielka kuźnia, ale jak na wioskę dobrze wyposażona.</p>",
+
+      "enterBlackSmith":"<p id='enterBlackSmith' class='newRocker textIndent15px'>Wchodzisz do kuźni. Przy kowadle stoi krasnolud i zawzięcie naparza w kawał jakiegoś żelastwa.</p>"
     }
 
     $("#toVillage").on("click", () => {
@@ -104,8 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //zdarzenia dla kowala
       $("#blacksmith").on("click", ()=>{
-        $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").show();
+        $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith").show();
         $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").hide();
+        $("#mainPartDescription").before(villageTexts.enterBlackSmith);
         $("#mainPartDescription").empty();
       });
 
@@ -113,29 +116,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let buyItem = ["młot", "topór", "pług", "podkowa", "gwoździe", "brona", "siekiera"];
   let priceBuyItem = [5, 5, 10, 1, 0.5, 20, 3];
 
-      $("#buyBlackSmith").on("click", ()=>{
-        $("#mainPartDescription").empty();
-        for(let i=0; i<buyItem.length; i++){
-           $("#mainPartDescription").append("<p id='"+i+"'></p>");
-           $("#"+i).append("<span class='greenText'>" + buyItem[i] + " <span class='blackText'>" + priceBuyItem[i] + " szt. zł.</span></span>");
-
-           $("#"+i).on("click", ()=>{
-            if(priceBuyItem[i] <= heroCreator.gold[0]){
-              heroCreator.gold.splice(0, 1, heroCreator.gold[0] - priceBuyItem[i]);
-              heroCreator.equip.push(buyItem[i]);
-              $("#alerts").html("<p class='newRocker greenText center margin2000p'>Kupiono: " + buyItem[i] + "</p>");
-              setTimeout(function(){ $("#alerts").empty(); }, 3000);
-            }else{
-              $("#alerts").html("<p class='newRocker redText center margin2000p'>Brak złota !!!</p>");
-              setTimeout(function(){ $("#alerts").empty(); }, 3000);
-            }
-          });
-         }
-       });
+      $("#buyBlackSmith").on("click", ()=>{ functions.buying(buyItem, priceBuyItem); });
+      $("#sellBlacksmith").on("click", ()=>{ functions.selling(); })
 
 //wyjście od kowala
       $("#outBlacksmitch").on("click", ()=>{
-        $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith").hide();
+        $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith, #enterBlackSmith").hide();
         $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
         $("#mainPartDescription").empty();
 
