@@ -252,3 +252,6 @@ Praca z kowalem cz. II. - dodanie opcji kupna.
 
 15 stycznia 2019 - wersja 0.1.68
 Praca z kowalem cz. III. - dodanie opcji sprzedaży oraz tekstu wejścia do kowala.
+
+16 stycznia 2019 - wersja 0.1.69
+Praca ze zdarzeniami dla karczmy.

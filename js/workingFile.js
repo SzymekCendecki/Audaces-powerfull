@@ -31,7 +31,9 @@ $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
   $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
 
   //po walce - wioska - przybycie karawany do wioski
-    $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith").hide();
+    $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith, #blackboard, #lookAroundTavern, #outTavern").hide();
+
+$("#goTask1, #goTask2, #goTask3").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){

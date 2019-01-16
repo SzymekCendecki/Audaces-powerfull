@@ -2055,7 +2055,9 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
 
   //po walce - wioska - przybycie karawany do wioski
-  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith").hide();
+  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith, #blackboard, #lookAroundTavern, #outTavern").hide();
+
+  $("#goTask1, #goTask2, #goTask3").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -2131,7 +2133,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       "lookAroundBlackSmith": "<p id='lookAroundChurch' class='newRocker textIndent15px'>Jest to niewielka kuźnia, ale jak na wioskę dobrze wyposażona.</p>",
 
-      "enterBlackSmith": "<p id='enterBlackSmith' class='newRocker textIndent15px'>Wchodzisz do kuźni. Przy kowadle stoi krasnolud i zawzięcie naparza w kawał jakiegoś żelastwa.</p>"
+      "enterBlackSmith": "<p id='enterBlackSmith' class='newRocker textIndent15px'>Wchodzisz do kuźni. Przy kowadle stoi krasnolud i zawzięcie naparza w kawał jakiegoś żelastwa.</p>",
+
+      "enterTavern": "<p id='enterTavern' class='newRocker textIndent15px'>W karczmie jest dość przyjemnie. W powietrzu utrzymuje się zapach pieczonego mięsa. Kilku wieśniaków siedzi i popija z gąsiora. W kącie pomieszczenia siedzi niewielka trupa aktorska. Na ścianie obok kontuaru właściciela karczma jest tablica z ogłoszeniami. Co robisz?</p>",
+
+      "lookAroundTavern": "<p id='lookAroundTavern' class='newRocker textIndent15px'>Typowa karczma, w której można zjeść, wypić czy wynająć pokój.</p>"
     };
 
     $("#toVillage").on("click", function () {
@@ -2213,7 +2219,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //zdarzenia dla kowala
     $("#blacksmith").on("click", function () {
-      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith").show();
+      $("#lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith").show();
       $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage").hide();
       $("#mainPartDescription").before(villageTexts.enterBlackSmith);
       $("#mainPartDescription").empty();
@@ -2231,7 +2237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     //wyjście od kowala
-    $("#outBlacksmitch").on("click", function () {
+    $("#outBlacksmith").on("click", function () {
       $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith, #enterBlackSmith").hide();
       $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
       $("#mainPartDescription").empty();
@@ -2246,7 +2252,97 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#lookAroundBlackSmith").on("click", function () {
       $("#mainPartDescription").empty().append(villageTexts.lookAroundBlackSmith);
     });
-  };
+
+    //zdarzenie dla karczmy
+    $("#tavern").on("click", function () {
+      $("#lookAroundTavern, #outTavern, #blackboard").show();
+      $("#monk, #blacksmith, #tavern, #mainSquareVillage, #lookAroundVillage, #outBlacksmith").hide();
+      $("#mainPartDescription").before(villageTexts.enterTavern).empty();
+    });
+
+    $("#outTavern").on("click", function () {
+      $("#lookAroundTavern, #outTavern, #blackboard").hide();
+      $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
+      $("#mainPartDescription").empty();
+      $("#enterTavern").remove();
+
+      if (heroCreator.equip.indexOf("paczka") !== -1) {
+        $("#mainSquareVillage").show();
+      } else {
+        $("#mainPartDescription").empty().append(villageTexts.mainSquareVillage2);
+      }
+    });
+
+    var text = ["", "", ""];
+    $("#blackboard").on("click", function () {
+      if (heroCreator.tasks.indexOf(" ubij pasikonika") !== -1 && heroCreator.tasks.indexOf(" ubij wilka") !== -1 && heroCreator.tasks.indexOf(" rozwiąż konflikt z trolem") !== -1) {
+        text.splice(0, 1, "");
+        text.splice(1, 1, "");
+        text.splice(2, 1, "");
+        text.splice(3, 1, "Brak ogłoszeń.");
+      } else if (heroCreator.tasks.indexOf(" ubij pasikonika") !== -1) {
+        text.splice(0, 1, "");
+        text.splice(1, 1, "<button id='task2' class='greenBtn newRocker'>wilk</button>");
+        text.splice(2, 1, "<button id='task3' class='greenBtn newRocker'>trol</button>");
+        text.splice(3, 1, "Wiszą na niej ogłoszenia.");
+      } else if (heroCreator.tasks.indexOf(" ubij wilka") !== -1) {
+        text.splice(0, 1, "<button id='task1' class='greenBtn newRocker'>pasikonik</button>");
+        text.splice(1, 1, "");
+        text.splice(2, 1, "<button id='task3' class='greenBtn newRocker'>trol</button>");
+        text.splice(3, 1, "Wiszą na niej ogłoszenia.");
+      } else if (heroCreator.tasks.indexOf(" rozwiąż konflikt z trolem") !== -1) {
+        text.splice(0, 1, "<button id='task1' class='greenBtn newRocker'>pasikonik</button>");
+        text.splice(1, 1, "<button id='task2' class='greenBtn newRocker'>wilk</button>");
+        text.splice(2, 1, "");
+        text.splice(3, 1, "Wiszą na niej ogłoszenia.");
+      } else if (heroCreator.tasks.indexOf(" ubij pasikonika") !== -1 && heroCreator.tasks.indexOf(" ubij wilka") !== -1) {
+        text.splice(0, 1, "");
+        text.splice(1, 1, "");
+        text.splice(2, 1, "<button id='task3' class='greenBtn newRocker'>trol</button>");
+        text.splice(3, 1, "Wiszą na niej ogłoszenia.");
+      } else if (heroCreator.tasks.indexOf(" ubij pasikonika") !== -1 && heroCreator.tasks.indexOf(" rozwiąż konflikt z trolem") !== -1) {
+        text.splice(0, 1, "");
+        text.splice(1, 1, "<button id='task2' class='greenBtn newRocker'>wilk</button>");
+        text.splice(2, 1, "");
+        text.splice(3, 1, "Wiszą na niej ogłoszenia.");
+      } else if (heroCreator.tasks.indexOf(" ubij wilka") !== -1 && heroCreator.tasks.indexOf(" rozwiąż konflikt z trolem") !== -1) {
+        text.splice(0, 1, "<button id='task1' class='greenBtn newRocker'>pasikonik</button>");
+        text.splice(1, 1, "");
+        text.splice(2, 1, "");
+        text.splice(3, 1, "Wiszą na niej ogłoszenia.");
+      } else {
+        text.splice(0, 1, "<button id='task1' class='greenBtn newRocker'>pasikonik</button>");
+        text.splice(1, 1, "<button id='task2' class='greenBtn newRocker'>wilk</button>");
+        text.splice(2, 1, "<button id='task3' class='greenBtn newRocker'>trol</button>");
+        text.splice(3, 1, "Wiszą na niej ogłoszenia.");
+      }
+
+      $("#mainPartDescription").html("<p class='newRocker textIndent15px'>Podchodzisz do tablicy. " + text[3] + " <p id='taskBtn' class='flexForBtns marginTop4'>" + text[0] + " " + text[1] + " " + text[2] + "</p></p>");
+
+      //zdarzenia dla podjęcia się pracy
+      $("#task1").on("click", function () {
+        $("#task1").remove();
+        heroCreator.tasks.push(" ubij pasikonika");
+        $("#goTask1").show();
+      });
+
+      $("#task2").on("click", function () {
+        $("#task2").remove();
+        heroCreator.tasks.push(" ubij wilka");
+        $("#goTask2").show();
+      });
+      $("#task3").on("click", function () {
+        $("#task3").remove();
+        heroCreator.tasks.push(" rozwiąż konflikt z trolem");
+        $("#goTask3").show();
+      });
+    });
+
+    $("#lookAroundTavern").on("click", function () {
+      $("#mainPartDescription").empty().append(villageTexts.lookAroundTavern);
+    });
+  }; //koniec module.exports.village
+
 }); //koniec DOMContentLoaded
 
 /***/ })
