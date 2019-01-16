@@ -2238,7 +2238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //wyjście od kowala
     $("#outBlacksmith").on("click", function () {
-      $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith, #enterBlackSmith").hide();
+      $("#lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith, #enterBlackSmith").hide();
       $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
       $("#mainPartDescription").empty();
 

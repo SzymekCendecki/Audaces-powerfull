@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //wyjście od kowala
       $("#outBlacksmith").on("click", ()=>{
-        $("#lookAroundBlackSmith, #outBlacksmitch, #buyBlackSmith, #sellBlacksmith, #enterBlackSmith").hide();
+        $("#lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith, #enterBlackSmith").hide();
         $("#monk, #blacksmith, #tavern, #lookAroundVillage").show();
         $("#mainPartDescription").empty();
 
