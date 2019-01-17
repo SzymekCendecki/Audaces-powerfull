@@ -255,3 +255,6 @@ Praca z kowalem cz. III. - dodanie opcji sprzedaży oraz tekstu wejścia do kowa
 
 16 stycznia 2019 - wersja 0.1.69
 Praca ze zdarzeniami dla karczmy.
+
+17 stycznia 2019 - wersja 0.1.70
+Rozpoczęcie pracy z zadaniem "Pasikonik".

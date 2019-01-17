@@ -10,6 +10,7 @@ let street=require("./street.js");
 let caravans=require("./caravans.js");
 let firstFight=require("./firstFight.js");
 let village=require("./village.js");
+let grasshopper=require("./grasshopper.js");
 
 document.addEventListener("DOMContentLoaded", () => {
 //ukrywanie odpowiednich części
@@ -75,5 +76,8 @@ firstFight.firstFightEvents();
 
 //zdarzenia dla wioski
 village.village();
+
+//zdarzenia dla zadania z pasikonikiem
+grasshopper.grasshopper();
 
 });//koniec DOMContentLoaded

@@ -2034,6 +2034,7 @@ var street = __webpack_require__(6);
 var caravans = __webpack_require__(7);
 var firstFight = __webpack_require__(11);
 var village = __webpack_require__(14);
+var grasshopper = __webpack_require__(15);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -2099,6 +2100,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //zdarzenia dla wioski
   village.village();
+
+  //zdarzenia dla zadania z pasikonikiem
+  grasshopper.grasshopper();
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -2343,6 +2347,61 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }; //koniec module.exports.village
 
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  module.exports.grasshopper = function () {
+
+    $("#goTask1").on("click", function () {
+      var text = [];
+
+      //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
+      if (heroCreator.hero[1] == "kobieta") {
+        text.splice(0, 1, "Doszłaś");
+        text.splice(1, 1, "niedostrzegłaś");
+        text.splice(2, 1, "Uznałaś");
+        text.splice(3, 1, "uszłyszałaś");
+        text.splice(4, 1, "Zaczęłaś");
+        text.splice(5, 1, "ujrzałaś");
+      } else if (heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo") {
+        text.splice(0, 1, "Doszedłeś");
+        text.splice(1, 1, "niedostrzegłeś");
+        text.splice(2, 1, "Uznałeś");
+        text.splice(3, 1, "uszłyszałeś");
+        text.splice(4, 1, "Zacząłeś");
+        text.splice(5, 1, "ujrzałeś");
+      }
+
+      if (heroCreator.equip.indexOf("paczka") !== -1) {
+        $("#alerts").html("<p class='newRocker redText center margin2000p'>Oddaj paczkę !!!</p>");
+        setTimeout(function () {
+          $("#alerts").empty();
+        }, 3000);
+      } else {
+        $("#mainBtns button").hide();
+        $("#interactionsBtns button").hide();
+        $("#goTask2, #goTask3").show();
+        $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith").hide();
+        $("#mainPartDescription").empty();
+
+        $("#mainPartDescription").before("<div class='newRocker textIndent15px'>Idziesz na pola. Jest ciep\u0142o, \u0142any zb\xF3\u017C ko\u0142ysz\u0105 si\u0119 na wietrze. Jest spok\xF3j. Zastanawiasz si\u0119 czy ten polny stw\xF3r to nie majaki pijanych farmer\xF3w. Jednak dla \u015Bwi\u0119tego spokoju idziesz dalej i rozgl\u0105dasz si\u0119 po okolicy. " + text[0] + " prawie do ko\u0144ca p\xF3l. Niczego niepokoj\u0105cego " + text[1] + ". " + text[2] + ", \u017Ce trzeba si\u0119 zaj\u0105\u0107 nast\u0119pnym zadaniem. Wtem " + text[3] + " dziwne, suche trzaski. " + text[4] + " si\u0119 rozgl\u0105da\u0107 i " + text[5] + " jak z pobliskiego rowu zacz\u0105\u0142 wstawa\u0107 stw\xF3r, wielki jak dorodny baw\xF3\u0142. Przecierasz oczy ze zdumienia i nie wierzysz. Ten potw\xF3r wygl\u0105da jak gigantyczny PASIKONIK!!!!</div><div id='description' ></div>");
+      }
+    });
+  };
 }); //koniec DOMContentLoaded
 
 /***/ })
