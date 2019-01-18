@@ -36,6 +36,9 @@ $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
 
 $("#goTask1, #goTask2, #goTask3").hide();
 
+//zadanie pasikonika
+$("#afterPrepareGrasshoper, #prepareGrasshoper").hide();
+
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
  $("header p, #heroBtns div").fadeIn(750);

@@ -258,3 +258,6 @@ Praca ze zdarzeniami dla karczmy.
 
 17 stycznia 2019 - wersja 0.1.70
 Rozpoczęcie pracy z zadaniem "Pasikonik".
+
+18 stycznia 2019 - wersja 0.1.71
+Praca z zadaniem "Pasikonik" cz. II.

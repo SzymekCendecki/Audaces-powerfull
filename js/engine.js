@@ -71,6 +71,7 @@
 
 
 var heroCreator = __webpack_require__(1);
+var prepareFightText = "./firstFight";
 
 //funkcja, która tworzy nowy element DOM
 module.exports.newElement = function (nameElement, idName, text, whereAppend) {
@@ -421,6 +422,78 @@ module.exports.selling = function () {
         heroCreator.gold.splice(0, 1, heroCreator.gold[0] + 0.5);
       }
     }
+  });
+};
+
+//przygotowanie do walki
+//funkcja optymalizująca pętle dla broni, zbroi i tarczy
+function battleLoop(where, array) {
+  for (var i = 0; i < array.length; i++) {
+    where.append("<span class='greenText'>" + array[i] + " </span>");
+  }
+}
+
+module.exports.prepareFight = function (equip, hero) {
+  var firstFightTexts = {
+    "title": "<p id='titleFirstFight' class='newRocker greenText'>Posiadasz poniższy ekwipunek.</p>",
+    "weapon": "<p id='weaponFirstFight' class='newRocker blackText'>broń</p>",
+    "armor": "<p id='armorFirstFight' class='newRocker blackText'>zbroje</p>",
+    "shield": "<p id='shieldFirstFight' class='newRocker blackText'>tarcze</p>",
+    "resultItems": "<p id='resultItems' class='newRocker height15px'></p>",
+    "reset": "<p id='reset' class='newRocker redText'>usuń rzeczy</p>"
+  };
+
+  $("#mainPartDescription").append(firstFightTexts.title, firstFightTexts.weapon, firstFightTexts.armor, firstFightTexts.shield, firstFightTexts.skills, firstFightTexts.resultItems, firstFightTexts.reset);
+
+  //wyświetlenie dostępnej broni
+  var weapon = heroCreator.equip.filter(function (el) {
+    return el === 'sztylet' || el == "drew. pałka" || el == "krótki miecz" || el == "szabla" || el == "włócznia" || el == "proca" || el == "łuk" || el == "kusza" || el == "kostur" || el == "młot" || el == "topór" || el == "siekiera";
+  });
+
+  battleLoop($("#weaponFirstFight"), weapon);
+
+  //wyświetlenie dostępnych zbroi
+  var armor = heroCreator.equip.filter(function (el) {
+    return el === 'przeszywanica' || el == "zbroja skórzana" || el == "zbroja ćwiekowana";
+  });
+
+  battleLoop($("#armorFirstFight"), armor);
+
+  //wyświetlenie dostępnych zbroi
+  var shield = heroCreator.equip.filter(function (el) {
+    return el === 'puklerz' || el == "mała tarcza drew." || el == "mała tarcza metal.";
+  });
+
+  battleLoop($("#shieldFirstFight"), shield);
+
+  var arr = [];
+
+  $("p span").click(function () {
+    arr.push($(this).text());
+
+    if (arr.length > 3) {
+      arr.splice(3, 1);
+      $("#alerts").html("<p class='newRocker redText center margin2000p'>Możesz wybrać tylko trzy rzeczy !!!</p>");
+      setTimeout(function () {
+        $("#alerts").empty();
+      }, 3000);
+    }
+    $("#resultItems").empty().append(arr);
+  });
+
+  $("#reset").on("click", function () {
+    arr.splice(0, 3);
+    $("#resultItems").empty().append(arr);
+  });
+
+  //resetowanie wyników wyborów
+  $("#reset").on("click", function () {
+    $("#result2").empty();
+  });
+
+  //akceptacja wyborów
+  $("#agrreChoose").on("click", function () {
+    $("#mainPartDescription").empty();
   });
 };
 
@@ -1905,13 +1978,7 @@ var introGame = __webpack_require__(4);
 
 document.addEventListener("DOMContentLoaded", function () {
   var firstFightTexts = {
-    "firstText": "<p id='firstTextFirstFight' class='newRocker textIndent15px'>Jedziecie sobie spokojnie. Czas mija na oglądaniu pejzaży z jadącego wozu. Niestety ta sielanka skończyła się wieczorem drugiego dnia. Zaczęło się od zawalonej, przez drzewa drogi. Gdy uczestnicy, z pierwszych wozów karawany uprzątali drzewa, nastąpił atak. Wszyscy muszą walczyć!. Ciebie atakuje bandyta z wielkim mieczem. Po lewej stronie znajduje się przycisk 'przygotuj się', aby wybrać ekwipunek.</p>",
-    "title": "<p id='titleFirstFight' class='newRocker greenText'>Posiadasz poniższy ekwipunek.</p>",
-    "weapon": "<p id='weaponFirstFight' class='newRocker blackText'>broń</p>",
-    "armor": "<p id='armorFirstFight' class='newRocker blackText'>zbroje</p>",
-    "shield": "<p id='shieldFirstFight' class='newRocker blackText'>tarcze</p>",
-    "resultItems": "<p id='resultItems' class='newRocker height15px'></p>",
-    "reset": "<p id='reset' class='newRocker redText'>usuń rzeczy</p>"
+    "firstText": "<p id='firstTextFirstFight' class='newRocker textIndent15px'>Jedziecie sobie spokojnie. Czas mija na oglądaniu pejzaży z jadącego wozu. Niestety ta sielanka skończyła się wieczorem drugiego dnia. Zaczęło się od zawalonej, przez drzewa drogi. Gdy uczestnicy, z pierwszych wozów karawany uprzątali drzewa, nastąpił atak. Wszyscy muszą walczyć!. Ciebie atakuje bandyta z wielkim mieczem.</p>"
   };
 
   module.exports.firstFightTexts = firstFightTexts;
@@ -1925,59 +1992,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   module.exports.firstFightEvents = function (equip, hero) {
     $("#prepare").on("click", function () {
-
-      $("#mainPartDescription").append(firstFightTexts.title, firstFightTexts.weapon, firstFightTexts.armor, firstFightTexts.shield, firstFightTexts.skills, firstFightTexts.resultItems, firstFightTexts.reset);
-
-      //wyświetlenie dostępnej broni
-      var weapon = heroCreator.equip.filter(function (el) {
-        return el === 'sztylet' || el == "drew. pałka" || el == "krótki miecz" || el == "szabla" || el == "włócznia" || el == "proca" || el == "łuk" || el == "kusza" || el == "kostur";
-      });
-
-      battleLoop($("#weaponFirstFight"), weapon);
-
-      //wyświetlenie dostępnych zbroi
-      var armor = heroCreator.equip.filter(function (el) {
-        return el === 'przeszywanica' || el == "zbroja skórzana" || el == "zbroja ćwiekowana";
-      });
-
-      battleLoop($("#armorFirstFight"), armor);
-
-      //wyświetlenie dostępnych zbroi
-      var shield = heroCreator.equip.filter(function (el) {
-        return el === 'puklerz' || el == "mała tarcza drew." || el == "mała tarcza metal.";
-      });
-
-      battleLoop($("#shieldFirstFight"), shield);
-
-      var arr = [];
-
-      $("p span").click(function () {
-        arr.push($(this).text());
-
-        if (arr.length > 3) {
-          arr.splice(3, 1);
-          $("#alerts").html("<p class='newRocker redText center margin2000p'>Możesz wybrać tylko trzy rzeczy !!!</p>");
-          setTimeout(function () {
-            $("#alerts").empty();
-          }, 3000);
-        }
-        $("#resultItems").empty().append(arr);
-      });
-
-      $("#reset").on("click", function () {
-        arr.splice(0, 3);
-        $("#resultItems").empty().append(arr);
-      });
-
-      //resetowanie wyników wyborów
-      $("#reset").on("click", function () {
-        $("#result2").empty();
-      });
-
-      //akceptacja wyborów
-      $("#agrreChoose").on("click", function () {
-        $("#mainPartDescription").empty();
-      });
+      functions.prepareFight();
     });
 
     $("#afterPrepareFirstBattle").on("click", function () {
@@ -2059,6 +2074,9 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith, #blackboard, #lookAroundTavern, #outTavern").hide();
 
   $("#goTask1, #goTask2, #goTask3").hide();
+
+  //zadanie pasikonika
+  $("#afterPrepareGrasshoper, #prepareGrasshoper").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -2395,10 +2413,29 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#mainBtns button").hide();
         $("#interactionsBtns button").hide();
         $("#goTask2, #goTask3").show();
-        $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith").hide();
+        $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
         $("#mainPartDescription").empty();
 
-        $("#mainPartDescription").before("<div class='newRocker textIndent15px'>Idziesz na pola. Jest ciep\u0142o, \u0142any zb\xF3\u017C ko\u0142ysz\u0105 si\u0119 na wietrze. Jest spok\xF3j. Zastanawiasz si\u0119 czy ten polny stw\xF3r to nie majaki pijanych farmer\xF3w. Jednak dla \u015Bwi\u0119tego spokoju idziesz dalej i rozgl\u0105dasz si\u0119 po okolicy. " + text[0] + " prawie do ko\u0144ca p\xF3l. Niczego niepokoj\u0105cego " + text[1] + ". " + text[2] + ", \u017Ce trzeba si\u0119 zaj\u0105\u0107 nast\u0119pnym zadaniem. Wtem " + text[3] + " dziwne, suche trzaski. " + text[4] + " si\u0119 rozgl\u0105da\u0107 i " + text[5] + " jak z pobliskiego rowu zacz\u0105\u0142 wstawa\u0107 stw\xF3r, wielki jak dorodny baw\xF3\u0142. Przecierasz oczy ze zdumienia i nie wierzysz. Ten potw\xF3r wygl\u0105da jak gigantyczny PASIKONIK!!!!</div><div id='description' ></div>");
+        $("#mainPartDescription").before("<div id='grasshopperText' class='newRocker textIndent15px'>Idziesz na pola. Jest ciep\u0142o, \u0142any zb\xF3\u017C ko\u0142ysz\u0105 si\u0119 na wietrze. Jest spok\xF3j. Zastanawiasz si\u0119 czy ten polny stw\xF3r to nie majaki pijanych farmer\xF3w. Jednak dla \u015Bwi\u0119tego spokoju idziesz dalej i rozgl\u0105dasz si\u0119 po okolicy. " + text[0] + " prawie do ko\u0144ca p\xF3l. Niczego niepokoj\u0105cego " + text[1] + ". " + text[2] + ", \u017Ce trzeba si\u0119 zaj\u0105\u0107 nast\u0119pnym zadaniem. Wtem " + text[3] + " dziwne, suche trzaski. " + text[4] + " si\u0119 rozgl\u0105da\u0107 i " + text[5] + " jak z pobliskiego rowu zacz\u0105\u0142 wstawa\u0107 stw\xF3r, wielki jak dorodny baw\xF3\u0142. Przecierasz oczy ze zdumienia i nie wierzysz. Ten potw\xF3r wygl\u0105da jak gigantyczny PASIKONIK!!!!</div><div id='description'></div>");
+        $("#prepareGrasshoper").show();
+
+        $("#prepareGrasshoper").on("click", function () {
+          $("#afterPrepareGrasshoper").show();
+          $("#prepareGrasshoper").hide();
+          functions.prepareFight();
+        });
+
+        $("#afterPrepareGrasshoper").on("click", function () {
+          $("#mainPartDescription").empty();
+          $("#grasshopperText").remove();
+          $("#mainPartDescription").before("<p i='afterGrshopper' class='newRocker textIndent15px'>Pasikonik wykończony. Twoje cechy podniosły się.</p>");
+
+          heroCreator.hero.splice(4, 1, heroCreator.hero[4] + 5);
+          heroCreator.hero.splice(5, 1, heroCreator.hero[5] + 5);
+          heroCreator.hero.splice(6, 1, heroCreator.hero[6] + 5);
+          heroCreator.hero.splice(7, 1, heroCreator.hero[7] + 5);
+          heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
+        });
       }
     });
   };
