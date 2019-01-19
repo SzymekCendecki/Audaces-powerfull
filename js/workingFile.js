@@ -11,6 +11,7 @@ let caravans=require("./caravans.js");
 let firstFight=require("./firstFight.js");
 let village=require("./village.js");
 let grasshopper=require("./grasshopper.js");
+let wolf=require("./wolf.js");
 
 document.addEventListener("DOMContentLoaded", () => {
 //ukrywanie odpowiednich części
@@ -36,8 +37,10 @@ $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
 
 $("#goTask1, #goTask2, #goTask3").hide();
 
-//zadanie pasikonika
+//zadanie pasikonik
 $("#afterPrepareGrasshoper, #prepareGrasshoper").hide();
+//zadanie wilk
+$("#afterPrepareWolf, #prepareWolf").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
@@ -47,6 +50,9 @@ setTimeout(function(){
  functions.newElement("p", "description", "", $("#mainPart"));
  $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
 }, 16000);
+
+//tablica dla zrobionych zadań
+module.exports.taskDone = [0, 0, 0];
 
 //funkcje dla przycisków pierwszego menu
  firstMenu.firstMenuBtns();
@@ -82,5 +88,8 @@ village.village();
 
 //zdarzenia dla zadania z pasikonikiem
 grasshopper.grasshopper();
+
+//zdarzenia dla zadania z wilkiem
+wolf.wolf();
 
 });//koniec DOMContentLoaded

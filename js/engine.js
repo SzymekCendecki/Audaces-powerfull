@@ -2050,6 +2050,7 @@ var caravans = __webpack_require__(7);
 var firstFight = __webpack_require__(11);
 var village = __webpack_require__(14);
 var grasshopper = __webpack_require__(15);
+var wolf = __webpack_require__(16);
 
 document.addEventListener("DOMContentLoaded", function () {
   //ukrywanie odpowiednich części
@@ -2075,8 +2076,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   $("#goTask1, #goTask2, #goTask3").hide();
 
-  //zadanie pasikonika
+  //zadanie pasikonik
   $("#afterPrepareGrasshoper, #prepareGrasshoper").hide();
+  //zadanie wilk
+  $("#afterPrepareWolf, #prepareWolf").hide();
 
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
@@ -2086,6 +2089,9 @@ document.addEventListener("DOMContentLoaded", function () {
     functions.newElement("p", "description", "", $("#mainPart"));
     $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
   }, 16000);
+
+  //tablica dla zrobionych zadań
+  module.exports.taskDone = [0, 0, 0];
 
   //funkcje dla przycisków pierwszego menu
   firstMenu.firstMenuBtns();
@@ -2121,6 +2127,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //zdarzenia dla zadania z pasikonikiem
   grasshopper.grasshopper();
+
+  //zdarzenia dla zadania z wilkiem
+  wolf.wolf();
 }); //koniec DOMContentLoaded
 
 /***/ }),
@@ -2379,12 +2388,14 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
+var workingFile = __webpack_require__(13);
 
 document.addEventListener("DOMContentLoaded", function () {
 
   module.exports.grasshopper = function () {
 
     $("#goTask1").on("click", function () {
+      $("#afterWolf, #afterTroll").hide();
       var text = [];
 
       //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
@@ -2412,7 +2423,6 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         $("#mainBtns button").hide();
         $("#interactionsBtns button").hide();
-        $("#goTask2, #goTask3").show();
         $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
         $("#mainPartDescription").empty();
 
@@ -2428,13 +2438,123 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#afterPrepareGrasshoper").on("click", function () {
           $("#mainPartDescription").empty();
           $("#grasshopperText").remove();
-          $("#mainPartDescription").before("<p i='afterGrshopper' class='newRocker textIndent15px'>Pasikonik wykończony. Twoje cechy podniosły się.</p>");
+          $("#mainPartDescription").before("<p id='afterGrasshopper' class='newRocker textIndent15px'>Pasikonik wykończony. Twoje cechy podniosły się.</p>");
 
           heroCreator.hero.splice(4, 1, heroCreator.hero[4] + 5);
           heroCreator.hero.splice(5, 1, heroCreator.hero[5] + 5);
           heroCreator.hero.splice(6, 1, heroCreator.hero[6] + 5);
           heroCreator.hero.splice(7, 1, heroCreator.hero[7] + 5);
           heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
+
+          workingFile.taskDone.splice(0, 1, 1);
+          console.log(workingFile.taskDone);
+
+          function checkTask(number, task) {
+            if (workingFile.taskDone[number] == 1) {
+              task.hide();
+            } else {
+              task.show();
+            }
+          }
+
+          checkTask(0, $("#goTask1"));
+          checkTask(1, $("#goTask2"));
+          checkTask(2, $("#goTask3"));
+
+          if (workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1) {
+            console.log("game over");
+          }
+
+          $("#afterPrepareGrasshoper").hide();
+        });
+      }
+    });
+  };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var workingFile = __webpack_require__(13);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  module.exports.wolf = function () {
+
+    $("#goTask2").on("click", function () {
+      var text = [];
+      $("#afterGrasshopper, #afterTroll").hide();
+
+      //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
+      if (heroCreator.hero[1] == "kobieta") {
+        text.splice(0, 1, "wykorzystałaś");
+        text.splice(1, 1, "trafiłaś");
+      } else if (heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo") {
+        text.splice(0, 1, "Wykorzystałeś");
+        text.splice(1, 1, "trafiłeś");
+      }
+
+      if (heroCreator.equip.indexOf("paczka") !== -1) {
+        $("#alerts").html("<p class='newRocker redText center margin2000p'>Oddaj paczkę !!!</p>");
+        setTimeout(function () {
+          $("#alerts").empty();
+        }, 3000);
+      } else {
+        $("#mainBtns button").hide();
+        $("#interactionsBtns button").hide();
+        $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
+        $("#mainPartDescription").empty();
+
+        $("#mainPartDescription").before("<div id='wolfText' class='newRocker textIndent15px'>Id\u0105c drog\u0105 w stron\u0119 kolejnego zadania, wchodzisz w las. Pachnie igliwiem, ptaki \u015Bpiewaj\u0105. Przechodzisz ko\u0142o sporej polany. Na jej ko\u0144cu widzisz \u0142anie z m\u0142odymi. Spostrzeg\u0142a Ci\u0119 i szybkimi susami znikn\u0119\u0142a z m\u0142odymi w lesie. Idziesz dalej. W ko\u0144cu docieraszdo pieczary. Przed ni\u0105 widzisz resztki zwierz\u0105t. W powietrzu unosi si\u0119 zapach gnij\u0105cego mi\u0119sa, kt\xF3ry potrafi zemdli\u0107 nawet takiego twardziela jak Ty. 'No c\xF3\u017C. Zadanie trzeba wykona\u0107, pomimo zapachu. Jaskinia jest wi\u0119ksza i do\u015B\u0107 dobrze o\u015Bwietlona ni\u017C wydawa\u0142o si\u0119 to z zewn\u0105trz. Po kilku krokach dochodzisz prawie do jej \u015Brodka. Wtem, zza sporego g\u0142azu, kt\xF3ry sta\u0142 przy wej\u015Bciu wyszed\u0142 bardzo du\u017Cy wilk i tarasuje wyj\u015Bcie. Nie mo\u017Cesz ucie\u0107. Musisz walczy\u0107.Wchodzisz do jaskini</div><div id='description'></div>");
+
+        $("#prepareWolf").show();
+
+        $("#prepareWolf").on("click", function () {
+          $("#afterPrepareWolf").show();
+          $("#prepareWolf").hide();
+          functions.prepareFight();
+        });
+
+        $("#afterPrepareWolf").on("click", function () {
+          $("#mainPartDescription").empty();
+          $("#wolfText").remove();
+          $("#mainPartDescription").before("<p id='afterWolf' class='newRocker textIndent15px'>To by\u0142a dzika walka. Nie by\u0142o 'zlituj si\u0119'. Niestety wilk pope\u0142ni\u0142 b\u0142\u0105d. Fatalny dla niego w skutkach. \u0179le si\u0119 ustawi\u0142, a Ty bez skrup\xF3\u0142\xF3w " + text[0] + " jego b\u0142\u0105d i z ca\u0142ej si\u0142y " + text[1] + " w jego kr\u0119gos\u0142up. Tylko gruchn\u0119\u0142o. Wilk momentalnie pad\u0142 i zgin\u0105\u0142 w konwulsjach, z pian\u0105 na pysku. Twoje cechy podnios\u0142y si\u0119.</p>");
+
+          heroCreator.hero.splice(4, 1, heroCreator.hero[4] + 5);
+          heroCreator.hero.splice(5, 1, heroCreator.hero[5] + 5);
+          heroCreator.hero.splice(6, 1, heroCreator.hero[6] + 5);
+          heroCreator.hero.splice(7, 1, heroCreator.hero[7] + 5);
+          heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
+
+          workingFile.taskDone.splice(1, 1, 1);
+          console.log(workingFile.taskDone);
+
+          function checkTask(number, task) {
+            if (workingFile.taskDone[number] == 1) {
+              task.hide();
+            } else {
+              task.show();
+            }
+          }
+
+          checkTask(0, $("#goTask1"));
+          checkTask(1, $("#goTask2"));
+          checkTask(2, $("#goTask3"));
+
+          if (workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1) {
+            console.log("game over");
+          }
+
+          $("#afterPrepareWolf").hide();
         });
       }
     });

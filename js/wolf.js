@@ -7,27 +7,19 @@ let workingFile=require("./workingFile.js");
 
 document.addEventListener("DOMContentLoaded", () => {
 
- module.exports.grasshopper = function(){
+ module.exports.wolf = function(){
 
-     $("#goTask1").on("click", ()=>{
-        $("#afterWolf, #afterTroll").hide();
-         let text = [];
+     $("#goTask2").on("click", ()=>{
+       let text = [];
+       $("#afterGrasshopper, #afterTroll").hide();
 
         //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
         if(heroCreator.hero[1] == "kobieta"){
-          text.splice(0, 1, "Doszłaś");
-          text.splice(1, 1, "niedostrzegłaś");
-          text.splice(2, 1, "Uznałaś");
-          text.splice(3, 1, "uszłyszałaś");
-          text.splice(4, 1, "Zaczęłaś");
-          text.splice(5, 1, "ujrzałaś");
+          text.splice(0, 1, "wykorzystałaś");
+          text.splice(1, 1, "trafiłaś");
         }else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
-          text.splice(0, 1, "Doszedłeś");
-          text.splice(1, 1, "niedostrzegłeś");
-          text.splice(2, 1, "Uznałeś");
-          text.splice(3, 1, "uszłyszałeś");
-          text.splice(4, 1, "Zacząłeś");
-          text.splice(5, 1, "ujrzałeś");
+          text.splice(0, 1, "Wykorzystałeś");
+          text.splice(1, 1, "trafiłeś");
         }
 
         if(heroCreator.equip.indexOf("paczka") !== -1){
@@ -39,19 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
           $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
           $("#mainPartDescription").empty();
 
-          $("#mainPartDescription").before(`<div id='grasshopperText' class='newRocker textIndent15px'>Idziesz na pola. Jest ciepło, łany zbóż kołyszą się na wietrze. Jest spokój. Zastanawiasz się czy ten polny stwór to nie majaki pijanych farmerów. Jednak dla świętego spokoju idziesz dalej i rozglądasz się po okolicy. ${text[0]} prawie do końca pól. Niczego niepokojącego ${text[1]}. ${text[2]}, że trzeba się zająć następnym zadaniem. Wtem ${text[3]} dziwne, suche trzaski. ${text[4]} się rozglądać i ${text[5]} jak z pobliskiego rowu zaczął wstawać stwór, wielki jak dorodny bawół. Przecierasz oczy ze zdumienia i nie wierzysz. Ten potwór wygląda jak gigantyczny PASIKONIK!!!!</div><div id='description'></div>`);
-          $("#prepareGrasshoper").show();
+          $("#mainPartDescription").before(`<div id='wolfText' class='newRocker textIndent15px'>Idąc drogą w stronę kolejnego zadania, wchodzisz w las. Pachnie igliwiem, ptaki śpiewają. Przechodzisz koło sporej polany. Na jej końcu widzisz łanie z młodymi. Spostrzegła Cię i szybkimi susami zniknęła z młodymi w lesie. Idziesz dalej. W końcu docieraszdo pieczary. Przed nią widzisz resztki zwierząt. W powietrzu unosi się zapach gnijącego mięsa, który potrafi zemdlić nawet takiego twardziela jak Ty. 'No cóż. Zadanie trzeba wykonać, pomimo zapachu. Jaskinia jest większa i dość dobrze oświetlona niż wydawało się to z zewnątrz. Po kilku krokach dochodzisz prawie do jej środka. Wtem, zza sporego głazu, który stał przy wejściu wyszedł bardzo duży wilk i tarasuje wyjście. Nie możesz ucieć. Musisz walczyć.Wchodzisz do jaskini</div><div id='description'></div>`);
 
-          $("#prepareGrasshoper").on("click", ()=>{
-            $("#afterPrepareGrasshoper").show();
-              $("#prepareGrasshoper").hide();
+          $("#prepareWolf").show();
+
+          $("#prepareWolf").on("click", ()=>{
+            $("#afterPrepareWolf").show();
+              $("#prepareWolf").hide();
               functions.prepareFight();
           });
 
-          $("#afterPrepareGrasshoper").on("click", ()=>{
+          $("#afterPrepareWolf").on("click", ()=>{
             $("#mainPartDescription").empty()
-            $("#grasshopperText").remove();
-            $("#mainPartDescription").before("<p id='afterGrasshopper' class='newRocker textIndent15px'>Pasikonik wykończony. Twoje cechy podniosły się.</p>");
+            $("#wolfText").remove();
+            $("#mainPartDescription").before(`<p id='afterWolf' class='newRocker textIndent15px'>To była dzika walka. Nie było 'zlituj się'. Niestety wilk popełnił błąd. Fatalny dla niego w skutkach. Źle się ustawił, a Ty bez skrupółów ${text[0]} jego błąd i z całej siły ${text[1]} w jego kręgosłup. Tylko gruchnęło. Wilk momentalnie padł i zginął w konwulsjach, z pianą na pysku. Twoje cechy podniosły się.</p>`);
 
             heroCreator.hero.splice(4, 1, (heroCreator.hero[4] + 5));
             heroCreator.hero.splice(5, 1, (heroCreator.hero[5] + 5));
@@ -59,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
             heroCreator.hero.splice(7, 1, (heroCreator.hero[7] + 5));
             heroCreator.hero.splice(8, 1, (heroCreator.hero[8] + 5));
 
-            workingFile.taskDone.splice(0, 1, 1);
+            workingFile.taskDone.splice(1, 1, 1);
             console.log(workingFile.taskDone);
 
             function checkTask(number, task){
@@ -78,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
               console.log("game over");
             }
 
-            $("#afterPrepareGrasshoper").hide();
+            $("#afterPrepareWolf").hide();
 
           });
         }

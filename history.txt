@@ -261,3 +261,6 @@ Rozpoczęcie pracy z zadaniem "Pasikonik".
 
 18 stycznia 2019 - wersja 0.1.71
 Praca z zadaniem "Pasikonik" cz. II.
+
+19 stycznia 2019 - wersja 0.1.72
+Dodano zadanie z wilkiem.
