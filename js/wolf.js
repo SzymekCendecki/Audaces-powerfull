@@ -13,14 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
        let text = [];
        $("#afterGrasshopper, #afterTroll").hide();
 
-        //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
-        if(heroCreator.hero[1] == "kobieta"){
-          text.splice(0, 1, "wykorzystałaś");
-          text.splice(1, 1, "trafiłaś");
-        }else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
-          text.splice(0, 1, "Wykorzystałeś");
-          text.splice(1, 1, "trafiłeś");
-        }
+       //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
+      if(heroCreator.hero[1] == "kobieta"){
+        text.splice(0, 1, "Miałaś");
+        text.splice(1, 1, "Spojrzałaś");
+        text.splice(2, 1, "ujrzałaś");
+      }else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
+        text.splice(0, 1, "Miałeś");
+        text.splice(1, 1, "Spojrzałeś");
+        text.splice(2, 1, "ujrzałeś")
+      }
 
         if(heroCreator.equip.indexOf("paczka") !== -1){
           $("#alerts").html("<p class='newRocker redText center margin2000p'>Oddaj paczkę !!!</p>");
@@ -31,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
           $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
           $("#mainPartDescription").empty();
 
-          $("#mainPartDescription").before(`<div id='wolfText' class='newRocker textIndent15px'>Idąc drogą w stronę kolejnego zadania, wchodzisz w las. Pachnie igliwiem, ptaki śpiewają. Przechodzisz koło sporej polany. Na jej końcu widzisz łanie z młodymi. Spostrzegła Cię i szybkimi susami zniknęła z młodymi w lesie. Idziesz dalej. W końcu docieraszdo pieczary. Przed nią widzisz resztki zwierząt. W powietrzu unosi się zapach gnijącego mięsa, który potrafi zemdlić nawet takiego twardziela jak Ty. 'No cóż. Zadanie trzeba wykonać, pomimo zapachu. Jaskinia jest większa i dość dobrze oświetlona niż wydawało się to z zewnątrz. Po kilku krokach dochodzisz prawie do jej środka. Wtem, zza sporego głazu, który stał przy wejściu wyszedł bardzo duży wilk i tarasuje wyjście. Nie możesz ucieć. Musisz walczyć.Wchodzisz do jaskini</div><div id='description'></div>`);
+          $("#mainPartDescription").before(`<div id='wolfText' class='newRocker textIndent15px'>Idąc drogą w stronę kolejnego zadania, wchodzisz w las. Pachnie igliwiem, ptaki śpiewają. Przechodzisz koło sporej polany. Na jej końcu widzisz łanie z młodymi. Spostrzegła Cię i szybkimi susami zniknęła z młodymi w lesie. Idziesz dalej. W końcu docieraszdo pieczary. Przed nią widzisz resztki zwierząt. W powietrzu unosi się zapach gnijącego mięsa, który potrafi zemdlić nawet takiego twardziela jak Ty. 'No cóż. Zadanie trzeba wykonać, pomimo zapachu. Wchodzisz do jaskini. Jaskinia jest większa i dość dobrze oświetlona niż wydawało się to z zewnątrz. Po kilku krokach dochodzisz prawie do jej środka. Wtem, zza sporego głazu, który stał przy wejściu wyszedł bardzo duży wilk i tarasuje wyjście. Nie możesz ucieć. Musisz walczyć.</div><div id='description'></div>`);
 
           $("#prepareWolf").show();
 

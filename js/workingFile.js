@@ -12,6 +12,7 @@ let firstFight=require("./firstFight.js");
 let village=require("./village.js");
 let grasshopper=require("./grasshopper.js");
 let wolf=require("./wolf.js");
+let troll=require("./troll.js");
 
 document.addEventListener("DOMContentLoaded", () => {
 //ukrywanie odpowiednich części
@@ -41,6 +42,9 @@ $("#goTask1, #goTask2, #goTask3").hide();
 $("#afterPrepareGrasshoper, #prepareGrasshoper").hide();
 //zadanie wilk
 $("#afterPrepareWolf, #prepareWolf").hide();
+
+//zadanie troll
+$("#afterPrepareTroll, #prepareTroll").hide();
 
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
@@ -91,5 +95,8 @@ grasshopper.grasshopper();
 
 //zdarzenia dla zadania z wilkiem
 wolf.wolf();
+
+//zdarzenia dla zadania z wilkiem
+troll.troll();
 
 });//koniec DOMContentLoaded

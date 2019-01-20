@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1452,7 +1452,7 @@ module.exports.firstMenuBtns = function () {
 
 var functions = __webpack_require__(0);
 var heroCreator = __webpack_require__(1);
-var room = __webpack_require__(5);
+var room = __webpack_require__(6);
 
 var introGameTexts = {
   "text1": "<p class='animOpacity01'>Mówią, że Dzikie Pustkowia to kraina opuszczona przez Bogów.</p>",
@@ -1511,6 +1511,115 @@ module.exports.showIntro = function () {
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var keys = __webpack_require__(9);
+var mainGameBtns = __webpack_require__(10);
+var room = __webpack_require__(6);
+var street = __webpack_require__(7);
+var caravans = __webpack_require__(8);
+var firstFight = __webpack_require__(12);
+var village = __webpack_require__(14);
+var grasshopper = __webpack_require__(15);
+var wolf = __webpack_require__(16);
+var troll = __webpack_require__(17);
+
+document.addEventListener("DOMContentLoaded", function () {
+  //ukrywanie odpowiednich części
+  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
+
+  //pokój
+  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
+
+  //ulica
+  $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
+
+  //karawany
+  $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
+
+  //targ
+  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
+
+  //pierwsza walka - obrona karawany
+  $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
+
+  //po walce - wioska - przybycie karawany do wioski
+  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith, #blackboard, #lookAroundTavern, #outTavern").hide();
+
+  $("#goTask1, #goTask2, #goTask3").hide();
+
+  //zadanie pasikonik
+  $("#afterPrepareGrasshoper, #prepareGrasshoper").hide();
+  //zadanie wilk
+  $("#afterPrepareWolf, #prepareWolf").hide();
+
+  //zadanie troll
+  $("#afterPrepareTroll, #prepareTroll").hide();
+
+  //przejście z pierwszego intro do pierwszego menu
+  setTimeout(function () {
+    $("header p, #heroBtns div").fadeIn(750);
+    $("body").fadeIn(750).css("background", "beige");
+    $("#mainPart h2, #mainPart h3").remove();
+    functions.newElement("p", "description", "", $("#mainPart"));
+    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
+  }, 16000);
+
+  //tablica dla zrobionych zadań
+  module.exports.taskDone = [0, 0, 0];
+
+  //funkcje dla przycisków pierwszego menu
+  firstMenu.firstMenuBtns();
+  heroCreator.random();
+  heroCreator.choose();
+
+  //funkcje dla "wyskakującego" okienka dla informacji gry
+  gameInfo.gameInfo();
+
+  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
+  introGame.showIntro();
+
+  //zdarzenia pod przyciskiem
+  keys.keys();
+
+  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
+  mainGameBtns.mainGameBtns();
+
+  //zdarzenia dla pokoju
+  room.roomEvents(heroCreator.equip, heroCreator.hero);
+
+  //zdarzenia dla ulicy
+  street.streetEvents();
+
+  //zdarzenia dla caravan
+  caravans.caravansEvents();
+
+  //zdarzenia dla pierwszej walki
+  firstFight.firstFightEvents();
+
+  //zdarzenia dla wioski
+  village.village();
+
+  //zdarzenia dla zadania z pasikonikiem
+  grasshopper.grasshopper();
+
+  //zdarzenia dla zadania z wilkiem
+  wolf.wolf();
+
+  //zdarzenia dla zadania z wilkiem
+  troll.troll();
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1625,7 +1734,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1636,8 +1745,8 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var caravans = __webpack_require__(7);
-var market = __webpack_require__(10);
+var caravans = __webpack_require__(8);
+var market = __webpack_require__(11);
 
 document.addEventListener("DOMContentLoaded", function () {
   var streetTexts = {
@@ -1687,7 +1796,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1698,9 +1807,9 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var street = __webpack_require__(6);
-var market = __webpack_require__(10);
-var firstFight = __webpack_require__(11);
+var street = __webpack_require__(7);
+var market = __webpack_require__(11);
+var firstFight = __webpack_require__(12);
 
 document.addEventListener("DOMContentLoaded", function () {
   var caravansTexts = {
@@ -1776,7 +1885,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1854,7 +1963,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1898,7 +2007,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1909,11 +2018,11 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var keys = __webpack_require__(8);
-var mainGameBtns = __webpack_require__(9);
-var room = __webpack_require__(5);
-var street = __webpack_require__(6);
-var caravans = __webpack_require__(7);
+var keys = __webpack_require__(9);
+var mainGameBtns = __webpack_require__(10);
+var room = __webpack_require__(6);
+var street = __webpack_require__(7);
+var caravans = __webpack_require__(8);
 
 document.addEventListener("DOMContentLoaded", function () {
   var marketTexts = {
@@ -1964,7 +2073,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2024,113 +2133,11 @@ document.addEventListener("DOMContentLoaded", function () {
 }); //koniec DOMContentLoaded
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(13);
-
-
-/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+module.exports = __webpack_require__(5);
 
-
-var functions = __webpack_require__(0);
-var firstMenu = __webpack_require__(3);
-var heroCreator = __webpack_require__(1);
-var gameInfo = __webpack_require__(2);
-var introGame = __webpack_require__(4);
-var keys = __webpack_require__(8);
-var mainGameBtns = __webpack_require__(9);
-var room = __webpack_require__(5);
-var street = __webpack_require__(6);
-var caravans = __webpack_require__(7);
-var firstFight = __webpack_require__(11);
-var village = __webpack_require__(14);
-var grasshopper = __webpack_require__(15);
-var wolf = __webpack_require__(16);
-
-document.addEventListener("DOMContentLoaded", function () {
-  //ukrywanie odpowiednich części
-  $("header p, #heroBtns div, #randomHero, #chooseHero, #heroResults, #gameInfo,  #gameInfoResult, #randomResult, #chooseResult, #unlock, #deleteSkills, #deleteEquip, #choosingResult, #play, #introGameTexts, #skip, #features, #equip, #skills, #tasks, #heroInfo").hide();
-
-  //pokój
-  $("#outRoom, #lookAroundRoom, #wardrobe, #chest, #package").hide();
-
-  //ulica
-  $("#inRoom, #lookAroundStreet, #caravans, #market").hide();
-
-  //karawany
-  $("#ask, #lookAroundCaravans, #toMarket, #toStreet, #agree").hide();
-
-  //targ
-  $("#buy, #sell, #lookAroundMarket, #marketToStreet, #marketToCaravans, #go, #lookAroundWagon").hide();
-
-  //pierwsza walka - obrona karawany
-  $("#prepare, #afterPrepareFirstBattle, #toVillage").hide();
-
-  //po walce - wioska - przybycie karawany do wioski
-  $("#enterVillage, #lookAroundEnterVillage, #monk, #tavern, #blacksmith, #lookAroundVillage, #givePackage, #outChurch, #lookAroundBlackSmith, #outBlacksmith, #buyBlackSmith, #sellBlacksmith, #blackboard, #lookAroundTavern, #outTavern").hide();
-
-  $("#goTask1, #goTask2, #goTask3").hide();
-
-  //zadanie pasikonik
-  $("#afterPrepareGrasshoper, #prepareGrasshoper").hide();
-  //zadanie wilk
-  $("#afterPrepareWolf, #prepareWolf").hide();
-
-  //przejście z pierwszego intro do pierwszego menu
-  setTimeout(function () {
-    $("header p, #heroBtns div").fadeIn(750);
-    $("body").fadeIn(750).css("background", "beige");
-    $("#mainPart h2, #mainPart h3").remove();
-    functions.newElement("p", "description", "", $("#mainPart"));
-    $("#description").addClass("standardText newRocker").empty().html(firstMenu.textHello);
-  }, 16000);
-
-  //tablica dla zrobionych zadań
-  module.exports.taskDone = [0, 0, 0];
-
-  //funkcje dla przycisków pierwszego menu
-  firstMenu.firstMenuBtns();
-  heroCreator.random();
-  heroCreator.choose();
-
-  //funkcje dla "wyskakującego" okienka dla informacji gry
-  gameInfo.gameInfo();
-
-  //funkcja umożliwiajaca rozpoczęcie gry po utworzenu postaci
-  introGame.showIntro();
-
-  //zdarzenia pod przyciskiem
-  keys.keys();
-
-  //zdarzenia dla przycików głownych - cechy, ekwipunek, umiejętności oraz zadania
-  mainGameBtns.mainGameBtns();
-
-  //zdarzenia dla pokoju
-  room.roomEvents(heroCreator.equip, heroCreator.hero);
-
-  //zdarzenia dla ulicy
-  street.streetEvents();
-
-  //zdarzenia dla caravan
-  caravans.caravansEvents();
-
-  //zdarzenia dla pierwszej walki
-  firstFight.firstFightEvents();
-
-  //zdarzenia dla wioski
-  village.village();
-
-  //zdarzenia dla zadania z pasikonikiem
-  grasshopper.grasshopper();
-
-  //zdarzenia dla zadania z wilkiem
-  wolf.wolf();
-}); //koniec DOMContentLoaded
 
 /***/ }),
 /* 14 */
@@ -2388,7 +2395,7 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var workingFile = __webpack_require__(13);
+var workingFile = __webpack_require__(5);
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -2484,7 +2491,7 @@ var firstMenu = __webpack_require__(3);
 var heroCreator = __webpack_require__(1);
 var gameInfo = __webpack_require__(2);
 var introGame = __webpack_require__(4);
-var workingFile = __webpack_require__(13);
+var workingFile = __webpack_require__(5);
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -2496,11 +2503,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
       if (heroCreator.hero[1] == "kobieta") {
-        text.splice(0, 1, "wykorzystałaś");
-        text.splice(1, 1, "trafiłaś");
+        text.splice(0, 1, "Miałaś");
+        text.splice(1, 1, "Spojrzałaś");
+        text.splice(2, 1, "ujrzałaś");
       } else if (heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo") {
-        text.splice(0, 1, "Wykorzystałeś");
-        text.splice(1, 1, "trafiłeś");
+        text.splice(0, 1, "Miałeś");
+        text.splice(1, 1, "Spojrzałeś");
+        text.splice(2, 1, "ujrzałeś");
       }
 
       if (heroCreator.equip.indexOf("paczka") !== -1) {
@@ -2514,7 +2523,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
         $("#mainPartDescription").empty();
 
-        $("#mainPartDescription").before("<div id='wolfText' class='newRocker textIndent15px'>Id\u0105c drog\u0105 w stron\u0119 kolejnego zadania, wchodzisz w las. Pachnie igliwiem, ptaki \u015Bpiewaj\u0105. Przechodzisz ko\u0142o sporej polany. Na jej ko\u0144cu widzisz \u0142anie z m\u0142odymi. Spostrzeg\u0142a Ci\u0119 i szybkimi susami znikn\u0119\u0142a z m\u0142odymi w lesie. Idziesz dalej. W ko\u0144cu docieraszdo pieczary. Przed ni\u0105 widzisz resztki zwierz\u0105t. W powietrzu unosi si\u0119 zapach gnij\u0105cego mi\u0119sa, kt\xF3ry potrafi zemdli\u0107 nawet takiego twardziela jak Ty. 'No c\xF3\u017C. Zadanie trzeba wykona\u0107, pomimo zapachu. Jaskinia jest wi\u0119ksza i do\u015B\u0107 dobrze o\u015Bwietlona ni\u017C wydawa\u0142o si\u0119 to z zewn\u0105trz. Po kilku krokach dochodzisz prawie do jej \u015Brodka. Wtem, zza sporego g\u0142azu, kt\xF3ry sta\u0142 przy wej\u015Bciu wyszed\u0142 bardzo du\u017Cy wilk i tarasuje wyj\u015Bcie. Nie mo\u017Cesz ucie\u0107. Musisz walczy\u0107.Wchodzisz do jaskini</div><div id='description'></div>");
+        $("#mainPartDescription").before("<div id='wolfText' class='newRocker textIndent15px'>Id\u0105c drog\u0105 w stron\u0119 kolejnego zadania, wchodzisz w las. Pachnie igliwiem, ptaki \u015Bpiewaj\u0105. Przechodzisz ko\u0142o sporej polany. Na jej ko\u0144cu widzisz \u0142anie z m\u0142odymi. Spostrzeg\u0142a Ci\u0119 i szybkimi susami znikn\u0119\u0142a z m\u0142odymi w lesie. Idziesz dalej. W ko\u0144cu docieraszdo pieczary. Przed ni\u0105 widzisz resztki zwierz\u0105t. W powietrzu unosi si\u0119 zapach gnij\u0105cego mi\u0119sa, kt\xF3ry potrafi zemdli\u0107 nawet takiego twardziela jak Ty. 'No c\xF3\u017C. Zadanie trzeba wykona\u0107, pomimo zapachu. Wchodzisz do jaskini. Jaskinia jest wi\u0119ksza i do\u015B\u0107 dobrze o\u015Bwietlona ni\u017C wydawa\u0142o si\u0119 to z zewn\u0105trz. Po kilku krokach dochodzisz prawie do jej \u015Brodka. Wtem, zza sporego g\u0142azu, kt\xF3ry sta\u0142 przy wej\u015Bciu wyszed\u0142 bardzo du\u017Cy wilk i tarasuje wyj\u015Bcie. Nie mo\u017Cesz ucie\u0107. Musisz walczy\u0107.</div><div id='description'></div>");
 
         $("#prepareWolf").show();
 
@@ -2555,6 +2564,95 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           $("#afterPrepareWolf").hide();
+        });
+      }
+    });
+  };
+}); //koniec DOMContentLoaded
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var functions = __webpack_require__(0);
+var firstMenu = __webpack_require__(3);
+var heroCreator = __webpack_require__(1);
+var gameInfo = __webpack_require__(2);
+var introGame = __webpack_require__(4);
+var workingFile = __webpack_require__(5);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  module.exports.troll = function () {
+
+    $("#goTask3").on("click", function () {
+      var text = [];
+      $("#afterGrasshopper, #afterWolf").hide();
+
+      //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
+      if (heroCreator.hero[1] == "kobieta") {
+        text.splice(0, 1, "wykorzystałaś");
+        text.splice(1, 1, "trafiłaś");
+      } else if (heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo") {
+        text.splice(0, 1, "Wykorzystałeś");
+        text.splice(1, 1, "trafiłeś");
+      }
+
+      if (heroCreator.equip.indexOf("paczka") !== -1) {
+        $("#alerts").html("<p class='newRocker redText center margin2000p'>Oddaj paczkę !!!</p>");
+        setTimeout(function () {
+          $("#alerts").empty();
+        }, 3000);
+      } else {
+        $("#mainBtns button").hide();
+        $("#interactionsBtns button").hide();
+        $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
+        $("#mainPartDescription").empty();
+
+        $("#mainPartDescription").before("<div id='trollText' class='newRocker textIndent15px'>Idziesz w stron\u0119 mostu. Przez las, w\u0105w\xF3z. Wychodzisz na du\u017C\u0105 polan\u0119. Na drugim ko\u0144cu widzisz ju\u017C zarysy mostu. Z trudem dostrzegasz du\u017C\u0105 posta\u0107 - to chyba ten trol. Podchodzisz bli\u017Cej i widzisz jak jakie\u015B osoby co\u015B wykrzykuj\u0105 i machaj\u0105 r\u0119kami. Po chwili wszystko ucicha. Du\u017Ca posta\u0107 nadal stoi przy mo\u015Bcie, reszta przechodzi. Jeste\u015B ju\u017C blisko mostu. Widzisz ogromnego trola siedz\u0105cego na kamieniu, wspartego o du\u017Cych rozmiar\xF3w maczug\u0119. Gdy ju\u017C jeste\u015B ca\u0142kiem blisko trol m\xF3wi do Ciebie: 'Op\u0142ata za przej\u015Bcie, albo zje\u017Cd\u017Caj!!'. 'Nie mam zamiaru p\u0142aci\u0107m, ani przechodzi\u0107. Jestem tutaj z twojego powodu.' - odpowiadasz. 'Chce, \u017Ceby\u015B zaprzesta\u0142 pobierania nielegalnego myta. Je\u017Celi tego nie zrobisz b\u0119d\u0119 musia\u0142 Ci\u0119 zabi\u0107.' - m\xF3wisz dalej. 'Nic z Tego. To jest m\xF3j most i b\u0119d\u0119 pobiera\u0142 myto za jego przej\u015Bcie.' - odpar\u0142. Dyplomacja nie wysz\u0142a. Musisz z nim walczy\u0107.</div><div id='description'></div>");
+
+        $("#prepareTroll").show();
+
+        $("#prepareTroll").on("click", function () {
+          $("#afterPrepareTroll").show();
+          $("#prepareTroll").hide();
+          functions.prepareFight();
+        });
+
+        $("#afterPrepareTroll").on("click", function () {
+          $("#mainPartDescription").empty();
+          $("#trollText").remove();
+          $("#mainPartDescription").before("<p id='afterTroll' class='newRocker textIndent15px'>Walka nie by\u0142a d\u0142uga. " + text[0] + " szcz\u0119\u015Bcie. Uda\u0142o Ci si\u0119 go zrani\u0107 pod pach\u0105. Trol zawy\u0142 dziko. Przechyli\u0142 si\u0119 i straci\u0142 r\xF3wnowag\u0119 i stoczy\u0142 si\u0119 ze skarpy do rzeki. " + text[1] + " w d\xF3\u0142 i " + text[2] + " go martwego z roztrzaskan\u0105 g\u0142ow\u0105.</p>");
+
+          heroCreator.hero.splice(4, 1, heroCreator.hero[4] + 5);
+          heroCreator.hero.splice(5, 1, heroCreator.hero[5] + 5);
+          heroCreator.hero.splice(6, 1, heroCreator.hero[6] + 5);
+          heroCreator.hero.splice(7, 1, heroCreator.hero[7] + 5);
+          heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
+
+          workingFile.taskDone.splice(2, 1, 1);
+          console.log(workingFile.taskDone);
+
+          function checkTask(number, task) {
+            if (workingFile.taskDone[number] == 1) {
+              task.hide();
+            } else {
+              task.show();
+            }
+          }
+
+          checkTask(0, $("#goTask1"));
+          checkTask(1, $("#goTask2"));
+          checkTask(2, $("#goTask3"));
+
+          if (workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1) {
+            console.log("game over");
+          }
+
+          $("#afterPrepareTroll").hide();
         });
       }
     });
