@@ -267,3 +267,6 @@ Dodano zadanie z wilkiem.
 
 20 stycznia 2019 - wersja 0.1.73.
 Dodano zadanie z trolem.
+
+20 stycznia 2019 - wersja 0.1.74
+Dodano tekst kończący grę.

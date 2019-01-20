@@ -363,3 +363,34 @@ let arr = [];
         $("#mainPartDescription").empty();
       });
 }
+
+//tekst końca gry
+module.exports.gameOver = function(){
+  let txt=[];
+  $("#afterWolf, #afterTroll, #afterGrasshopper").hide();
+  //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
+ if(heroCreator.hero[1] == "kobieta"){
+   txt.splice(0, 1, "Zakończyłaś");
+   txt.splice(1, 1, "Zmęczona");
+   txt.splice(2, 1, "poobijana");
+   txt.splice(3, 1, "wróciłaś");
+   txt.splice(4, 1, "weszłaś");
+   txt.splice(5, 1, "mogłaś");
+   txt.splice(6, 1, "obudziłaś");
+}else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
+  txt.splice(0, 1, "Zakończyłeś");
+  txt.splice(1, 1, "Zmęczony");
+  txt.splice(2, 1, "poobijany");
+  txt.splice(3, 1, "wróciłeś");
+  txt.splice(4, 1, "wszedłeś");
+  txt.splice(5, 1, "mogłeś");
+  txt.splice(6, 1, "obudziłeś");
+ }
+  $("#afterWolf, #afterTroll, #afterGrasshopper").hide();
+    $("#mainPartDescription").before(`<p id='gameOver' class='newRocker textIndent15px'>${txt[0]} trzecie zadanie. ${txt[1]} i ${txt[2]} ${txt[3]} do osady. Gdy tylko ${txt[4]} do osady zobaczyłeś jak mieszkańcy oraz uczestnicy karawany świętowali. Kapłan uleczył Twoje rany, dzięki temu ${txt[5]} bawić się z innymi. Następnego dnia ${txt[6]} się potwornym kacem, na kopie siana w szczerym polu. I tak nastąpił szczęśliwy koniec tej przygody z dostarczeniem paczki. Jednakże nastał nowy dzień... ale to już inna historia.</p>`);
+
+    $("#mainPart p:nth-child(2)").hide();
+    $("#mainPart p:nth-child(3)").hide();
+    $("#mainPart p:nth-child(4)").hide();
+    $("#gameOver").hide();
+}

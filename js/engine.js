@@ -497,6 +497,37 @@ module.exports.prepareFight = function (equip, hero) {
   });
 };
 
+//tekst końca gry
+module.exports.gameOver = function () {
+  var txt = [];
+  $("#afterWolf, #afterTroll, #afterGrasshopper").hide();
+  //wyszkanie płci oraz przypisanie konkretnego słowa do zmiennej
+  if (heroCreator.hero[1] == "kobieta") {
+    txt.splice(0, 1, "Zakończyłaś");
+    txt.splice(1, 1, "Zmęczona");
+    txt.splice(2, 1, "poobijana");
+    txt.splice(3, 1, "wróciłaś");
+    txt.splice(4, 1, "weszłaś");
+    txt.splice(5, 1, "mogłaś");
+    txt.splice(6, 1, "obudziłaś");
+  } else if (heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo") {
+    txt.splice(0, 1, "Zakończyłeś");
+    txt.splice(1, 1, "Zmęczony");
+    txt.splice(2, 1, "poobijany");
+    txt.splice(3, 1, "wróciłeś");
+    txt.splice(4, 1, "wszedłeś");
+    txt.splice(5, 1, "mogłeś");
+    txt.splice(6, 1, "obudziłeś");
+  }
+  $("#afterWolf, #afterTroll, #afterGrasshopper").hide();
+  $("#mainPartDescription").before("<p id='gameOver' class='newRocker textIndent15px'>" + txt[0] + " trzecie zadanie. " + txt[1] + " i " + txt[2] + " " + txt[3] + " do osady. Gdy tylko " + txt[4] + " do osady zobaczy\u0142e\u015B jak mieszka\u0144cy oraz uczestnicy karawany \u015Bwi\u0119towali. Kap\u0142an uleczy\u0142 Twoje rany, dzi\u0119ki temu " + txt[5] + " bawi\u0107 si\u0119 z innymi. Nast\u0119pnego dnia " + txt[6] + " si\u0119 potwornym kacem, na kopie siana w szczerym polu. I tak nast\u0105pi\u0142 szcz\u0119\u015Bliwy koniec tej przygody z dostarczeniem paczki. Jednak\u017Ce nasta\u0142 nowy dzie\u0144... ale to ju\u017C inna historia.</p>");
+
+  $("#mainPart p:nth-child(2)").hide();
+  $("#mainPart p:nth-child(3)").hide();
+  $("#mainPart p:nth-child(4)").hide();
+  $("#gameOver").hide();
+};
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1564,6 +1595,9 @@ document.addEventListener("DOMContentLoaded", function () {
   //zadanie troll
   $("#afterPrepareTroll, #prepareTroll").hide();
 
+  //gameOver
+  $("#gameOver").hide();
+
   //przejście z pierwszego intro do pierwszego menu
   setTimeout(function () {
     $("header p, #heroBtns div").fadeIn(750);
@@ -2420,6 +2454,7 @@ document.addEventListener("DOMContentLoaded", function () {
         text.splice(3, 1, "uszłyszałeś");
         text.splice(4, 1, "Zacząłeś");
         text.splice(5, 1, "ujrzałeś");
+        text.splice(6, 1, "Zakończyłeś");
       }
 
       if (heroCreator.equip.indexOf("paczka") !== -1) {
@@ -2454,7 +2489,6 @@ document.addEventListener("DOMContentLoaded", function () {
           heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
 
           workingFile.taskDone.splice(0, 1, 1);
-          console.log(workingFile.taskDone);
 
           function checkTask(number, task) {
             if (workingFile.taskDone[number] == 1) {
@@ -2469,9 +2503,11 @@ document.addEventListener("DOMContentLoaded", function () {
           checkTask(2, $("#goTask3"));
 
           if (workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1) {
-            console.log("game over");
+            $("#gameOver").show();
           }
-
+          $("#gameOver").on("click", function () {
+            functions.gameOver();
+          });
           $("#afterPrepareGrasshoper").hide();
         });
       }
@@ -2545,7 +2581,6 @@ document.addEventListener("DOMContentLoaded", function () {
           heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
 
           workingFile.taskDone.splice(1, 1, 1);
-          console.log(workingFile.taskDone);
 
           function checkTask(number, task) {
             if (workingFile.taskDone[number] == 1) {
@@ -2560,8 +2595,12 @@ document.addEventListener("DOMContentLoaded", function () {
           checkTask(2, $("#goTask3"));
 
           if (workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1) {
-            console.log("game over");
+            $("#gameOver").show();
           }
+
+          $("#gameOver").on("click", function () {
+            functions.gameOver();
+          });
 
           $("#afterPrepareWolf").hide();
         });
@@ -2596,9 +2635,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (heroCreator.hero[1] == "kobieta") {
         text.splice(0, 1, "wykorzystałaś");
         text.splice(1, 1, "trafiłaś");
+        text.splice(6, 1, "Zakończyłaś");
       } else if (heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo") {
         text.splice(0, 1, "Wykorzystałeś");
         text.splice(1, 1, "trafiłeś");
+        text.splice(6, 1, "Zakończyłeś");
       }
 
       if (heroCreator.equip.indexOf("paczka") !== -1) {
@@ -2612,7 +2653,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
         $("#mainPartDescription").empty();
 
-        $("#mainPartDescription").before("<div id='trollText' class='newRocker textIndent15px'>Idziesz w stron\u0119 mostu. Przez las, w\u0105w\xF3z. Wychodzisz na du\u017C\u0105 polan\u0119. Na drugim ko\u0144cu widzisz ju\u017C zarysy mostu. Z trudem dostrzegasz du\u017C\u0105 posta\u0107 - to chyba ten trol. Podchodzisz bli\u017Cej i widzisz jak jakie\u015B osoby co\u015B wykrzykuj\u0105 i machaj\u0105 r\u0119kami. Po chwili wszystko ucicha. Du\u017Ca posta\u0107 nadal stoi przy mo\u015Bcie, reszta przechodzi. Jeste\u015B ju\u017C blisko mostu. Widzisz ogromnego trola siedz\u0105cego na kamieniu, wspartego o du\u017Cych rozmiar\xF3w maczug\u0119. Gdy ju\u017C jeste\u015B ca\u0142kiem blisko trol m\xF3wi do Ciebie: 'Op\u0142ata za przej\u015Bcie, albo zje\u017Cd\u017Caj!!'. 'Nie mam zamiaru p\u0142aci\u0107m, ani przechodzi\u0107. Jestem tutaj z twojego powodu.' - odpowiadasz. 'Chce, \u017Ceby\u015B zaprzesta\u0142 pobierania nielegalnego myta. Je\u017Celi tego nie zrobisz b\u0119d\u0119 musia\u0142 Ci\u0119 zabi\u0107.' - m\xF3wisz dalej. 'Nic z Tego. To jest m\xF3j most i b\u0119d\u0119 pobiera\u0142 myto za jego przej\u015Bcie.' - odpar\u0142. Dyplomacja nie wysz\u0142a. Musisz z nim walczy\u0107.</div><div id='description'></div>");
+        $("#mainPartDescription").before("<div id='trollText' class='newRocker textIndent15px'>Idziesz w stron\u0119 mostu. Przez las, w\u0105w\xF3z. Wychodzisz na du\u017C\u0105 polan\u0119. Na drugim ko\u0144cu widzisz ju\u017C zarysy mostu. Z trudem dostrzegasz du\u017C\u0105 posta\u0107 - to chyba ten trol. Podchodzisz bli\u017Cej i widzisz jak jakie\u015B osoby co\u015B wykrzykuj\u0105 i machaj\u0105 r\u0119kami. Po chwili wszystko ucicha. Du\u017Ca posta\u0107 nadal stoi przy mo\u015Bcie, reszta przechodzi. Jeste\u015B ju\u017C blisko mostu. Widzisz ogromnego trola siedz\u0105cego na kamieniu, wspartego o du\u017Cych rozmiar\xF3w maczug\u0119. Gdy ju\u017C jeste\u015B ca\u0142kiem blisko trol m\xF3wi do Ciebie: 'Op\u0142ata za przej\u015Bcie, albo zje\u017Cd\u017Caj!!'. 'Nie mam zamiaru p\u0142aci\u0107, ani przechodzi\u0107. Jestem tutaj z Twojego powodu.' - odpowiadasz. 'Chce, \u017Ceby\u015B zaprzesta\u0142 pobierania nielegalnego myta. Je\u017Celi tego nie zrobisz b\u0119d\u0119 musia\u0142 Ci\u0119 zabi\u0107.' - m\xF3wisz dalej. 'Nic z Tego. To jest m\xF3j most i b\u0119d\u0119 pobiera\u0142 myto za jego przej\u015Bcie.' - odpar\u0142. Dyplomacja nie wysz\u0142a. Musisz z nim walczy\u0107.</div><div id='description'></div>");
 
         $("#prepareTroll").show();
 
@@ -2634,7 +2675,6 @@ document.addEventListener("DOMContentLoaded", function () {
           heroCreator.hero.splice(8, 1, heroCreator.hero[8] + 5);
 
           workingFile.taskDone.splice(2, 1, 1);
-          console.log(workingFile.taskDone);
 
           function checkTask(number, task) {
             if (workingFile.taskDone[number] == 1) {
@@ -2649,8 +2689,13 @@ document.addEventListener("DOMContentLoaded", function () {
           checkTask(2, $("#goTask3"));
 
           if (workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1) {
-            console.log("game over");
+            $("#gameOver").show();
           }
+
+          functions.gameOver();
+          $("#gameOver").on("click", function () {
+            functions.gameOver();
+          });
 
           $("#afterPrepareTroll").hide();
         });

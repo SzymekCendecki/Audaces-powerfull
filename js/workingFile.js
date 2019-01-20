@@ -46,6 +46,9 @@ $("#afterPrepareWolf, #prepareWolf").hide();
 //zadanie troll
 $("#afterPrepareTroll, #prepareTroll").hide();
 
+//gameOver
+$("#gameOver").hide();
+
 //przejście z pierwszego intro do pierwszego menu
 setTimeout(function(){
  $("header p, #heroBtns div").fadeIn(750);

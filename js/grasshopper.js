@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
           text.splice(3, 1, "uszłyszałaś");
           text.splice(4, 1, "Zaczęłaś");
           text.splice(5, 1, "ujrzałaś");
+
         }else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
           text.splice(0, 1, "Doszedłeś");
           text.splice(1, 1, "niedostrzegłeś");
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           text.splice(3, 1, "uszłyszałeś");
           text.splice(4, 1, "Zacząłeś");
           text.splice(5, 1, "ujrzałeś");
+          text.splice(6, 1, "Zakończyłeś");
         }
 
         if(heroCreator.equip.indexOf("paczka") !== -1){
@@ -60,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
             heroCreator.hero.splice(8, 1, (heroCreator.hero[8] + 5));
 
             workingFile.taskDone.splice(0, 1, 1);
-            console.log(workingFile.taskDone);
 
             function checkTask(number, task){
               if(workingFile.taskDone[number] == 1){
@@ -75,9 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
             checkTask(2, $("#goTask3"));
 
             if(workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1){
-              console.log("game over");
-            }
-
+              $("#gameOver").show();
+                        }
+            $("#gameOver").on("click", ()=>{
+              functions.gameOver();
+            });
             $("#afterPrepareGrasshoper").hide();
 
           });

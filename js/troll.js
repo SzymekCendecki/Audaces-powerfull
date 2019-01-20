@@ -17,9 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if(heroCreator.hero[1] == "kobieta"){
           text.splice(0, 1, "wykorzystałaś");
           text.splice(1, 1, "trafiłaś");
+          text.splice(6, 1, "Zakończyłaś");
         }else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
           text.splice(0, 1, "Wykorzystałeś");
           text.splice(1, 1, "trafiłeś");
+          text.splice(6, 1, "Zakończyłeś");
         }
 
         if(heroCreator.equip.indexOf("paczka") !== -1){
@@ -31,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
           $("#mainSquareVillage, #mainSquareVillage2, #monkFirst, #enterVillage, #enterBlackSmith, #enterTavern").hide();
           $("#mainPartDescription").empty();
 
-          $("#mainPartDescription").before(`<div id='trollText' class='newRocker textIndent15px'>Idziesz w stronę mostu. Przez las, wąwóz. Wychodzisz na dużą polanę. Na drugim końcu widzisz już zarysy mostu. Z trudem dostrzegasz dużą postać - to chyba ten trol. Podchodzisz bliżej i widzisz jak jakieś osoby coś wykrzykują i machają rękami. Po chwili wszystko ucicha. Duża postać nadal stoi przy moście, reszta przechodzi. Jesteś już blisko mostu. Widzisz ogromnego trola siedzącego na kamieniu, wspartego o dużych rozmiarów maczugę. Gdy już jesteś całkiem blisko trol mówi do Ciebie: 'Opłata za przejście, albo zjeżdżaj!!'. 'Nie mam zamiaru płacićm, ani przechodzić. Jestem tutaj z twojego powodu.' - odpowiadasz. 'Chce, żebyś zaprzestał pobierania nielegalnego myta. Jeżeli tego nie zrobisz będę musiał Cię zabić.' - mówisz dalej. 'Nic z Tego. To jest mój most i będę pobierał myto za jego przejście.' - odparł. Dyplomacja nie wyszła. Musisz z nim walczyć.</div><div id='description'></div>`);
+          $("#mainPartDescription").before(`<div id='trollText' class='newRocker textIndent15px'>Idziesz w stronę mostu. Przez las, wąwóz. Wychodzisz na dużą polanę. Na drugim końcu widzisz już zarysy mostu. Z trudem dostrzegasz dużą postać - to chyba ten trol. Podchodzisz bliżej i widzisz jak jakieś osoby coś wykrzykują i machają rękami. Po chwili wszystko ucicha. Duża postać nadal stoi przy moście, reszta przechodzi. Jesteś już blisko mostu. Widzisz ogromnego trola siedzącego na kamieniu, wspartego o dużych rozmiarów maczugę. Gdy już jesteś całkiem blisko trol mówi do Ciebie: 'Opłata za przejście, albo zjeżdżaj!!'. 'Nie mam zamiaru płacić, ani przechodzić. Jestem tutaj z Twojego powodu.' - odpowiadasz. 'Chce, żebyś zaprzestał pobierania nielegalnego myta. Jeżeli tego nie zrobisz będę musiał Cię zabić.' - mówisz dalej. 'Nic z Tego. To jest mój most i będę pobierał myto za jego przejście.' - odparł. Dyplomacja nie wyszła. Musisz z nim walczyć.</div><div id='description'></div>`);
 
           $("#prepareTroll").show();
 
@@ -53,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
             heroCreator.hero.splice(8, 1, (heroCreator.hero[8] + 5));
 
             workingFile.taskDone.splice(2, 1, 1);
-            console.log(workingFile.taskDone);
 
             function checkTask(number, task){
               if(workingFile.taskDone[number] == 1){
@@ -68,8 +69,13 @@ document.addEventListener("DOMContentLoaded", () => {
             checkTask(2, $("#goTask3"));
 
             if(workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1){
-              console.log("game over");
+              $("#gameOver").show();
             }
+
+            functions.gameOver();
+            $("#gameOver").on("click", ()=>{
+            functions.gameOver();
+            });
 
             $("#afterPrepareTroll").hide();
 

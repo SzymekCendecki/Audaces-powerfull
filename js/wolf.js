@@ -18,13 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
         text.splice(0, 1, "Miałaś");
         text.splice(1, 1, "Spojrzałaś");
         text.splice(2, 1, "ujrzałaś");
-      }else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
+    }else if(heroCreator.hero[1] == "mężczyzna" || heroCreator.hero[1] == "nie wiadomo"){
         text.splice(0, 1, "Miałeś");
         text.splice(1, 1, "Spojrzałeś");
         text.splice(2, 1, "ujrzałeś")
       }
 
-        if(heroCreator.equip.indexOf("paczka") !== -1){
+      if(heroCreator.equip.indexOf("paczka") !== -1){
           $("#alerts").html("<p class='newRocker redText center margin2000p'>Oddaj paczkę !!!</p>");
           setTimeout(function(){ $("#alerts").empty(); }, 3000);
         }else{
@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
             heroCreator.hero.splice(8, 1, (heroCreator.hero[8] + 5));
 
             workingFile.taskDone.splice(1, 1, 1);
-            console.log(workingFile.taskDone);
 
             function checkTask(number, task){
               if(workingFile.taskDone[number] == 1){
@@ -70,8 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
             checkTask(2, $("#goTask3"));
 
             if(workingFile.taskDone[0] == 1 && workingFile.taskDone[1] == 1 && workingFile.taskDone[2] == 1){
-              console.log("game over");
+                $("#gameOver").show();
             }
+
+            $("#gameOver").on("click", ()=>{
+              functions.gameOver();
+            });
 
             $("#afterPrepareWolf").hide();
 
