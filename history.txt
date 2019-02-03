@@ -270,3 +270,8 @@ Dodano zadanie z trolem.
 
 20 stycznia 2019 - wersja 0.1.74
 Dodano tekst kończący grę.
+
+3 luty 2019  - wersja 0.1.75
+Rozpoczęto pracę nad nową wersją Audaces - powerfull.
+  Utworzono animację ładownia gry.
+Utworzono katalog z plikami w formacie .json.
